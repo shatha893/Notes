@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>&lt;span class&equals;&quot;copyright&quot;&gt;Cisco Certified Network Associate Notes &lt;span style&equals;&quot;float&colon;right&semi;&quot;&gt;By Shatha Barqawi&lt;&sol;span&gt;</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <link href="styles.module.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Encode+Sans+SC&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
+<h2 id="cisco-certified-network-associate-notes-span-stylefloatrightby-shatha-barqawi"><span class="copyright">Cisco Certified Network Associate Notes <span style="float:right;">By Shatha Barqawi</span></h2>
+<p><br/><br/></p>
+<h1 id="span-classtitlechapter-2--basic-switch-and-end-device-configuration"><span class="title">Chapter 2 : Basic Switch and End-Device Configuration</h1>
+<p><span class="date">Tuesday, 29/6/2021</span>
+<br/><br/></p>
+<h3 id="span-classchapter2subs-subtitle-general-knowledge"><span class="chapter2subs subtitle"> General Knowledge</h3>
+<ul>
+<li>IOS is originally owned by cisco and cisco gave it to apple to use it for it's mobile phones.</li>
+<li>On cisco routers today they have IOS 15.<br>
+<br/><br/></li>
+</ul>
+<h3 id="span-classchapter2subs-subtitle-cisco-device-booting-process"><span class="chapter2subs subtitle"> Cisco Device Booting Process</h3>
+<ol>
+<li>The device performs POST (Power-On Self-Test) where it discovers and verifies its hardware.</li>
+<li>If the post test is successful, the bootstrap program is copied from the ROM to the RAM.</li>
+<li>The bootstrap program decides which IOS image to load from the flash memory or load a backup from the TFTP into the RAM, then loads the chosen IOS. If no IOS image was found the device goes into ROMmon mode.</li>
+<li>IOS finds the startup configuration file usually located in the NVRAM and loads it into the RAM as the running configuration.<br>
+<br/><br/></li>
+</ol>
+<p><span class="chapter2subs subtitle"> Some Terminologies' Explanations</p>
+<ul>
+<li>
+<p><span class="chapter2subs">NVRAM</span><br>
+According to Wikipedia a Non Volatile Random Access Memory (NVRAM) is</p>
+<blockquote>
+<p><em>is random-access memory that retains data without applied power.</em></p>
+</blockquote>
+</li>
+<li>
+<p><span class="chapter2subs">TFTP</span><br>
+According to Lifewire TFTP is<br>
+<blockquote>
+<em>Trivial File Transfer Protocol is a technology that transfers files between network devices and is a simplified version of the more robust File Transfer Protocol.</em>
+</blockquote></p>
+</li>
+<li>
+<p><span class="chapter2subs">ROMmon Mode</span><br>
+Taken From Cisco Community website</p>
+  <blockquote>
+<p><em>These are three ways the router can enter ROM Monitor (ROMmon) mode (rommon#&gt;):</em></p>
+<ul>
+<li><em>Reload, initialize, or power cycle the router with the configuration register boot field set to 0.</em></li>
+<li><em>Reload, initialize, or power cycle the router without having a Cisco IOS  Software image to boot from.</em></li>
+<li><em>Press the Break key within the first 60 seconds of the system boot. The break function is enabled during this period.</em></li>
+</ul>
+  </blockquote>
+</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classchapter2subs--subtitle-access-methods"><span class="chapter2subs  subtitle"> Access Methods</h3>
+<p><span class="chapter2subs">1. Out-of-Band (Local).</span></p>
+<ul>
+<li>
+<p>To access a cisco device locally we use something called the <strong>console cable</strong> which is usually used to connect the device to a computer for maintenance and the initial configuration.</p>
+</li>
+<li>
+<p>To connect the console cable to the computer we need a RS 252 port and a RJ45 port in the switch.</p>
+</li>
+<li>
+<p>When do we have to use the console?</p>
+<ol>
+<li>When I have a new device.</li>
+<li>Intial Configuration.</li>
+<li>Remote.</li>
+<li>Recovery of Password.(At the end of the course).</li>
+</ol>
+</li>
+</ul>
+<br/>
+<span class="chapter2subs">2. In-Band (Remotely). </span>   
+<ul>
+<li>
+<p>We use Virtual teletype (VTY) which allows me to access the device remotely.<br>
+According to <em>techopedia</em> a vty is</p>
+ <blockquote>
+    a command line interface (CLI) created in a router and used to facilitate a connection to the daemon via Telnet, a network protocol used in local area networks. To connect to a VTY, users must present a valid password.
+ </blockquote>  
+</li>
+<li>
+<p>See what do we mean by daemon <sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.
+<br/></p>
+</li>
+<li>
+<p>Both Telnet and SSH  can be used to connect to a device remotely but the deference is that SSH establishes a secure connection whereas Telnet establishes an unsecure.<br>
+<br/><br/></p>
+</li>
+</ul>
+<h3 id="span-classchapter2subs-subtitle-terminal-in-packet-tracer"><span class="chapter2subs subtitle"> Terminal in Packet Tracer</h3>
+<ul>
+<li>What do we use to configure a device?<br>
+In real devices we use something called <em>Emulation Software (PuTTY)</em> but in Packet Tracer the devices have something called <em>Terminal</em>.
+<br/><br/></li>
+</ul>
+<h3 id="span-classchapter2subs-subtitle-navigation-through-ios-command-modes"><span class="chapter2subs subtitle"> Navigation Through IOS (Command Modes)</h3>
+<p><span class="chapter2subs"> 1. User Mode <code>&gt;</code>.</span><br>
+Has access to a limited number of monitoring commands such as:</p>
+<ul>
+<li>
+<p><strong>Ping:</strong> which is a protocol to check the ability to connect to another device, so by providing the IP of the other device it will tell me if we can connect to it or not by an &quot;echo request&quot; that is sent to the IP and the IP sends back an &quot;echo reply&quot; and this reply is what tells me &quot;I can connect to that IP&quot;.</p>
+</li>
+<li>
+<p><strong>TraceRoot:</strong> shows me all the IPs that were hopped upon in the path until we get to the destination IP.</p>
+</li>
+<li>
+<p>To switch up to the next mode which is <em>Privileged Mode</em> use the following command</p>
+<pre><code>Enable
+</code></pre>
+</li>
+</ul>
+<p><span class="chapter2subs">2. Privileged Mode (aka Enabled Mode) <code>#</code> </span></p>
+<ul>
+<li>
+<p>Allows access to all commands and features such as show, copy, delete and reload.<br>
+To get to the next mode we need to, first, go to the privileged mode and then to the Global configuration mode.</p>
+</li>
+<li>
+<p>Command to get to the <em>Global Configuration Mode</em></p>
+<pre><code> Switch# configure terminal  
+</code></pre>
+</li>
+<li>
+<p>Command to go back to the user mode</p>
+<pre><code>Switch# disable  
+</code></pre>
+</li>
+<li>
+<p>To see what are the applied configurations we use the running-config with this command</p>
+<pre><code>Switch# show running-config 
+</code></pre>
+</li>
+<li>
+<p>To copy the configurations from the RAM to the NVRAM to save everything</p>
+<pre><code>Switch# copy running-config startup-config
+</code></pre>
+</li>
+<li>
+<p>To get out of the device entirely we use</p>
+<pre><code>Switch# exit
+</code></pre>
+</li>
+</ul>
+<br/>
+<p><span class="chapter2subs">3. Global Configuration Mode <code>(config)#</code>.</span></p>
+<ul>
+<li>
+<p>It gives me the ability to configure the hostname, clock and allows the transition to the next mode(gives me the ability to do <em>basic configurations</em>).</p>
+</li>
+<li>
+<p>You can set a <strong>name</strong> to the current <strong>device</strong> (host) using</p>
+<pre><code>Switch(config)# hostname [NAME OF MY CHOOSING]  
+</code></pre>
+<p>The constraints over host names are the following:</p>
+<ol>
+<li>Start with a letter.</li>
+<li>Ends with a letter or digit.</li>
+<li>Letters, digits and dashes are the only allowed characters.</li>
+<li>No spaces.</li>
+<li>64 character maximum.<br>
+<br/></li>
+</ol>
+</li>
+<li>
+<p>To solve the problem of the <strong>lookup</strong> that happens when typing a wrong command by mistake we have 2 options:</p>
+<ol>
+<li>
+<p>Interrupting the lookup using</p>
+<pre><code>ctrl+shift+6  
+</code></pre>
+</li>
+<li>
+<p>Removing the whole lookup thing using</p>
+<pre><code>  Switch(config)# no ip domain-lookup
+</code></pre>
+</li>
+</ol>
+</li>
+<li>
+<p>To put a <strong>Message of the Day</strong> use the following</p>
+<pre><code>Switch(config)# banner motd $[TEXT USUALLY &quot;Authorized Only&quot;]$  
+</code></pre>
+</li>
+<li>
+<p><strong>Configuring Passwords</strong><br>
+We configure the passwords for</p>
+</li>
+</ul>
+<ol>
+<li>
+<p>The Console.<br>
+To log into the console</p>
+<pre><code>  Switch(config)# line console 0
+</code></pre>
+<p>If we don't write the command <code>login</code> the device won't ask us for the password.</p>
+</li>
+<li>
+<p>The VTY.<br>
+To login through the vty use</p>
+<pre><code>  Switch(config)# line vty [SESSION NUMBER AS A RANGE &quot;e.g. 0 4&quot;]  
+</code></pre>
+<p>To hash or encrypt the password we have we use the following command</p>
+<pre><code>  Switch(config)# service password-encryption
+</code></pre>
+<p>When using the keyword <code>password</code> it gets hashed with md7 but when we use the keyword <code>secret</code> if gets hashed with md5 which is much better.</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>To be able to <strong>connect to the switch remotely</strong> it needs an IP address but switches exist in the data link layer so what are we supposed to do about this?<br>
+A <strong>Switch Virtual Interface (SVI)</strong> that will have the same characteristics as a router and can be created by creating a VLAN</p>
+<pre><code>Switch(config)# interface VLAN 1   
+</code></pre>
+</li>
+<li>
+<p>To connect to the switch remotely write the following command in the <strong>Command Line</strong></p>
+<pre><code> C:/ telnet [IP ADDRESS]
+</code></pre>
+</li>
+<li>
+<p>To switch up to the next mode (<em>specific configuration mode</em>) if it was an interface we do the following</p>
+<pre><code>Switch(config)# interface [PORT TYPE]  
+</code></pre>
+</li>
+<li>
+<p>To shutdown the chosen port</p>
+<pre><code>Switch(config)# shutdown  
+</code></pre>
+</li>
+<li>
+<p>When putting a <code>?</code> after a part of the command it will give me hints on what the command might be.</p>
+</li>
+<li>
+<p>Putting <code>?</code> alone it will give me the commands I can execute in the current mode.</p>
+</li>
+<li>
+<p>To erase all of the configurations we either just <strong>reload</strong> the device if we didn't copy the configs but if we did copy them we write the following command</p>
+<pre><code>   Switch(config)# erase startup-config
+</code></pre>
+</li>
+<li>
+<p>To go back to the privileged mode use the command</p>
+<pre><code> Switch(config)# exit
+</code></pre>
+</li>
+</ul>
+<p><span class="chapter2subs">4. Line Configuration Mode <code>(config-line)#</code>.</span></p>
+<ul>
+<li>
+<p>Used to configure console, SSH, Telnet and AUX access.</p>
+</li>
+<li>
+<p>To configure the <strong>Console</strong>'s or <strong>VTY</strong>'s password</p>
+<pre><code>Switch(config-line)# password [PASSWORD]  
+Switch(config-line)# login
+</code></pre>
+</li>
+<li>
+<p>To get back to the global config mode use</p>
+<pre><code>Switch(config-line)# exit
+</code></pre>
+</li>
+</ul>
+<p><span class="chapter2subs">5. Interface Configuration Mode <code>(config-if)#</code>.</span></p>
+<ul>
+<li>
+<p>Used to configure a switch's port (I'm guessing the logical port) or interface.</p>
+</li>
+<li>
+<p>After executing the command <code>interface vlan</code> we do the following to create an ip address for the switch</p>
+<pre><code>Switch(config-if)# ip address [IP ADDRESS] [SUBNET MASK]
+Switch(config-if)# no shutdown
+</code></pre>
+</li>
+<li>
+<p>To get back to the global config mode use</p>
+<pre><code>Switch(config-if)# exit  
+</code></pre>
+</li>
+</ul>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>In multitasking computer operating systems, a daemon is a computer program that runs as a background process, rather than being under the direct control of an interactive user. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+
+    </body>
+    </html>

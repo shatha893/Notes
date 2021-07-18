@@ -1,0 +1,30 @@
+body{
+   font-size:large;
+
+}
+.chapter2subs{
+   color:#FF7F50;
+}
+
+.subtitle{
+   font-size:20px;
+   font-family: 'Encode Sans SC', sans-serif;
+}
+.copyright{
+   font-family: 'Cedarville Cursive', cursive;
+
+}
+
+.date{
+   font-family: 'Cedarville Cursive', cursive;
+   color:gray;
+   font-size:normal;
+}
+
+.title{
+font-family: 'Zen Tokyo Zoo', cursive;
+}
+
+blockquote{
+   background-color:rgba(240, 239, 239, 0.726);
+}

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Cisco Certified Network Associate Notes &lt;span style&equals;&quot;float&colon;right&semi;&quot;&gt;By Shatha Barqawi&lt;&sol;span&gt;</title>
+        <style>
+</style>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h2 id="cisco-certified-network-associate-notes-by-shatha-barqawi">Cisco Certified Network Associate Notes <span style="float:right;">By Shatha Barqawi</span></h2>
+<p><br/><br/></p>
+<h1 id="introduction-to-networking">Introduction to Networking</h1>
+<p><span style="color:gray;font-size:small;">Tuesday, 22/6/2021</span></p>
+<h3 id="span-stylecolor8b0000communication-types-network-transmission-modes"><span style="color:#8B0000">Communication Types (Network Transmission Modes)</h3>
+<p><span style="color:#F08080;">1. Simplex</span> Always from the source to destination (e.g. TV).<br>
+<span style="color:#F08080;">2. Half Duplex</span> The source and destination can either send <em><strong>or</strong></em> recieve (e.g. Walkie Talkie).<br>
+<span style="color:#F08080;">3. Full Duplex</span> The source and destination can send <em><strong>and</strong></em> recieve (e.g. Mobile).</p>
+<img src="https://media-exp3.licdn.com/dms/image/C5112AQHPExfAVoJffA/article-cover_image-shrink_720_1280/0/1520184208215?e=1629331200&v=beta&t=KIdmjxZ5yRNUzUEXE09gFR6RDirkG38y0sUKZi5556w">  
+<p><br/><br/></p>
+<h3 id="span-stylecolor8b0000-delivery-options-casting-types"><span style="color:#8B0000"> Delivery Options (Casting Types)</h3>
+<p>We have Unicast (one-to-one), Multicast (one-to-many) and Broadcast (one-to-all)
+<br/>
+<img src="https://cdn.techterms.com/img/xl/multicast_946.png"></p>
+<p><br/><br/></p>
+<h3 id="span-stylecolor8b0000the-hub"><span style="color:#8B0000">The Hub</h3>
+<p>Is a device that connects all devices to <span style="color:#F08080;"> one channel</span>. When a message is sent on this hub it will be <span style="color:#F08080;">broadcasted</span> on the whole channel to all the connected devices. Also, a <span style="color:#F08080;">collision</span> is possible if 2 or more workstation want to broadcast the message at the same time and <em>those are the 2 problems that a hub has.</em><br>
+The <em>collision</em> problem was solved using the <span style="color:#F08080;">&quot;CSMA/CD&quot;</span> which is an abbreviation for <em>Carrier Sense Multiple Access/Collision Detection</em>. What it does is that, in a way, it asks if the channel has sth or that the workstation can send it's message. But this way there still could be the problem that if 2 workstations ask at the very same second and the channel seems clear the ability to send will be granted for both workstations and a collision will definitly happen.</p>
+<p><strong>The hub is called dumb and it's not used anymore</strong><br>
+<br/><br/></p>
+<h3 id="span-stylecolor8b0000the-switch"><span style="color:#8B0000">The Switch</h3>
+<p>First good thing about switches that when connected to it a workstation can send a message in <span style="color:#F08080;">multicast</span> by using a <span style="color:#F08080;">MAC-Address-Table</span> that consists of Ports and their MAC.<br>
+<br/>
+In a switch the ports of it are connected to each other as a <span style="color:#F08080;">full mesh</span> which means that each port has a specific path (channel) to communicate with any other port, hence, no collision.</p>
+<img src="https://www.omnisecu.com/images/basic-networking/full-mesh-topology.jpg">  
+<br/>  <br/>
+<p>The switch also has a <span style="color:#F08080;">Buffer Memory</span> and a <span style="color:#F08080;">Shared Memory</span>.<br>
+<br/>
+Also, all the switches ports are <span style="color:#F08080;">full duplex.<br>
+<br/><br/></p>
+<h3 id="span-stylecolor8b0000--the-router"><span style="color:#8B0000">  The Router</h3>
+<p>It, mainly, enables workstations from different networks to communicate.</p>
+<p>The router gives us the ability to connect an <span style="color:#F08080;">ethernet cable</span> and a <span style="color:#F08080;">serial cable</span> when the switch enables us to connect <span style="color:#F08080;">only ethernet.</p>
+<p>The routers symbol is<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Router_symbol.svg/1200px-Router_symbol.svg.png" width="100" height="100"></p>
+<p><br/><br/></p>
+<h3 id="span-stylecolor8b0000--address-types"><span style="color:#8B0000">  Address Types</h3>
+<p><span style="color:#F08080;">1. Physical Address</span> (MAC Address) it's represented by 48 bits(12 hexa) and splitted into 2 =&gt; OUI + Vendors.<br>
+<span style="color:#F08080;">2. Logical Address</span>  (IP =&gt; IPv4 or IPv6) which is represented by 32 bits (4 octal), between each 8 bits there's a &quot;.&quot; and it's represented in decimal.</p>
+<p><br/><br/></p>
+<h3 id="span-stylecolor8b0000-ipv4"><span style="color:#8B0000"> IPv4</h3>
+<p>It's divided into five classes:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Class</th>
+<th>IP Address</th>
+<th>Prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>A</td>
+<td>0-127.X.X.X</td>
+<td>/8</td>
+</tr>
+<tr>
+<td>2</td>
+<td>B</td>
+<td>128-191.X.X.X</td>
+<td>/16</td>
+</tr>
+<tr>
+<td>3</td>
+<td>C</td>
+<td>192-223.X.X.X</td>
+<td>/24</td>
+</tr>
+<tr>
+<td>4</td>
+<td>D</td>
+<td>224-239.X.X.X</td>
+<td>Multicast Address</td>
+</tr>
+<tr>
+<td>5</td>
+<td>E</td>
+<td>240-255.X.X.X</td>
+<td>Research</td>
+</tr>
+</tbody>
+</table>
+<p>As obvious from the table the first number hints the class of the IP.</p>
+<ul>
+<li>What's a <em>prefix</em>?<br>
+It's the number that decides how many bits will be designated for the network and consequently how many bits for the hosts e.g. If the prefix is 8 then the subnet mask is 11111111.00000000.00000000.00000000.00000000 =&gt; N.H.H.H =&gt; N for Network &amp; H for Host.<br>
+Depending on the number of devices we're connecting on the network we decide which class is best to choose.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-stylecolor8b0000-network-id"><span style="color:#8B0000"> Network Id</h3>
+<p>We can calculate the network id by ANDing the IP address and the subnet mask.</p>
+<ul>
+<li>If the devices are in the same network <em>=then=&gt;</em> they have the same network id which communicate through a <strong>switch</strong>.</li>
+<li>If the devices are in different networks <em>=then=&gt;</em> they have different network ids and they communicate through a <strong>router</strong>.</li>
+</ul>
+<p><br/><br/><br/></p>
+<p><span style="color:gray;font-size:small;">Thursday, 24/6/2021</span></p>
+<h3 id="span-stylecolor228b22-network-components"><span style="color:#228B22"> Network Components</h3>
+   <br/>
+A network has to have at least these 5 components to be called a network:
+<ol>
+<li>Source (Sender).</li>
+<li>Media.</li>
+<li>Destination (Reciever).</li>
+<li>Message (which could be <em>Data &quot;text, voice or video&quot;</em> or <em>Query</em>).</li>
+<li>Protocol.</li>
+</ol>
+<p><br/><br/></p>
+<h3 id="span-stylecolor228b22-media"><span style="color:#228B22"> Media</h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Media Type</th>
+<th>Examples</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Wired</td>
+<td>Copper, Optical</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Wireless</td>
+<td>Wifi, WiMax, Bluetooth and IR</td>
+</tr>
+</tbody>
+</table>
+<p><br/><br/></p>
+<h3 id="span-stylecolor228b22-copper-wires"><span style="color:#228B22"> Copper Wires</h3>
+<p>Could be 1 of 2 <em>Coaxial Cable</em> or <em>Twisted Pair</em>.</p>
+<ul>
+<li>What do we mean by bandwidth?<br>
+The maximum rate of data transfer in a given path.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-stylecolor228b22-coaxial-cable"><span style="color:#228B22"> Coaxial Cable</h3>
+<ul>
+<li>It needs a T connector.</li>
+<li>It's used with TV cable.</li>
+<li>It has two types <em>10 base 5 (THICK)</em> and <em>10 base 2 (THIN).</em> The number 10 means <strong>10 Mbps</strong> and the 5 or 2 mean <strong>500 meters</strong> or <strong>200 meters</strong> (respectively).</li>
+<li>The meters mean that after this distance we will need a repeater to regenerate the signal.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-stylecolor228b22-twisted-pair-cable"><span style="color:#228B22"> Twisted Pair Cable</h3>
+<ul>
+<li>Why is it twisted?<br>
+Because every wire emits some kind of a magnetic field and when the 2 wires are twisted upon each other the magnetic field of each one of them is</li>
+</ul>
+
+    </body>
+    </html>
