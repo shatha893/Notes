@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>What is a VPN&quest;</title>
+        <style>
+</style>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+<style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', system-ui, 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
+        
+    </head>
+    <body class="vscode-body vscode-light">
+        <h2 id="what-is-a-vpn">What is a VPN?</h2>
+<p>A Virtual Private Network allows us to connect to a private network and access hosts and resources just like if we're directly connected to the network.</p>
+<p>It's a secured channel for shared public networks to communicate by connecting to a private network.</p>
+<p>VPNs encrypt communications over the channel so by that it provides a level of security by preventing eavesdropping and access to data traversing the channel.</p>
+<h2 id="two-types-of-vpns">Two Types of VPNs</h2>
+<ol>
+<li>
+<p>Client-based VPN.
+Requires the use of client software to establish the VPN connection. It will act as if the client is connected directly to the company's network and it will have access to all its resource (applications, hosts, subnest, etc.) <strong>allowed by the server configuration</strong>.</p>
+</li>
+<li>
+<p>SSL VPN.<br>
+uses the web browser as the VPN client, where the connection is established between the browser and an SSL VPN gateway.</p>
+</li>
+</ol>
+<br/>
+<h2 id="why-use-a-vpn">Why Use a VPN?</h2>
+<p>We use a VPN to connect to another region or another country to obscure our browsing traffic or to disguise our public IP address.<br>
+Using a VPN service comes with its own negativities one of which is the fact that the VPN provider is not doing what they're saying they're doing and they're logging our data, that's why they always say that if you want to use a VPN it's best if it was a paid one because free ones are not guaranteed to not take your data.<br>
+That's why it's best when connecting via a VPN to connect a VM not my original computer.<br>
+To connect to HTB's VPN  type the following command:</p>
+<pre><code><code><div>Shatha Barqawi@htb[/htb]$ sudo openvpn user.ovpn
+
+Thu Dec 10 18:42:41 2020 OpenVPN 2.4.9 x86_64-pc-linux-gnu [SSL (OpenSSL)] [LZO] [LZ4] [EPOLL] [PKCS11] [MH/PKTINFO] [AEAD] built on Apr 21 2020
+Thu Dec 10 18:42:41 2020 library versions: OpenSSL 1.1.1g  21 Apr 2020, LZO 2.10
+Thu Dec 10 18:42:41 2020 Outgoing Control Channel Authentication: Using 256 bit message hash 'SHA256' for HMAC authentication
+Thu Dec 10 18:42:41 2020 Incoming Control Channel Authentication: Using 256 bit message hash 'SHA256' for HMAC authentication
+Thu Dec 10 18:42:41 2020 TCP/UDP: Preserving recently used remote address: [AF_INET]
+Thu Dec 10 18:42:41 2020 Socket Buffers: R=[212992-&gt;212992] S=[212992-&gt;212992]
+Thu Dec 10 18:42:41 2020 UDP link local: (not bound)
+&lt;SNIP&gt;
+Thu Dec 10 18:42:41 2020 Initialization Sequence Completed
+</div></code></code></pre>
+<p>You can see the networks accessible via the VPN by typing the following command:</p>
+<pre><code><code><div>Shatha Barqawi@htb[/htb]$ netstat -rn
+
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+0.0.0.0         192.168.1.2     0.0.0.0         UG        0 0          0 eth0
+10.10.14.0      0.0.0.0         255.255.254.0   U         0 0          0 tun0
+10.129.0.0      10.10.14.1      255.255.0.0     UG        0 0          0 tun0
+192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 eth0
+</div></code></code></pre>
+<h2 id="whats-a-shell">What's a Shell?</h2>
+<p>It's the Command-Line Interface such as Linux terminal, Windows command-line (cmd.exe), and Windows PowerShell. It's a program that takes input from the user (via keyboard) and passes these commands to the OS so that it performs a specific function.<br>
+Most Linux systems use a program called Bash(Bourne Again Shell) as a shell to interact with the OS. There are others types of shells such as Zsh, Tcsh, Ksh, Fish shell, and the list keeps going on.<br>
+&quot;Getting a shell on a system&quot; means that we exploit the target host in order to obtain shell-level access and run commands through it. We can obtain shell level access by exploiting a web application, network vulneribitlity or obtaining credentials and logging into the target host remotely.</p>
+
+    </body>
+    </html>
