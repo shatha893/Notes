@@ -265,11 +265,9 @@ client max protocol = SMB3
 <p>Once I was able to log into smb it wasn't hard to find a way to log in.</p>
 </li>
 <li>
-<p>With the ssh the problem was that I couldn't get any credentials to benefit from the exploits I found for it.
-<br/></p>
+<p>With the ssh the problem was that I couldn't get any credentials to benefit from the exploits I found for it.</p>
 </li>
 </ul>
-<h3 id="span-classlamemach-subtitlewrite-up"><span class="lameMach subtitle">Write Up</h3>
 <br/>
 <h3 id="span-classlamemach-subtitleto-do-list"><span class="lameMach subtitle">To Do List</h3>
 <ol>
@@ -313,6 +311,33 @@ WORKGROUP            LAME
 </div></code></pre>
 </li>
 </ol>
+<br/>
+<h3 id="span-classlamemach-subtitlenice-things-i-found-in-someone-elses-write-up"><span class="lameMach subtitle">Nice Things I Found in Someone Else's Write Up</h3>
+<ul>
+<li>
+<p>According to <em>NOOBSEC</em></p>
+<blockquote>
+<p><em>Good thing about getting SSH version is you get the OS running on the target machine too.</em></p>
+</blockquote>  
+<blockquote>
+<p><em>We’ll cross out SSH from out list of things to look for, unless we get some creds or keys from somewhere.</em></p>
+</blockquote>  
+<blockquote> IMPORTANT!!!
+<p><em>A tip, when you want to view a exploit that searchsploit printed out in the results, you can use -x flag of searchsploit to view its’ contents.</em></p>
+</blockquote>
+<ul>
+<li>
+<p>So he used <em>searchexploit</em> to check for kernel vulnerabilities when he was trying to privilege escalate to root in the <em>distcc</em> exploit</p>
+<blockquote>
+<p><em>Since this machine is old, a kernel exploit is very likely. Let’s check the kernel version running, and details of the OS too</em></p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li>
+<p>The Daemon Command Execution was accomplished with the service <em>distcc</em> aka the service that I didn't know existed.</p>
+</li>
+</ul>
 
     </body>
     </html>

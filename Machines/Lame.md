@@ -194,9 +194,6 @@ Because of the stupid smbclient that kept refusing my connection to the smb serv
 - Once I was able to log into smb it wasn't hard to find a way to log in.
 
 - With the ssh the problem was that I couldn't get any credentials to benefit from the exploits I found for it.
-<br/>
-
-### <span class="lameMach subtitle">Write Up
 
 <br/>
 
@@ -242,3 +239,32 @@ Because of the stupid smbclient that kept refusing my connection to the smb serv
    WORKGROUP            LAME
 
    ```
+
+<br/>
+
+### <span class="lameMach subtitle">Nice Things I Found in Someone Else's Write Up  
+  
+  * According to *NOOBSEC*  
+    <blockquote>
+
+    *Good thing about getting SSH version is you get the OS running on the target machine too.*
+    </blockquote>  
+
+    <blockquote>
+
+    *We’ll cross out SSH from out list of things to look for, unless we get some creds or keys from somewhere.*
+    </blockquote>  
+
+    <blockquote> IMPORTANT!!!
+
+    *A tip, when you want to view a exploit that searchsploit printed out in the results, you can use -x flag of searchsploit to view its’ contents.*
+    </blockquote>
+
+    * So he used *searchexploit* to check for kernel vulnerabilities when he was trying to privilege escalate to root in the *distcc* exploit
+      <blockquote>
+      
+      *Since this machine is old, a kernel exploit is very likely. Let’s check the kernel version running, and details of the OS too*
+      </blockquote>
+
+* The Daemon Command Execution was accomplished with the service *distcc* aka the service that I didn't know existed.
+  
