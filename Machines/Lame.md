@@ -239,7 +239,7 @@ Because of the stupid smbclient that kept refusing my connection to the smb serv
    WORKGROUP            LAME
 
    ```
-
+<span class="comments">//I should've written that earlier I don't remember the exact outputs...If you have the time write it later
 <br/>
 
 ### <span class="lameMach subtitle">Nice Things I Found in Someone Else's Write Up  
