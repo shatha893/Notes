@@ -10,11 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Encode+Sans+SC&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
 
 
-## <span class="copyright">Machine #1<span style="float:right;">By Shatha Barqawi</span>
+## <span class="copyright">Machine #2<span style="float:right;">By Shatha Barqawi</span>
 
 <br/><br/>
 
-# <span class="title">Lame
+# <span class="title">Irked
 
 
 <span class="date">Wednesday, 21/7/2021</span> 
@@ -50,7 +50,19 @@
      8067/tcp  open  infi-async
      49889/tcp open  unknown
      65534/tcp open  unknown
-     ```
+     ```.
+3. Grabbed the banner of the http port  
+   ```console
+   PORT   STATE SERVICE VERSION
+   80/tcp open  http    Apache httpd 2.4.10 ((Debian))
+   ```
+   We now know the version of the http server we have.  
+
+4. What I found on the http page  
+<img src="irked_http.png">  
+
+6. What's an IRC?  
+   
 
 <br/><br/>
 
