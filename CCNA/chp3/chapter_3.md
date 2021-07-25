@@ -1,4 +1,4 @@
-<link href="../styles.module.css" rel="stylesheet">
+<link href="../../styles.module.css" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
@@ -162,6 +162,7 @@ Keywords:
   * Bits, light or signal.
   * Copper, fiber or wireless.
   * NIC or port.  
+  * Hardware Components.
 
 PDU: <span class="chapter3ccna">Light or Signal</span>
 <br/><br/>
@@ -239,3 +240,14 @@ PDU: <span class="chapter3ccna">Data</span>
   | SMAC | DMAC | SIP         | DIP        | TCP Header | Data |
   |------|------|-------------|------------|------------|------|
   |   D  |   G  | 192.168.1.1 | 172.16.1.1 |      -     |   -  |
+
+
+<br/><br/>
+
+### <span class="chapter3ccna subtitle">Encapsulation Process  
+It's as the prompt at the bottom left corner explains  
+<img src="encapsulation.PNG">  
+  1. Data. 
+  2. TCP Header.
+  3. IP Header.
+  4. Ethernet.
