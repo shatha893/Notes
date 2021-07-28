@@ -62,4 +62,65 @@ Because most of the corruption of data happens in the physical layer.
 * To know a MAC address of the PC open CMD on it and write the command `ipconfig /all`.  
 
 * Levels of communications through a network  
-<img src="example.PNG">
+<img src="example.PNG">  
+
+<br/><br/>
+
+### <span class="chapter4color subtitle">Network Documentation and Topologies  
+For people to understand our network we have to document it in a way or another so we use Physical Topologies and Logical Topologies to do just that.  
+
+* Physical Topology  
+  * What is it?  
+   Quoted from *Techopedia*  
+     <blockquote>
+     
+     *The method employed to connect the physical devices on the network with the cables, and the type of cabling used, all constitute the physical topology.*
+     </blockquote>
+
+   * Common WAN Physical Topologies  
+     1. Point-to-Point.  
+      The devices are connected to each other directly but they don't really have to be connected to each other directly in a physical way.  
+      Meaning there could be other intermediery devices between them.
+
+     2. Hub and Spoke.  
+      The hub with each spoke has a point to point relationship.  
+      Sometimes there could be multiple hubs and this is for if one hub goes down the other one would take after it without the whole network going down.    
+      <img src="https://blog.bmtmicro.com/wp-content/uploads/2015/08/hub-spoke-generic.gif" width=300>  
+
+     3. Full Mesh.   
+      <img src="https://networklessons.com/wp-content/uploads/2016/12/full-mesh-router-topology.png" width=300>       
+<br/>
+
+   * Common LAN Physical Topologies  
+      1. Bus.  
+         <img src="https://thumbs.dreamstime.com/b/bus-topology-d-image-network-50152734.jpg" width=300>  
+         IT'S LEGACY.  
+
+      2. Ring.  
+         <img src="https://sites.google.com/site/networktopologies12/_/rsrc/1468849869009/home/ring--the-beginning/ring%20topology.jpg?height=2399&width=3300" width=300>  
+         IT'S LEGACY TOO.  
+
+      3. Star.  
+         <img src="https://sites.google.com/site/networktopologies12/_/rsrc/1468849869348/home/star/star.jpg?height=2400&width=3299" width=300>  
+         It's used nowadays.  
+         The device in the middle could be a *switch* or a *hub*.  
+
+      4. Extended-star.  
+         <img src="https://www.conceptdraw.com/How-To-Guide/picture/star-network-topology-diagram.png" width=300>  
+         It's also used nowadays.
+   
+
+<br/>
+
+* Logical Topology  
+  * What do we mean by it?  
+     Quoted from *Educba*  
+     <blockquote>
+     
+     *The logical topology deals with network protocols that are used to control the data flow across the network. The ethernet protocol is the most common protocol used for logical topology.*
+     </blockquote>
+
+
+     
+     
+    
