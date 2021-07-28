@@ -120,7 +120,38 @@ For people to understand our network we have to document it in a way or another 
      *The logical topology deals with network protocols that are used to control the data flow across the network. The ethernet protocol is the most common protocol used for logical topology.*
      </blockquote>
 
+<br/><br/>
 
-     
-     
+### <span class="chapter4color subtitle">Half and Full Duplex  
+
+* <span class="chapter4color"> Half Duplex</span>  
+    * The sender sends and when the sending process finishes the sender can receive it can't send and recieve at the same time and if it does happen it results in a collision.  
+  
+    * Hubs and wireless connections can only use half duplex.  
+
+* <span class="chapter4color "> Full Duplex </span>  
+    * No collisions EVER.
+    * Devices can send and recieve whenever they want. 
+    * Switches are always full duplex. Routers too! 
+
+
+* Quoted from *Wikipedia*  
+   <blockquote>
+   
+    *In a full-duplex system, both parties can communicate with each other simultaneously. An example of a full-duplex device is plain old telephone service; the parties at both ends of a call can speak and be heard by the other party simultaneously. The earphone reproduces the speech of the remote party as the microphone transmits the speech of the local party. There is a two-way communication channel between them, or more strictly speaking, there are two communication channels between them.*
+
+    *In a half-duplex or semiduplex system, both parties can communicate with each other, but not simultaneously; the communication is one direction at a time. An example of a half-duplex device is a walkie-talkie, a two-way radio that has a push-to-talk button. When the local user wants to speak to the remote person, they push this button, which turns on the transmitter and turns off the receiver, preventing them from hearing the remote person while talking. To listen to the remote person, they release the button, which turns on the receiver and turns off the transmitter.*
+   </blockquote>
+
+     <br/><br/>
+
+### <span class="chapter4color subtitle">Contention-Based Access Methods  
+   These methods are used in networks operating in half duplex mode.
+
+   1. CSMA/CD (Carrier Sense Multiple Access/Collision Detection).
+      * Used in legacy bus topology ethernet LANs.
+      * 
+
+   2. CSMA/CA (Carrier Sense Multiple Access/Collision Aviodance)
+     * Used in wireless LANs.
     
