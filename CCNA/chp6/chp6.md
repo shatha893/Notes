@@ -150,8 +150,23 @@ For people to understand our network we have to document it in a way or another 
 
    1. CSMA/CD (Carrier Sense Multiple Access/Collision Detection).
       * Used in legacy bus topology ethernet LANs.
-      * 
+      * So it happens when devices transmit data simultaneously on a shared media these devices detect the collision and then wait a random amount of time and retrasmit (e.g. both of the devices could wait the same amount of time and have another collision).  
+  <br/>
 
-   2. CSMA/CA (Carrier Sense Multiple Access/Collision Aviodance)
-     * Used in wireless LANs.
+   2. CSMA/CA (Carrier Sense Multiple Access/Collision Aviodance)  
+        * Used in wireless LANs.  
+        * The duration needed for the transmission is included with the data being transmitted so that the other devices would know this duration and how long the media won't be available (How long they have to wait to be able to send).
     
+     <br/><br/>
+
+### <span class="chapter4color subtitle">Data Encapsulation in the Data Link Layer  
+
+* The packet is to be encapsulated by a *header* and *trailer* for it to become a frame.  
+* Later, we will be talking about the *Ethernet Header* but there are other types of headers for frames. Choosing the type of header depends on the type of media we have.   
+* I found this descriptive enough  
+  <img src="frame_fields.PNG">  
+
+<br/><br/>
+
+### <span class="chapter4color subtitle">Ethernet is Best Effort Delivery  
+It's called that way because the ethernet protocol in layer 2 sends data without guaranteeing that the data was delivered (recieved) or not. That's the Transport Layer's job.  

