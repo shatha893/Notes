@@ -157,7 +157,7 @@ For people to understand our network we have to document it in a way or another 
         * Used in wireless LANs.  
         * The duration needed for the transmission is included with the data being transmitted so that the other devices would know this duration and how long the media won't be available (How long they have to wait to be able to send).
     
-     <br/><br/>
+<br/><br/>
 
 ### <span class="chapter4color subtitle">Data Encapsulation in the Data Link Layer  
 
