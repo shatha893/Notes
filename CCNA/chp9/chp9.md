@@ -1,8 +1,42 @@
 
+<link href="../styles.module.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Encode+Sans+SC&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
 
-# Chapter 9 and 10
-## ARP Table  
-* The PC's ARP table will have its own IP and MAC address.
+## <span class="copyright">Cisco Certified Network Associate Notes <span style="float:right;">By Shatha Barqawi</span>
+
+<br/><br/>
+
+# <span class="title">Chapter 9: Address Resolution (ARP)
+
+<span class="date">Monday,9/8/2021</span> 
+
+<br/><br/>
+
+<!-- ### <span class="[chapterColor] subtitle"> -->
+
+* ARP tables have the IP address and MAC address of its entries.  
+
+* The PC's ARP table will have its own IP and MAC addresses.  
+
+<br/><br/>
+
+<span class="[chapterColor] subtitle">Explanatory Scenario</span>
+  * The reciever PC is in another network so the frame from the reciever won't be sent directly because our PC (in its current state) doesn't have the MAC address of the default gateway in its ARP table(which is the MAC the PC should put to be able to contact outsider recievers). In such situation the PC sends an ARP request to retrieve the MAC address of the default gateway.
+  * The gateway will send an ARP reply to the PC with its MAC (as source MAC).
+  * The MAC table learns through the source MACs and the ARP gives and includes the destination MACs.
+  * The PC that gets the ARP request but it's not the intended one (destination IP) it takes the source MAC and source IP and stores them in the ARP table (for later use).
+
+  * This is a visual example:
+  <img src="ARP_MAC_ex.PNG"> 
+
 * It has the default gateway's IP address but not the MAC. So how do we get it? By sending an ARP request.
   This ARP request has Source Mac as the PC's MAC, destination MAC as FFFFFF... and source IP address of the source and destination IP as the IP of the default gateway.  
   Then an ARP reply (always unicast) from the router (default gateway) to the PC.
@@ -16,43 +50,12 @@
 
 * windows pcs 2min-10min and routers 5min (ARP timer).  
 
-* I have to give the pc an ip, subnet mask and default gateway in the ip configuration place in the PC
-* Commands  
-    * On PC's cmd:
-    * arp -a
-    * arp -d
-    * show ip arp
-    * To connect remotely to the switch:
-      * telnet [SWITCH/ROUTER IP ADDRESS]
-
-    * show ip int br (show ip interface brief) in enable mode
-    * set ip address : ip addr [IP ADDRESS] [SUBNET MASK] we did this for the vlan and it was in the config interface vlan 1
-    * show mac address table: show mac mac address-table
-    * no shutdown
-    * show ip arp  
 
 
-    * Configuration in the router: 
-      * config t
-      * interface fa0/0 (It's changable).
-      * ip address [IP ADDRESS] [SUBNET MASK] >>>> 192.168.1.10 255.255.255.0
-      * shutdown
-      * description ## Default gateway port## (optional)
-      * to show the counters of all the interfaces: show interfaces 
-
-       * switch:
-       * config t
-       * interface vlan 1
-       * ip address [IP ADDRESS] [SUBNET MASK]
-       * no shutdown
-       * ip default-gateway [GATEWAY IP ADDRESS]
-
-* put the example of the eng (the screenshot)  
-* The PC that gets the ARP request but it's not the intended one (destination IP) it takes the source MAC and source IP and stores them in the ARP table (for later use).
 
 * If we have a gateway of last resort it means that if we don't have the IP the data is supposed to be sent to it will be sent to this gateway if it was assigned if there was no gateway of last resort then the data will be dropped.
 
 
 
 
-* EMAIL h.albeshawi@gmail.com
+* EMAIL h.albeshawi@gmail.com 
