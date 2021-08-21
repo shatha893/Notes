@@ -52,7 +52,8 @@
 * The ARP request has the following information:
   * Destination MAC address (Broadcast Address).
   * Source MAC Address.
-  * Type
+  * Type (ARP messages have a type field of 0x806. This informs the receiving NIC that the data portion of the frame needs to be passed to the ARP process).  
+* Additionally, static map entries can be entered in an ARP table, but this is rarely done. Static ARP table entries do not expire over time and must be manually removed.
 
 
 <br/><br/>
@@ -79,8 +80,17 @@
 
 * windows pcs 2min-10min and routers 5min (ARP timer).  
 
-
+* The command `show ip arp` shows the arp table on routers.
+* On Windows 10 pc we use the command `arp -a`
 
 
 * If we have a gateway of last resort it means that if we don't have the IP the data is supposed to be sent to it will be sent to this gateway if it was assigned if there was no gateway of last resort then the data will be dropped.
+
+
+<br/><br/>
+
+<span class="[chapterColor] subtitle">Security Risks
+
+* In some cases, the use of ARP can lead to a potential security risk. A threat actor can use ARP spoofing to perform an ARP poisoning attack. This is a technique used by a threat actor to reply to an ARP request for an IPv4 address that belongs to another device, such as the default gateway, as shown in the figure. The threat actor sends an ARP reply with its own MAC address. The receiver of the ARP reply will add the wrong MAC address to its ARP table and send these packets to the threat actor.
+Enterprise level switches include mitigation techniques known as dynamic ARP inspection (DAI).  
 
