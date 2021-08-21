@@ -23,8 +23,37 @@
 <!-- ### <span class="[chapterColor] subtitle"> -->
 
 * ARP tables have the IP address and MAC address of its entries.  
-
+* MAC addresses are used for NIC to NIC communications on the same ethernet network.
+* When the destination IP address (IPv4 or IPv6) is on a **remote network**, the destination MAC address will be the address of the host default gateway (i.e., the router interface).
 * The PC's ARP table will have its own IP and MAC addresses.  
+  
+* *How are the IP addresses of the IP packets in a data flow associated with the MAC addresses on each link along the path to the destination?* **For IPv4** packets, this is done through a process called Address Resolution Protocol (**ARP**). **For IPv6** packets, the process is ICMPv6 Neighbor Discovery (**ND**).
+
+* Device destination IPv4 addresses are either known or resolved by device name. However, MAC addresses must be discovered.  
+
+
+
+<br/><br/>
+
+<span class="[chapterColor] subtitle">ARP Provides 2 basic functions</span>  
+* Resolving IPv4 addresses to MAC addresses.
+* Maintaining a table of IPv4 to MAC address mappings.
+
+<br/><br/>
+
+<span class="[chapterColor] subtitle">ARP Functions  
+
+* When a packet is sent to the data link layer to be encapsulated into an Ethernet frame, the device refers to a table in its memory to find the MAC address that is mapped to the IPv4 address. This table is stored temporarily in RAM memory and called the ARP table or the ARP cache.
+
+<br/><br/>
+
+<span class="[chapterColor] subtitle">ARP Request  
+* An ARP message is directly encapsulated into an ethernet frame. There's no IPv4 header.
+* The ARP request has the following information:
+  * Destination MAC address (Broadcast Address).
+  * Source MAC Address.
+  * Type
+
 
 <br/><br/>
 
@@ -55,7 +84,3 @@
 
 * If we have a gateway of last resort it means that if we don't have the IP the data is supposed to be sent to it will be sent to this gateway if it was assigned if there was no gateway of last resort then the data will be dropped.
 
-
-
-
-* EMAIL h.albeshawi@gmail.com 

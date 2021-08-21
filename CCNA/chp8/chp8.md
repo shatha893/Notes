@@ -37,6 +37,14 @@
 * In a network the route chosen is decided by the routing protocol in that network.
 * The network layer, as in the data link layer, has nth to do with if the data is recieved or not meaning it's also a Best Effort Service.   
 
+
+<br/><br/>
+
+### <span class="chp8 subtitle">Characteristics of IP</span>  
+* Connectionless.
+* Best Effort.
+* Media Independent. Meaning IP doesn't care what's the type of media (copper, fiber, wireless,...etc) it works on any type.
+
 <br/><br/>
 
 ### <span class="chp8 subtitle">The Tables</span>
@@ -101,12 +109,15 @@
 
 <br/><br/>
 
-### <span class="chp8 subtitle">What does the IP header consist of?</span>  
+### <span class="chp8 subtitle">What does the IPv4 header consist of?</span>  
+  
+  <img src="ipv4_header.png">
+
   1. Source IP.
   <br/>
   2. Destination IP.
   <br/>
-  3. Differentiated Services 
+  3. Differentiated Services(DS) 
       * To determine the QoS priority of each packet.    
       <br/> 
   4. Time to Live (TTL).
@@ -157,7 +168,10 @@
       * Integrated security.  
 <br/>
 
-  * <span class="chp8">It Consists of</span>  
+  * <span class="chp8">IPv6 Header</span>  
+
+     <img src="ipv6_header.png">
+
     1. version
     2. Traffic Class
     3. Flow Label
@@ -212,11 +226,19 @@
 
 ### <span class="chp8 subtitle">Routing Table in Details (But not everything on it)</span>  
 
-* Command `netstat -r` or `route print` shows me the routing table of the PC.  
+* Command `netstat -r` or `route print` shows me the routing table of the PC.
+* The `show ip route` privileged EXEC mode command is used to view the IPv4 routing table on a Cisco IOS  router.
+* Common route sources (codes) include:
+  * L - Directly connected local interface IP address.
+  * C - Directly connected network.
+  * S - Static route was manually configured by an administrator.
+  * O - OSPF.
+  * D - EIGRP.   
+   
 * <span class="chp8">First thing the routing table will give me</span>   
-  * `192.168.1.1 on link` means this is me
-    `192.168.1.0 on link` the network I'm on 
-    `127.0.0.1 on link` loopback
+  * `192.168.1.1 on link` means this is me  
+    `192.168.1.0 on link` the network I'm on   
+    `127.0.0.1 on link` loopback  
     `0.0.0.0` means if you want to send data to anything other than the ips above go to the default route or default gateway.   
 
 * <span class="chp8">Routing table in detail</span>  
@@ -238,9 +260,17 @@
     2. Remote Network  
      The router can learn them by 2 ways:
         1. Static.
-           Manually (More on that later).
+           * Manually (remote networks are manually entered into the routing table using static routes).
+           * If there is a change in the network topology, the static route is not automatically updated and must be manually reconfigured.
+           * A static route is appropriate for a small network and when there are few or no redundant links.
+           * A static route is commonly used with a dynamic routing protocol for configuring a default route.
         2. Dynamic  
-           By using routing protocols such as OSPF, EIGRP, RIP, ISIS, BGP, ...etc (Also, more on these later).  
+           * By using dynamic routing protocols such as OSPF, EIGRP, RIP, ISIS, BGP, ...etc (Also, more on these later).  
+           * Basic configuration is only required from the network administrator to statically configure the directly connected networks and the dynamic routing protocol will do the following:
+             * Discover remote networks.
+             * Maintain up-to-date routing information.
+             * Choose the best path to destination networks.
+             * Attempt to find a new best path if the current path is no longer available.
 
 * <span class="chp8">What does the Routing Table have?</span>
   * How did it learn the networks?  
