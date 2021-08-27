@@ -158,4 +158,24 @@
     Switch(config-if)# end
     ```
 * The previous configuration demonstrates the configuration on 2960 switches that does the 802.1Q encapsulation automatically. Some switches might need the encapsulation to be configured manually.
-* The previous configuration could be verified using this command `show interfaces [INTERFACE ID] switchport` or we can use `show interfaces trunk`.
+* The previous configuration could be verified using this command `show interfaces [INTERFACE ID] switchport` or we can use `show interfaces trunk`.  
+
+<br/>
+
+* Reset the Trunk to the Default State  
+  * We can use the command `no switchport trunk allowed vlan` and `no switchport trunk native vlan` which remove the allowed vlans and reset the native vlan of the trunk .
+  * When we reset to the default state, then trunk allows all vlans and uses vlan 1 as native vlan. 
+```console
+S1(config)# interface fa0/1
+S1(config-if)# no switchport trunk allowed vlan
+S1(config-if)# no switchport trunk native vlan
+S1(config-if)# end
+```  
+
+<br/> 
+
+* Dynamic Trunking Protocol  
+  * It allows switches to negotiate trunking with a neighboring device.
+  * `switchport mode` full command syntax `Switch(config-if)# switchport mode { access | dynamic { auto | desirable } | trunk }`.  
+  <img src="dtp.png">  
+  * To verify DTP mode we can use the command `show dtp interface [INTERFACE ID]`
