@@ -79,3 +79,8 @@ gobuster dir -u [VICTIM'S LINK] -w [WORDLIST PATH]
 ```console
 gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
 ```
+
+
+
+dns zone transfer :  
+dirsearch instead of dirbuster/gobuster (git clone it from github)
