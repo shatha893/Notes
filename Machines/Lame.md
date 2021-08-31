@@ -193,8 +193,13 @@ Because of the stupid smbclient that kept refusing my connection to the smb serv
   ```
 - Once I was able to log into smb it wasn't hard to find a way to log in.
 
-- With the ssh the problem was that I couldn't get any credentials to benefit from the exploits I found for it.
-
+- With the ssh the problem was that I couldn't get any credentials to benefit from the exploits I found for it.  
+- My newly downloaded Kali didn't even work with these lines I had to add
+    ```console
+    [global]
+    client min protocol=NT1
+    ```  
+  to the /etc/samba/smb.conf file  
 <br/>
 
 ### <span class="lameMach subtitle">To Do List  
