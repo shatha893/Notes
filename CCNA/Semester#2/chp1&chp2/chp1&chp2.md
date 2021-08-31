@@ -136,8 +136,38 @@
 
 <br/><br/>
 
-* Switching in Networking  
+* Chapter 2: Switching in Networking   
 
   * Two terms that describe frames entering and leaving an interface are:
     * Ingress - which is used to describe the port where a frame enters the device.
     * Egress - which is used to describe the port that frames use when leaving the device.
+  
+<br/>
+
+  * MAC address table exists so that the switch would know where to forward frames by knowing what is the device connected to what port by storing the port with its corresponding MAC address.
+  * The MAC Address Table is also called (CAM) Content Addressable Memory because it's stored in this memory.
+  * In a LAN a switch determines how to handle incoming data frames by maintaining the MAC address table.  
+
+  * Two-step process performed on every Ethernet frame that enters a switch
+    1. Learn  
+       * If the source MAC address does not exist the switch adds it to the table.
+       * If the source MAC address exists the switch updates the timer for that entry.   
+    2. Forward  
+       * If the destination MAC address is in the table, the switch forwards the frame to the specified port.
+       * If the destination MAC address is not in the table, the switch will forward the frame out all ports except for the incoming port (aka Unknown Unicast).
+  * Two methods to *switch frames*
+    * Store-and-forward switching
+      The forwarding decision in this method is made after it has received the entire frame and checked the frame for errors using CRC or sth similar (Cyclic Redundancy Check).  
+    * Cut-through Switching  
+      The forwarding decision in this method is made after the *destination MAC* address of an incoming frame and the *egress* have been determined.  
+
+  * Collisions Domains  
+    * No collision domains when switch ports are operating in full-duplex but there are collision domains when we have half-duplex.  
+  * Broadcast Domains  
+    * Only a network layer device such as a router can divide a layer 2 boadcast domain.  
+    * The broadcast domain consists of all the devices that receive broadcast frames from a host.  
+  * Characteritics of switches that can alleviate network  
+    * Fast port speeds.
+    * Fast internal switching
+    * Large frame buffers.
+    * High port density.

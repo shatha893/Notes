@@ -72,7 +72,7 @@ The presence of the robots.txt does not in itself present any kind of security v
 ### <span class="useful_shit subtitle">Gobuster Bruteforcing Directories and Subdomains  
 * Command to bruteforece in `DIR` mode  
 ```console
-gobuster dir -u [VICTIM'S LINK] -w [WORDLIST PATH]
+gobuster dir -u [VICTIM'S LINK] -x [LIST OF EXTENSIONS] -w [WORDLIST PATH]
 ```  
 
 * Command to bruteforce `DNS` mode  
@@ -80,7 +80,12 @@ gobuster dir -u [VICTIM'S LINK] -w [WORDLIST PATH]
 gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
 ```
 
+ <br/><br/> 
+
+### <span class="useful_shit subtitle">DNS Zone Transfer  
+* Definition?
+  Is the process of copying the contents of the zone file on a primary DNS server to a secondary DNS server.  
+  And this way fault tolerance is provided.
 
 
-dns zone transfer :  
 dirsearch instead of dirbuster/gobuster (git clone it from github)
