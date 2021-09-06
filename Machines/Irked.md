@@ -232,5 +232,41 @@ I memorized the damn filesystem looking for the right file until I found it.
 
 <br/><br/>
 
-### <span class="irkedmach subtitle">Nice Things I Found in Someone Else's Write Up  
+### <span class="irkedmach subtitle">Priv Esc  
+
+* Found this in the LinPeas Output:
+```
+#From github
+/etc/apache2/sites-available/default-ssl.conf:      	#    	file needs this password: `xxj31ZMTZzkVA'.
+```
   
+
+* Nmapped Loopback and go the following
+  
+    ```
+    PORT	STATE SERVICE
+    22/tcp  open  ssh
+    25/tcp  open  smtp
+    80/tcp  open  http
+    111/tcp open  rpcbind
+    631/tcp open  ipp
+    ```
+
+    ```
+    PORT	STATE SERVICE VERSION
+    631/tcp open  ipp 	CUPS 1.7
+    | http-methods: Potentially risky methods: PUT
+    |_See http://nmap.org/nsedoc/scripts/http-methods.html
+    | http-robots.txt: 1 disallowed entry
+    |_/
+    |_http-title: Home - CUPS 1.7.5
+    ```
+
+    ```
+    PORT   STATE SERVICE VERSION
+    25/tcp open  smtp	Exim smtpd
+    |_smtp-commands: Couldn't establish connection on port 25
+    ``` 
+
+
+    * I rooted the system using a file that is calling a nonexistent library and this file is owned by root and this way I created the library (binary file) and put a shell code inside of it and it gave me root because it was run by root.

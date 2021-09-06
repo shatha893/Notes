@@ -89,3 +89,14 @@ gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
 
 
 dirsearch instead of dirbuster/gobuster (git clone it from github)
+
+
+* `cat /etc/shells` shows me what shells the machine uses
+
+* `scp [PATH TO FILE ON MY SYSTEM] [USERNAME]@[TARGET IP]:[PATH ON TARGET TO TRANSFER FILE TO]` only works when I have the password of the user and I can ssh with it.
+
+* store output in a file `[COMMAND] | tee [FILE NAME]`
+
+dpkg -l to show the packages and libraries we have
+
+* exploitdb's exploits are saved in the path `/usr/share/exploitdb/exploits`

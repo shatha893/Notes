@@ -244,7 +244,9 @@ Because of the stupid smbclient that kept refusing my connection to the smb serv
    WORKGROUP            LAME
 
    ```
-<span class="comments">//I should've written that earlier I don't remember the exact outputs...If you have the time write it later
+
+* I used the following payload to get into the machine
+* First I opened the share `tmp` but didn't find anything there so I wrote the following command in the smbclient `logon` with a payload that has to start with `/= nohup [REVERSE SHELL CODE]` and this way I've got a reverse shell on the system that gave me root access directly.
 <br/>
 
 ### <span class="lameMach subtitle">Nice Things I Found in Someone Else's Write Up  
