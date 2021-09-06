@@ -232,16 +232,18 @@ I memorized the damn filesystem looking for the right file until I found it.
 
 <br/><br/>
 
-### <span class="irkedmach subtitle">Priv Esc  
+### <span class="irkedmach subtitle">PrivEsc  
 
-* Found this in the LinPeas Output:
+* Found this in the LinPeas Output:  
+  
 ```
 #From github
 /etc/apache2/sites-available/default-ssl.conf:      	#    	file needs this password: `xxj31ZMTZzkVA'.
 ```
-  
 
-* Nmapped Loopback and go the following
+<br/>
+
+* Nmapped Loopback( To see the services running internally)
   
     ```
     PORT	STATE SERVICE
@@ -250,7 +252,7 @@ I memorized the damn filesystem looking for the right file until I found it.
     80/tcp  open  http
     111/tcp open  rpcbind
     631/tcp open  ipp
-    ```
+    ```  
 
     ```
     PORT	STATE SERVICE VERSION
@@ -260,7 +262,7 @@ I memorized the damn filesystem looking for the right file until I found it.
     | http-robots.txt: 1 disallowed entry
     |_/
     |_http-title: Home - CUPS 1.7.5
-    ```
+    ```  
 
     ```
     PORT   STATE SERVICE VERSION
@@ -268,5 +270,11 @@ I memorized the damn filesystem looking for the right file until I found it.
     |_smtp-commands: Couldn't establish connection on port 25
     ``` 
 
+<br/>
 
-    * I rooted the system using a file that is calling a nonexistent library and this file is owned by root and this way I created the library (binary file) and put a shell code inside of it and it gave me root because it was run by root.
+* How Did I privesc?  
+  * After I tried more than 5 Dirty Freaking Cows and nothing worked.
+  * I found a file that had a SUID and owned by root and this file used a library that did not exist.
+  * This library existed in a folder that I had write privilege on. 
+  * So I went there created the library with the same name and put shell code in it that gave me a bind shell.
+  * And just like that I've got root privilege.

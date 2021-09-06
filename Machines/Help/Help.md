@@ -389,6 +389,20 @@
         sys.exit(0)
         print ("Sorry, I did not find anything")
 
+<br/><br/>
+
+### <span class="helpmach subtitle">PrivEsc   
+
+* How Did I Privesc?  
+  * I used an exploit of a vulnerability in the *s-nail* version on the system.
+  * It was written in C.
+  * What the vulnerability was that s-nail had what they called "helper program" in `/usr/lib` which has the ability to gain more privileges than s-nail(file: `/usr/lib/s-nail/s-nail-privsep`).
+  * So what they did is they used this file to gain more privileges and create lock files.
+  * Lock files: Cooperating processes acquire a lock on a lock file to indicate that it is their turn to run or manipulate a shared resource.  
+  * So this setUID binary *s-nail-privsep* has a directory traversal bug which lets us be owner of a file at any location the root can give us one but only for a very short time.  
+  * Seems like this s-nail is only used on either ArchLinux or Ubuntu.  
+  * God all writeups used a Kernel Exploit. But not mee 🤓.
+
 
 
 

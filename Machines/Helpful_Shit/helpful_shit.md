@@ -41,7 +41,8 @@ python -c 'import pty;pty.spawn("/bin/bash");'
   ```console
   sqlmap -u [LINK OF VICTIM] --data='username=&password=' --method POST --dbs --batch
   ```
-* In addition to the databases' names the previous line also provided me with the version of the SQL on the server.  
+* In addition to the databases' names the previous line also provided me with the version of the SQL on the server. 
+* `--batch` answers the questions for me with the default. 
 <br/>
 * We can also get the tables' names by writing the following line:
   ```console
@@ -87,16 +88,66 @@ gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
   Is the process of copying the contents of the zone file on a primary DNS server to a secondary DNS server.  
   And this way fault tolerance is provided.
 
+ <br/><br/> 
 
-dirsearch instead of dirbuster/gobuster (git clone it from github)
+### <span class="useful_shit subtitle">Dirsearch  
+
+* Check out <a href="https://github.com/maurosoria/dirsearch">this link</a> to git clone it.
+* We can use it instead of Dirbuster or Gobuster.
+
+ <br/><br/> 
+
+### <span class="useful_shit subtitle">PrivEsc 😈
 
 
-* `cat /etc/shells` shows me what shells the machine uses
+* `cat /etc/shells`   
+* Shows me what shells the machine uses  
 
-* `scp [PATH TO FILE ON MY SYSTEM] [USERNAME]@[TARGET IP]:[PATH ON TARGET TO TRANSFER FILE TO]` only works when I have the password of the user and I can ssh with it.
+<br/>
 
-* store output in a file `[COMMAND] | tee [FILE NAME]`
+* `scp [PATH TO FILE ON MY SYSTEM] [USERNAME]@[TARGET IP]:[PATH ON TARGET TO TRANSFER FILE TO]` 
+* Only works when I have the password of the user.
 
-dpkg -l to show the packages and libraries we have
+<br/>
 
-* exploitdb's exploits are saved in the path `/usr/share/exploitdb/exploits`
+* `[COMMAND] | tee [FILE NAME]` 
+* Stores output of the command in a file.  
+
+<br/>
+
+* `dpkg -l`  
+* Shows the packages and libraries on system.
+* I think this command is only for Debian based OSes 🤔.
+
+<br/>
+
+* `/usr/share/exploitdb/exploits`
+* ExploitDB's exploits are saved in this path.  
+
+<br/>
+
+* Tools we can use to make life easier  
+* <a href="https://github.com/rebootuser/LinEnum">LinEnum</a>, <a href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">LinPeas</a>, <a href="https://github.com/diego-treitos/linux-smart-enumeration">Linux-Smart-Enumeration</a> and <a href="https://github.com/DominicBreuker/pspy">Pspy</a>.  
+
+<br/>
+
+* Some info on gcc  
+* The option `-Wall` is a warning option.  
+
+
+ <br/><br/> 
+
+### <span class="useful_shit subtitle">Searchsploit  
+
+* `searchsploit -x [EXPLOIT PATH]`
+* Can be used to view the exploit code.
+
+<br/>
+
+* `searchsploit -m [EXPLOIT PATH]`
+* Copies the exploit to my working directory 😱.
+
+<br/>
+
+* People that name exploits sometimes name the versions wrongly. So, don't trusts the version in the name of the exploit.   
+
