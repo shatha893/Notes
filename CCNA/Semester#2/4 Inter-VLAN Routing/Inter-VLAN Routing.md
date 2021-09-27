@@ -46,7 +46,7 @@ S1(config-vlan)# exit
 
 * The subinterface configuration  
   * The subinterface syntax is the *physical interface* followed by a period and a *subinterface number*.
-  * It's cutomary to match the subinterface number with the vlan's number.
+  * It's customary to match the subinterface number with the vlan's number.
   * For each subinterface we write the following commands (the physical interface and vlan number can be different of course)
     ```
     R1(config)# interface G0/0/1.10
