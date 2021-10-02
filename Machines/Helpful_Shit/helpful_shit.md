@@ -308,3 +308,9 @@ stty row <num> columns <cols>
  <br/><br/> 
 
 ### <span class="useful_shit subtitle">MySQL  
+
+
+
+
+
+* We can convert Hex to ASCII using the command `xxd`
