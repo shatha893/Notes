@@ -311,6 +311,20 @@ stty row <num> columns <cols>
 
 
 
+ <br/><br/> 
+
+### <span class="useful_shit subtitle"> Proxy Servers  
+
+* We can obscure our traffic by using proxies.
+* Specifically, in Kali Linux there's a command for proxying called *proxychains*  
+  ```console
+  kali> proxychains [THE COMMAND YOU WANT TO PROXY] [ARGUMENTS]
+  ``` 
+* The configurations of `proxychains` are stored in a config file `/etc/proxychains.conf`. We can edit this file to set a proxy for the `proxychains` command to use.
+
+
+
+
 
 
 * We can convert Hex to ASCII using the command `xxd`
