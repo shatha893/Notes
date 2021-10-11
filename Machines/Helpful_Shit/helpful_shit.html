@@ -299,6 +299,46 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 <ul>
 <li>We can use the command <code>whatweb [IP ADDRESS]</code> to see info about the web server.</li>
 </ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitlechanging-process-priority-with-nice"><span class="useful_shit subtitle">Changing Process Priority with <em>nice</em></h3>
+<pre><code class="language-console"><div>nice -n [niceness value] [command]
+</div></code></pre>
+<ul>
+<li>-ve value is most likely to receive priority.</li>
+<li>+ve value is the least likely to receive priority.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitleenvironment-variables"><span class="useful_shit subtitle">Environment Variables</h3>
+<ul>
+<li>To view the contents of an env variable</li>
+</ul>
+<pre><code class="language-console"><div>echo $[ENV VAR]
+</div></code></pre>
+<ul>
+<li>For the change in  the contents of a variable to be for all we have to export it</li>
+</ul>
+<pre><code class="language-console"><div>export [ENVE VAR]
+</div></code></pre>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitlemysql"><span class="useful_shit subtitle">MySQL</h3>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitle-proxy-servers"><span class="useful_shit subtitle"> Proxy Servers</h3>
+<ul>
+<li>
+<p>We can obscure our traffic by using proxies.</p>
+</li>
+<li>
+<p>Specifically, in Kali Linux there's a command for proxying called <em>proxychains</em></p>
+<pre><code class="language-console"><div><span class="hljs-meta">kali&gt;</span><span class="bash"> proxychains [THE COMMAND YOU WANT TO PROXY] [ARGUMENTS]</span>
+</div></code></pre>
+</li>
+<li>
+<p>The configurations of <code>proxychains</code> are stored in a config file <code>/etc/proxychains.conf</code>. We can edit this file to set a proxy for the <code>proxychains</code> command to use.</p>
+</li>
+<li>
+<p>We can convert Hex to ASCII using the command <code>xxd</code></p>
+</li>
+</ul>
 
     </body>
     </html>
