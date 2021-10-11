@@ -92,18 +92,6 @@ The file robots.txt is used to give instructions to web robots, such as search e
 The presence of the robots.txt does not in itself present any kind of security vulnerability. However, it is often used to identify restricted or private areas of a site's contents. The information in the file may therefore help an attacker to map out the site's contents, especially if some of the locations identified are not linked from elsewhere in the site. If the application relies on robots.txt to protect access to these areas, and does not enforce proper access control over them, then this presents a serious vulnerability.
 </blockquote>  
 <p><br/><br/></p>
-<h3 id="span-classuseful_shit-subtitlegobuster-bruteforcing-directories-and-subdomains"><span class="useful_shit subtitle">Gobuster Bruteforcing Directories and Subdomains</h3>
-<ul>
-<li>Command to bruteforece in <code>DIR</code> mode</li>
-</ul>
-<pre><code class="language-console"><div>gobuster dir -u [VICTIM&#x27;S LINK] -x [LIST OF EXTENSIONS] -w [WORDLIST PATH]
-</div></code></pre>
-<ul>
-<li>Command to bruteforce <code>DNS</code> mode</li>
-</ul>
-<pre><code class="language-console"><div>gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
-</div></code></pre>
-<p><br/><br/></p>
 <h3 id="span-classuseful_shit-subtitledns-zone-transfer"><span class="useful_shit subtitle">DNS Zone Transfer</h3>
 <ul>
 <li>Definition?
@@ -358,16 +346,40 @@ Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
 <p><br/><br/></p>
 <h3 id="span-classuseful_shit-subtitle-proxy-servers"><span class="useful_shit subtitle"> Proxy Servers</h3>
 <ul>
-<li>
-<p>We can obscure our traffic by using proxies.</p>
+<li>We can obscure our traffic by using proxies.</li>
+<li>Specifically, in Kali Linux there's a command for proxying called <em>proxychains</em><pre><code class="language-console"><div><span class="hljs-meta">kali&gt;</span><span class="bash"> proxychains [THE COMMAND YOU WANT TO PROXY] [ARGUMENTS]</span>
+</div></code></pre>
 </li>
+<li>The configurations of <code>proxychains</code> are stored in a config file <code>/etc/proxychains.conf</code>. We can edit this file to set a proxy for the <code>proxychains</code> command to use.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classuseful_shit-subtitlebruteforcing"><span class="useful_shit subtitle">BruteForcing</h3>
+<ul>
+<li><span class="useful_shit subtitle"> Hydra</span>
+<ul>
+<li>Hydra for SSH and FTP<pre><code class="language-console"><div>hydra -l [USER NAME] -p [PASSWORD] [IP ADDRESS] -t [NUMBER OF THREADS] [SSH OR FTP]
+</div></code></pre>
+</li>
+<li>To use a usernames wordlist we can use the -L option and -P option for a wordlist of passwords.</li>
+</ul>
+</li>
+</ul>
+<br/> 
+<ul>
 <li>
-<p>Specifically, in Kali Linux there's a command for proxying called <em>proxychains</em></p>
-<pre><code class="language-console"><div><span class="hljs-meta">kali&gt;</span><span class="bash"> proxychains [THE COMMAND YOU WANT TO PROXY] [ARGUMENTS]</span>
+<p><span class="useful_shit subtitle"> Gobuster Bruteforcing Directories and Subdomains</p>
+<ul>
+<li>
+<p>Command to bruteforece in <code>DIR</code> mode</p>
+<pre><code class="language-console"><div>gobuster dir -u [VICTIM&#x27;S LINK] -x [LIST OF EXTENSIONS] -w [WORDLIST PATH]
 </div></code></pre>
 </li>
 <li>
-<p>The configurations of <code>proxychains</code> are stored in a config file <code>/etc/proxychains.conf</code>. We can edit this file to set a proxy for the <code>proxychains</code> command to use.</p>
+<p>Command to bruteforce <code>DNS</code> mode</p>
+<pre><code class="language-console"><div>gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
+</div></code></pre>
+</li>
+</ul>
 </li>
 <li>
 <p>We can convert Hex to ASCII using the command <code>xxd</code></p>

@@ -70,18 +70,6 @@ The presence of the robots.txt does not in itself present any kind of security v
 
  <br/><br/> 
 
-### <span class="useful_shit subtitle">Gobuster Bruteforcing Directories and Subdomains  
-* Command to bruteforece in `DIR` mode  
-```console
-gobuster dir -u [VICTIM'S LINK] -x [LIST OF EXTENSIONS] -w [WORDLIST PATH]
-```  
-
-* Command to bruteforce `DNS` mode  
-```console
-gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
-```
-
- <br/><br/> 
 
 ### <span class="useful_shit subtitle">DNS Zone Transfer  
 * Definition?
@@ -348,8 +336,29 @@ gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
 * The configurations of `proxychains` are stored in a config file `/etc/proxychains.conf`. We can edit this file to set a proxy for the `proxychains` command to use.
 
 
+ <br/><br/> 
 
+### <span class="useful_shit subtitle">BruteForcing
 
+* <span class="useful_shit subtitle"> Hydra</span>
+  * Hydra for SSH and FTP  
+    ```console
+    hydra -l [USER NAME] -p [PASSWORD] [IP ADDRESS] -t [NUMBER OF THREADS] [SSH OR FTP]
+    ```
+  * To use a usernames wordlist we can use the -L option and -P option for a wordlist of passwords.  
+
+<br/> 
+
+* <span class="useful_shit subtitle"> Gobuster Bruteforcing Directories and Subdomains 
+  * Command to bruteforece in `DIR` mode  
+    ```console
+    gobuster dir -u [VICTIM'S LINK] -x [LIST OF EXTENSIONS] -w [WORDLIST PATH]
+    ```  
+
+  * Command to bruteforce `DNS` mode  
+    ```console
+    gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
+    ```
 
 
 * We can convert Hex to ASCII using the command `xxd`
