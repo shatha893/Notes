@@ -70,6 +70,13 @@
 <li>The network layer, as in the data link layer, has nth to do with if the data is recieved or not meaning it's also a Best Effort Service.</li>
 </ul>
 <p><br/><br/></p>
+<h3 id="characteristics-of-ip"><span class="chp8 subtitle">Characteristics of IP</span></h3>
+<ul>
+<li>Connectionless.</li>
+<li>Best Effort.</li>
+<li>Media Independent. Meaning IP doesn't care what's the type of media (copper, fiber, wireless,...etc) it works on any type.</li>
+</ul>
+<p><br/><br/></p>
 <h3 id="the-tables"><span class="chp8 subtitle">The Tables</span></h3>
 <ul>
 <li>MAC Address Table
@@ -151,7 +158,8 @@ So as we can see the MTU changes depending on the media we have.</li>
 <li>A non-zero Fragment Offset with More Fragment equals to zero means this is the last fragment.</li>
 </ul>
 <p><br/><br/></p>
-<h3 id="what-does-the-ip-header-consist-of"><span class="chp8 subtitle">What does the IP header consist of?</span></h3>
+<h3 id="what-does-the-ipv4-header-consist-of"><span class="chp8 subtitle">What does the IPv4 header consist of?</span></h3>
+  <img src="file:///c:\Users\shado\Documents\GitHub\Notes\CCNA\Semester#1\chp8\ipv4_header.png">
 <ol>
 <li>
 <p>Source IP.
@@ -162,7 +170,7 @@ So as we can see the MTU changes depending on the media we have.</li>
 <br/></p>
 </li>
 <li>
-<p>Differentiated Services</p>
+<p>Differentiated Services(DS)</p>
 <ul>
 <li>To determine the QoS priority of each packet.<br>
 <br/></li>
@@ -238,7 +246,8 @@ So as we can see the MTU changes depending on the media we have.</li>
 </ul>
 </li>
 <li>
-<p><span class="chp8">It Consists of</span></p>
+<p><span class="chp8">IPv6 Header</span></p>
+ <img src="file:///c:\Users\shado\Documents\GitHub\Notes\CCNA\Semester#1\chp8\ipv6_header.png">
 <ol>
 <li>version</li>
 <li>Traffic Class</li>
@@ -307,6 +316,19 @@ So as we can see the MTU changes depending on the media we have.</li>
 <p>Command <code>netstat -r</code> or <code>route print</code> shows me the routing table of the PC.</p>
 </li>
 <li>
+<p>The <code>show ip route</code> privileged EXEC mode command is used to view the IPv4 routing table on a Cisco IOS  router.</p>
+</li>
+<li>
+<p>Common route sources (codes) include:</p>
+<ul>
+<li>L - Directly connected local interface IP address.</li>
+<li>C - Directly connected network.</li>
+<li>S - Static route was manually configured by an administrator.</li>
+<li>O - OSPF.</li>
+<li>D - EIGRP.</li>
+</ul>
+</li>
+<li>
 <p><span class="chp8">First thing the routing table will give me</span></p>
 <ul>
 <li><code>192.168.1.1 on link</code> means this is me<br>
@@ -350,9 +372,26 @@ As the name suggests the networks that are directly connected to the router are 
 The router can learn them by 2 ways:
 <ol>
 <li>Static.
-Manually (More on that later).</li>
-<li>Dynamic<br>
-By using routing protocols such as OSPF, EIGRP, RIP, ISIS, BGP, ...etc (Also, more on these later).</li>
+<ul>
+<li>Manually (remote networks are manually entered into the routing table using static routes).</li>
+<li>If there is a change in the network topology, the static route is not automatically updated and must be manually reconfigured.</li>
+<li>A static route is appropriate for a small network and when there are few or no redundant links.</li>
+<li>A static route is commonly used with a dynamic routing protocol for configuring a default route.</li>
+</ul>
+</li>
+<li>Dynamic
+<ul>
+<li>By using dynamic routing protocols such as OSPF, EIGRP, RIP, ISIS, BGP, ...etc (Also, more on these later).</li>
+<li>Basic configuration is only required from the network administrator to statically configure the directly connected networks and the dynamic routing protocol will do the following:
+<ul>
+<li>Discover remote networks.</li>
+<li>Maintain up-to-date routing information.</li>
+<li>Choose the best path to destination networks.</li>
+<li>Attempt to find a new best path if the current path is no longer available.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
 </li>
 </ol>

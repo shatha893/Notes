@@ -56,8 +56,44 @@
 <p>ARP tables have the IP address and MAC address of its entries.</p>
 </li>
 <li>
+<p>MAC addresses are used for NIC to NIC communications on the same ethernet network.</p>
+</li>
+<li>
+<p>When the destination IP address (IPv4 or IPv6) is on a <strong>remote network</strong>, the destination MAC address will be the address of the host default gateway (i.e., the router interface).</p>
+</li>
+<li>
 <p>The PC's ARP table will have its own IP and MAC addresses.</p>
 </li>
+<li>
+<p><em>How are the IP addresses of the IP packets in a data flow associated with the MAC addresses on each link along the path to the destination?</em> <strong>For IPv4</strong> packets, this is done through a process called Address Resolution Protocol (<strong>ARP</strong>). <strong>For IPv6</strong> packets, the process is ICMPv6 Neighbor Discovery (<strong>ND</strong>).</p>
+</li>
+<li>
+<p>Device destination IPv4 addresses are either known or resolved by device name. However, MAC addresses must be discovered.</p>
+</li>
+</ul>
+<p><br/><br/></p>
+<p><span class="[chapterColor] subtitle">ARP Provides 2 basic functions</span></p>
+<ul>
+<li>Resolving IPv4 addresses to MAC addresses.</li>
+<li>Maintaining a table of IPv4 to MAC address mappings.</li>
+</ul>
+<p><br/><br/></p>
+<p><span class="[chapterColor] subtitle">ARP Functions</p>
+<ul>
+<li>When a packet is sent to the data link layer to be encapsulated into an Ethernet frame, the device refers to a table in its memory to find the MAC address that is mapped to the IPv4 address. This table is stored temporarily in RAM memory and called the ARP table or the ARP cache.</li>
+</ul>
+<p><br/><br/></p>
+<p><span class="[chapterColor] subtitle">ARP Request</p>
+<ul>
+<li>An ARP message is directly encapsulated into an ethernet frame. There's no IPv4 header.</li>
+<li>The ARP request has the following information:
+<ul>
+<li>Destination MAC address (Broadcast Address).</li>
+<li>Source MAC Address.</li>
+<li>Type (ARP messages have a type field of 0x806. This informs the receiving NIC that the data portion of the frame needs to be passed to the ARP process).</li>
+</ul>
+</li>
+<li>Additionally, static map entries can be entered in an ARP table, but this is rarely done. Static ARP table entries do not expire over time and must be manually removed.</li>
 </ul>
 <p><br/><br/></p>
 <p><span class="[chapterColor] subtitle">Explanatory Scenario</span></p>
@@ -76,7 +112,7 @@
 </li>
 <li>
 <p>This is a visual example:
-<img src="file:///c:\Users\Shatha Barqawi\Documents\Notes\CCNA\chp9\ARP_MAC_ex.PNG"></p>
+<img src="file:///c:\Users\shado\Documents\GitHub\Notes\CCNA\Semester#1\chp9\ARP_MAC_ex.PNG"></p>
 </li>
 <li>
 <p>It has the default gateway's IP address but not the MAC. So how do we get it? By sending an ARP request.
@@ -95,11 +131,20 @@ source MAC is</p>
 <p>windows pcs 2min-10min and routers 5min (ARP timer).</p>
 </li>
 <li>
-<p>If we have a gateway of last resort it means that if we don't have the IP the data is supposed to be sent to it will be sent to this gateway if it was assigned if there was no gateway of last resort then the data will be dropped.</p>
+<p>The command <code>show ip arp</code> shows the arp table on routers.</p>
 </li>
 <li>
-<p>EMAIL <a href="mailto:h.albeshawi@gmail.com">h.albeshawi@gmail.com</a></p>
+<p>On Windows 10 pc we use the command <code>arp -a</code></p>
 </li>
+<li>
+<p>If we have a gateway of last resort it means that if we don't have the IP the data is supposed to be sent to it will be sent to this gateway if it was assigned if there was no gateway of last resort then the data will be dropped.</p>
+</li>
+</ul>
+<p><br/><br/></p>
+<p><span class="[chapterColor] subtitle">Security Risks</p>
+<ul>
+<li>In some cases, the use of ARP can lead to a potential security risk. A threat actor can use ARP spoofing to perform an ARP poisoning attack. This is a technique used by a threat actor to reply to an ARP request for an IPv4 address that belongs to another device, such as the default gateway, as shown in the figure. The threat actor sends an ARP reply with its own MAC address. The receiver of the ARP reply will add the wrong MAC address to its ARP table and send these packets to the threat actor.
+Enterprise level switches include mitigation techniques known as dynamic ARP inspection (DAI).</li>
 </ul>
 
     </body>
