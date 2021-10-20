@@ -47,259 +47,299 @@
 <link href="https://fonts.googleapis.com/css2?family=Cedarville+Cursive&family=Encode+Sans+SC&family=Zen+Tokyo+Zoo&display=swap" rel="stylesheet">
 <h2 id="cisco-certified-network-associate-notes-span-stylefloatrightby-shatha-barqawi"><span class="copyright">Cisco Certified Network Associate Notes <span style="float:right;">By Shatha Barqawi</span></h2>
 <p><br/><br/></p>
-<h1 id="span-classtitlechapter-11-ipv4-addressing"><span class="title">Chapter 11: IPv4 Addressing</h1>
+<h1 id="span-classtitlechapter-12-ipv6"><span class="title">Chapter 12: IPv6</h1>
 <p><span class="date">Monday, 9/8/2021</span></p>
 <p><br/><br/></p>
-<h3 id="span-classchaptercolor-subtitlenetwork-portion-and-host-portion"><span class="[chapterColor] subtitle">Network Portion and Host Portion</h3>
 <ul>
-<li>
-<p>What's the role of the <em>Subnet Mask</em>?<br>
-To identify the network/host portion of the IPv4 address.</p>
-</li>
-<li>
-<p>Prefix Length: is the alternative to writing the long decimal subnet mask address and it represents the number of <em>ones</em> set in the subnet mask.</p>
-</li>
-<li>
-<p>Network Prefix: is another name for the network address and that's why we call the other notation of the subnet mask <em>&quot;prefix length&quot;</em>.</p>
-</li>
-<li>
-<p>IP address consists of 32 bits.</p>
-</li>
-<li>
-<p>Network portion is the same on all devices on the same network (It's what indicates the network the device is on).</p>
-</li>
-<li>
-<p>How to know the network from the host portion?</p>
+<li>Why IPv6 is needed?
 <ul>
-<li>The subnet mask does not actually contain the network portion and the host portion. The actual process to identify the network and host portion is the ANDing.</li>
-<li>We put the IP address and the subnet mask and we AND them (after converting to binary).</li>
-<li>After ANDing the ones represent the network portion whereas the zeros represent the host portion.</li>
-<li>Anything mapped with the 255 is a network portion and anything mapped with 0 is a host portion.</li>
+<li>Because we're running out of IPv4 addresses.</li>
+<li>NAT is problematic for many applications, creates latency, and has limitations that severely impede peer-to-peer communications.</li>
 </ul>
 </li>
-<li>
-<p>Most famous 3 subnet masks?</p>
-<ul>
-<li>255.0.0.0, 255.255.0.0 and 255.255.255.0 .</li>
 </ul>
-</li>
-<li>
-<p>When we write the subnet mask in this way <em>e.g \24</em><br>
-It means that the network portion consists of 24 bit that is one.</p>
-</li>
-<li>
-<p>We can extract the network address, broadcast address and host address using the subnet mask.</p>
-</li>
-<li>
-<p>Within each network there is 3 types of IP addresses:</p>
+<p><br/><br/></p>
+<h3 id="span-classchaptercolor-subtitlelength-of-ipv6"><span class="[chapterColor] subtitle">Length of IPv6</h3>
+<ul>
+<li>128 bit.</li>
+<li>First 48 bits is called <strong>Global Routing Prefix</strong>.</li>
+<li>Then the next 16 bit are called <strong>Subnet ID</strong>.</li>
+<li>The last 64 bits are called <strong>Interface ID</strong>.</li>
+<li>So IPv6 is divided into 3 portions instead of 2 as in IPv4.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classchaptercolor-subtitleformat-to-write-ipv6-in"><span class="[chapterColor] subtitle">Format to Write IPv6 In</h3>
+<ul>
+<li><em>Preferred format</em> x:x:x:x:x:x:x:x each one of these x's is called a &quot;Hextet&quot; because it's 16 bits or 4 hex's.</li>
+<li>Rules to write the ipv6 in the <em>compressed format</em>:
 <ol>
-<li>Network Address (Network ID) : Usually the 1st IP in the network. Which's the result of the ANDing of the IP with the subnet mask.</li>
-<li>Broadcast Address : Usually the last IP in the network. Which is <em>e.g 192.168.1.255</em> (replace the zeros in the network id with 255s).</li>
+<li>Omit Leading 0s.</li>
+<li>Double colon:</li>
 </ol>
 <ul>
-<li>It's forbidden to use the previous 2 addresses as an IP for any of the hosts (because they're reserved).</li>
+<li>Can replace any single, contiguous string of one or more 16-bit hextets consisting of all zeros.</li>
+<li>It can only occur just once (we can't put it more than once).</li>
+<li>If an address has more than one contiguous string of all-0 hextets, best practice is to use the double colon (::) on the longest string. If the strings are equal, the first string should use the double colon (::).</li>
 </ul>
-<ol start="3">
-<li>Host Address : the 1st IP address allowed for hosts is <em>e.g 192.168.1.1</em> and the last available one is <em>e.g. 192.168.255.254</em>. Meaning the number of hosts is 2^16-2.</li>
-</ol>
 </li>
-<li>
-<p>There are different ways to send a packet from a source device and these 3 ways affect the destination IPv4 address:</p>
-<ol>
-<li>
-<p>Unicast</p>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classchaptercolor-subtitlecategories-of-ipv6-addresses"><span class="[chapterColor] subtitle">Categories of IPv6 Addresses</h3>
 <ul>
-<li>The source IP address is always unicast because a packet can only originate from a single device.</li>
-</ul>
-</li>
 <li>
-<p>Broadcast</p>
-<ul>
-<li>There's broadcast in IPv4 but no broadcast in IPv6.</li>
-<li>There are 2 types of it:
-<ol>
-<li>
-<p>Direct Broadcast</p>
-<ul>
-<li>By default disabled (with the command <code>no ip redirect-broadcast</code>).</li>
-<li>A PC wants to send a broadcast message to all devices in another network.</li>
-<li>The host uses the target network address with all the host bits as <em>ones</em>.</li>
-</ul>
-</li>
-<li>
-<p>Limited Broadcast
-255.255.255.255
-Broadcast inside the same network. Sends packet to all devices on the same network (By default routers don't forward broadcasts).<br>
-<br/></p>
-</li>
-</ol>
-</li>
-</ul>
+<p>Unicast<br>
+An IPv6 unicast address uniquely identifies an interface on an IPv6-enabled device.</p>
 </li>
 <li>
 <p>Multicast<br>
-It has reserved IP addresses of its own 224.0.0.0 - 239.255.255.255.
-Multicast can be 2 types:</p>
+An IPv6 multicast address is used to send a single IPv6 packet to multiple destinations.</p>
+</li>
+<li>
+<p>Anycast<br>
+An IPv6 anycast address is any IPv6 unicast address that can be assigned to multiple devices. A packet sent to an anycast address is routed to the nearest device having that address.</p>
+</li>
+<li>
+<p>Unlike IPv4, IPv6 does not have a <em>broadcast</em> address. However, there is an IPv6 all-nodes multicast address that essentially gives the same result.</p>
+</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classchaptercolor-subtitleprefix-length"><span class="[chapterColor] subtitle">Prefix Length</h3>
+<ul>
+<li>The prefix length can range from 0 to 128. The recommended IPv6 prefix length for LANs and most other types of networks is /64.</li>
+<li>It is strongly recommended to use a 64-bit Interface ID for most networks. This is because stateless address autoconfiguration (SLAAC) uses 64 bits for the Interface ID. It also makes subnetting easier to create and manage.</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classchaptercolor-subtitle-ipv4-and-ipv6-coexistence"><span class="[chapterColor] subtitle"> IPv4 and IPv6 Coexistence</h3>
+<ul>
+<li>
+<p>Tunnel</p>
+<ul>
+<li>Tunnels only work with IPv4 so if we have a packet with ipv6 we encapsulate it with another packet that has an IPv4 as source and destination IP.</li>
+<li>GRE does the encapsulation.</li>
+<li>DMVPN does encapsulation and encryption.</li>
+</ul>
+</li>
+<li>
+<p>Dual-Stack</p>
+<ul>
+<li>When a device has 2 ip addresses (IPv4 and IPv6).</li>
+<li><strong>Native IPv6</strong> which is using only IPv6.</li>
+</ul>
+</li>
+<li>
+<p>NAT64</p>
+<ul>
+<li>Allows me to transform IPv6 into IPv4.</li>
+<li>Network Address Translation 64 (NAT64) allows IPv6-enabled devices to communicate with IPv4-enabled devices using a translation technique similar to NAT for IPv4. An IPv6 packet is translated to an IPv4 packet and an IPv4 packet is translated to an IPv6 packet.</li>
+</ul>
+</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classchaptercolor-subtitletypes-of-ipv6-unicast-addresses"><span class="[chapterColor] subtitle">Types of IPv6 Unicast Addresses</h3>
+<img src="file:///c:\Users\shado\Documents\GitHub\Notes\CCNA\Semester#1\chp12\unicast_addr.png">  
+<ul>
+<li>Typically, IPv6 addresses have 2 unicast addresses:
 <ol>
-<li>Reserved Link Local Address (224.0.0.0 - 224.0.0.255).
-Here TTL=1, meaning it doesn't go out of the network (local).</li>
-<li>Globally Scoped Address (224.0.1.0 - 239.255.255.255) (Internet).</li>
-</ol>
-</li>
-</ol>
-</li>
-</ul>
-<p><br/><br/></p>
-<h3 id="span-classchaptercolor-subtitletypes-of-ipv4-addresses"><span class="[chapterColor] subtitle">Types of IPv4 Addresses</h3>
+<li>
+<p>Global Unicast Address(GUA)</p>
 <ul>
 <li>
-<p>Two types of IP Addresses</p>
+<p>Similar to Public IPv4 address.</p>
+</li>
+<li>
+<p>Globally unique and internet-routable.</p>
+</li>
+<li>
+<p>Can be configured statically or dynamically.
+<img src="file:///c:\Users\shado\Documents\GitHub\Notes\CCNA\Semester#1\chp12\gua.png"></p>
+</li>
+<li>
+<p>Global Routing Prefix</p>
+<ul>
+<li>It's assigned by the ISP.</li>
+<li>/48 prefixes are a common global routing prefix.</li>
+<li>The size of the global routing prefix determines the size of the subnet ID.</li>
+</ul>
+</li>
+<li>
+<p>Subnet ID</p>
+<ul>
+<li>Unlike IPv4 where we have to borrow bits from the host to make subnets, IPv6 was built with subnetting in mind. The subnet ID is used by an organization to identify subnets within its site (The larger the subnet ID, the more subnets available).</li>
+<li>Using a typical /64 prefix length, the first four hextets are for the network portion of the address, with the fourth hextet indicating the Subnet ID. The remaining four hextets are for the Interface ID.</li>
+</ul>
+</li>
+<li>
+<p>Interface ID</p>
+<ul>
+<li>The IPv6 interface ID is equivalent to the host portion of an IPv4 address. The term Interface ID is used because a single host may have multiple interfaces, each having one or more IPv6 addresses.</li>
+</ul>
+</li>
+<li>
+<p>GUA static configuration on a router R1:</p>
+<pre><code class="language-console"><div><span class="hljs-meta">R1(config)#</span><span class="bash"> interface gigabitethernet 0/0/0</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> ipv6 address 2001:db8:acad:1::1/64</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> no shutdown</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> <span class="hljs-built_in">exit</span></span>
+<span class="hljs-meta">R1(config)#</span><span class="bash"> interface gigabitethernet 0/0/1</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> ipv6 address 2001:db8:acad:2::1/64</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> no shutdown</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> <span class="hljs-built_in">exit</span></span>
+<span class="hljs-meta">R1(config)#</span><span class="bash"> interface serial 0/1/0</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> ipv6 address 2001:db8:acad:3::1/64</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> no shutdown</span>
+</div></code></pre>
+</li>
+<li>
+<p>GUA can be assigned automatically (dynamically) using either 2 ways:</p>
+<ul>
+<li>Stateless Address Autoconfiguration(SLAAC).</li>
+<li>Stateful DHCPv6.</li>
+</ul>
+</li>
+<li>
+<p>Dynamic Addressing for IPv6 GUAs</p>
+<ul>
+<li>RS and RA Messages: RA (Router Advertisment) is sent from the router to any IPv6-enabled device or as a response to an RS (Router Solicitation) sent from a host to the router (Both are sent through ICMPv6).</li>
+<li>The RA message is a suggestion that's sent to a device on how to obrain an IPv6 GUA and it contains:
+<ul>
+<li>Network prefix and prefix length.</li>
+<li>Default gateway address.</li>
+<li>DNS addresses and domain name.</li>
+</ul>
+</li>
+<li>There are 3 methods for RA messages:
 <ol>
-<li>
-<p>Private IP Address.</p>
+<li>SLAAC (<em>I have everything you need including the prefix, prefix length, and default gateway address</em>).
 <ul>
-<li>Not allowed on the internet.</li>
-<li>Local in the network.</li>
-<li>Free.</li>
-<li>Range of private IP addresses:
-<ul>
-<li>10.0.0.0/8 (10.0.0.0 - 10.255.255.255)</li>
-<li>172.16.0.0/12 (172.16.0.0 - 172.31.255.255)</li>
-<li>192.168.0.0/16 (192.168.0.0 - 192.168.255.255)</li>
+<li>This is a method that allows a device to create its own GUA without the help of a DHCPv6 server.</li>
+<li>So in this technique, devices rely on ICMPv6 RA messages to get what it need.</li>
+<li>The process would be as follows: 1. The router sends an RA message with the prefix for the local link. 2. Th PC uses SLAAC to obtain a prefix from the RA message and creates its own interface ID either using EUI or a randomly generated 64-bit number.</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>
-<p>Public IP Address.</p>
+<li>SLAAC with a stateless DHCPv6 server (<em>Here's my information but you need to get other information such as DNS addresses from a stateless DHCPv6 serve</em>).
 <ul>
-<li>Routed through the internet.</li>
-<li>You have to pay to buy public IPs.</li>
-</ul>
-</li>
-</ol>
-</li>
-<li>
-<p>NATing stands for (Network Address Translation) which as the name states translates private IPs to public ones so that it can be transmitted and understood through the internet. It usually happens on the router that connects the internal network to the ISP network.</p>
-</li>
-<li>
-<p>Note: Although, a device with a private IPv4 address is not directly accessible from another device across the internet, the IETF does not consider private IPv4 addresses or NAT as effective security measures.</p>
-</li>
-</ul>
-<p><br/><br/></p>
-<h3 id="span-classchaptercolor-subtitleloopback"><span class="[chapterColor] subtitle">Loopback</h3>
-<ul>
-<li>Usually is 127.0.0.1</li>
-<li>It can be 127.0.0.0 - 127.255.255.255</li>
-<li>For example, it can be used on a host to test if the TCP/IP configuration is operational</li>
-</ul>
-<p><br/><br/></p>
-<h3 id="span-classchaptercolor-subtitlelink-local-address"><span class="[chapterColor] subtitle">Link Local Address</h3>
-<ul>
-<li>APIPA (Automatic Private IP Addressing)addresses or self-assigned addresses.</li>
-<li>It's used by the Windows DHCP client if there was no DHCP server available.</li>
-<li>If the DHCP doesn't know what IP to put it will put an IP from this range (169.254.0.0 - 169.254.255.255).</li>
-<li>TTL = 1.</li>
-</ul>
-<p><br/><br/></p>
-<h3 id="span-classchaptercolor-subtitletest---net-address"><span class="[chapterColor] subtitle">Test - Net Address</h3>
-<ul>
-<li>For testing purposes</li>
-<li>It ranges between (192.0.2.0 - 192.0.2.255)</li>
-</ul>
-<p><br/><br/></p>
-<h3 id="span-classchaptercolor-subtitleclasses-of-ip"><span class="[chapterColor] subtitle">Classes of IP</h3>
-<table>
-<thead>
-<tr>
-<th>IP Class</th>
-<th>IP Starts With</th>
-<th>Subnet Mask</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Class A</td>
-<td>0 - 127</td>
-<td>/8</td>
-</tr>
-<tr>
-<td>Class B</td>
-<td>128 - 191</td>
-<td>/16</td>
-</tr>
-<tr>
-<td>Class C</td>
-<td>192 -223</td>
-<td>/24</td>
-</tr>
-<tr>
-<td>Class D</td>
-<td>224 - 239</td>
-<td>Multicast</td>
-</tr>
-<tr>
-<td>Class E</td>
-<td>240 - 255</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<ul>
-<li>
-<p>IP address with subnet mask the same as the one it's supposed to have according to its class is called <strong>Classfull</strong>.</p>
-</li>
-<li>
-<p>IP address that has a subnet mask different than the one that it's supposed to have according to the class it's in is called <strong>Classless</strong>.</p>
-</li>
-<li>
-<p>In the mid-1990s, with the introduction of the World Wide Web (WWW), classful addressing was deprecated to more efficiently allocate the limited IPv4 address space. Classful address allocation was replaced with classless addressing, which is used today. Classless addressing ignores the rules of classes (A, B, C). Public IPv4 network addresses (network addresses and subnet masks) are allocated based on the number of addresses that can be justified.
-<br/><br/></p>
-</li>
-</ul>
-<h3 id="span-classchaptercolor-subtitlesubnetting-network-segementation"><span class="[chapterColor] subtitle">Subnetting (Network Segementation)</h3>
-<ul>
-<li>
-<p>Reasons for Subnetting?<br>
-Subnetting reduces overall network traffic and improves network performance. It also enables an administrator to implement security policies such as which subnets are allowed or not allowed to communicate together. Another reason is that it reduces the number of devices affected by abnormal broadcast traffic due to misconfigurations, hardware/software problems, or malicious intent.</p>
-</li>
-<li>
-<p>Subnetting can be accomplished depending on:</p>
+<li>The process is as follows:
 <ol>
-<li>Location.</li>
-<li>Device Type.</li>
-<li>Group or Function.</li>
+<li>The PC sends an RS to all IPv6 routers &quot;I need addressing Info&quot;.</li>
+<li>The router sends an RA message with &quot;here's your prefix, prefix-length and default gateway info. You'll need DNS information from a DHCPv6 server&quot;.</li>
+<li>The PC sends a DHCPv6 solicit message to all DHCPv6 servers.</li>
 </ol>
 </li>
-<li>
-<p>The /24 boundary is very popular in subnetting because it accommodates a reasonable number of hosts and conveniently subnets at the octet boundary.</p>
+</ul>
+</li>
+<li>Stateful DHCPv6 (no SLAAC) (<em>I can give you your default gateway address. You need to ask a stateful DHCPv6 server for all your other information</em>).
+<ul>
+<li>Stateful DHCPv6 is similar to DHCP for IPv4.</li>
+<li>The process:
+<ol>
+<li>PC sends RS to all IPv6 routers.</li>
+<li>The router sends all IPv6 nodes an RA message with method 3 specified.</li>
+<li>PC sends DHCPv6 solicit message to all DHCPv6 servers.</li>
+</ol>
+</li>
+<li>A stateful DHCPv6 server allocates and maintains a list of which device receives which IPv6 address. DHCP for IPv4 is stateful.</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>The interface ID with method 1 and 2 is generated by the device itself using either 2 ways:
+<ol>
+<li>EUI-64 Process:
+<ul>
+<li>This process uses the 48-bit ethernet MAC address of a client and inserts another 16 bits in the middle of the 48-bit MAC address to create a 64-bit interface ID.</li>
+<li>The MAC address is made up of 2 parts (Organizationally Unique Identifier(OUI)which are the first 24 bits) and  the (Device Identifier which is the left 24 bits).</li>
+<li>An EUI-64 Interface ID is made up of 3 parts (24-bit OUI from the MAC but the 7th bit is reversed), (The inserted 16-bit value FFFE) and the (24-bit device identifier from the client MAC address).</li>
+</ul>
+</li>
+<li>Randomly generated interface IDs
+<ul>
+<li>To ensure the uniqueness of any IPv6 unicast address, the client may use a process known as Duplicate Address Detection (DAD). This is similar to an ARP request for its own address. If there is no reply, then the address is unique.</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
 </li>
 <li>
-<p>A subnet bits are the bits that are borrowed from the host bits and when the number of subnet bits is put as power of 2 the result is <em>the number of subnets I can make</em> and <em>the number of hosts</em> would be the number of zeros left for the host as power of 2.</p>
+<p>Note: Unlike IPv4, in IPv6, the all-0s and all-1s host addresses can be assigned to a device. The all-1s address can be used because broadcast addresses are not used within IPv6. The all-0s address can also be used, but is reserved as a Subnet-Router anycast address, and should be assigned only to routers.</p>
+</li>
+</ul>
 </li>
 <li>
-<p>The network administrator subnets their public address space into subnets with different subnet masks, in order to minimize the number of unused host addresses per subnet. This is known as Variable Subnet Length Masking (VLSM).</p>
+<p>Link-local address(LLA)</p>
+<ul>
+<li>
+<p>Required for every IPv6-enabled device.</p>
 </li>
 <li>
-<p>This screenshot is good
-<img src="file:///c:\Users\shado\Documents\GitHub\Notes\CCNA\Semester#1\chp11\subnetting.PNG"></p>
+<p>It can't be routed beyond the link that it's confined to.</p>
+</li>
+<li>
+<p>It should be unique only to this link.</p>
+</li>
+<li>
+<p>If an LLA is not configured manualy on an interface, the device will automatically create its own without communicating with a DHCP server. And the LLA is generated dynamically either by using randomly generated interface ID or by using the Extended Unique Identifier (EUI) which uses client MAC address with additional bits.</p>
+</li>
+<li>
+<p>Static configuration of LLA</p>
+<pre><code class="language-console"><div><span class="hljs-meta">R1(config)#</span><span class="bash"> interface gigabitethernet 0/0/0</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> ipv6 address fe80::1:1 link-local</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> <span class="hljs-built_in">exit</span></span>
+<span class="hljs-meta">R1(config)#</span><span class="bash"> interface gigabitethernet 0/0/1</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> ipv6 address fe80::2:1 link-local</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> <span class="hljs-built_in">exit</span></span>
+<span class="hljs-meta">R1(config)#</span><span class="bash"> interface serial 0/1/0</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> ipv6 address fe80::3:1 link-local</span>
+<span class="hljs-meta">R1(config-if)#</span><span class="bash"> <span class="hljs-built_in">exit</span></span>
+</div></code></pre>
+</li>
+<li>
+<p>The exact same LLA could be configured on each link as long as it is unique on that link. This is because LLAs only have to be unique on that link. However, common practice is to create a different LLA on each interface of the router to make it easy to identify the router and the specific interface.</p>
+</li>
+<li>
+<p>Typically, it is the LLA of the router, and not the GUA, that is used as the default gateway for other devices on the link.</p>
+</li>
+<li>
+<p>Dynamically assigning LLAs</p>
+<ul>
+<li>This illustration explains it all<br>
+<img src="file:///c:\Users\shado\Documents\GitHub\Notes\CCNA\Semester#1\chp12\lla.png"></li>
+<li>Operating systems, such as Windows, will typically use the same method for both a SLAAC-created GUA and a dynamically assigned LLA.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Unique Local Address</p>
+<ul>
+<li>Range FC00::/7 to FDFF::/7.</li>
+<li>It's not yet implemented.</li>
+<li>It have similarity to private addresses for IPv4.</li>
+</ul>
+</li>
+</ol>
 </li>
 </ul>
 <p><br/><br/></p>
-<h3 id="span-classchaptercolor-subtitlevlsm-variable-length-subnet-mask"><span class="[chapterColor] subtitle">VLSM (Variable Length Subnet Mask)</h3>
+<h3 id="span-classchaptercolor-subtitlettl-in-ipv4-is-hop-limit-in-ipv6"><span class="[chapterColor] subtitle">TTL in IPv4 is Hop Limit in IPv6</h3>
+<p><br/><br/></p>
+<h3 id="span-classchaptercolor-subtitleicmpv6"><span class="[chapterColor] subtitle">ICMPv6</h3>
 <ul>
-<li>
-<p>The number of users is what I depend on to subnet the network.</p>
+<li>No Fragmentation</li>
+</ul>
+<p><br/><br/></p>
+<h3 id="span-classchaptercolor-subtitleassigned-ipv6-multicast-addresses"><span class="[chapterColor] subtitle">Assigned IPv6 Multicast Addresses</h3>
+<ul>
+<li>IPv6 multicast addresses have the prefix ff00::/8.</li>
+<li>Two types of IPv6 multicast addresses:
+<ol>
+<li>Well-known multicast addresses.
+<ul>
+<li>Two common IPv6 assigned multicast groups: <strong>ff02::1 All-nodes multicast group which has the same effect as a broadcast in IPv4</strong> and <strong>FF02::2 All-routers multicast group</strong></li>
+</ul>
 </li>
-<li>
-<p>I think the screenshot is enough
-<img src="file:///c:\Users\shado\Documents\GitHub\Notes\CCNA\Semester#1\chp11\vlsm_subnetting.PNG"></p>
-</li>
-<li>
-<p>It's called that way because subnets don't have to be of equal size as long as the address ranges do not overlap.</p>
-</li>
-<li>
-<p>The variable-length subnet mask (VLSM) was developed to avoid wasting addresses by enabling us to subnet a subnet.</p>
+<li>Solicited node multicast addresses.</li>
+</ol>
 </li>
 </ul>
 
