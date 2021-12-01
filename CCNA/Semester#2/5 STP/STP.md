@@ -78,7 +78,7 @@
    * Fast Ethernet ==path=cost== 19
    * Ethernet ==path=cost== 100   
 
- * When a switch has *multiple* equal-cost paths to the root bridge, the switch will a port using the following criteria
+ * When a switch has *multiple* equal-cost paths to the root bridge, the switch will decide what's the Root Port using the following criteria
    1. Lowest sender BID.
    2. Lowest sender port priority.
    3. Lowest sender port ID. 
@@ -122,7 +122,13 @@
   * The default times can be changed on the root bridge, which dictates the value of these timers for the STP domain.  
 
 * Port States  
-  <img src="port_states.png">
+  <img src="port_states.png">   
+
+  * Disabled (shutdown)
+  * Blocked (no traffic)
+  * Listening (BPDU only).
+  * Learning (BPDU + MAC Learning).
+  * Forwarding (Forward Traffic).
 
 * STP can be implemented on multiple VLANs with each vlan having it's own spanning tree instance. So, if we find there is only one spanning tree instance this means that we only have one vlan.
 
@@ -133,56 +139,28 @@
     * Forward Delay.
   * When the switches agree on a root switch this root switch will be the only one that sends BPDU.
 
-* Each VLAN has a BID.
+* Each VLAN has a BID. *[What the hell does that mean!!]*
 
 
+### Evolution of STP  
 
-
-* PVST+  
+* PVST+ (Per-VLAN Spanning Tree) 
   * Each VLAN has it's own calculations.
-* RSTP  
+  * Each VLAN in the network has a Spanning Tree instance.  
+
+
+* RSTP (Rapid Spanning Tree Protocol)  
   * All vlans has one calculation.
-  * Fast.
-* Rapid-PVST+  
-  * Used everywhere in the world.
-  * It's the Cisco implementation of RSTP on a per-VLAN basis.
-  * With it an independent instance o RSTP runs for each vlan.
-* MSTP & MST(CCNP).
-
-
-```console
-S1# config t
-S1(config)# spanning-tree vlan 10 priority 0
-//ORRR 
-S1(config)# spanning-tree vlan 10 root primary
-//                range      1-4096
-S1(config)# spanning-tree vlan 10 root secondary
-//show spanning-tree
-```  
-* STP  
-  * sth????
-    * Disabled (shutdown)
-    * Blocked (no traffic)
-    * Listening (BPDU only).
-    * Learning (BPDU + MAC Learning).
-    * Forwarding (Forward Traffic).
-  * Port Fast (same idea as "edge" in the RSTP. Command `S1(config-if)# spanning-tree portfast`).
-  * BPDU Guard( command `S1(config-if)# spanning-tree bpduguard enable`)
-  * Uplink Fast(legacy)
-  * Backbone Fast(legacy)
-  * BPDU filter.
-  * Loop Guard
-  * Root Guard
-
-* RSTP
+  * Faster convergence than STP.  
   * The same spanning tree algorithm is used for both STP and RSTP to determine port roles and topology.
   * It increases the speed of the recalculation of the spanning tree when the layer 2 network topology chagnes. 
   * If a port is configured to be an alternate port it can immediately change to a forwarding state without waiting for the network to converge.
-  * sth????
+
+  * RSTP Port States:  
     * Discarding (immediatly).
     * Learning.
     * Forwarding.
-  * Edge
+
   * STP and RSTP Port States  
   <img src="stp_rstp.png">   
   
@@ -199,6 +177,26 @@ S1(config)# spanning-tree vlan 10 root secondary
     * Connected to SW or Hub.  
     * Could be either *point to point (Full Duplex)* or *shared (Half Duplex)*.
 
+
+* Rapid-PVST+ (Rapid Per-VLAN Spanning Tree)
+  * Used everywhere in the world.
+  * It's the Cisco implementation of RSTP on a per-VLAN basis.
+  * With it an independent instance of RSTP runs for each vlan.  
+
+* MSTP (Multiple Spanning Tree Protocol) & MST (Multiple Spanning Tree) => CCNP.
+
+
+```console
+S1# config t
+S1(config)# spanning-tree vlan 10 priority 0
+//ORRR 
+S1(config)# spanning-tree vlan 10 root primary
+//                range      1-4096
+S1(config)# spanning-tree vlan 10 root secondary
+//show spanning-tree
+```  
+
+  
 * Port Priority.  
 * How to change the spanning tree mode 
 ```console
@@ -208,10 +206,22 @@ S1(config)# spanning-tree mode ?
 
 * Problem that is a consequent of the delay that happens in the listening and learning state   
   * When a device is connected to a switch port or when a switch powers up, the switch port goes through both the listening and learning states, each time waiting for the Forward Delay timer to expire. This delay is 15 seconds for each state, listening and learning, for a total of 30 seconds. This delay can present a problem for DHCP clients trying to discover a DHCP server. DHCP messages from the connected host will not be forwarded for the 30 seconds of Forward Delay timers and the DHCP process may timeout. The result is that an IPv4 client will not receive a valid IPv4 address.  
+  * Port Fast (same idea as "edge" in the RSTP. Command `S1(config-if)# spanning-tree portfast`).
+  * BPDU Guard (command `S1(config-if)# spanning-tree bpduguard enable`)
+  * Uplink Fast(legacy)
+  * Backbone Fast(legacy)
+  * BPDU filter.
+  * Loop Guard
+  * Root Guard  
 
 ## PortFast
 
 * When a switch is configured with **PortFast** that port transitions from blocking to forwarding immediately, no delay will happen. This way DHCP clients can access the network immediately.
 * **PortFast** are only used with ports connected to end devices on the other end of the link. If we use it with a port that is connected to another switch we risk having a spanning tree loop.
 
-* In a valid PortFast configuration, BPDUs should never be received on PortFast-enabled switch ports because that would indicate that another bridge or switch is connected to the port. This potentially causes a spanning tree loop. To prevent this type of scenario from occurring, Cisco switches support a feature called BPDU guard. When enabled, **BPDU guard** immediately puts the switch port in an errdisabled (error-disabled) state on receipt of any BPDU. This protects against potential loops by effectively shutting down the port. The BPDU guard feature provides a secure response to invalid configurations because an administrator must manually put the interface back into service.
+* In a valid PortFast configuration, BPDUs should never be received on PortFast-enabled switch ports because that would indicate that another bridge or switch is connected to the port. This potentially causes a spanning tree loop. To prevent this type of scenario from occurring, Cisco switches support a feature called BPDU guard. When enabled, **BPDU guard** immediately puts the switch port in an errdisabled (error-disabled) state on receipt of any BPDU. This protects against potential loops by effectively shutting down the port. The BPDU guard feature provides a secure response to invalid configurations because an administrator must manually put the interface back into service.  
+
+
+### Using Layer 3 Devices as Alternative to STP
+
+* Layer 3 switches can be an alternative to STPs that allows for redundant paths and loops in the topology without blocking ports.

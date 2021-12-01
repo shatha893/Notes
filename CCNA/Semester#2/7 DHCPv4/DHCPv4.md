@@ -43,7 +43,7 @@
 ## Configuring Router to Act as a DHCP Server  
 
 1. Exclude IPv4 addresses  
-   * The routing functioning as a DHCPv4 server assigns all IPv4 addresses in a DHCPv4 address pool unless it is configured to exclude specific addresses. 
+   * The router functioning as a DHCPv4 server assigns all IPv4 addresses in a DHCPv4 address pool unless it is configured to exclude specific addresses. 
    * We would want to exclude the ip addresses that are used for static address assignments (The devices that will be manually configured). We use the following command for exclusion
 ```console
 Router(config)# ip dhcp excluded-address [LOW ADDRESS] [HIGH ADDRESS]
@@ -102,5 +102,5 @@ Router(config)# ip dhcp excluded-address [LOW ADDRESS] [HIGH ADDRESS]
 ```console
 SOHO(config)# interface G0/0/1
 SOHO(config-if)# ip address dhcp
-SOHO(config-if)# no shutdownf
+SOHO(config-if)# no shutdown
 ```

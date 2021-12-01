@@ -21,7 +21,7 @@
       2. Application visibility and control.
       3. A next generation intrusion prevention system.
       4. Advanced malware protection.
-      5. URL filtering.  
+      5. URL filtering.
 
   * Network Access Control (NAC) Devices.
     * ISE
