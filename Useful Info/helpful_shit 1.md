@@ -55,7 +55,7 @@ python3 -c 'import pty;pty.spawn("/bin/bash");'
   sqlmap -u [LINK OF VICTIM] --data="username=&password=" --method POST -D [DATABASE NAME] --dump all --batch
   ```
 * When using this command I also got the content of the admin table. 
-* Sqlmap seems to use the SQLi vulneribility in the application to gain access to:
+* Sqlmap seems to use the SQLi vulnerability in the application to gain access to:
   * Determine the schema of the database (database, table and column names).
   * Dump data from tables.
   * Potentially upload or download files to the database server machine.
