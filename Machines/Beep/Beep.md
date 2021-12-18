@@ -321,4 +321,7 @@ A webpage says all versions before 1.920 are vulnerable to a remote code excutio
 
 * <span class="helpmach">SMTP</span>  
    * What is Swaks in Kali Linux?  
-    Swaks is a featureful, flexible, scriptable, transaction-oriented SMTP test tool written and maintained by John Jetmore.
+    Swaks is a featureful, flexible, scriptable, transaction-oriented SMTP test tool written and maintained by John Jetmore.  
+	
+	
+* Then to the next machine which is [[Cronos]]

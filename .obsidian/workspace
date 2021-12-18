@@ -4,13 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "b5abb514f4ffe27d",
+        "id": "54ef3c9522757167",
         "type": "leaf",
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Machines/Jarvis/Jarvis.md",
-            "mode": "preview"
+            "file": "Machines/Starting_Point/Tier_0.md",
+            "mode": "source"
           }
         }
       }
@@ -52,8 +52,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 160.99999809265137
   },
   "right": {
     "id": "9f878c2608801345",
@@ -69,7 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Machines/Jarvis/Jarvis.md",
+                "file": "Machines/Starting_Point/Tier_0.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -87,17 +86,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "b5abb514f4ffe27d",
+  "active": "54ef3c9522757167",
   "lastOpenFiles": [
-    "Machines/Jarvis/Jarvis.md",
+    "Machines/Starting_Point/Tier_0.md",
+    "Useful Info/helpful_shit 1.md",
+    "Useful Info/Linux.md",
+    "Useful Info/Linux-Commands.md",
+    "Useful Info/linux_commands.md",
     "Useful Info/Useful Info.md",
-    "Useful Info/helpful_shit.md",
-    "Useful Info/Content/sql injection.md",
-    "Useful Info/Content/code injection.md",
-    "Useful Info/Content/burp suite.md",
-    "Useful Info/Content/xss.md",
-    "Useful Info/Content/zone transfer.md",
-    "Useful Info/Content/xxe.md",
-    "Useful Info/Content/smb.md"
+    "ductf-certificate.jpg",
+    "htbAcademyNotesGettingStarted.md",
+    "htbNotes.md",
+    "Screenshot 2021-09-27 175331.png"
   ]
 }

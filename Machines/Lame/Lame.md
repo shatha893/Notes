@@ -275,3 +275,6 @@ Because of the stupid smbclient that kept refusing my connection to the smb serv
 
 * The Daemon Command Execution was accomplished with the service *distcc* aka the service that I didn't know existed.
   
+
+	
+	* On to the next machine ==> [[Irked]]

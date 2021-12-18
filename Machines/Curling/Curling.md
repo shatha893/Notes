@@ -125,3 +125,5 @@ PORT   STATE SERVICE
 * And that's it.
 * So the key to it all was using the `file://127.0.0.1/whatever/file/I/want` instead of `http://127.0.0.1` which brings me only pages.
   
+												   
+* On to the next machine [[Popcorn]]
