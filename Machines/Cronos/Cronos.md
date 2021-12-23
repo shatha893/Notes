@@ -125,3 +125,6 @@ Apache < 2.2.34 / < 2.4.27 - OPTIONS Memory Leak
 * I found the admin's password through it (hashed with md5) so I cracked it and logged into the login page in `admin.cronos.htb` and it showed me a webpage that literally executes commands but the nc didn't work until I tried the `mkfifo` payload.  
 
   <img src="savior_sqlmap.png">
+	
+	
+	* Then the next machine which is [[Curling]]

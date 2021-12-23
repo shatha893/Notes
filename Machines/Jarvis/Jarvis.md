@@ -52,6 +52,7 @@ gobuster dir -u http://10.10.10.143 -x php,txt,html -w /home/kali/SecLists/Disco
 * Found a page called `/myphpadmin` and it is a login page which means that I might be able to do the sql injection from there or anything else.
 
 * Found this `http://10.10.10.143/phpmyadmin/setup/index.php`. Seems like it's not supposed to be accessabile to the public even tho it it.
+* This page might be useful.
 
 
 * Gobustering `/phpmyadmin` is a gem I've got tons of directories that seem to be useful (Most of them at least)  
@@ -87,3 +88,23 @@ gobuster dir -u http://10.10.10.143 -x php,txt,html -w /home/kali/SecLists/Disco
 /url.php              (Status: 302) [Size: 0] [--> /phpmyadmin/]                               
 /vendor               (Status: 301) [Size: 324] [--> http://10.10.10.143/phpmyadmin/vendor/] 
 ```
+
+
+* There are a bunch of stuff that I can go to.
+* Found an exploit (LFI) of the phpmyadmin version we have (4.8.0) but it's not working. I don't know if this means that they've patched the vulnerability or that I'm not using it the proper way. Anyway I don't think it's that easy.
+* There's also this tamplating engine "Twig" that is a templating engine for the programming language php. I can inject code into it if it's vulnerable, but I'm not sure yet about this approach.
+* SQL injection. Not sure where to go from here.
+* There's this weird line of code in the response that has like weird stuff that I don't know if they're helpful 
+```javascript
+PMA_commonParams.setAll({common_query:"",opendb_url:"db_structure.php",lang:"en_GB",server:"1",table:"",db:"",token:")^||1xKqg]1MzIfK",text_dir:"ltr",show_databases_navigation_as_tree:true,pma_text_default_tab:"Browse",pma_text_left_default_tab:"Structure",pma_text_left_default_tab2:false,LimitChars:"50",pftext:"",confirm:true,LoginCookieValidity:"1440",session_gc_maxlifetime:"1440",logged_in:false,is_https:false,rootPath:"/phpmyadmin/",arg_separator:"&",PMA_VERSION:"4.8.0",auth_type:"cookie",user:"root"}
+```  
+
+* It might be a Server Side Template Injection.
+* Also, look into the exploits that phpmyadmin version 4.8.0 have. Seems like it has alot of exploits.
+* Most exploits seem to need authentication.
+
+* Found a Cross-site Request forgery on searchsploit but it needs an authenticated user plus I don't think CSRF would work on HTB machines because it needs interaction with users.
+* https://www.cvedetails.com/cve/CVE-2020-5504/ Seems like I can do SQLi when I get authenticated.
+* Default Credentials? root and empty not working
+
+* Seems like the phpmyadmin version we have is vulnerable to LFI with the parameter "target". Can they patch the vulnerability LFI? without downloading a new version of phpmyadmin? I should research it.

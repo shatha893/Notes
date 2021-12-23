@@ -8,11 +8,8 @@
         "type": "leaf",
         "dimension": 48.3739837398374,
         "state": {
-          "type": "markdown",
-          "state": {
-            "file": "Useful Info/helpful_shit.md",
-            "mode": "source"
-          }
+          "type": "empty",
+          "state": {}
         }
       },
       {
@@ -81,7 +78,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Useful Info/helpful_shit.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",

@@ -277,4 +277,6 @@ I memorized the damn filesystem looking for the right file until I found it.
   * I found a file that had a SUID and owned by root and this file used a library that did not exist.
   * This library existed in a folder that I had write privilege on. 
   * So I went there created the library with the same name and put shell code in it that gave me a bind shell.
-  * And just like that I've got root privilege.
+  * And just like that I've got root privilege.  
+	
+	* On to the next machine Help but I'm not sure where's it's md file so we'll skip to [[Beep]]
