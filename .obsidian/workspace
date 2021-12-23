@@ -6,6 +6,7 @@
       {
         "id": "bf1ced5bc1054167",
         "type": "leaf",
+        "dimension": 48.3739837398374,
         "state": {
           "type": "markdown",
           "state": {
@@ -15,12 +16,13 @@
         }
       },
       {
-        "id": "b5abb514f4ffe27d",
+        "id": "6a94cc92891d1e47",
         "type": "leaf",
+        "dimension": 51.6260162601626,
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Useful Info/Useful Info.md",
+            "file": "Useful Info/Content/priv esc.md",
             "mode": "preview"
           }
         }
@@ -63,8 +65,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "9f878c2608801345",
@@ -80,7 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Useful Info/Useful Info.md",
+                "file": "Useful Info/helpful_shit.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,17 +99,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "b5abb514f4ffe27d",
+  "active": "bf1ced5bc1054167",
   "lastOpenFiles": [
-    "Useful Info/Useful Info.md",
     "Useful Info/helpful_shit.md",
-    "Useful Info/Content/sql injection.md",
-    "Useful Info/Content/code injection.md",
+    "Useful Info/Content/priv esc.md",
+    "Useful Info/Content/searchsploit.md",
+    "Useful Info/Useful Info.md",
     "Useful Info/Content/burp suite.md",
-    "Useful Info/Content/xss.md",
-    "Useful Info/Content/zone transfer.md",
-    "Useful Info/Content/xxe.md",
-    "Useful Info/Content/smb.md",
-    "Useful Info/Content/proxy.md"
+    "Useful Info/Content/bruteforcing.md",
+    "Useful Info/Linux.md",
+    "Useful Info/Linux-Commands.md",
+    "Useful Info/versioning.jpg",
+    "Useful Info/machines_manual.md"
   ]
 }
