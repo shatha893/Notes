@@ -4,23 +4,13 @@
     "type": "split",
     "children": [
       {
-        "id": "bf1ced5bc1054167",
+        "id": "54ef3c9522757167",
         "type": "leaf",
-        "dimension": 48.3739837398374,
-        "state": {
-          "type": "empty",
-          "state": {}
-        }
-      },
-      {
-        "id": "6a94cc92891d1e47",
-        "type": "leaf",
-        "dimension": 51.6260162601626,
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Useful Info/Content/priv esc.md",
-            "mode": "preview"
+            "file": "Useful Info/Useful Info.md",
+            "mode": "source"
           }
         }
       }
@@ -62,7 +52,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 160.99999809265137
   },
   "right": {
     "id": "9f878c2608801345",
@@ -78,6 +68,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Useful Info/Useful Info.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -95,17 +86,17 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "bf1ced5bc1054167",
+  "active": "54ef3c9522757167",
   "lastOpenFiles": [
-    "Useful Info/helpful_shit.md",
-    "Useful Info/Content/priv esc.md",
-    "Useful Info/Content/searchsploit.md",
     "Useful Info/Useful Info.md",
-    "Useful Info/Content/burp suite.md",
-    "Useful Info/Content/bruteforcing.md",
+    "Machines/Starting_Point/Tier_0.md",
+    "Useful Info/helpful_shit 1.md",
     "Useful Info/Linux.md",
     "Useful Info/Linux-Commands.md",
-    "Useful Info/versioning.jpg",
-    "Useful Info/machines_manual.md"
+    "Useful Info/linux_commands.md",
+    "ductf-certificate.jpg",
+    "htbAcademyNotesGettingStarted.md",
+    "htbNotes.md",
+    "Screenshot 2021-09-27 175331.png"
   ]
 }
