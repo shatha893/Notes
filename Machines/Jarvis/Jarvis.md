@@ -321,4 +321,9 @@ WantedBy=multi-user.target
 
 
 
+* Seems like the phpmyadmin version we have is vulnerable to LFI with the parameter "target". Can they patch the vulnerability LFI? without downloading a new version of phpmyadmin? I should research it.
+* Yet again, it seems that the LFI vuln needs authorization. This is from a website talking about the vulnerability    
+<blockquote>
+ phpMyAdmin 4.8.x LFI to RCE (Authorization Required)
+</blockquote>   
 

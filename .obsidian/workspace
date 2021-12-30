@@ -4,9 +4,9 @@
     "type": "split",
     "children": [
       {
-        "id": "bf1ced5bc1054167",
+        "id": "54ef3c9522757167",
         "type": "leaf",
-        "dimension": 48.3739837398374,
+        "dimension": 43.24097397145256,
         "state": {
           "type": "markdown",
           "state": {
@@ -16,9 +16,9 @@
         }
       },
       {
-        "id": "6a94cc92891d1e47",
+        "id": "dea28c896c636183",
         "type": "leaf",
-        "dimension": 51.6260162601626,
+        "dimension": 56.759026028547446,
         "state": {
           "type": "markdown",
           "state": {
@@ -65,7 +65,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 160.99999809265137
   },
   "right": {
     "id": "9f878c2608801345",
@@ -99,7 +99,7 @@
     "width": 300,
     "collapsed": true
   },
-  "active": "bf1ced5bc1054167",
+  "active": "dea28c896c636183",
   "lastOpenFiles": [
     "Useful Info/helpful_shit 1.md",
     "Useful Info/Content/priv esc.md",
