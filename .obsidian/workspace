@@ -8,8 +8,11 @@
         "type": "leaf",
         "dimension": 48.3739837398374,
         "state": {
-          "type": "empty",
-          "state": {}
+          "type": "markdown",
+          "state": {
+            "file": "Useful Info/helpful_shit 1.md",
+            "mode": "source"
+          }
         }
       },
       {
@@ -20,7 +23,7 @@
           "type": "markdown",
           "state": {
             "file": "Useful Info/Content/priv esc.md",
-            "mode": "preview"
+            "mode": "source"
           }
         }
       }
@@ -78,6 +81,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "Useful Info/helpful_shit 1.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -97,15 +101,15 @@
   },
   "active": "bf1ced5bc1054167",
   "lastOpenFiles": [
-    "Useful Info/helpful_shit.md",
+    "Useful Info/helpful_shit 1.md",
     "Useful Info/Content/priv esc.md",
-    "Useful Info/Content/searchsploit.md",
     "Useful Info/Useful Info.md",
+    "Useful Info/helpful_shit.md",
+    "Useful Info/Content/searchsploit.md",
     "Useful Info/Content/burp suite.md",
     "Useful Info/Content/bruteforcing.md",
     "Useful Info/Linux.md",
     "Useful Info/Linux-Commands.md",
-    "Useful Info/versioning.jpg",
-    "Useful Info/machines_manual.md"
+    "Useful Info/versioning.jpg"
   ]
 }

