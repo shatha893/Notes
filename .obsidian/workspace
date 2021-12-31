@@ -9,8 +9,8 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "Machines/Jarvis/Jarvis.md",
-            "mode": "preview",
+            "file": "Challenges/We Have A Leak.md",
+            "mode": "source",
             "source": false
           }
         }
@@ -69,7 +69,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Useful Info/helpful_shit 1.md",
+                "file": "Challenges/We Have A Leak.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -89,15 +89,15 @@
   },
   "active": "dea28c896c636183",
   "lastOpenFiles": [
-    "Useful Info/helpful_shit 1.md",
+    "Challenges/We Have A Leak.md",
+    "OSINT/OSINTing People.md",
+    "Machines/Jarvis/Jarvis.md",
+    "Useful Info/temp.md",
     "Useful Info/Content/priv esc.md",
-    "Useful Info/Useful Info.md",
-    "Useful Info/helpful_shit.md",
-    "Useful Info/Content/searchsploit.md",
-    "Useful Info/Content/burp suite.md",
-    "Useful Info/Content/bruteforcing.md",
+    "Useful Info/helpful_shit 1.md",
     "Useful Info/Linux.md",
-    "Useful Info/Linux-Commands.md",
-    "Useful Info/versioning.jpg"
+    "Useful Info/Content/shells.md",
+    "Useful Info/Content/sql injection.md",
+    "Useful Info/Content/sqlmap.md"
   ]
 }

