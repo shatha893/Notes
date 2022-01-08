@@ -7,7 +7,8 @@
 * To view the exploits code we can use this command `searchsploit -x [EXPLOIT PATH]`.  
 *  Copies the exploit code to my working directory `searchsploit -m [EXPLOIT PATH]`.    
 
-
+* `/usr/share/exploitdb/exploits`
+* ExploitDB's exploits are saved in this path.  
 
 
 
