@@ -98,13 +98,7 @@ smbclient \\\\10.129.158.38\\ADMIN$ -U 'administrator'
 * We can use the command `get` inside the smb prompt to download files on our own box.
 
 
-## Windows
-* `xp_cmdshell` allows me to spawn a Windows shell.
 
-
-* grep substitute in Windows `C:\> netstat -na | findstr /c:"PORT"`
-
-* To view hidden file in Windows `dir [DIR NAME] /a:h /b /s`
 
 dir /a:h /b /s
 
