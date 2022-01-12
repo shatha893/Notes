@@ -137,7 +137,7 @@ define('DB_USER', 'wordpress');
   ```console
   05:05     1209    notch SCREEN screen -dmS blockycraft java -Xms500M -Xmx500M -jar ./sponge.jar nogui
   ```
-
+* That was a false call
 * /tmp/tmux-33
 * /usr/bin/gettext.sh
 
@@ -145,15 +145,29 @@ define('DB_USER', 'wordpress');
 
    <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
 
-   
-   
+* A kernel exploit worked just fine with me because the kernel version is so old but that was not the intended way.
+* The intended way of solving it:  
+  1. After exploring the website and gobustering the directories that are available I found a directory called `/plugins` which had files that exposed a password that had a username called root.
+
 
 ## Where I Got Stuck?   
-  
+* That I didn't try to use the password that I have to `su` as notch.
+* I had the password all along. I kept seeing it in the linpeas scan with another password but didn't even once think to try it.
+* So yeah I need to permute the passwords and usernames I find.
 
 ## What Did I learn from this Machine?  
 
+* If I find a password to try it anywhere and everywhere.
+* On the login screen when the user enters the wrong password, as a developer of the website, I shouldn't show any indication that the user exists. The error message on the login page helped me with knowing that I was entering the right user for sure and it's just figuring out the password what is left.
+* I guess we shouldn't give users the ability to access the phpmyadmin page, because even when I got the password I couldn't have been able to use it anywhere if it wasn't for my access to the phpmyadmin that gave me access to the database to change notches password because I had full privileges to edit the database eventhough the password was encrypted with the portable php format hashing.   
+* I think we can also say that I shouldn't have been able to access the "Cute file explorer" or whatever it's name was because it definitly exposed me to the password.  
 
+
+  <blockquote>
+  You can limit access to the phpMyAdmin interface to specific machines by editing the apache.conf file
+  </blockquote>    
+
+* KeepItSimpleStupid.   
 
 
 nc -z -v localhost 20-80 2>&1 | grep succeeded
