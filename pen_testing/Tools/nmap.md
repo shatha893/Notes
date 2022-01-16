@@ -38,3 +38,13 @@ PORT   STATE         SERVICE
   ```  
    After I made sure that there is an ssh service on the port 22 with the normal scan I did the aggressive one.
    Even do the banner grabbing `-sV` for each service separately.
+
+
+### <span class="useful_shit subtitle">Nmap  
+
+* We can use the option `-oA [FILE NAME]` to save the nmap output in a file in the working directory.
+  ```console
+  nmap -p- --open -oA nibbles_full_tcp_scan 10.129.42.190
+  ``` 
+
+ <br/><br/> 

@@ -39,4 +39,11 @@
 |    \|    | It represents piping the output of the first command as input to the command on its other side                                                                                                                      | `ps aux \| grep apache2`                                                                                    |
 | sed      | Stream editor, which acts like the find and replace in Windows                                                                                                                                                      | `sed s/[TERM SEARCHING FOR]/[REPLACEMENT] [PATH TO FILE] > [NEW FILE NAME]`                                 |
 | more     | Another way of viewing file contents than `cat` where I scroll through the pages by pressing ENTER                                                                                                                  | `more [PATH TO FILE]`                                                                                       |
-| less     | "Less is more" but It gives me the ability to filter                                                                                                                                                                | `less [PATH TO FILE]`                                                                                       |
+| less     | "Less is more" but It gives me the ability to filter                                                                                                                                                                | `less [PATH TO FILE]`                                                                                        |
+
+
+* `find directory-location -group {group-name} -name {file-name}` this syntax is used to find the files that belong to the group specified.  
+
+### <span class="useful_shit subtitle">Web Testing  
+
+* We can use the command `whatweb [IP ADDRESS]` to see info about the web server.
