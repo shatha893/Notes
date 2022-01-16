@@ -16,5 +16,9 @@ gobuster dir -u http://10.129.159.48:8080/ -x php,jsp -w /home/kali/Documents/cl
 
 * The command to bruteforce in `dns` mode (Bruteforcing Subdomains)   
 	```console
-	gobuster dns -d [WEB SERVICE DOMAIN] -W [WORDLIST PATH]
+	gobuster dns -d [WEB SERVICE DOMAIN] -w [WORDLIST PATH]
 	```  
+
+
+
+gobuster dir -u bank.htb/uploads/ -x php,txt,html,jar -w /opt/useful/SecLists/Discovery/Web-Content/big.txt -b 403,404 -t20

