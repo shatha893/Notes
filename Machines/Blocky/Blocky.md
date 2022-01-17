@@ -199,3 +199,4 @@ define('DB_USER', 'wordpress');
 
 ### ippsec   
 * wpscan (Check it out)
+* When I kept opening the machine at different times I would plant the rev shell again when I didn't have to do that (After I knew notch's pass) because I could've just used his pass to ssh.

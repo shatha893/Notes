@@ -21,4 +21,3 @@ gobuster dir -u http://10.129.159.48:8080/ -x php,jsp -w /home/kali/Documents/cl
 
 
 
-gobuster dir -u bank.htb/uploads/ -x php,txt,html,jar -w /opt/useful/SecLists/Discovery/Web-Content/big.txt -b 403,404 -t20

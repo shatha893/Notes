@@ -15,4 +15,12 @@ The presence of the robots.txt does not in itself present any kind of security v
  * To check if the user have access to use sudo, especially that sometimes a user can have access to sudo a specific command and not everything, we can use this command `sudo -l` which should open the sudoers file unless we don't have privilege to do so.   
 
 
-* The configurations of `proxychains` are stored in a config file `/etc/proxychains.conf`. We can edit this file to set a proxy for the `proxychains` command to use.
+* The configurations of `proxychains` are stored in a config file `/etc/proxychains.conf`. We can edit this file to set a proxy for the `proxychains` command to use.   
+
+
+
+/etc/hosts file
+
+/etc/passwd
+
+shadow file
