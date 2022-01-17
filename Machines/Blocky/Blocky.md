@@ -16,14 +16,14 @@
 
 * Full scan output   
 
-```console
-PORT      STATE  SERVICE
-21/tcp    open   ftp
-22/tcp    open   ssh
-80/tcp    open   http
-8192/tcp  closed sophos
-25565/tcp open   minecraft
-```
+  ```console
+  PORT      STATE  SERVICE
+  21/tcp    open   ftp
+  22/tcp    open   ssh
+  80/tcp    open   http
+  8192/tcp  closed sophos
+  25565/tcp open   minecraft
+  ```
 
 <br/><br/>
 
@@ -45,7 +45,7 @@ PORT      STATE  SERVICE
 <br/><br/>  
 
 ## Gobustering Stuff  
-  <img src="https://cdn.akamai.steamstatic.com/steam/apps/1092880/capsule_616x353.jpg?t=1605640630" width=400 height=200>  
+   <img src="https://cdn.akamai.steamstatic.com/steam/apps/1092880/capsule_616x353.jpg?t=1605640630" width=400 height=200>  
 
   * Results   
     ```
