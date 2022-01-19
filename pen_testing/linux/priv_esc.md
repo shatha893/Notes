@@ -46,9 +46,9 @@ There are two common types of privilege escalation: vertical and horizontal. Ver
 
 	# In reverse shell
 	reset
-	export ShELL=bash
+	export SHELL=bash
 	export TERM=xterm-256color
-	stty row <num> columns <cols>
+	stty rows <num> columns <num2>
 	```
 
 * If we type `stty -a` it will give me info and I can get the rows and columns from there.
@@ -175,3 +175,9 @@ I have to write more about this
 * ### <span class="useful_shit subtitle">Upgrading The Reverse Shell   
 
 * The bitch machine Cronos keeps making problems for me and I can't seem to open the admin some times. So I wasn't able to test the ways I'll be mentioning next (I got them from this <a href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/">website</a>)  
+
+
+* NetCat 
+  * It can be used to scan for open ports `nc -z -v 10.10.8.8 20-80`.  
+
+
