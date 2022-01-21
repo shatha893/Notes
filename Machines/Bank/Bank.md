@@ -1,4 +1,4 @@
-# Machine #[NUMBER] [NAME]  
+# Machine #11 Bank  
 
 
 ## Nmap Results  
@@ -133,7 +133,46 @@ found the password not hashed in the file bankreports
 ## How Did I Solve the Challenge  
 <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
 
+1. Zone transfer to 'bank.htb' where I put it in my /etc/hosts file and this way I was able to open stuff I wasn't able to open on the ip address.  
+2. Login page. Didn't find anyhing there.
+3. Found a redirect with a file upload there which was easily exploitable especially that it listed the files I uploaded in the same page and I could execute the file from there too.
+4. Uploaded a php rev shell in a file with extension `.htb` because of what the comment said ( that it will be executed as php for debugging ).  
+5. I escalated my privilege staight to root by just running a script called "emergency" that gave me root shell for "emergencies only", funny.
+
 <br/><br/>
 
-## Walkthroughs  
 
+## What Did I learn from this Machine?  
+
+### Bad Redirect  
+* I shouldn't be able to see any content when redirecting because as we saw I could change the code of the redirect to 200 OK and view the page and use it without authorization.
+
+### Revealing comments in the UI's Source Code  
+* There was a comment that stated that we can use .htb file as php for debuggin which is really bad because this means I can upload any php file I want including a reverse shell, which was what I did.  
+
+### Privilege to Execute File in `/uploads` and Read Directories I Shouldn't Have Been Able To Read
+* Which means that I was able to traverse through any directory, except for the uploads, which I was able to execute a file that I knew was inside of it. I think this is considered under bad privileges given for the user www-data.  
+
+### Unauthorized Zone Transfer  
+* Which allowed me to view content on the http service I wasn't able to view when I was using the IP address itself.
+* We can check out the data with this command `dig axfr bank.htb @10.10.10.29`  
+
+### Don't Put a Root Shell Script For EMERGENCIES ONLY  
+
+## Writeups  
+
+* It turns out that the way I used was not the intended way and the intended way needed me to use a bruteforcer other than gobuster to get to a specific directory that for some reason gobuster doesn't show up.  
+
+* I could've been able to write a password directly in the `/etc/passwd` file, like this   
+```console
+www-data@bank:/$ echo 'oxdf:$1$q6iY9K5M$eYK1fPmp6OfjbHhWGqZIf0:0:0:pwned:/root:/bin/bash' >> /etc/passwd
+```   
+* Hashed of course. Then `su` to this user `oxdf`.  
+
+
+* There are really three ways that a PHP site commonly blocks based on file type:  
+1. file extension
+2. Content-Type header
+3. Mime type, looking at the starting bytes of the content itself and signature that.
+
+<!--@nested-tags:machines/zone_transfer/Bank,machines/bad_redirect/Bank,machines/bad_commenting_practices/Bank,machines/suid/Bank,machines/vuln_file_upload/Bank-->

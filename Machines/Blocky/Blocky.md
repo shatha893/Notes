@@ -1,4 +1,4 @@
-# Machine #9 Jarvis  
+# Machine #10 Blocky  
 
 
 ## Nmap Results  
@@ -199,4 +199,7 @@ define('DB_USER', 'wordpress');
 
 ### ippsec   
 * wpscan (Check it out)
-* When I kept opening the machine at different times I would plant the rev shell again when I didn't have to do that (After I knew notch's pass) because I could've just used his pass to ssh.
+* When I kept opening the machine at different times I would plant the rev shell again when I didn't have to do that (After I knew notch's pass) because I could've just used his pass to ssh.   
+
+
+<!--@nested-tags:machines/user_enum/Blocky,machines/phpmyadmin/Blocky,machines/weak_creds/Blocky-->

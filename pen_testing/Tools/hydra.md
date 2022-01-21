@@ -30,4 +30,4 @@ hydra -l admin -P /home/kali/Documents/cloned_reps/SecLists/Passwords/2020-200_m
 * Check out the github page <a href="https://github.com/Moham3dRiahi/XBruteForcer">here</a> .
 
 
-<!--@nested-tags:Brute Force/Passwords-->
+<!--@nested-tags:brute_force/passwords-->

@@ -237,4 +237,4 @@ www-data can run this command as pepper (THAT'S SOMETHING)
 * I've used a php script that takes commands as input so when I put the "mkfifo" command above it gave me a rev shell on my own because it executed the command the wrong way so when I put "" double quotations it solved the problem and took the whole line of commands as input.  
 
 
-<!--@nested-tags:Sql Injection/Jarvis,SUID/Jarvis-->
+<!--@nested-tags:machines/sql_injection/Jarvis,machines/suid/Jarvis,machines/bad_input_sanitization/Jarvis-->

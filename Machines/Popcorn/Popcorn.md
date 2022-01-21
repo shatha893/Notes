@@ -134,9 +134,9 @@
 
 * The `test.php` has the phpinfo() page with all php info in it.
 * Of course the `/torrent` page has the Torrent Hoster page and it's what contains all the directories above.
-* The `/torrent/readme` directory opens up to two files `readme.txt` and `liscense.txt` the readme file contains theat the Torrent Hoster we have is version 2.0 (Exploitdb states that torrent hoster is vulnerable to the "Remount Exploit" whatever its version is. Or at least it hasn't been specified).
+* The `/torrent/readme` directory opens up to two files `readme.txt` and `license.txt` the readme file contains theat the Torrent Hoster we have is version 2.0 (Exploitdb states that torrent hoster is vulnerable to the "Remount Exploit" whatever its version is. Or at least it hasn't been specified).
 * The `/torrent/database` directory has a file called `th_database.sql` when you open it shows me the version of phpmyAdmin SQL Dump ---> 2.10.1 and it also gives out an admin password that is useless to me until now.
-* Found an sql injection vulnerability in the search bar. I'm thinking if I could add a user of my own and add there privilage as `admin` after all I have the syntax of the insert statement and the structure of the table, its name and the DB's name.(The Admin's password: `d5bfedcee289e5e05b86daad8ee3e2e2`).
+* Found an sql injection vulnerability in the search bar. I'm thinking if I could add a user of my own and add there privilege as `admin` after all I have the syntax of the insert statement and the structure of the table, its name and the DB's name.(The Admin's password: `d5bfedcee289e5e05b86daad8ee3e2e2`).
 
 <br/><br/> 
 
@@ -154,3 +154,6 @@
 ## <span style="color:#b980ee;">PrivEsc
 
 * It's just to use one of the Dirty Cows.
+
+
+<!--@nested-tags:machines/dirty_cow/Popcorn,machines/vuln_file_upload/Popcorn,machines/sql_injection/Popcorn-->
