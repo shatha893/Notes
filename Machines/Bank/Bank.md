@@ -175,4 +175,4 @@ www-data@bank:/$ echo 'oxdf:$1$q6iY9K5M$eYK1fPmp6OfjbHhWGqZIf0:0:0:pwned:/root:/
 2. Content-Type header
 3. Mime type, looking at the starting bytes of the content itself and signature that.
 
-<!--@nested-tags:machines/zone_transfer/Bank,machines/bad_redirect/Bank,machines/bad_commenting_practices/Bank,machines/suid/Bank,machines/vuln_file_upload/Bank-->
+<!--@nested-tags:zone_transfer/machines/Bank,bad_redirect/machines/Bank,bad_commenting_practices/machines/Bank,suid/machines/Bank,vuln_file_upload/machines/Bank-->

