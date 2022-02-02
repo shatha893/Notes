@@ -111,6 +111,10 @@ But I'm not able to use the passphrase yettt which is frustrating and a reverse 
 * Carousel is a popular wordpress plugin.  
 * He made an HTML page with `python -m http.server 80` to run the exploit that is expecting us to "make an html page".  
 * Don't jump straight into a dangerous command with command injection, try a simple, useless one first.  
-* 
+
+
+### 0xdf's Writeup  
+
+* He used a webshell and then
 
 <!-- tagsss -->
