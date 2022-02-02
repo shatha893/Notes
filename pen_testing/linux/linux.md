@@ -71,4 +71,9 @@
 
 
 ## What does Focal Fossa mean?  
-Ubuntu code names contain 2 parts the first is an adjective and the second is an animal name. That being said "Focal" is an adjective that means "Focus" and "Fossa" is an animal name.
+Ubuntu code names contain 2 parts the first is an adjective and the second is an animal name. That being said "Focal" is an adjective that means "Focus" and "Fossa" is an animal name.  
+
+
+## `cd` Command  
+
+* We can use `cd -` to go back to the previous working directory.
