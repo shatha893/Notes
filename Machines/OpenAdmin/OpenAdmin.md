@@ -107,8 +107,20 @@ But I'm not able to use the passphrase yettt which is frustrating and a reverse 
 
 ### ippsec  
 
+<<<<<<< HEAD
 * So first he tried to look for a "robot.txt" file because it could lead to something if it existed.
 * He tried to check if the backend was php by trying "index.php" if "index.html" existed.
 * Looked at the source code of the websites he found to see if he can find the software that is used to make the website.
+=======
+* He checked the source of the page to check what is the type of the content management system that is being used.  
+* Carousel is a popular wordpress plugin.  
+* He made an HTML page with `python -m http.server 80` to run the exploit that is expecting us to "make an html page".  
+* Don't jump straight into a dangerous command with command injection, try a simple, useless one first.  
+* We can test for a firewall if we `nc [MY IP] [PORT]` we can check if a firewall is blocking us.   
+
+### 0xdf's Writeup  
+
+* He used a webshell and then
+>>>>>>> 677c4834b2d4b34f01f4f17f46864709ce7556bd
 
 <!-- tagsss -->

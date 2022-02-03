@@ -13,6 +13,12 @@
 
 
 
+## Options/Flags/Switches  
+
+### Option `-u`  
+* It updates searchsploit.  
+* We use this option because sometimes `searchsploit` doesn't show us the latest exploits if not updated.
+
 
 
 
