@@ -47,4 +47,22 @@ PORT   STATE         SERVICE
   nmap -p- --open -oA nibbles_full_tcp_scan 10.129.42.190
   ``` 
 
- <br/><br/> 
+ <br/><br/>   
+
+## Options/Switches/flags  
+
+### `-v` option  
+* Can be used to see the progress of nmap while it's scanning.  
+
+### `-sC` option  
+* Quoted from "nmap.org" 
+
+
+  <blockquote>
+
+  Performs a script scan using the default set of scripts. It is equivalent to --script=default. **Some of the scripts in this default category are considered intrusive and should not be run against a target network without permission**.
+  </blockquote>  
+
+### `-sV` option  
+* To enumerate versions.
+* It's the flag that we use to grab banners which I think is equavelant to "enumerating versions".

