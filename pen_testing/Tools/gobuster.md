@@ -19,5 +19,8 @@ gobuster dir -u http://10.129.159.48:8080/ -x php,jsp -w /home/kali/Documents/cl
 	gobuster dns -d [WEB SERVICE DOMAIN] -w [WORDLIST PATH]
 	```  
 
+## Options/Flags/Switches  
 
+### `-o` option  
+* Can be used to write the output of the command into a file.
 

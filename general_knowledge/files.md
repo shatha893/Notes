@@ -243,5 +243,7 @@ The hash consists of 3 different fields that are seperated by a `$`  these field
 * The local file inclusion vul in the http service allowed me to access the `.htpasswd` file which, it seems, contains usernames and password. Indeed, it did contain the username and password of a user named Mike. I'll try and ssh with them. Damn just remembered there's no ssh on the host.
 mike:Sheffield19  
 
+## Files with `.bak` extension  
+* In computing, ".bak" is a filename extension commonly used to signify a backup copy of a file.
 
 <!--@nested-tags:general_knowledge/files,pen_testing/files-->

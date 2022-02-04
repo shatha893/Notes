@@ -57,6 +57,9 @@ PORT   STATE         SERVICE
 ### `-sC` option  
 * Quoted from "nmap.org" 
 
+### `-o` option  
+* To save output in a file.
+
 
   <blockquote>
 

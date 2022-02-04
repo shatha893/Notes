@@ -87,12 +87,16 @@ But I'm not able to use the passphrase yettt which is frustrating and a reverse 
 
    <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
 
-
-     
+1. After enumerating the machine I found a webpage that is an ona with a vulnerable version to an exploit that was easily implemented so I didn it and got www-data.
+2. Then I got jimmy with more enumeration when I found this password in some file written in plain text.
+3. This left me with trying to priv esc to joanna (horizontally).
+4. I found an internal webserver on a weird port and realizing that joanna was the one executing it I manipulated the ssh files instead of brute forcing the passphrase for her own private key and got her.
+5. After that there was an easy way of getting a rev shell with root when nano is executed with sudo.   
 
 ## Where I Got Stuck?  
-
-   
+* When I was trying to priv esc to joanna.
+* It took me time to find the internal web server.
+* And when I found it I kept trying to spawn a reverse shell but it didn't work. Still dunno why.
 
 ## What Did I learn from this Machine?  
 
@@ -118,6 +122,6 @@ But I'm not able to use the passphrase yettt which is frustrating and a reverse 
 
 ### 0xdf's Writeup  
 
-* He used a webshell and then
+* He used a webshell and then made a rev shell.
 
 <!-- tagsss -->
