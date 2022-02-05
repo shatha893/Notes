@@ -1,55 +1,40 @@
+# <span style="color:#009688">Tools --*Nmap*--</span> 
+
+## <span style="color:#009688">Special Usage  
+
+* To perform a udp scan ( It takes forever to finish )  
+  ```console
+  sudo nmap -Pn -sV -sU 10.129.126.250 
+  ```  
+* It has to be done with elevated privileges.
+
 * Why does UDP nmap take forever?  
   <blockquote>
   UDP scanning is likely to be slower than TCP due to the differences in how the protocol works (i.e. with TCP it's easier to establish that a port is open due to the three-way handshake).
   </blockquote>
 
-* To scan for UDP ports with nmap write the following `sudo nmap -Pn -sV -sU 10.129.126.250 `
-* UDP nmap results  
+* It's best if we use the `-A` or `-sV` on the victim with each port on its own so that we be more stealthy.
 
-```
-PORT   STATE         SERVICE
-68/udp open|filtered dhcpc
-69/udp open|filtered tftp  
-```
+<br/><br/>
 
-
-
-* We can use the option `-oA [FILE NAME]` to save the nmap output in a file in the working directory.
+## <span style="color:#009688">Normal Usage  
+ 
+* It would be something like this  
   ```console
-  nmap -p- --open -oA nibbles_full_tcp_scan 10.129.42.190
-  ```   
+  nmap -Pn [IP ADDRESS]
 
+  # or this for the full scan  
 
+  nmap -Pn -p- [IP ADDRESS]  
 
-  * It's best to do *aggressive* scanning on the services seperately e.g. the following command    
+  # or this for a scan on a specific port  
 
+  nmap -Pn -p[PORT] [IP ADDRESS]
   ```
-  nmap -Pn -p22 10.10.10.3 -A 
-  ```
-  The output would look something like this  
 
-  ```
-  PORT   STATE SERVICE VERSION
-  22/tcp open  ssh     OpenSSH 4.7p1 Debian 8ubuntu1 (protocol 2.0)
-  | ssh-hostkey: 
-  |   1024 60:0f:cf:e1:c0:5f:6a:74:d6:90:24:fa:c4:d5:6c:cd (DSA)
-  |_  2048 56:56:24:0f:21:1d:de:a7:2b:ae:61:b1:24:3d:e8:f3 (RSA)
-  Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-  ```  
-   After I made sure that there is an ssh service on the port 22 with the normal scan I did the aggressive one.
-   Even do the banner grabbing `-sV` for each service separately.
+<br/><br/>
 
-
-### <span class="useful_shit subtitle">Nmap  
-
-* We can use the option `-oA [FILE NAME]` to save the nmap output in a file in the working directory.
-  ```console
-  nmap -p- --open -oA nibbles_full_tcp_scan 10.129.42.190
-  ``` 
-
- <br/><br/>   
-
-## Options/Switches/flags  
+## <span style="color:#009688">Options/Flags/Switches  
 
 ### `-v` option  
 * Can be used to see the progress of nmap while it's scanning.  
@@ -58,14 +43,20 @@ PORT   STATE         SERVICE
 * Quoted from "nmap.org" 
 
 ### `-o` option  
-* To save output in a file.
-
-
-  <blockquote>
-
-  Performs a script scan using the default set of scripts. It is equivalent to --script=default. **Some of the scripts in this default category are considered intrusive and should not be run against a target network without permission**.
-  </blockquote>  
+* To save output in a file.  
 
 ### `-sV` option  
 * To enumerate versions.
-* It's the flag that we use to grab banners which I think is equavelant to "enumerating versions".
+* It's the flag that we use to grab banners which I think is equavelant to "enumerating versions".  
+<blockquote>
+
+Performs a script scan using the default set of scripts. It is equivalent to --script=default. **Some of the scripts in this default category are considered intrusive and should not be run against a target network without permission**.
+</blockquote>  
+
+### `-oA` option  
+* We can use the option `-oA [FILE NAME]` to save the nmap output in a file in the working directory.
+  ```console
+  nmap -p- --open -oA nibbles_full_tcp_scan 10.129.42.190
+  ``` 
+
+<br/><br/>
