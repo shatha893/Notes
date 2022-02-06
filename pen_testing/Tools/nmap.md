@@ -60,3 +60,13 @@ Performs a script scan using the default set of scripts. It is equivalent to --s
   ``` 
 
 <br/><br/>
+
+## <span style="color:#009688">Extra Notes on The Side  
+* Filtered ports. What are these?  
+  <blockquote>
+  Filtered means that a firewall, filter, or other network obstacle is blocking the port so that Nmap cannot tell whether it is open or closed
+  </blockquote>
+
+
+
+<br/><br/>
