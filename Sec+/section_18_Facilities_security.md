@@ -111,3 +111,59 @@
 
 * When we're talking about ICS and SCADA we're talking about OT (Operational Technology). What is this?  
   * A communications network designed to implement an industrial control system rather than data networking.
+  * Operational technology is all about using computers to control things in real life like opening and closing a valve and stuff like that.  
+
+* Industrial systems prioritize *availability* and *integrity* over confidentiality.  
+
+* ICS (Industrial Control System)  
+  * Which is a network that manages embedded devices.  
+  * ICS is *used for* electrical power stations, water suppliers, health services, telecommunications, manufacturing, and defense needs.     
+  * ICS uses *Fieldbus* which is a digital serial data communications used in operational technology networks to link PLCs.
+
+  * PLCs?  
+  * HMI (Human Machine Interface)  
+    * Which is an input and output controls on a PLC to allow a user to configure and monitor the system. 
+    * ICS manages the process automation by linking together PLCs using a fieldbus to make change in *the physical world* (values, motors, etc).  
+    * The whole process automation system is governed by a control server.  
+    * How to know what these systems has done in the past?  
+      * We use a *Data Historian* which is a software that aggregates and catalogs data from multiple sources within an industrial control system.
+* SCADA  
+  * Stands for *Supervisory Control and Data Acquisition*.  
+  * It's definition: A type of industrial control system that manages large-scale, multiple-site devices and equipment spread over a geographic region.  
+  * SCADA is typically run as software on ordinary computers to gather data from and manage plant devices and equipment with embedded PLCs.  
+
+
+* Modbus  
+  * It's a communications protocol used in operational technology networks.
+  * Seems like it's the substitution of TCP/IP in IT networks (Here we're talking about OT).  
+  * Modbus gives control servers and SCADA hosts the ability to query and change the configuraiton of each PLC.  
+
+## 161. Mitigating Vulnerabilities   
+
+* Four key controls for mitigating vulnerabilities in specialized systems  
+  1. Establish administrative control over Operational Technology networks by recruiting staff with relevant expertise.  
+  2. Implement the minimum network links by disabling unnecessary links, services and protocols.  
+  3. Develop and test a patch management program for OT networks.  
+  4. Perform regular audits of logical and physical access to systems to detect possible vulnerabilities and intrusions.  
+
+* Enumeration tools and vulnerability scanners can cause problems on OT networks (Like we should be scanning, passively, using WireShark).  
+
+## 162. Premise System Vulnerabilities  
+
+* Entry Access system (or whatever it's called) is considered a part of this system.  
+* Security cameras are also considered to be part of this system.  
+* Many system designs allow the monitoring to be accessible from the corporate data network or even directly from the internet.  
+
+* Building Automation System (BAS)  
+  * Definition: Components and protocols that facilitate the centralized configuration and monitoring of mechanical and electrical systems within offices and data centers.  
+  * Process and memory vulnerabilities in PLC.  
+  * Plaintext credentials or keys in application code.  
+  * Code Injection via web user interface.
+* One of the main vulnerabilities in premise systems or building automation systems is that they can be used to create denial of service condition by affecting building automation systems like HVAC.  
+* Another thing about these systems is that they have bad security.  
+* Somebody could pivot from their intrusion on such systems into attacks taht are more serious.  
+
+* Physcial Access Control System (PACS)  
+  * Components and protocols that facilitate the centralized configuration and monitoring of security mechanisms within offices and data centers.  
+  * It can be implemented either as part of building automation system or a separate system.  
+  * PACS are often installed and maintained by an external supplier and are therefore omitted from risk and vulnerability assessments by analysts.
