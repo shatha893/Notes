@@ -24,3 +24,8 @@ gobuster dir -u http://10.129.159.48:8080/ -x php,jsp -w /home/kali/Documents/cl
 ### `-o` option  
 * Can be used to write the output of the command into a file.
 
+<br/><br/>
+
+## Some Notes on the Side  
+
+* Try using the dirbuster wordlists (They seem pretty nice).
