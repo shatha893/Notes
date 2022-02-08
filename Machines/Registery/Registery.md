@@ -10,6 +10,16 @@
 * Seems like there's a LFI vulnerability.
 * Because I'm able to open files in directories I'm forbidden to access.
 * Still no trace of a login page (If it's necessary anyway).
+* gobuster dir -u http://10.10.10.159/install -x .php,.txt,.html,.md -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
+ -b 403,404  
+
+ gobuster dns -d registry.htb -w ./test.wordlist  
+
+ * Version of bolt I found is 3.6.4 .  
+ * Seems that bolt is coded with php.  
+ * I tried to gobuster with different directories but it's no use. It's not giving me anything new.
+ * I also tried to gobuster the subfolders.
+ * Found twig files in `/app/theme/base-2018/[FILENAME]` or something like that. Not sure that I remember it correctly.
 
 <br/><br/>
 
