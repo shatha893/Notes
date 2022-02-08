@@ -21,6 +21,7 @@
  * I also tried to gobuster the subfolders.
  * Found twig files in `/app/theme/base-2018/[FILENAME]` or something like that. Not sure that I remember it correctly.
 
+* Ok I'm going to check all the files I can 
 <br/><br/>
 
 
