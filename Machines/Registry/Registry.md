@@ -105,9 +105,9 @@ Authorization: Basic YWRtaW46YWRtaW4=
   * The `runc` command but there's nothing from its side either.
   * There's also the `registry serve /etc/docker/registry/config.yml` command that neither the command exists nor the file in the path exists.  
 
-nc -l -p 1234 > suid3num.py
+nc -l -p 1234 > mysql
 
-nc -w 3 10.10.10.159 1234 < suid3num.py  
+nc -w 3 10.10.10.159 1234 < mysql  
 
 * This could be something `/lib/systemd/system/uuidd.socket is calling this writable listener: /run/uuidd/request`.  
 * Use SUID3NUM it's nice. Relieves the burden of searching through the SUID binaries and checking if it's normal that they have the sticky bit or not. ( And it's legit in OSCP)  
