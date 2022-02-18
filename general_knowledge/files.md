@@ -244,6 +244,28 @@ The hash consists of 3 different fields that are seperated by a `$`  these field
 mike:Sheffield19  
 
 ## Files with `.bak` extension  
-* In computing, ".bak" is a filename extension commonly used to signify a backup copy of a file.
+* In computing, ".bak" is a filename extension commonly used to signify a backup copy of a file.  
+
+## `wget` to download files  
+* We can use `wget` to download files from my box to the victim and from the victim to me.   
+
+## Zip Files  
+* We can use `zcat` to extract .gz files.
+* `tar -xvf [FILE NAME]` to extract from the archive file.  
+
+## SSH Files  
+* All SSH keys should have a privilege of 600.
+
+* We can create a file in the `.ssh` in my home as an attacker called "config" which can help me with sshing to hosts by providing some info on how to ssh to that specific host like the following  
+```console
+Host  [ANY NAME]
+        HostName [HOST'S IP ADDRESS]
+        User [USER TO SSH WITH]
+        IdentityFile [/path/to/ssh/key/including/the/key]
+```  
+
+## `.viminfo` file  
+* The file `.viminfo` could give me some more information (If it did not have the size of zero).
+
 
 <!--@nested-tags:general_knowledge/files,pen_testing/files-->

