@@ -282,4 +282,4 @@ curl "http://localhost/index.html?127.0.0.1;ls&#8221;"
 * I could've put the `&` at the end of the reverse shell to make it a background process so that the mindy ssh interface won't get hung up. So that if we were in a real world scenario the user won't suspect anything ( or maybe suspect something but at least it's better than the ssh hanging up).   
 
 
-<!--@nested-tags:machines/mail_server/SolidState,machines/weak_creds/SolidState,machines/cron_jobs/Solidstate-->
+<!--@nested-tags:machines/mail_server/SolidState,weak_creds/machines/SolidState,machines/cron_jobs/Solidstate-->

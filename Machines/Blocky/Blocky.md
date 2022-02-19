@@ -202,4 +202,4 @@ define('DB_USER', 'wordpress');
 * When I kept opening the machine at different times I would plant the rev shell again when I didn't have to do that (After I knew notch's pass) because I could've just used his pass to ssh.   
 
 
-<!--@nested-tags:machines/user_enum/Blocky,machines/phpmyadmin/Blocky,machines/weak_creds/Blocky-->
+<!--@nested-tags:machines/user_enum/Blocky,machines/phpmyadmin/Blocky,weak_creds/machines/Blocky-->
