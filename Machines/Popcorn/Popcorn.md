@@ -156,4 +156,4 @@
 * It's just to use one of the Dirty Cows.
 
 
-<!--@nested-tags:machines/dirty_cow/Popcorn,machines/vuln_file_upload/Popcorn,machines/sql_injection/Popcorn-->
+<!--@nested-tags:machines/dirty_cow/Popcorn,vuln_file_upload/machines/Popcorn,machines/sql_injection/Popcorn-->

