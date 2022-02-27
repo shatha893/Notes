@@ -206,7 +206,7 @@ The first level of directories inside the root directory (`/`) are called *"Conf
 * You can create a restful server with this command `./rest-server --path /tmp/restic --no-auth --debug`. 
 * The `--debug` option is to see if the request went in successfully and if not then what's the problem.
 
-
+## The command `strings`
 
 
 
