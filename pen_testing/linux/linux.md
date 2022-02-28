@@ -209,6 +209,13 @@ The first level of directories inside the root directory (`/`) are called *"Conf
 ## The command `strings`
 
 
+## The command `script`  
+
+script command in Linux is used to make typescript or record all the terminal activities
+
+
+## Using `2>/dev/null`  
+* We can put it at the end of each command if we want to show only the successful output. 
 
 <!-- FOOTNOTES -->
 <!-- [^1]: I'm not sure if it replaces the content with the provided content or does it add to it? <span style='color:red'>(Check it out!)</span>

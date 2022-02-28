@@ -99,6 +99,9 @@
 
 ## <span style="color: #FFFF66">Writeups ✍🏽📓   
 
+### ippsec  
+* There are other backdoor wordlists to use in SecList's `Web-Content` called "CommonBackdoors".
+* The comment turned out to be a line from a github that has a bunch of webshells(Some of the best webshells...etc).
 
 <br/><br/>
 
