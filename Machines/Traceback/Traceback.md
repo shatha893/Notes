@@ -72,6 +72,12 @@
 
 ## <span style="color: #FFFF66">How Did I Solve the Machine 😎🥳 
 
+1. I bruteforced the directories with gobuster until I found a webshell called `smevk.php`.
+2. On my first try I used admin/admin credentials and they worked.
+3. I uploaded a php reverse shell and visited to execute the code.
+4. I got in with `webshell` privilege.
+5. I escalated my privilege to `sysadmin` by spawning a bash shell in a Lua code that could be executed with `sudo` privilege to sysadmin.
+6. Then as `sysadmin` I injected a code in the motd header and got a root shell that way.
 
 <br/><br/>
 
@@ -108,4 +114,4 @@
 
 
 
-<!-- @nested-tags:EXAMPLE/OF/NESTED/TAGS-->
+<!-- @nested-tags:machines/brute_force/Traceback-->
