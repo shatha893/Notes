@@ -1,4 +1,4 @@
-# <span style="color:[COLOR]">Machine #18 Paper</span>  
+# <span style="color:[COLOR]">Machine #- Paper</span>  
 
 
 ## <span style="color:[COLOR]">Notes During Working on the Machine 🧐🤓   

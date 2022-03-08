@@ -1,12 +1,3 @@
-	* How to use rsa id to ssh  
-	
-	```
-	ssh -i id_rsa daniel@10.129.140.196
-	```
-
-	* how to create a key  
-  ssh-keygen -t ed25519
-
 # <span style="color:#009688">Services --*SSH*--</span> 
 
 ## <span style="color:#009688">Special Usage  
