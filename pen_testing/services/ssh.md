@@ -20,7 +20,7 @@
   ```
   ssh-keygen -t [KEY TYPE]
   ```
-
+* Permissions of a private ssh key has to be `600`.
 * Key types can be  
 	* rsa
 	* dsa
