@@ -30,4 +30,6 @@ gobuster dir -u http://10.129.159.48:8080/ -x php,jsp -w /home/kali/Documents/cl
 
 * Try using the dirbuster wordlists (They seem pretty nice).  
 
+
+* To gobuster with POST method
 <!-- @nested-tags:brute_force/gobuster-->

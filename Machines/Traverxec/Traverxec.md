@@ -14,7 +14,7 @@
   -rw-r--r-- 1 root bin 41 Oct 25  2019 /var/nostromo/conf/.htpasswd                 
   david:$1$e7NfNpNi$A6nCwOTqrNR2oDuIKirRZ/
   ```  
-* Cracked the password Nowonly4me.
+* Cracked the password Nowonly4me nowonly4me
 * This password is useless I tried it with SSH david, su, as the password for sudo of www-data, ssh root, su root and even sshed on localhost.
 
 * The Nostromo web server was vulnerable to the easiest rce I've ever encountered (v1.9.6) so I got access as www-data easily.
