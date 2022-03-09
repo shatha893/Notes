@@ -15,6 +15,8 @@
 john --wordlist=[PATH/TO/WORDLIST] [PRIVATE KEY FILE]
 ```  
 
+* We can use john the ripper to crack shadow file password by combining passwd and shadow first `unshadow /etc/passwd /etc/shadow > password.txt`.
+* Then we just write `john password.txt`.
 <br/><br/>
 
 ## <span style="color:#009688">Options/Flags/Switches  
