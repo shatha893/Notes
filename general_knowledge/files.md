@@ -268,4 +268,7 @@ Host  [ANY NAME]
 * The file `.viminfo` could give me some more information (If it did not have the size of zero).
 
 
+## Shadow file and Passwd file  
+* We can combine these two files into one using `unshadow /etc/passwd /etc/shadow > password.txt`
+
 <!--@nested-tags:general_knowledge/files,pen_testing/files-->
