@@ -57,7 +57,11 @@ Performs a script scan using the default set of scripts. It is equivalent to --s
 * We can use the option `-oA [FILE NAME]` to save the nmap output in a file in the working directory.
   ```console
   nmap -p- --open -oA nibbles_full_tcp_scan 10.129.42.190
-  ``` 
+  ```  
+
+### `-oX` option  
+* Will show the nmap results in xml. 
+* I can use this to convert it into md with  <a href="https://github.com/vdjagilev/nmap2md">tool</a> (check it out please). 
 
 <br/><br/>
 
