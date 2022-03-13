@@ -21,4 +21,9 @@ Connection: close
 {"artist.name":"abcd"}
 ```  
 
-* Imma try and gobuster it see if I find anything or maybe try using feroxbuster. Maybe check a word list specifically for apis.
+* Imma try and gobuster it see if I find anything or maybe try using feroxbuster. Maybe check a word list specifically for apis.  
+* There is no need to brute force directories I found an RCE exploit but it kept giving me command failed.
+* Anyway the backend is nodejs.
+
+
+
