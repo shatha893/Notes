@@ -64,4 +64,7 @@ curl [URL]
 
 ### `-L` option  
 * To follow the redirection after a login.
+
+### `-b` option  
+* To add a cookie to the request
 <br/><br/>
