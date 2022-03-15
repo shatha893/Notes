@@ -86,6 +86,14 @@ $5$1dKf1P7dhcB2i1QA$PQJrOE013sKIrqLOaWbdPTWpFFW0qhJV2f4ckr0WM28
 
 ## <span style="color:#CC6699">How Did I Solve the Machine 😎🥳 
 
+1. Found a header that had `X-Backend-Server:office.paper` and when I tried to put `office.paper` as the domain for http it opened up a whole new website which meant that there are "Virtual Hosts".  
+2. The website works on Wordpress.
+3. Found an exploit after I bruteforced for files and directories for the specific version of WordPress we had.
+4. If I put the parameter `?static=1` to any page it could open up secrets ( I think it shows me a test page or sth like that Imma research this).
+5. When using the exploit I found a url for a subdomain that uses "rocketchat" and you can't register unless we had a specific url.
+6. After registering I found a bot that I can straight up send commands to.
+7. After some research I found that if I put the word `run` before any comand I can run anything I want. So I put a reverse shell and easily got foothold in the system.  
+8. I kept researching the system for something until I found that it was vulnerable for a Polkit exploit. The exact OS version and whatever the exploit needs I have. This got me root.
 
 <br/><br/>
 
@@ -93,6 +101,7 @@ $5$1dKf1P7dhcB2i1QA$PQJrOE013sKIrqLOaWbdPTWpFFW0qhJV2f4ckr0WM28
 
 ## <span style="color:#CC6699">Where I Got Stuck?😡😧  
 
+* I got stuck researching the system for a way to privesc until I updated linpeas and found a polkit vulnerability in the operating system.
 
 <br/><br/>
 
@@ -100,16 +109,9 @@ $5$1dKf1P7dhcB2i1QA$PQJrOE013sKIrqLOaWbdPTWpFFW0qhJV2f4ckr0WM28
 
 ## <span style="color:#CC6699">What Did I learn from this Machine?👀  
 
+* Bots can sometimes be a vulnerability.
 
 <br/><br/>
-
-
-
-## <span style="color:#CC6699">Writeups ✍🏽📓   
-
-
-<br/><br/>
-
 
 
 
