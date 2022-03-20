@@ -26,14 +26,14 @@ curl  http://admin:admin@<SERVER_IP>:<PORT>/
 ## <span style="color:#009688">Normal Usage  
 
 * For post requests  
-```console
-curl -X POST -F '[PARAMETER]' -F '[PARAMETER]' [URL]
-```  
+  ```console
+  curl -X POST -F '[PARAMETER]' -F '[PARAMETER]' [URL]
+  ```  
 
 * For get requests
-```
-curl [URL]
-```  
+  ```
+  curl [URL]
+  ```  
 
 
 <br/><br/>
