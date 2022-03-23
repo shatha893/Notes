@@ -8,7 +8,7 @@
 ## <span style="color:#009688">Normal Usage  
 
 ```cmd
-./feroxbuster -u http://127.1 -x pdf -x js -x php txt json,docx
+./feroxbuster -u http://127.0.0.1 -x pdf -x js -x php txt json,docx
 ```  
 
 ```cmd
