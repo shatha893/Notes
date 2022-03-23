@@ -1,9 +1,5 @@
 # <span style="color:#009688">Tools --*feroxbuster*--</span> 
 
-## <span style="color:#009688">Special Usage  
-
-
-<br/><br/>
 
 ## <span style="color:#009688">Normal Usage  
 
@@ -14,10 +10,6 @@
 ```cmd
 feroxbuster --url http://10.10.11.143 -w ./big.txt --depth=4
 ```
-
-<br/><br/>
-
-## <span style="color:#009688">Options/Flags/Switches  
 
 <br/><br/><br/><br/>
 
@@ -57,18 +49,9 @@ feroxbuster --url http://10.10.11.143 -w ./big.txt --depth=4
 
 # <span style="color:#009688">Tools --*hashcat*--</span> 
 
-## <span style="color:#009688">Special Usage  
-
-
-<br/><br/>
-
 ## <span style="color:#009688">Normal Usage  
 * `hashcat -m 500 'b27179713f7bffc48b9ffd2cf9467620' /usr/share/wordlists/rockyou.txt `  
-
-
-<br/><br/>
-
-## <span style="color:#009688">Options/Flags/Switches  
+ 
 
 <br/><br/><br/><br/> 
 
@@ -92,18 +75,11 @@ john --wordlist=[PATH/TO/WORDLIST] [PRIVATE KEY FILE]
 
 * We can use john the ripper to crack shadow file password by combining passwd and shadow first `unshadow /etc/passwd /etc/shadow > password.txt`.
 * Then we just write `john password.txt`.
-<br/><br/>
 
-## <span style="color:#009688">Options/Flags/Switches  
 
 <br/><br/><br/><br/>  
 
 # <span style="color:#009688">Tools --*dirSearch*--</span> 
-
-## <span style="color:#009688">Special Usage  
-
-
-<br/><br/>
 
 ## <span style="color:#009688">Normal Usage  
  
@@ -116,9 +92,24 @@ john --wordlist=[PATH/TO/WORDLIST] [PRIVATE KEY FILE]
   python3 dirsearch.py -u [URL] -e [EXTENSIONS]
   ```  
 
-<br/><br/>
-
-
-## <span style="color:#009688">Options/Flags/Switches  
-
 <br/><br/><br/><br/>  
+
+
+# <span style="color:#009688">Tools --*BruteX*--</span> 
+
+## <span style="color:#009688"> A Brief Description
+
+* Can be used to bruteforce passwords.
+* Check out the code on Github through <a href="https://github.com/1N3/BruteX">this link</a>
+
+<br/><br/><br/><br/> 
+
+
+# <span style="color:#009688">Tools --*XBruteForcer*--</span> 
+
+## <span style="color:#009688"> A Brief Description
+
+* To bruteforce certain Content management systems. Taken from the official github page "Brute Force Tool 🔓 WordPress , Joomla , DruPal , OpenCart , Magento".
+* Check out the github page <a href="https://github.com/Moham3dRiahi/XBruteForcer">here</a> .
+
+<br/><br/><br/><br/> 
