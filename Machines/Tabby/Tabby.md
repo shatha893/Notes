@@ -106,28 +106,39 @@ Apache Tomcat < 9.0.1 (Beta) / < 8.5.23 / < 8.0.47 / < 7.0.8 - JSP Upload Bypass
 * They say that credentials are usually stored on tomcat config files.  
 * I must be able to open some file from the tomcat service in the port 80 service through the LFI vulnerability and this way I can get something. A credential or anything.
 
+<br/><br/>  
+
+
+# <span style="color:#FF5050">Machine #21 Tabby</span>  
+
+
+## <span style="color:#FF5050">Checklist 🤓   
+
+- [ ] LFI
+- [ ] Maybe I can access data through this path somehow `/var/lib/tomcat9/webapps/ROOT/index.html`
+
 <br/><br/>
 
 
-
-## How Did I Solve the Machine 
-
-   <img src="https://images.lifesizecustomcutouts.com/image/cache/catalog/febProds21/SP000081-500x500.png" width=200 height=200>   
+## <span style="color:#FF5050">What Do We Have? 🤔🤔 
 
 
-     
-
-## Where I Got Stuck?  
-
-   
-
-## What Did I learn from this Machine?  
+<br/><br/>
 
 
+## <span style="color:#FF5050">Random Notes👀  
+
+<br/><br/>
+
+## <span style="color:#FF5050">How Did I Own This Shit 😎🥳 
 
 
-## Writeups   
+<br/><br/>
+
+## <span style="color:#FF5050">Writeups ✍🏽📓   
+
+
+<br/><br/> 
   
 
 
-<!-- tagsss -->
