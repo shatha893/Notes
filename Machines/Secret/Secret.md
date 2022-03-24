@@ -5,8 +5,10 @@
 
 - [ ] Maybe I could find out what to put in the api url after I comb the website for more stuff.
 - [ ] Check the zip file. What does it contain the source code of the authentication api functionality?
-- [ ] The search could be vulnerable to SQL Injection.
-- [ ] The ppp port (What can I do with it?).
+- [x] ~~The search could be vulnerable to SQL Injection.~~
+- [ ] The ppp port (What can I do with it?). Turns out it's not ppp it's the port where the api is working.
+- [ ] The credentials in the documentation could be real.
+- [ ] Check the admin creds.
 <br/><br/>
 
 
@@ -20,6 +22,7 @@
 
 
 ## <span style="color:#FF5050">Random Notes👀  
+* Damn I get the title of the website now "DUMBDocs" it means the documentation is absolutely stupid which could indicate that the credentials in the documentation are real. So the 
 
 <br/><br/>
 
