@@ -9,6 +9,9 @@
 - [ ] The ppp port (What can I do with it?). Turns out it's not ppp it's the port where the api is working.
 - [ ] The credentials in the documentation could be real.
 - [ ] Check the admin creds.
+- [ ] Try to imitate the jwt in the documentation.
+- [x] Check if there are any nginx vulnerabilities for 1.18.0.
+- [ ] 
 <br/><br/>
 
 
@@ -23,6 +26,15 @@
 
 ## <span style="color:#FF5050">Random Notes👀  
 * Damn I get the title of the website now "DUMBDocs" it means the documentation is absolutely stupid which could indicate that the credentials in the documentation are real. So the 
+
+* The payload  
+```json
+{
+    "_id": "6114654d77f9a54e00f05777",
+    "name": "theadmin",
+    "email": "root@dasith.works"
+}
+```
 
 <br/><br/>
 
