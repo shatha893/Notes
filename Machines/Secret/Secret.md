@@ -24,6 +24,11 @@
 ## <span style="color:#FF5050">Random Notes👀  
 * Damn I get the title of the website now "DUMBDocs" it means the documentation is absolutely stupid which could indicate that the credentials in the documentation are real. So the 
 
+* I found this while researching apis  
+  <blockquote>
+  API locations may be discovered through many means including analysing JavaScript files, analysing exposed source code, observing host names
+  </blockquote>
+* That's exactly what "I have an exposed source code".
 <br/><br/>
 
 ## <span style="color:#FF5050">How Did I Own This Shit 😎🥳 
