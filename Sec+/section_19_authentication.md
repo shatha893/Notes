@@ -192,4 +192,4 @@ It's a standardized framework used for port-based authentication on wired and wi
     * Credential exposure (could include hardcoded credentials into the application or using weak encryptionor sending things accross the network in plain text).  
     * Session Hijacking (is when using session keys that aren't strong and are really easy to guess).
 
-* POS Terminal (Point Of Sale Terminal)
+* POS Terminal (Point Of Sale Terminal)  
