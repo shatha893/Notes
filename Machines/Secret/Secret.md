@@ -8,12 +8,13 @@
 - [x] ~~The search could be vulnerable to SQL Injection.~~
 - [x] The ppp port (What can I do with it?). Turns out it's not ppp it's the port where the api is working.
 - [x] The credentials in the documentation could be real. The names are but the password is not.
-- [ ] Check the admin creds.
-- [ ] Try to imitate the jwt in the documentation.
+- [ ] ~~Check the admin creds~~.
+- [x] Try to imitate the jwt in the documentation.
 - [x] Check if there are any nginx vulnerabilities for 1.18.0.
-- [ ] Maybe I can get to "theadmin" by trying to create a new user with this name
-- [ ] Maybe I have to find theadmin's password somewhere
+- [ ] ~Maybe I can get to "theadmin" by trying to create a new user with this name~
+- [x] Maybe I have to find theadmin's password somewhere
 - [ ] Maybe use the `/download` functionality to do something.
+- [ ] Analyze the source code more and in a more effecient way I think it should be my way in whether it was the logs dir or something else.
 <br/><br/>
 
 
