@@ -50,7 +50,7 @@ feroxbuster --url http://10.10.11.143 -w ./big.txt --depth=4
 # <span style="color:#009688">Tools --*hashcat*--</span> 
 
 ## <span style="color:#009688">Normal Usage  
-* `hashcat -m 500 'b27179713f7bffc48b9ffd2cf9467620' /usr/share/wordlists/rockyou.txt `  
+* `hashcat -m 100 '964430b4cdd199af19b986eaf2193b21f32542d0' /usr/share/wordlists/rockyou.txt `  
  
 
 <br/><br/><br/><br/> 
@@ -112,4 +112,10 @@ john --wordlist=[PATH/TO/WORDLIST] [PRIVATE KEY FILE]
 * To bruteforce certain Content management systems. Taken from the official github page "Brute Force Tool 🔓 WordPress , Joomla , DruPal , OpenCart , Magento".
 * Check out the github page <a href="https://github.com/Moham3dRiahi/XBruteForcer">here</a> .
 
-<br/><br/><br/><br/> 
+<br/><br/><br/><br/>  
+
+
+
+hydra -l <username> -P <password list> <Target hostname> <service module> <post request parameters>[/code]
+
+hydra -L ./wordlist -P /usr/share/wordlists/rockyou.txt 138.68.180.98:31314 http-post-form "/login:username=^USER^&password=^PASS^:S=964430b4cdd199af19b986eaf2193b21f32542d0" -vV -f
