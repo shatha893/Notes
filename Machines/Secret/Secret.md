@@ -8,11 +8,11 @@
 - [x] ~~The search could be vulnerable to SQL Injection.~~
 - [x] The ppp port (What can I do with it?). Turns out it's not ppp it's the port where the api is working.
 - [x] The credentials in the documentation could be real. The names are but the password is not.
-- [ ] Check the admin creds.
-- [ ] Try to imitate the jwt in the documentation.
+- [ ] ~~Check the admin creds~~.
+- [x] Try to imitate the jwt in the documentation.
 - [x] Check if there are any nginx vulnerabilities for 1.18.0.
-- [ ] Maybe I can get to "theadmin" by trying to create a new user with this name
-- [ ] Maybe I have to find theadmin's password somewhere
+- [ ] ~Maybe I can get to "theadmin" by trying to create a new user with this name~
+- [x] Maybe I have to find theadmin's password somewhere
 - [ ] Maybe use the `/download` functionality to do something.
 - [x] NoSQL Injection (The string validation using Joi is not helping)
 - [x] None algorithm JWT.
@@ -45,6 +45,7 @@
   - [ ] ~~Using `decode()` instead of `verify`.~~   
   - [ ] ~~Trying to use `none` algorithm ( It's not allowed because for it to be allowed I have to put the second parameter or maybe the third as `"algorithms":["none","HMAC256"]` but that's not the case because I the parameter does not exist which means it's the default and the default is "HMAC256" on it's own).~~ 
   - [ ] ~~Trying to use the RSA (Asymmetric Algo) instead of HMAC but that won't work too because for the RSA to work I have to replace the secret key with the public key and I don't have either public key or the ability to replacet the key with anything.~~
+- [ ] Analyze the source code more and in a more effecient way I think it should be my way in whether it was the logs dir or something else.
 <br/><br/>
 
 
@@ -62,6 +63,11 @@
 ## <span style="color:#FF5050">Random Notes👀  
 * Damn I get the title of the website now "DUMBDocs" it means the documentation is absolutely stupid which could indicate that the credentials in the documentation are real. So the 
 
+* I found this while researching apis  
+  <blockquote>
+  API locations may be discovered through many means including analysing JavaScript files, analysing exposed source code, observing host names
+  </blockquote>
+* That's exactly what "I have an exposed source code".
 * The payload  
 ```json
 {
