@@ -85,6 +85,16 @@
 
 ## <span style="color:#FF5050">How Did I Own This Shit 😎🥳 
 
+1. Downloaded the source code of the Authentication API.
+2. Looked through the website for a while.
+3. Looked through the code for a little too long while.
+4. Turns out it's the `.git` folder that was maybe the only file that I did not look into other than `node_modules` which is definitly not worth looking into.
+5. So while searching the `objects` directory it had a bunch of objects that when I unzipped them I found data on the previous commits
+6. Given that a commit in the `logs` directory had something that said `I removed .env file for security reasons` it meant that the `.env` file existed at some point and that it might exist in the .git timeline.
+7. It did. And sure as hell it contained the `TOKEN_SECRET` that is being used to sign the jwt.
+8. I found that after falling into the rabbit holes of jwt attacks and NoSQL Injection.
+9. The root was the pkexec polkit's CVE which gives root instantanuously after compiling the c code.
+10. The writeup mentions another way of privesc but I'm not sure I totally understood what it's talking about.
 
 <br/><br/>
 
