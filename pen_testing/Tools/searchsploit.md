@@ -1,4 +1,6 @@
-# Searchsploit 
+# <span style="color:#009688">Tools --*Searchsploit*--</span> 
+
+## <span style="color:#009688"> Some Notes on the Matter    
 
 * It's a tool that checks exploitDB for exploits on different pieces of software.
 
@@ -10,18 +12,12 @@
 * `/usr/share/exploitdb/exploits`
 * ExploitDB's exploits are saved in this path.  
 
+<br/><br/>
 
-
-
-## Options/Flags/Switches  
+## <span style="color:#009688">Options/Flags/Switches  
 
 ### Option `-u`  
 * It updates searchsploit.  
 * We use this option because sometimes `searchsploit` doesn't show us the latest exploits if not updated.
 
-
-
-
-
-
-
+<br/><br/>
