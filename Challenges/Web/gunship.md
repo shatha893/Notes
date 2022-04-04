@@ -27,7 +27,7 @@
   }
   ```
 
-  ```
+  ```js
   //pug
   "__proto__.block": {
           "type": "Text", 
@@ -53,7 +53,6 @@
 
 ## <span style="color:[COLOR]">How Did I Solve the Challenge 😎🥳 
 
-
 <br/><br/>
 
 
@@ -61,10 +60,10 @@
 
 
 
-## <span style="color:[COLOR]">What Did I learn from this Machine?👀  
+<!-- ## <span style="color:[COLOR]">What Did I learn from this Machine?👀  
 
 
-<br/><br/>
+<br/><br/> -->
 
 
 
