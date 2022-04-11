@@ -66,5 +66,8 @@ curl  http://admin:admin@<SERVER_IP>:<PORT>/
 * To follow the redirection after a login.
 
 ### `-b` option  
-* To add a cookie to the request
+* To add a cookie to the request  
+
+
+I found out that the -K option for curl allows me to put a configuration file to put the rest of the options in it. But I'm still not sure how can I exploit this.
 <br/><br/>
