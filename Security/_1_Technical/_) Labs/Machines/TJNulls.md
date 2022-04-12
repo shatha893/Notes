@@ -1,6 +1,6 @@
 | **#**  | _HTB Machine (Linux)_ |
 |--------|----------------|
-| **1**  | _Lame_         |
+| <span style="color:#33CC33">**1**  | <span style="color:#33CC33">_Lame_         |
 | **2**  | _Brainfuck_    |
 | **3**  | _Shocker_      |
 | **4**  | _Bashed_       |

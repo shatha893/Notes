@@ -1,44 +1,22 @@
-* Services available
-```
-PORT 	STATE SERVICE
-22/tcp   open  ssh
-80/tcp   open  http
-8080/tcp open  http-proxy
-```
 
-* Tried a directory that doesn't exist so that I can get the apache version its `2.4.41`.
-* The Apache Tomcat vesion is `9` I think. 
-
-* Grabbed the banner of the `p8080` service: 
-```
-PORT 	STATE SERVICE VERSION
-8080/tcp open  http	Apache Tomcat
-```  
-* Searchsploited the http tomcat with the apache version  
-```
-Apache Tomcat < 5.5.17 - Remote Directory Listing 
-Apache Tomcat < 6.0.18 - 'utf8' Directory Traversal  
-Apache Tomcat < 6.0.18 - 'utf8' Directory Traversal (PoC)
-Apache Tomcat < 9.0.1 (Beta) / < 8.5.23 / < 8.0.47 / < 7.0.8 - JSP Upload Bypass / Remote Code Execution (1) 
-Apache Tomcat < 9.0.1 (Beta) / < 8.5.23 / < 8.0.47 / < 7.0.8 - JSP Upload Bypass / Remote Code Execution (2)
-```  
 
 * I'm gonna try with the first one see if the code is readable to me.
 * It's simple but not working :(
 * It's not working because I'm looking in the wrong direction and the tomcat version is 9 not 2 which leaves me with no exploits on exploit-db.
-* Found an exploit that affects tomcat-catalina version 9.0.31 is affected.
+* Found an exploit that affects tomcat-catalina version 9.0.31 is affected ( Needs Authentication ).  
+
 * found these for the tomcat service and found some stuff in the examples directory but no luck with anything so far 
 ```
 /examples        	(Status: 302) [Size: 0] [--> /examples/]
 //examples/jsp/index.html (Status: 200) [Size: 14245]    	 
 //examples/jsp/snp/snoop.jsp.html (Status: 200) [Size: 2318]  
 //examples/jsp/snp/snoop.jsp (Status: 200) [Size: 581]   	 
-//examples/servlets/index.html (Status: 200) [Siz
+//examples/servlets/index.html (Status: 200) 
 ```
 
 
 * Found this vulnerability. Might be the one but it seems too new (https://www.sangfor.com/en/info-center/blog-center/cyber-security/apache-tomcat-deserialization-remote-code-execution-vulnerability) IRRELEVANT
-* Try and look into this one or any other expliots for the apache version because it's quiet old (https://www.virsec.com/research-lab/cve-2020-11984-apache-http-server-2-4-32-to-2-4-44-mod_proxy_uwsgi-info-disclosure-and-possible-rce)
+* Try and look into this one or any other exploits for the apache version because it's quiet old (https://www.virsec.com/research-lab/cve-2020-11984-apache-http-server-2-4-32-to-2-4-44-mod_proxy_uwsgi-info-disclosure-and-possible-rce)
 
 
 # Machine #14 Tabby   
@@ -53,7 +31,7 @@ Apache Tomcat < 9.0.1 (Beta) / < 8.5.23 / < 8.0.47 / < 7.0.8 - JSP Upload Bypass
   PORT     STATE SERVICE
   22/tcp   open  ssh
   80/tcp   open  http
-  8080/tcp open  http-proxy
+  8080/tcp open  http	Apache Tomcat
   ```
 
 * Full scan gives same results as the 1000 ports nmap scan.   
@@ -109,24 +87,28 @@ Apache Tomcat < 9.0.1 (Beta) / < 8.5.23 / < 8.0.47 / < 7.0.8 - JSP Upload Bypass
 <br/><br/>  
 
 
-# <span style="color:#FF5050">Machine #21 Tabby</span>  
+# <span style="color:#FF5050">Machine # Tabby</span>  
 
 
 ## <span style="color:#FF5050">Checklist 🤓   
 
-- [ ] LFI
-- [ ] Maybe I can access data through this path somehow `/var/lib/tomcat9/webapps/ROOT/index.html`
+- [x] LFI
+- [ ] ~~Maybe I can access data through this path somehow `/var/lib/tomcat9/webapps/ROOT/index.html`~~
+- [ ] Scower the RUNNING.txt file for something.
 
 <br/><br/>
 
 
 ## <span style="color:#FF5050">What Do We Have? 🤔🤔 
 
+* A `http://10.10.10.194:8080/manager/html` manager page that prompts me for a username and a password (Tried the defaults and they didn't work).
 
 <br/><br/>
 
 
 ## <span style="color:#FF5050">Random Notes👀  
+* PHP is being used in the backend.  
+* So LFI gives me access to files, let's call it, outside of the sandboxed environment but it does not allow me to read files I don't have privilege to read. So what am I supposed to do with it?
 
 <br/><br/>
 
@@ -140,5 +122,4 @@ Apache Tomcat < 9.0.1 (Beta) / < 8.5.23 / < 8.0.47 / < 7.0.8 - JSP Upload Bypass
 
 <br/><br/> 
   
-
 
