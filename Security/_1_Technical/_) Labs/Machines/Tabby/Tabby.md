@@ -95,6 +95,9 @@
 - [x] LFI
 - [ ] ~~Maybe I can access data through this path somehow `/var/lib/tomcat9/webapps/ROOT/index.html`~~
 - [ ] Scower the RUNNING.txt file for something.
+- [ ] Maybe I can access data through this path somehow `/var/lib/tomcat9/webapps/ROOT/index.html`
+- [x] Try default credentials for `/html/manager`.
+- [ ] Bruteforce the `/html/manager` login credentials.
 
 <br/><br/>
 
@@ -102,6 +105,15 @@
 ## <span style="color:#FF5050">What Do We Have? 🤔🤔 
 
 * A `http://10.10.10.194:8080/manager/html` manager page that prompts me for a username and a password (Tried the defaults and they didn't work).
+* Default credentials that could be the ones  
+```
+admin:admin
+tomcat:tomcat
+admin:<NOTHING>
+admin:s3cr3t
+tomcat:s3cr3t
+admin:tomcat
+```
 
 <br/><br/>
 

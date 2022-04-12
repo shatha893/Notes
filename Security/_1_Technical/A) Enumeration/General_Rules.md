@@ -1,0 +1,1 @@
+* Always do a udp nmap scan just like the tcp and the full tcp.
