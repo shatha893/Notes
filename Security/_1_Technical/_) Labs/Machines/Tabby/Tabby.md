@@ -115,7 +115,7 @@ Apache Tomcat < 9.0.1 (Beta) / < 8.5.23 / < 8.0.47 / < 7.0.8 - JSP Upload Bypass
 ## <span style="color:#FF5050">Checklist 🤓   
 
 - [ ] Maybe I can access data through this path somehow `/var/lib/tomcat9/webapps/ROOT/index.html`
-- [x] Try default credentials for `/html/manager`.
+- [x] Try default credentials for `/html/manager` and `/html/host-manager`.
 - [ ] Bruteforce the `/html/manager` login credentials.
 
 <br/><br/>
