@@ -45,6 +45,15 @@ feroxbuster --url http://10.10.11.143 -w ./big.txt --depth=4
 ### `-s` option  
 * To whitelist http codes
 
+### `--exclude-length [LENGTH]` option  
+<blockquote>
+--exclude-length 4561 is the option you are looking for under the dir subcommand. There isn't a short code option for now.
+
+cmdDir.Flags().IntSlice("exclude-length", []int{}, "exclude the following content length (completely ignores the status). Supply multiple times to exclude multiple sizes.")
+
+It worked for me on the most recent update. Please reply back if this resolves the problem.
+</blockquote>
+
 <br/><br/><br/><br/>   
 
 # <span style="color:#009688">Tools --*hashcat*--</span> 
