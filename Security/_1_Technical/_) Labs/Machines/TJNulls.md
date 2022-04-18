@@ -32,7 +32,7 @@
 | **30** | _Magic_        |
 | **31** | _Admirer_      |
 | **32** | _Blunder_      |
-| **33** | _Tabby_        |
+| <span style="color:#33CC33">**33** | <span style="color:#33CC33">_Tabby_        |
 | **34** | _Doctor_       |
 | **35** | _SneakyMailer_ |
 | **36** | _Passage_      |

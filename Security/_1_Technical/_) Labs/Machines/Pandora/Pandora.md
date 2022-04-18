@@ -78,6 +78,12 @@ INSERT INTO `tusuario` (`id_user`, `fullname`, `firstname`, `lastname`, `middlen
 
 ## <span style="color:[COLOR]">Writeups ✍🏽📓   
 
+### Brainful Writeup  
+
+* In the writeup they did the priv esc as follows.
+* There was an internal web service that clearly returned a login page but what's the point of it? I can't keep curling it and dealing with it with curl so what do I do?
+* What they did in the writeup is that they tunnelled the ssh through a proxy into the browser which gave me the ability to open up the ssh into the browser and thus being able to open the local web service. How
+* Check out the <a href="https://brainful.blog/2022/01/19/enumeration-2/">link</a> for more info and please TRY IT OUT!
 
 <br/><br/>
 
