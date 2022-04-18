@@ -1,0 +1,2 @@
+* If we have php and lfi we can do log poisoning easily with Burp but we will need to be able to read the file `/var/log/apache2/access.log` which has the user agent inside of it which means if we had the ability to inject code into the user agent we can maybe poison the file.
+* Check <a href="https://dheerajdeshmukh.medium.com/get-reverse-shell-through-log-poisoning-with-the-vulnerability-of-lfi-local-file-inclusion-e504e2d41f69">this link</a> for more info ( or to write more info later )

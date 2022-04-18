@@ -74,8 +74,12 @@ There are two common types of privilege escalation: vertical and horizontal. Ver
 
 	# In Kali 
 	stty raw -echo  
+  stty size 
 	reset
 	fg
+
+  #export SHELL=bash
+  #stty rows 31 columns 134
 
 	# In reverse shell
 	
