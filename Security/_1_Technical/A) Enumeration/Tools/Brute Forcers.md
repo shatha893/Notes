@@ -127,16 +127,41 @@ john --wordlist=[PATH/TO/WORDLIST] [PRIVATE KEY FILE]
 
 <br/><br/><br/><br/>  
 
+# <span style="color:#009688">Tools --*Hydra*--</span> 
 
+## General Format  
 
-hydra -l <username> -P <password list> <Target hostname> <service module> <post request parameters>[/code]
+  ```
+  hydra -l <username> -P <password list> <Target hostname> <service module> <post request parameters>[/code]
+  ```
+## To Bruteforce a Hash  
 
-hydra -L ./wordlist -P /usr/share/wordlists/rockyou.txt 138.68.180.98:31314 http-post-form "/login:username=^USER^&password=^PASS^:S=964430b4cdd199af19b986eaf2193b21f32542d0" -vV -f  
+  ```
+  hydra -L ./wordlist -P /usr/share/wordlists/rockyou.txt 138.68.180.98:31314 http-post-form "/login:username=^USER^&password=^PASS^:S=964430b4cdd199af19b986eaf2193b21f32542d0" -vV -f  
+  ```
 
-* To bruteforce a popup login  
-```
-hydra -L usernames.txt -P passwords.txt http-post-form "page:username=^USER^&password=^PASS^&Login=Login:Login Failed"
-```
+## To bruteforce a popup login  
+
+  ```
+  hydra -L usernames.txt -P passwords.txt http-post-form "page:username=^USER^&password=^PASS^&Login=Login:Login Failed"
+  ```
 * You are most likely going to replace several of these parameters to fit your situation. Replace username with the username that you know already exists. Replace passwords.txt with the file path to your password collection. Replace page with the current page. For example, for example.com/login.php, you would use login.php as the page parameter.  
 
 * To brute force basic http auth with hydra we can do the following
+
+<br/><br/><br/><br/> 
+
+# <span style="color:#009688">Tools --*fcrackzip*--</span> 
+
+## Using the Dictionary Mode  
+  ```
+  fcrackzip -v -u -D -p /usr/share/wordlists/rockyou.txt backup.zip
+  ```  
+
+## Using the Bruteforce Mode  
+
+  ```
+  fcrackzip -v -u -b -p /usr/share/wordlists/rockyou.txt backup.zip
+  ``` 
+
+<br/><br/><br/><br/>

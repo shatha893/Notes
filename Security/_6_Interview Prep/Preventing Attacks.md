@@ -18,4 +18,5 @@
 * Stored Procedures   
 * Escaping  
 * Avoiding administrative privileges  
-* Web Application Firewall
+* Web Application Firewall  
+

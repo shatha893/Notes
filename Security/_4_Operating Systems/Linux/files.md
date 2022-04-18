@@ -269,6 +269,26 @@ Host  [ANY NAME]
 
 
 ## Shadow file and Passwd file  
-* We can combine these two files into one using `unshadow /etc/passwd /etc/shadow > password.txt`
+* We can combine these two files into one using `unshadow /etc/passwd /etc/shadow > password.txt`   
+
+
+
+<br/><br/>
+
+## File Transfer  
+
+### Turn file into base64 Representation   
+
+* Convert file into base64 with this code  
+
+  ```
+  base64 -w0 16162020_backup.zip
+  ```  
+
+* Then convert it back on the reciever with this code   
+
+  ```
+  echo "UEsDBAoAAAAAAIUDf0gAAAAAAAAAAAAAAAA<SNIP>" | base64 -d -w0 > backup.zip
+  ```
 
 <!--@nested-tags:general_knowledge/files,pen_testing/files-->
