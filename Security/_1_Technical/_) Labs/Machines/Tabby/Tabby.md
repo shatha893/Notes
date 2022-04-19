@@ -5,8 +5,13 @@
 
 - [x] LFI
 - [ ] ~~Maybe I can access data through this path somehow `/var/lib/tomcat9/webapps/ROOT/index.html`~~
-- [ ] Scower the RUNNING.txt file for something.
+- [x] Scower the RUNNING.txt file for something.
 - [ ] Maybe I can access data through this path somehow `/var/lib/tomcat9/webapps/ROOT/index.html`
+- [x] Try default credentials for `/html/manager`.
+- [ ] Bruteforce the `/html/manager` login credentials.  
+- [ ] Improper Authentication (Doesn't seem to have an available exploit) -- The version seems to be vulnerable.
+- [x] Deserialization of untrusted data (the persistence manager thing). To replace the cookie with a path
+- [x] Log Poisoning
 - [x] Try default credentials for `/html/manager` and `/html/host-manager`.
 - [ ] Bruteforce the `/html/manager` login credentials.
 
@@ -17,21 +22,43 @@
 
 * A `http://10.10.10.194:8080/manager/html` manager page that prompts me for a username and a password (Tried the defaults and they didn't work).
 * Default credentials that could be the ones  
-  ```
-  admin:admin
-  tomcat:tomcat
-  admin:<NOTHING>
-  admin:s3cr3t
-  tomcat:s3cr3t
-  admin:tomcat
-  ```
-<br/><br/> 
+```
+admin:admin
+tomcat:tomcat
+admin:<NOTHING>
+admin:s3cr3t
+tomcat:s3cr3t
+admin:tomcat
+```  
+
+* My theory so far is that I find the credentials of the tomcat manager somehow (because it's not BRUTEFORCE) with the lfi then I can use the war exploit.
+* I looked everywhere for a Tomcat exploit that could work but there isn't anything for the specific version and the specific circumstances. I found the Persistence Manager but that doesn't work. I found another couple of ones but the version I have doesn't seem to be vulnerable to them. So what now?
+* I looked into apache exploits too but I didn't find anything there.
+* Now I'm thinking maybe the fact that the website is a hosting service maybe this could mean something but I researched Tomcat and hosting and nothing came out of that.
+* The LFI doesn't seem to give me anything. I found out that I could view the page's `news.php`'s code but also what the hell is the point of this? The code doesn't contain anything that I could exploit to go further in attacking the system.  
+* After looking at the writeup's first part it turned out that I had to look for the right path of `tomcat-users.xml` it's not that I don't have authorization to read it, no, it seems that I was providing the wrong path.
+* The `tomcat-users.xml`'s path turned out to be `/usr/share/tomcat9/etc/tomcat-users.xml` after thoroughly looking and googling and trying paths that did not work.
+* Why should I have persued this file specifically because I clearly needed to get authenticated and the unauthorized page showed me that the creds can be found in this file.
+* The creds `<user username="tomcat" password="$3cureP4s5w0rd123!" roles="admin-gui,manager-script"/>`
+
+```
+fcrackzip -b -v -u ash_backup.zip -bvu 
+``` 
+
+
+FOUND ASH's password `admin@it` he used the same password for the zipped file that he used for his user on the os.
+/snap/bin/lxc image import ./alpine.tar.gz --alias myimage
+
+<br/><br/>
 
 
 ## <span style="color:#FF5050">Random Notes👀
   
 * PHP is being used in the backend.  
 * So LFI gives me access to files, let's call it, outside of the sandboxed environment but it does not allow me to read files I don't have privilege to read. So what am I supposed to do with it?
+* The `/files` directory returns code `403` and because of that if I was able to upload a file in the tomcat maybe I'll be able to execute it through this directory if the file was uploaded in here.
+* The `http-proxy-open` thing on nmap is a bit weird maybe I should look more into it.
+<br/><br/>
 * I will use the manual exploit to try and understand it as much as I can (The upload war thing).
 * It seems that I can't upload a .war file unless I have the right privileges which can be acquired if I have the roles admin, manager or manager-script and according to the `tomcat-users.xml` file I have the `manager-script` role.  
 * The path was right infront of me in the HackTricks page in the RCE section. What lesson did I learn? Read articles properly and don't skip stuff.

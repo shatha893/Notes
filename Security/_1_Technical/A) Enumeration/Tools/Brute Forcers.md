@@ -52,6 +52,10 @@ feroxbuster --url http://10.10.11.143 -w ./big.txt --depth=4
 cmdDir.Flags().IntSlice("exclude-length", []int{}, "exclude the following content length (completely ignores the status). Supply multiple times to exclude multiple sizes.")
 
 It worked for me on the most recent update. Please reply back if this resolves the problem.
+
+### `-x` option  
+* Extensions to put when using this option `txt,php,csv,md,json,js,html,py,sh`.
+
 </blockquote>
 
 <br/><br/><br/><br/>   
