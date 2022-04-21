@@ -41,7 +41,7 @@
 | **39** | _Ready_        |
 | **40** | _Delivery_     |
 | **41** | _Ophiuchi_     |
-| **42** | _ScriptKiddie_ |
+|<span style="color:#33CC33">**42** | <span style="color:#33CC33">_ScriptKiddie_ |
 | **43** | _Armageddon_   |
 | **44** | _Knife_        |
 | **45** | _Pit_          |

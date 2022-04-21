@@ -11,4 +11,7 @@ document.getElementById("message").innerHTML = message;
 * This form tag looks weird  
 ```
 <form class="form-inline my-2 my-lg-0" action="javascript:;" onsubmit="search(this)">
-```
+```  
+
+
+- [ ] I should try sql injection
