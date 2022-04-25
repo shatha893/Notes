@@ -45,6 +45,9 @@ feroxbuster --url http://10.10.11.143 -w ./big.txt --depth=4
 ### `-s` option  
 * To whitelist http codes
 
+### `-m` option  
+* To choose method. Either POST or GET.
+
 ### `--exclude-length [LENGTH]` option  
 <blockquote>
 --exclude-length 4561 is the option you are looking for under the dir subcommand. There isn't a short code option for now.

@@ -12,12 +12,12 @@
 
   * On the recieving end  
     ```console
-    nc -l -p 1234 > out.file
+    nc -l -p 4445 > out.file
     ```  
 
   * On the sending end  
     ```console
-    nc -w 3 [destination] 1234 < out.file
+    nc -w 3 [destination] 4445 < out.file
     ```  
 
 
