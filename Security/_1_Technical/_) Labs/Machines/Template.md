@@ -1,15 +1,26 @@
 # <span style="color:[COLOR]">Machine #[NUMBER] [NAME]</span>  
 
 
-## <span style="color:[COLOR]">Notes During Working on the Machine 🧐🤓   
+
+## <span style="color:[COLOR]">Checklist 🤓   
+
 
 
 <br/><br/>
 
 
+## <span style="color:[COLOR]">What Do We Have? 🤔🤔 
 
-## <span style="color:[COLOR]">How Did I Solve the Machine 😎🥳 
 
+<br/><br/>
+
+
+## <span style="color:[COLOR]">Random Notes👀
+
+<br/><br/>  
+
+
+## <span style="color:[COLOR]">How Did I Own This Shit 😎🥳  
 
 <br/><br/>
 
@@ -33,8 +44,5 @@
 
 
 <br/><br/>
-
-
-
 
 <!-- @nested-tags:EXAMPLE/OF/NESTED/TAGS-->

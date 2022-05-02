@@ -20,3 +20,4 @@ The moment her cousin said "This is where the scene happened" this is where alic
 Or I had another theory where Alicia and Kathy are the same person and also Theo was the one in therapy
 
 My mind kept going to the explanation that theoy was the one who's insane but until the last 100 pages when I connected the dots and everything started to make sense.
+
