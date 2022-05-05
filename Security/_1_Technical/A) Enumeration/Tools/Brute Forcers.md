@@ -32,9 +32,13 @@ feroxbuster --url http://10.10.11.143 -w ./big.txt --depth=4
 * Try using the dirbuster wordlists (They seem pretty nice).  
 
 
+
 <br/><br/>
 
 ## <span style="color:#009688">Options/Flags/Switches  
+
+### `-k` option  
+* To evade certificate check when gobustering an `https` service.
 
 ### `-o` option  
 * Can be used to write the output of the command into a file.  
