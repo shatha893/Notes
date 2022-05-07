@@ -37,7 +37,10 @@ uploads.friendzone.red
 ```
 bmOKpuihQ 516517768779 T4 pTl4yE Z
 nc                        
-```
+```  
+
+* Found an upload page in the domain `uploads.friendzone.red`.
+* The subdomain `administrator1.friendzone.red` also opened up to a login page ( Weird that they weren't working before )
 <br/><br/>
 
 
