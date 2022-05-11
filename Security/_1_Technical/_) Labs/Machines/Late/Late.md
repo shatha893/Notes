@@ -60,4 +60,21 @@ Which means I'm getting somewhere.
 ## <span style="color:#999966">What Did I learn from this Machine?👀  
 
 
-<br/><br/>
+<br/><br/>  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
