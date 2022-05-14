@@ -6,6 +6,7 @@
 - [x] AXFR zone transfer.
 - [ ] ~~Break into the login somehow.~~
   - [ ] ~~Try default credentials (like admin/admin)~~
+- [ ] Bruteforce all the domains just to be sure.
 
 <br/><br/>
 
@@ -18,34 +19,54 @@
 * Found a zone transfer vulnerability which I exploited as follows (This kind of vulnerability could be exploited to gain information)
   * There's a dns service open on the victim so what I did is I added the ip of the machine (victim) to my `/etc/resolv.conf` file (before the nameserver that already existed) which meant that dns domains will be taken from this address now which allowed me to use this command `dig axfr friendzoneportal.red` without specifying the nameserver so that it would use the one in the `resolv.conf` file and this way I got the information I wanted without even bruteforcing for subdomains. The following is what I saw to be useful of the information I got  
   ```
-  admin.friendzoneportal.red
-  files.friendzoneportal.red
-  imports.friendzoneportal.red
-  vpn.friendzoneportal.red
+  admin.friendzoneportal.red //An admin login page that is underconstruction
+  files.friendzoneportal.red //Gave me a 404
+  imports.friendzoneportal.red //Gave me a 404
+  vpn.friendzoneportal.red //Gave me a 404
   ```  
 
 * Got an admin page on this subdomain `admin.friendzoneportal.red` only on the https service the http redirects me to the same page each time.
 * The login image on the admin subdomain is just frustrating. It says the admin page hasn't been developed yet.
 * Found another domain with the name `friendzone.red` when I tried to dig it `dig axfr friendzone.red @friendzoneportal.red` from the certificate of the https service.  
-```
-friendzone.red
-administrator1.friendzone.red
-hr.friendzone.red
-uploads.friendzone.red
-```  
+  ```
+  friendzone.red
+  administrator1.friendzone.red //Gave output
+  hr.friendzone.red // Gave 404
+  uploads.friendzone.red //Gave output
+  ```  
 
-```
-bmOKpuihQ 516517768779 T4 pTl4yE Z
-nc                        
-```  
+  ```
+  bmOKpuihQ516517768779T4pTl4yEZ
+  nc   
+  NJvfXXUCKw 1652546224 vbSfGn577v                     
+  ```  
 
 * Found an upload page in the domain `uploads.friendzone.red`.
-* The subdomain `administrator1.friendzone.red` also opened up to a login page ( Weird that they weren't working before )
+* The subdomain `administrator1.friendzone.red` also opened up to a login page ( Weird that they weren't working before ).
+* Here `https://friendzone.red/js/js/` found this weird message with this base64 value  
+  ```
+  Uzl0WUZXSjZTejE2NTI1NDU1NThod3YwSnpibUx5
+  VzIxMHNvbWJ1ZzE2NTI1NDU4NTlKZFZyalRyaWow
+  bk5ha1pJZUpueDE2NTI1NDU5MTVzbTg5SFdrcUlS
+  
+  dmxkcHh0dW8wRzE2NTI1NDYzNDJhNXU5QmpaSnd3
+  nVcHgfv1Sv1652546413tdP3FUQSpY
+  ```  
+* I found a `/files` directory in this domain `https://uploads.friendzone.red/files/`.
+* Found a `/admin` in the domain `https://friendzone.red` that is empty which is a bit weird.  
+* When gobustering `http://admin.friendzoneportal.red` I found a couple of stuff   
+```
+/fz.jpg               (Status: 200) [Size: 20889]
+/robots.txt           (Status: 200) [Size: 13]   
+/robots.txt           (Status: 200) [Size: 13]   
+/wordpress
+```
 <br/><br/>
 
 
-## <span style="color:#adadff">Random Notes👀
+## <span style="color:#adadff">Random Notes👀  
 
+* I'm thinking maybe the base64 value is actually a file name because when I uploaded a file in the uploads.friendzone.red domain it gave me a date/time value in epoch time.
 <br/><br/>  
 
 
