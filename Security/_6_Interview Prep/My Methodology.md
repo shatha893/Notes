@@ -65,4 +65,54 @@
 * We can leave a backdoor on the system so we can maintain persistence.   
 
 
-* The sql injection scenario
+* The sql injection scenario  
+
+
+My name is Shatha Barqawi 
+I work as a full stack developer hoon at STS 
+I studied computer science fee jam3et el2ameerah sumaya
+I took my university training in Orange but it was lightweight I just discussed a book with my supervisor. Didn't do much practical stuff
+My graduation project was a website to provide students with resources pastpapers, computerized exams and stuff like that
+I was a part of a training in our cyber security club in univesity and that's when I discovered how much I like security especially penetration testing
+the training started small like Linux commands stuff like that but then it finished up with how to hack machines on hack the box
+And from that time you'll always find me working on a machine. Learning new stuff everyday
+
+I finished a udemy course for the security plus examination but I wasn't really planning on taking the exam 
+I just took it to grow my knowledge in security especially that the university degree provided me with so little behad ilmajal
+
+I read books and articles 
+solving machines make me read because I need to understand what I'm doing not just run scripts
+
+I like to write python scripts to automate some of the stuff I usually do but because of work I don't have enough time to continue working on these scripts but I'm hoping if I get this job I will have the time to do so
+
+I love this thing so much. I never realized I will ever love something that could be categorized as work because when you usually hear people talking about work they're so bored and they talk about it like it's something that is somehow a burden but I don't feel like that when I study security stuff
+
+I think a programming background would be good for a security professional 
+
+I study security whenever I have time free 
+Afte work and in holidays because I like it I don't mind filling my free time studying for it  
+
+I've been almost studying security in general for, let's say, a year maybe less  
+
+
+I'm also planning on taking OSCP that's also a reason why I'm persistent with owning machines  
+
+I know Linux well enough but my knowledge of Windows is not as good.
+Because almost all the machines I hacked are Linux based
+
+I know that you first have to do OSINT on the organization I'm trying to test their systems but since there's no osint in machines I solved a couple of osint challenges on htb  
+
+
+
+OWASP Top 10  
+
+1. Broken Access Control
+2. Cryptographic Failures  
+3. Injection
+4. Insecure Design
+5. Security Misconiguration
+6. Vulnerable and Outdated Components
+7. Identification and Authentication Failures
+8. Software and Data Integrity Failures
+9. Security Logging and Monitoring Failures
+10. Server-Side Request Forgery
