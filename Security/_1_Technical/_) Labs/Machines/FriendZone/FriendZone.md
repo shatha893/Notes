@@ -7,6 +7,7 @@
 - [ ] ~~Break into the login somehow.~~
   - [ ] ~~Try default credentials (like admin/admin)~~
 - [ ] Bruteforce all the domains just to be sure.
+- [ ] I will try to login into ftp anonymously or with the admin creds I have into all the subdomains I have.
 
 <br/><br/>
 
@@ -60,13 +61,42 @@
 /robots.txt           (Status: 200) [Size: 13]   
 /robots.txt           (Status: 200) [Size: 13]   
 /wordpress
-```
+```  
+
+* Found this when I executed the command `enum4linux -a 10.10.10.123` `Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none`.
+* Found these too while looking through the same tool output  
+  ```
+  S-1-5-32-544 BUILTIN\Administrators (Local Group)
+  S-1-5-32-545 BUILTIN\Users (Local Group)
+  S-1-5-32-546 BUILTIN\Guests (Local Group)
+  S-1-5-32-547 BUILTIN\Power Users (Local Group)
+  S-1-5-32-548 BUILTIN\Account Operators (Local Group)
+  S-1-5-32-549 BUILTIN\Server Operators (Local Group)
+  S-1-5-32-550 BUILTIN\Print Operators (Local Group)
+  ```  
+* Also found this `S-1-5-21-3651157261-4258463691-276428382-513 FRIENDZONE\None (Domain Group)` and this `S-1-5-21-3651157261-4258463691-276428382-501 FRIENDZONE\nobody (Local User)`.  
+* It seems like there are 3 users  
+  ```
+  [I] Found new SID: S-1-22-1
+  [I] Found new SID: S-1-5-21-3651157261-4258463691-276428382
+  [I] Found new SID: S-1-5-32
+  ```
+  ```
+  S-1-22-1-1000 Unix User\friend (Local User)
+  ```
+  * This seems to be a user `friend`.
+  * When I ran this command `smbmap -H <IP ADDRESS> -R` I found a file inside `general` called `creds.txt` it probably has the admin credentials that I can sign in with.
+  * And indeed I found the admin's creds in the file `admin:WORKWORKHhallelujah@#`
 <br/><br/>
 
 
 ## <span style="color:#adadff">Random Notes👀  
 
-* I'm thinking maybe the base64 value is actually a file name because when I uploaded a file in the uploads.friendzone.red domain it gave me a date/time value in epoch time.
+* I'm thinking maybe the base64 value is actually a file name because when I uploaded a file in the uploads.friendzone.red domain it gave me a date/time value in epoch time.  
+
+* Maybe I have to change my time zone to another one so that I can get something?  
+* If I use one of these usernames `Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none` supposing they're coming from the server and not from the tool itself, I might be able to get more info than running `enum4linux` with a blank username and password. These usernames seem to be from the tool itself.
+* I can `put` a file in the share `Development` as admin. This will allow me to upload a shell. What is left would be to access this shell and execute it.
 <br/><br/>  
 
 
