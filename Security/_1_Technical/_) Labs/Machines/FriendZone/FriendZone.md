@@ -86,7 +86,15 @@
   ```
   * This seems to be a user `friend`.
   * When I ran this command `smbmap -H <IP ADDRESS> -R` I found a file inside `general` called `creds.txt` it probably has the admin credentials that I can sign in with.
-  * And indeed I found the admin's creds in the file `admin:WORKWORKHhallelujah@#`
+  * And indeed I found the admin's creds in the file `admin:WORKWORKHhallelujah@#`.  
+  * Found this in the response on the `friendzone.red/js/js` page  
+    ```
+    Date: Wed, 18 May 2022 07:35:52 GMT
+    Server: Apache/2.4.29 (Ubuntu)
+    Set-Cookie: zonedman=justgotzoned; expires=Wed, 18-May-2022 08:35:52 GMT; Max-Age=3600
+    ```  
+  * What does the header `Date` mean? Plus notice the difference between it and the date on the age of the cookie.
+  * The expiration of the cookie that I found in the browser's cookies section is `2022-05-18T08:30:23.705Z`
 <br/><br/>
 
 
