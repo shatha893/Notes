@@ -95,6 +95,7 @@
     ```  
   * What does the header `Date` mean? Plus notice the difference between it and the date on the age of the cookie.
   * The expiration of the cookie that I found in the browser's cookies section is `2022-05-18T08:30:23.705Z`
+  * By using this command `nmap --script smb-enum-shares.nse -p445 10.10.10.123` I was able to find the path of each of the shares.
 <br/><br/>
 
 
@@ -105,6 +106,8 @@
 * Maybe I have to change my time zone to another one so that I can get something?  
 * If I use one of these usernames `Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none` supposing they're coming from the server and not from the tool itself, I might be able to get more info than running `enum4linux` with a blank username and password. These usernames seem to be from the tool itself.
 * I can `put` a file in the share `Development` as admin. This will allow me to upload a shell. What is left would be to access this shell and execute it.
+* It should've occurred to me that there's a possibility of LFI in both parameters because they both take a file as a value but I was so focused on the timezone thing and the hints and the stuff I read in the forum that I stopped thinking of anything other than the stuff I was reading that didn't help much.  
+* I think the image_id parameter might be the one with the LFI.
 <br/><br/>  
 
 

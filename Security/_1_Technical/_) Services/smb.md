@@ -18,4 +18,8 @@ smbclient \\\\10.129.158.38\\ADMIN$ -U 'administrator'
 * We can use the command `get` inside the smb prompt to download files on our own box. 
 
 
-* Command `smbmap -H <IP ADDRESS> -R` where the `-H` is for host and the `-R` is for recursive. But what is `smbmap` used for.
+* Command `smbmap -H <IP ADDRESS> -R` where the `-H` is for host and the `-R` is for recursive. But what is `smbmap` used for.  
+
+* Samba's configuration file is found in this directory `/etc/samba/smb.conf`.  
+
+* We can enumerate smb with this `nmap` command `nmap --script smb-enum-shares.nse -p445 10.10.10.123`
