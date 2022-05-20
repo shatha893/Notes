@@ -86,7 +86,16 @@
   ```
   * This seems to be a user `friend`.
   * When I ran this command `smbmap -H <IP ADDRESS> -R` I found a file inside `general` called `creds.txt` it probably has the admin credentials that I can sign in with.
-  * And indeed I found the admin's creds in the file `admin:WORKWORKHhallelujah@#`
+  * And indeed I found the admin's creds in the file `admin:WORKWORKHhallelujah@#`.  
+  * Found this in the response on the `friendzone.red/js/js` page  
+    ```
+    Date: Wed, 18 May 2022 07:35:52 GMT
+    Server: Apache/2.4.29 (Ubuntu)
+    Set-Cookie: zonedman=justgotzoned; expires=Wed, 18-May-2022 08:35:52 GMT; Max-Age=3600
+    ```  
+  * What does the header `Date` mean? Plus notice the difference between it and the date on the age of the cookie.
+  * The expiration of the cookie that I found in the browser's cookies section is `2022-05-18T08:30:23.705Z`
+  * By using this command `nmap --script smb-enum-shares.nse -p445 10.10.10.123` I was able to find the path of each of the shares.
 <br/><br/>
 
 
@@ -130,6 +139,8 @@ echo "<center><p>You can't see the content ! , please login !</center></p>";
 }
 ?>
 ```
+* It should've occurred to me that there's a possibility of LFI in both parameters because they both take a file as a value but I was so focused on the timezone thing and the hints and the stuff I read in the forum that I stopped thinking of anything other than the stuff I was reading that didn't help much.  
+* I think the image_id parameter might be the one with the LFI.
 <br/><br/>  
 
 
