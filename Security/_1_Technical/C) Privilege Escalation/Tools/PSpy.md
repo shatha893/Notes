@@ -1,5 +1,6 @@
 ## Pspy   
 
+* You can download `go` through this command `sudo apt install golang-go `.
 * Tutorial on downloading it <a href="https://vk9-sec.com/how-to-enumerate-services-in-use-with-pspy/">Access Here!</a>
 * Not everything in the previous link might work, so here's what I did:  
   * If you get this error  
