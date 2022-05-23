@@ -83,7 +83,7 @@
   ```
   ```
   S-1-22-1-1000 Unix User\friend (Local User)
-  ```
+  ```  
   * This seems to be a user `friend`.
   * When I ran this command `smbmap -H <IP ADDRESS> -R` I found a file inside `general` called `creds.txt` it probably has the admin credentials that I can sign in with.
   * And indeed I found the admin's creds in the file `admin:WORKWORKHhallelujah@#`.  
@@ -107,7 +107,7 @@
 * If I use one of these usernames `Known Usernames .. administrator, guest, krbtgt, domain admins, root, bin, none` supposing they're coming from the server and not from the tool itself, I might be able to get more info than running `enum4linux` with a blank username and password. These usernames seem to be from the tool itself.
 * I can `put` a file in the share `Development` as admin. This will allow me to upload a shell. What is left would be to access this shell and execute it.
 * I found an LFI in the `pagename` parameter but only when using PHP Wrappers I used this line of code `pagename=php://filter/convert.base64-encode/resource=dashboard` which returns the code of the php page I provide to it and thus, I used it to check dashboard's (the current page's code to see how to deal with the parameters). I got this code   
-```php
+```php  
 <?php
 
 //echo "<center><h2>Smart photo script for friendzone corp !</h2></center>";
@@ -138,7 +138,7 @@ if(!isset($_GET["image_id"])){
 echo "<center><p>You can't see the content ! , please login !</center></p>";
 }
 ?>
-```
+```  
 * It should've occurred to me that there's a possibility of LFI in both parameters because they both take a file as a value but I was so focused on the timezone thing and the hints and the stuff I read in the forum that I stopped thinking of anything other than the stuff I was reading that didn't help much.  
 * I think the image_id parameter might be the one with the LFI.
 <br/><br/>  
@@ -165,6 +165,7 @@ echo "<center><p>You can't see the content ! , please login !</center></p>";
 
 
 ## <span style="color:#adadff">Writeups ✍🏽📓   
+
 
 
 <br/><br/>
