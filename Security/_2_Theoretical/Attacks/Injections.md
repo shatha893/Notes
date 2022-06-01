@@ -77,6 +77,13 @@ If the waf blocks “.” and “_": `{{request['application']['\x5f\x5fglobals\
 ### For More Info  
 * If the link is still working check it out it's got nice content. <a href="https://www.onsecurity.io/blog/server-side-template-injection-with-jinja2/">Link!</a>  
 
+<br/> <br/>
+
+## XSS (Cross Site Scripting)   
+* It's like Javascript injection.
+* I just realized that maybe I can inject javascript that made a call to the back-end that was not supposed to happen.
+* That's why the Sammy that exploited a Stored XSS in MySpace was able to add himself as a friend when users visited his profile page that he had the javascript injected in it.x
+
 
 
 
