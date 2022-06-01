@@ -8,6 +8,7 @@
   - [ ] ~~Try default credentials (like admin/admin)~~
 - [ ] Bruteforce all the domains just to be sure.
 - [ ] I will try to login into ftp anonymously or with the admin creds I have into all the subdomains I have.
+- [x] Exim4 vulnerability. Version vulnerable but there's no c compiler on the system
 
 <br/><br/>
 
@@ -96,6 +97,32 @@
   * What does the header `Date` mean? Plus notice the difference between it and the date on the age of the cookie.
   * The expiration of the cookie that I found in the browser's cookies section is `2022-05-18T08:30:23.705Z`
   * By using this command `nmap --script smb-enum-shares.nse -p445 10.10.10.123` I was able to find the path of each of the shares.
+  * Found other creds 
+    ```
+    db_user=friend
+
+    db_pass=Agpyu12!0.213$
+
+    db_name=FZ
+    ```  
+  * A script called `reporter.py` that's in `/opt/server-admin` it contains this code  
+    ```python
+    #!/usr/bin/python
+
+    import os
+
+    to_address = "admin1@friendzone.com"
+    from_address = "admin2@friendzone.com"
+
+    print "[+] Trying to send email to %s"%to_address
+
+    #command = ''' mailsend -to admin2@friendzone.com -from admin1@friendzone.com -ssl -port 465 -auth -smtp smtp.gmail.co-sub scheduled results email +cc +bc -v -user you -pass "PAPAP"'''
+
+    #os.system(command)
+
+    # I need to edit the script later
+    # Sam ~ python developer
+  ```
 <br/><br/>
 
 
@@ -141,6 +168,69 @@ echo "<center><p>You can't see the content ! , please login !</center></p>";
 ```  
 * It should've occurred to me that there's a possibility of LFI in both parameters because they both take a file as a value but I was so focused on the timezone thing and the hints and the stuff I read in the forum that I stopped thinking of anything other than the stuff I was reading that didn't help much.  
 * I think the image_id parameter might be the one with the LFI.
+* I have rwx to this directory and the roots owns it but I'm still not sure how this could be useful `drwxrwx--T  2 root sambashare   4096 Oct  6  2018 usershares`.  
+* This directory `drwx-wx-wt  2 root root 4096 Jan 30  2018 sessions` gave me permission denied when I tried to run the cron that the root is obvioulsy running which is `/usr/lib/php/sessionclean`.  
+
+```bash
+#!/bin/sh -e
+#
+# sessionclean - a script to cleanup stale PHP sessions
+#
+# Copyright 2013-2015 Ondřej Surý <ondrej@sury.org>
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy of
+# this software and associated documentation files (the "Software"), to deal in
+# the Software without restriction, including without limitation the rights to
+# use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+# the Software, and to permit persons to whom the Software is furnished to do so,
+# subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+# FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+# COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+# IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+# CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+SAPIS="apache2:apache2 apache2filter:apache2 cgi:php@VERSION@ fpm:php-fpm@VERSION@ cli:php@VERSION@"
+
+# Iterate through all web SAPIs
+(
+proc_names=""
+for version in $(/usr/sbin/phpquery -V); do
+    for sapi in ${SAPIS}; do
+        conf_dir=${sapi%%:*}
+        proc_name=${sapi##*:}
+        if [ -e /etc/php/${version}/${conf_dir}/php.ini ]; then
+            # Get all session variables once so we don't need to start PHP to get each config option
+            session_config=$(PHP_INI_SCAN_DIR=/etc/php/${version}/${conf_dir}/conf.d/ php${version} -c /etc/php/${version}/${conf_dir}/php.ini -d "error_reporting='~E_ALL'" -r 'foreach(ini_get_all("session") as $k => $v) echo "$k=".$v["local_value"]."\n";')
+            save_handler=$(echo "$session_config" | sed -ne 's/^session\.save_handler=\(.*\)$/\1/p')
+            save_path=$(echo "$session_config" | sed -ne 's/^session\.save_path=\(.*;\)\?\(.*\)$/\2/p')
+            gc_maxlifetime=$(($(echo "$session_config" | sed -ne 's/^session\.gc_maxlifetime=\(.*\)$/\1/p')/60))
+            
+            if [ "$save_handler" = "files" -a -d "$save_path" ]; then
+                proc_names="$proc_names $(echo "$proc_name" | sed -e "s,@VERSION@,$version,")";
+                printf "%s:%s\n" "$save_path" "$gc_maxlifetime"
+            fi
+        fi
+    done
+done
+# first find all open session files and touch them (hope it's not massive amount of files)
+for pid in $(pidof $proc_names); do
+    find "/proc/$pid/fd" -ignore_readdir_race -lname "$save_path/sess_*" -exec touch -c {} \; 2>/dev/null
+done ) | \
+    sort -rn -t: -k2,2 | \
+    sort -u -t: -k 1,1 | \
+    while IFS=: read -r save_path gc_maxlifetime; do
+        # find all files older then maxlifetime and delete them
+        find -O3 "$save_path/" -ignore_readdir_race -depth -mindepth 1 -name 'sess_*' -type f -cmin "+$gc_maxlifetime" -delete
+    done
+
+exit 0
+```
 <br/><br/>  
 
 

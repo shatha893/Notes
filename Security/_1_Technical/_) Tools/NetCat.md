@@ -21,7 +21,7 @@
     ```  
 
 
-  * It can be used to scan for open ports `nc -z -v 10.10.8.8 20-80`.   
+  * It can be used to scan for open ports `nc -z -v 1 172.17.0.1 20-80`.   
 
 <br/><br/>
 
