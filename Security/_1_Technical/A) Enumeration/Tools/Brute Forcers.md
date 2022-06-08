@@ -150,7 +150,7 @@ john --wordlist=[PATH/TO/WORDLIST] [PRIVATE KEY FILE]
 ## To bruteforce a popup login  
 
   ```
-  hydra -L usernames.txt -P passwords.txt http-post-form "page:username=^USER^&password=^PASS^&Login=Login:Login Failed"
+  hydra -L usernames.txt -P passwords.txt http-post-form "page:username=^USER^&password=^PASS^&Login=Login:Login Failed Message that the website shows"
   ```
 * You are most likely going to replace several of these parameters to fit your situation. Replace username with the username that you know already exists. Replace passwords.txt with the file path to your password collection. Replace page with the current page. For example, for example.com/login.php, you would use login.php as the page parameter.  
 
