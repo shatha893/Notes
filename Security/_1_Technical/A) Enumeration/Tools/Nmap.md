@@ -46,6 +46,9 @@
 
 ## <span style="color:#009688">Options/Flags/Switches  
 
+## `-sS` option  
+* Is the SYN scan which is also called the *Stealth scan*.
+
 ### `-v` option  
 * Can be used to see the progress of nmap while it's scanning.  
 
@@ -73,7 +76,14 @@ Performs a script scan using the default set of scripts. It is equivalent to --s
 * Will show the nmap results in xml. 
 * I can use this to convert it into md with  <a href="https://github.com/vdjagilev/nmap2md">tool</a> (check it out please). 
 
-<br/><br/>
+
+## `-iL` option  
+* To scan a list of separate ips in one file.  
+* The option is followed with the file name.  
+<br/><br/>  
+
+## `-T[NUMBER]` option  
+* [NUMBER] could be a number from 1-5 and 4 is a reasonable number.
 
 ## <span style="color:#009688">`-h` Output  
 
