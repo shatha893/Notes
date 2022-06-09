@@ -12,12 +12,12 @@
 
   * On the recieving end  
     ```console
-    nc -l -p 4445 > out.file
+    nc -l -p 4445 > source.zip
     ```  
 
   * On the sending end  
     ```console
-    nc -w 3 [destination] 4445 < out.file
+    nc -w 3 10.10.14.9 4445 < source.zip
     ```  
 
 
