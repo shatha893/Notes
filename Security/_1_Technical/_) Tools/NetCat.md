@@ -12,16 +12,16 @@
 
   * On the recieving end  
     ```console
-    nc -l -p 4445 > out.file
+    nc -l -p 4445 > source.zip
     ```  
 
   * On the sending end  
     ```console
-    nc -w 3 [destination] 4445 < out.file
+    nc -w 3 10.10.14.9 4445 < source.zip
     ```  
 
 
-  * It can be used to scan for open ports `nc -z -v 1 172.17.0.1 20-80`.   
+  * It can be used to scan for open ports `nc -z -v 1 10.10.11.164 20-80`.   
 
 <br/><br/>
 
