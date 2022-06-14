@@ -8,6 +8,7 @@
 - [x] The `/console` directory.
 - [ ] Try to accomplish port forwarding somehow so that I would be able to open up the local web server much easier.
 - [ ] Research the Gitea version.
+- [ ] Check the gitlab version. See if it's vulnerable to anything
 
 <br/><br/>
 
@@ -133,7 +134,7 @@ def send_report(path):
 
 
 
-gobuster dir -u 10.10.11.164 -x 'txt,md,jpg,php,html' -w /usr/share/seclists/Discovery/Web-Content/big.txt -b '404,403'
+gobuster dir -u salic.com -x 'txt,md,jpg,php,html' -w /usr/share/seclists/Discovery/Web-Content/big.txt -b '404,403'
 
 
 
@@ -141,7 +142,7 @@ gobuster dir -u 10.10.11.164 -x 'txt,md,jpg,php,html' -w /usr/share/seclists/Dis
 
 
 * On my machine I should put the following command `./chisel server -p 8000 --reverse`.
-* On the victim `./chisel client 10.10.14.9:8000 R:80:10.10.11.164:3000`
+* On the victim `./chisel client 10.10.14.12:8008 R:5000:10.10.11.164:3000`
 * Then after I do that you just go and open `http://localhost` on the browser and it will open it. YES!!!!
 * It's like using a reverse proxy for port forwarding.
 
@@ -151,6 +152,17 @@ gobuster dir -u 10.10.11.164 -x 'txt,md,jpg,php,html' -w /usr/share/seclists/Dis
 
 * Check this link out *https://git-scm.com/book/en/v2/Git-Internals-Git-Objects*.
 <br/><br/>  
+
+* I tried to use this but it seems like it's patched ( https://medium.com/@knownsec404team/analysis-of-git-submodule-vulnerability-cve-2018-17456-7e6d3fade8ed#:~:text=According%20to%20my%20research%2C%20the,effect%20according%20to%20this%20CVE. )   
+* It gave me this message   
+```
+warning: ignoring 'submodule.home-backup.url' which may be interpreted as a command-line option: -test
+```  
+
+* Git hooks might be the answer  
+  <blockquote>
+  Git hooks are scripts that run automatically every time a particular event occurs in a Git repository. They let you customize Git’s internal behavior and trigger customizable actions at key points in the development life cycle.
+  </blockquote>
 
 
 ## <span style="color:[COLOR]">How Did I Own This Shit 😎🥳  
