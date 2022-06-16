@@ -26,6 +26,7 @@
 * The kind of enumeration or recon I usually do with burp turned out to be considered as "Passive Recon".
 * There's an Active scan feature in burp suite pro that does an active VA.  
 * There's another tab in the `Target` tab called `Scope` which inside of it I can decide what is the scope I want for Burp to catch. I specify the domain.
+* We can use *Foxy Proxy* to set up burpsuite on any browser.  
 
 <br/><br/>  
 

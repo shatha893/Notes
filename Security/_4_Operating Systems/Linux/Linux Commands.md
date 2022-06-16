@@ -49,6 +49,8 @@
 
 
 
+* Using aliases to make command shortcuts of some kind (Do more research onto it)
+
 
 <!-- FOOTNOTES -->
 <!-- [^3]:Check out this [link][2] for a brief explanation on each directory and what is it for.  -->
