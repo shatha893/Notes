@@ -3,7 +3,7 @@
 | <span style="color:#33CC33">**1**  | <span style="color:#33CC33">_Lame_         |
 | **2**  | _Brainfuck_    |
 | **3**  | _Shocker_      |
-| **4**  | _Bashed_       |
+| <span style="color:#33CC33">**4**  | <span style="color:#33CC33">_Bashed_       |
 | <span style="color:#33CC33">**5**  | <span style="color:#33CC33">_Nibbles_      |
 | <span style="color:#33CC33">**6**  | <span style="color:#33CC33">_Beep_         |
 | <span style="color:#33CC33">**7**  | <span style="color:#33CC33">_Cronos_       |
