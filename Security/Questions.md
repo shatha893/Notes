@@ -1,1 +1,0 @@
-* How does HTB machines work?
