@@ -16,7 +16,7 @@
 | **14** | _Sunday_       |
 | **15** | _TartarSauce_  |
 | <span style="color:#33CC33">**16** | <span style="color:#33CC33">_Irked_        |
-| **17** | _Friendzone_   |
+| <span style="color:#33CC33">**17** | <span style="color:#33CC33">_Friendzone_   |
 | **18** | _Swagshop_     |
 | **19** | _Networked_    |
 | <span style="color:#33CC33">**20** | <span style="color:#33CC33">_Jarvis_       |
