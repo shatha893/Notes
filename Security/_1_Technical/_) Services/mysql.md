@@ -26,5 +26,7 @@
     kali> service mysql start
     ```
 
+`--dbs` to discover databases.
+`--tables -D safecosmetics` find tables in a specific database
 
  <br/><br/> 
