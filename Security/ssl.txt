@@ -1,0 +1,14 @@
+commonName: Go Daddy Secure Certificate Authority - G2
+countryName: US
+stateOrProvinceName: Arizona
+localityName: Scottsdale
+organizationName: GoDaddy.com, Inc.
+organizationalUnitName: http://certs.godaddy.com/repository/
+version: 3
+serialNumber: 23DBEFF5E04F998D
+notBefore: Aug 30 12:40:53 2021 GMT
+notAfter: Aug 16 12:37:13 2022 GMT
+subjectAltName: (('DNS', 'tanweel.app'), ('DNS', 'www.tanweel.app'))
+OCSP: ('http://ocsp.godaddy.com/',)
+caIssuers: ('http://certificates.godaddy.com/repository/gdig2.crt',)
+crlDistributionPoints: ('http://crl.godaddy.com/gdig2s1-3248.crl',)

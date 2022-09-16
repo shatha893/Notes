@@ -1,0 +1,15 @@
+asn_registry: ripencc
+asn: 209029
+asn_cidr: 2.59.55.0/24
+asn_country_code: JO
+asn_date: 2019-03-25
+asn_description: STS-CLOUD  JO
+query: 2.59.55.90
+cidr: 2.59.55.0/24
+name: SA-STSARABIA-S3
+handle: AA34520-RIPE
+range: 2.59.55.0 - 2.59.55.255
+country: SA
+address: Bldg. No. 1  Abdallah Ghosheh St. 11195 Amman JORDAN
+created: 2021-04-25T07:41:00Z
+updated: 2021-04-25T07:41:00Z

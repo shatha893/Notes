@@ -1,0 +1,39 @@
+.                       2154    IN      NS      g.root-servers.net.
+.                       86464   IN      NS      g.root-servers.net.
+.                       86464   IN      NS      b.root-servers.net.
+.                       86464   IN      NS      d.root-servers.net.
+.                       85661   IN      SOA     a.root-servers.net. nstld.verisign-grs.com. 2022081801 1800 900 604800 86400
+.                       2154    IN      NS      e.root-servers.net.
+.                       86332   IN      SOA     a.root-servers.net. nstld.verisign-grs.com. 2022081801 1800 900 604800 86400
+.                       86464   IN      NS      l.root-servers.net.
+.                       2154    IN      NS      f.root-servers.net.
+.                       86464   IN      NS      m.root-servers.net.
+.                       86464   IN      NS      a.root-servers.net.
+.                       86464   IN      NS      c.root-servers.net.
+.                       2154    IN      NS      m.root-servers.net.
+.                       86464   IN      NS      h.root-servers.net.
+.                       86464   IN      DNSKEY  257 3 8 AwEAAaz/tAm8yTn4Mfeh5eyI96WSVexTBAvkMgJzkKTOiW1vkIbzxeF3+/4RgWOq7HrxRixHlFlExOLAJr5emLvN7SWXgnLh4+B5xQlNVz8Og8kvArMtNROxVQuCaSnIDdD5LKyWbRd2n9WGe2R8PzgCmr3EgVLrjyBxWezF0jLHwVN8efS3rCj/EWgvIWgb9tarpVUDK/b58Da+sqqls3eNbuv7pr+eoZG+SrDK6nWeL3c6H5Apxz7LjVc1uTIdsIXxuOLYA4/ilBmSVIzuDWfdRUfhHdY6+cn8HFRm+2hM8AnXGXws9555KrUB5qihylGa8subX2Nn6UwNR1AkUTV74bU=
+.                       85661   IN      NSEC    aaa. NS SOA RRSIG NSEC DNSKEY
+.                       2154    IN      NS      b.root-servers.net.
+.                       86464   IN      NS      j.root-servers.net.
+.                       86464   IN      RRSIG   DNSKEY 8 0 172800 20220831000000 20220810000000 20326 . FJNYHZUipwrjUsDOPlE6hwUza6fRp2vwI294cL6vn5P9B5V2NT4Uf/wWoJvJlUdKPYhLSu2mfTM+2ufpNU9sHB+0Z1YXBj2zK8qQlT9S/BW5v4trLo1sZzK8uvl0hXKOwBsoOiNWdvqqtfqBTpz+mzWObVSoCnNSUyIJkDyydvbJ9W2zqP+EY448BC87+BOGn+rY0yYy9dp5NYbrAOTQDF0pudHp43LHYedcAfDtjwVREPVEWYkisVpJoT3EZbF31h1Gb/+P7v84UHi6Mykq5hgQ1fV0PIMczp53moxgJxfzr1Y8TIQnMy3xxmDxIiLXbaeUtkyBU2iMA1JJfWExyg==
+.                       85661   IN      RRSIG   NSEC 8 0 86400 20220831150000 20220818140000 20826 . o9XPFCEFDzsJbaTy52U7DrZ2aprEsSoKBsX+bNWxeCxabYJW8eubWAx9QzUCIFU8XgYoJJkNuPh/qrWnRr7PEbqH8Le96x1lbEPPzB7HhT5RmpeWo9/7Aiozh4d3YOJjp1C5SyH3UWY8VF+EQl8OBQSS85yd0dTDOslPzfZmN1hkv2+RUIV8TMqXoO3PB4ZoHGw75//Kod91ZWNwx5B0OCtfmNLioORag5Te2G8KyuF+fH6db/UURNhqWL2e+6TuyWrJrCl7tEEzw6pB17lt0kcVJnAQTGmKS6vgw3Af4Q4f1B7LlZuY/8vyDtkJ6T/AlxpaSDi5uqQ6KQIua5zUvA==
+.                       86400   IN      SOA     a.root-servers.net. nstld.verisign-grs.com. 2022081801 1800 900 604800 86400
+.                       2154    IN      NS      k.root-servers.net.
+.                       86464   IN      NS      k.root-servers.net.
+.                       2154    IN      NS      i.root-servers.net.
+.                       8730    IN      SOA     a.root-servers.net. nstld.verisign-grs.com. 2022081702 1800 900 604800 86400
+.                       86464   IN      RRSIG   NS 8 0 518400 20220831150000 20220818140000 20826 . OlN9dKHr5kbWsflllmnJT78AcW+R8d2dSfpinCuYL/GHI4VXcduUlukH03ebTCu8BZwRMDzCT2dOALfGccz+HVIoKNV9vSFtrMNulAybXZ6sOClXBGJlN56lGLkdpKjhU2LY/MRuyKcjGRslvezBS0xzPyqunyWB+WmHb8vrk2n7O7Yf1CuNyl9U1ZBLvnnCH2AiEY/4PAFJiPJDCyE+xJGXXSvCFeTe0ZemjN02WhVGSa/lvIwQqVGjaRmx2QXncVP5nrQmN0oHyBUy7TZ9jAZXwW1RrE6BCPE+kP0U6B3Q5pbnrAwxWcjuLLQIpbqfkJ2jC53xZtbaT8Oni9tOSQ==
+.                       2154    IN      NS      d.root-servers.net.
+.                       2154    IN      NS      c.root-servers.net.
+.                       86464   IN      NS      e.root-servers.net.
+.                       2154    IN      NS      j.root-servers.net.
+.                       2154    IN      NS      h.root-servers.net.
+.                       86464   IN      NS      f.root-servers.net.
+.                       86464   IN      NS      i.root-servers.net.
+.                       2154    IN      NS      a.root-servers.net.
+.                       86464   IN      DNSKEY  256 3 8 AwEAAaQVKIqdmeLCaF4lq+IoKpejId9qqoIbZJ6cjB5MfyJYX3KVFXYyJ9rt4jKOwf4m2BoDOY66V1upRumF+eu502HXzdOdJlioRLA9YiRyLgvfjzyfUYrExYT4/TDTS4XfQX2UcJDN5C7SQ9UxebZk/VjQfPAUU+hZKOcjOVRFbAHom4tIi+Rin0laGlAi8ZY5WUZypYKR0xvprtG0eXeOBMjbUt1EnhmO2Bs52zC8B0cMjq6fMiYFUqtziALccsQczGngIDR0dIvvL54ky1JNNp19Ldy9ir27s7eRCYGbYI1WzR05/d4/nCmDSHkQS2BiesYufuWZZwm+FsitupCciwE=
+.                       85661   IN      RRSIG   SOA 8 0 86400 20220831150000 20220818140000 20826 . m84Eb3hJY/cK0ydGuBVtB6W+kv38T9fBkEdKLLhmik5QRtE83LnWVWgKCK/NDWyZqXOLCYY3pBPVPCpDt0i2ISGFEnf9/d4G0Hv4ZlS7S3zbcQ8ZxRqAnzAaAjfaycZUyg7iB/J+pAm7QwFyLQWAk+QNd2muuR/Syv0qWFlVu8owFnEkcpJc5NMkaKGQ4d/BiD6cBBDEKJjtH//8MqyUuBkgmRixcqnWm2osjeCKsLDO76V/XcPoHqEqqtL5NDx/762ZZYEtCdiBG9GJimLWWEPTXvdrInDnj+/VHTCJwtTAyje7EMl/N4txPFjNqDNg5HujpdxYb4QJzXXcysWRfg==
+.                       2154    IN      NS      l.root-servers.net.
+.                       85284   IN      SOA     a.root-servers.net. nstld.verisign-grs.com. 2022081801 1800 900 604800 86400
+DMARC Record Not Found!
